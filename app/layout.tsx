@@ -1,16 +1,10 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import localFont from 'next/font/local'
 import "./globals.css";
+import { ViewTransitions } from 'next-view-transitions'
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
+// Font files can be colocated inside of `pages`
+const sfPro = localFont({ src: './SF-Pro.ttf' })
 
 export const metadata: Metadata = {
   title: "Apple tvOS",
@@ -23,12 +17,14 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
-        {children}
-      </body>
-    </html>
+    <ViewTransitions>
+      <html lang="en">
+        <body
+          className={`${sfPro.className} antialiased`}
+        >
+          {children}
+        </body>
+      </html>
+    </ViewTransitions>
   );
 }
