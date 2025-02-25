@@ -2,8 +2,9 @@ import React from 'react'
 import { motion } from "framer-motion"
 import { useTransitionRouter } from "next-view-transitions"
 import Image from 'next/image'
+import { Squircle } from "@squircle-js/react"
 
-interface Props{
+interface Props {
     shouldShowAppName: boolean
     appIconUrl: string
     appName: string
@@ -11,7 +12,7 @@ interface Props{
     id?: number
 }
 
-const AppItem = ({shouldShowAppName = true, appIconUrl,appName, href,id}:Props) => {
+const AppItem = ({ shouldShowAppName = true, appIconUrl, appName, href, id }: Props) => {
     const router = useTransitionRouter()
 
     return (
@@ -25,16 +26,22 @@ const AppItem = ({shouldShowAppName = true, appIconUrl,appName, href,id}:Props) 
             className={`relative group group-hover:shadow-2xl group-focus:shadow-2xl transition-all duration-300`}
         // transition={{ delay: i * 0.1 }}
         >
-            <motion.div
-                className={`aspect-video w-full rounded-[30px] bg-gray-600 group-focus:shadow-2xl group-hover:shadow-2xl`}>
-                <Image
-                src={appIconUrl}
-                alt={`${appName}`}
-                className="w-full h-full object-cover rounded-[30px]"
-                width={1000}
-                height={1000}
-              />
-            </motion.div>
+            <Squircle
+                asChild
+                cornerRadius={30}
+                cornerSmoothing={1}
+                className="bg-black text-white"
+            >
+                <motion.div className={`aspect-video w-full group-focus:shadow-2xl group-hover:shadow-2xl`}>
+                    <Image
+                        src={appIconUrl}
+                        alt={`${appName}`}
+                        className="w-full h-full object-cover"
+                        width={1000}
+                        height={1000}
+                    />
+                </motion.div>
+            </Squircle>
 
             {shouldShowAppName && <motion.span
                 className="mt-2 text-base text-white text-wrap opacity-0 group-hover:opacity-100 group-focus:opacity-100"
