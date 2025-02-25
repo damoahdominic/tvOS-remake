@@ -3,6 +3,7 @@ import localFont from 'next/font/local'
 import "./globals.css";
 import { ViewTransitions } from 'next-view-transitions'
 import { ThemeProvider } from "@/providers/theme-provider";
+import { AppProvider } from "@/providers/app-provider";
 
 
 // Font files can be colocated inside of `pages`
@@ -13,7 +14,7 @@ export const metadata: Metadata = {
   description: "The Best Apple tvOS Remake",
 };
 
-export default function RootLayout({children,}: Readonly<{children: React.ReactNode;}>) {
+export default function RootLayout({ children, }: Readonly<{ children: React.ReactNode; }>) {
 
   return (
     <ViewTransitions>
@@ -22,14 +23,16 @@ export default function RootLayout({children,}: Readonly<{children: React.ReactN
           className={`${sfPro.className} antialiased`}
         >
           <main className="relative min-h-screen overflow-hidden">
-            <ThemeProvider
-              attribute="class"
-              defaultTheme="system"
-              enableSystem
-              disableTransitionOnChange
-            >
-              {children}
-            </ThemeProvider>
+            <AppProvider>
+              <ThemeProvider
+                attribute="class"
+                defaultTheme="system"
+                enableSystem
+                disableTransitionOnChange
+              >
+                {children}
+              </ThemeProvider>
+            </AppProvider>
           </main>
         </body>
       </html>
