@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import localFont from 'next/font/local'
 import "./globals.css";
 import { ViewTransitions } from 'next-view-transitions'
+import { ThemeProvider } from "@/providers/theme-provider";
+
 
 // Font files can be colocated inside of `pages`
 const sfPro = localFont({ src: './SF-Pro.ttf' })
@@ -11,18 +13,24 @@ export const metadata: Metadata = {
   description: "The Best Apple tvOS Remake",
 };
 
-export default function RootLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+export default function RootLayout({children,}: Readonly<{children: React.ReactNode;}>) {
+
   return (
     <ViewTransitions>
       <html lang="en">
         <body
           className={`${sfPro.className} antialiased`}
         >
-          {children}
+          <main className="relative min-h-screen overflow-hidden">
+            <ThemeProvider
+              attribute="class"
+              defaultTheme="system"
+              enableSystem
+              disableTransitionOnChange
+            >
+              {children}
+            </ThemeProvider>
+          </main>
         </body>
       </html>
     </ViewTransitions>
