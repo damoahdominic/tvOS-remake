@@ -29,6 +29,10 @@ export default function Home() {
     return () => window.removeEventListener("scroll", handleScroll)
   }, [])
 
+  useEffect(() => {
+    window.scrollTo({top: 0})
+  }, [])
+
   return (
     <div className="relative min-h-screen overflow-hidden">
       {/* Background Image */}

@@ -20,11 +20,11 @@ const AppItem = ({shouldShowAppName = true, appIconUrl,appName, href}:Props) => 
             onClick={() => router.push(href)}
             // onFocus={() => setFocusedApp(app.id)}
             // onBlur={() => setFocusedApp(null)}
-            className={`relative group group-hover:shadow-2xl group-focus:shadow-lg`}
+            className={`relative group group-hover:shadow-2xl group-focus:shadow-2xl transition-all duration-300`}
         // transition={{ delay: i * 0.1 }}
         >
             <motion.div
-                className={`aspect-video w-full rounded-2xl bg-item-bg item-bg-shadow`}>
+                className={`aspect-video w-full rounded-2xl bg-gray-600 group-focus:shadow-2xl group-hover:shadow-2xl`}>
                 <Image
                 src={appIconUrl}
                 alt={`${appName}`}
