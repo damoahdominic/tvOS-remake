@@ -13,19 +13,53 @@ export function ThemeProvider({
     const pathname = usePathname()
     const router = useTransitionRouter()
 
-    // Adds a keyboard shortcut to take you back to home.
     useEffect(() => {
-        const handleKeyDown = (event: KeyboardEvent) => {
-            if (event.key === "Escape") {
-                event.preventDefault()
-                if (pathname !== "/") {
-                    router.back()
-                }
-            }
-        }
+        // Disable mouse movement
+        const preventMouseMove = (e: MouseEvent) => {
+            e.preventDefault();
+            e.stopPropagation();
+        };
+        document.addEventListener("mousemove", preventMouseMove);
 
-        window.addEventListener("keydown", handleKeyDown)
-        return () => window.removeEventListener("keydown", handleKeyDown)
-    }, [router, pathname])
+        // Handle keyboard navigation
+        const handleKeyDown = (e: KeyboardEvent) => {
+            switch (e.key) {
+                case "ArrowUp":
+                case "w":
+                    console.log("Move Up");
+                    break;
+                case "ArrowDown":
+                case "s":
+                    console.log("Move Down");
+                    break;
+                case "ArrowLeft":
+                case "a":
+                    console.log("Move Left");
+                    break;
+                case "ArrowRight":
+                case "d":
+                    console.log("Move Right");
+                    break;
+                case "Enter":
+                    console.log("Select");
+                    break;
+                case "Escape":
+                    console.log("Escape");
+                    if (pathname !== "/") {
+                        router.back()
+                    }
+                    break;
+                default:
+                    break;
+            }
+        };
+
+        document.addEventListener("keydown", handleKeyDown);
+
+        return () => {
+            document.removeEventListener("mousemove", preventMouseMove);
+            document.removeEventListener("keydown", handleKeyDown);
+        };
+    }, [router, pathname]);
     return <NextThemesProvider {...props}>{children}</NextThemesProvider>
 }

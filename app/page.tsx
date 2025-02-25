@@ -49,7 +49,7 @@ export default function Home() {
       <div className="relative min-h-screen flex flex-col justify-end px-4">
         {/* Dock */}
         <motion.div
-          className="w-full px-6 py-4 rounded-2xl relative bottom-8 backdrop-blur-xl bg-black/30"
+          className="w-full px-6 py-4 rounded-[30px] relative bottom-8 backdrop-blur-xl bg-black/30"
           initial={{ y: 100, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           transition={{ duration: 0.5 }}

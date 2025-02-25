@@ -22,6 +22,12 @@ body {
   border-radius: 4px;
 }
 
+.no-visible-scrollbar {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  -webkit-overflow-scrolling: touch;
+}
+
 /* Focus styles */
 :focus {
   outline: none;
@@ -29,6 +35,10 @@ body {
 
 .focus-visible {
   box-shadow: 0 0 0 4px rgba(255, 255, 255, 0.3);
+}
+
+.apple-active-item-shadow{
+  box-shadow: 0px 20px 12.5px 0px #00000040;
 }
 
 /* Smooth transitions */

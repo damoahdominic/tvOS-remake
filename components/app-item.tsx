@@ -8,13 +8,15 @@ interface Props{
     appIconUrl: string
     appName: string
     href: string
+    id?: number
 }
 
-const AppItem = ({shouldShowAppName = true, appIconUrl,appName, href}:Props) => {
+const AppItem = ({shouldShowAppName = true, appIconUrl,appName, href,id}:Props) => {
     const router = useTransitionRouter()
 
     return (
         <motion.button
+            tabIndex={id}
             whileHover={{ scale: 1.07 }}
             whileFocus={{ scale: 1.07 }}
             onClick={() => router.push(href)}
@@ -24,11 +26,11 @@ const AppItem = ({shouldShowAppName = true, appIconUrl,appName, href}:Props) => 
         // transition={{ delay: i * 0.1 }}
         >
             <motion.div
-                className={`aspect-video w-full rounded-2xl bg-gray-600 group-focus:shadow-2xl group-hover:shadow-2xl`}>
+                className={`aspect-video w-full rounded-[30px] bg-gray-600 group-focus:shadow-2xl group-hover:shadow-2xl`}>
                 <Image
                 src={appIconUrl}
                 alt={`${appName}`}
-                className="w-full h-full object-cover rounded-2xl"
+                className="w-full h-full object-cover rounded-[30px]"
                 width={1000}
                 height={1000}
               />
