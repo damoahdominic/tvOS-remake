@@ -120,7 +120,13 @@ export default function ActivityBar() {
 
     return (
         <MotionConfig transition={transition}>
-            <div className="z-[100] position absolute top-10 right-5 flex flex-col items-end gap-2 text-black/40 dark:text-white/50">
+            <motion.div
+                variants={{ open: { opacity: 1, y:0 }, closed: { opacity: 0,y:-20 } }}
+                initial='closed'
+                animate='open'
+                exit='closed'
+                transition={{delay:1}}
+                className="z-[100] position absolute top-10 right-5 flex flex-col items-end gap-2 text-black/40 dark:text-white/50">
                 <Squircle
                     asChild
                     cornerRadius={50}
@@ -274,7 +280,7 @@ export default function ActivityBar() {
                                     <MusicPlayer />
                         }
                     </motion.div>}
-            </div>
+            </motion.div>
         </MotionConfig >
     )
 }
