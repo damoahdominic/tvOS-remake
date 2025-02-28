@@ -121,7 +121,7 @@ export default function ActivityBar() {
     return (
         <MotionConfig transition={transition}>
             <motion.div
-                variants={{ open: { opacity: 1, y:0 }, closed: { opacity: 0,y:-20 } }}
+                variants={{ open: { opacity: 1, y:0 }, closed: { opacity: 0,y:20 } }}
                 initial='closed'
                 animate='open'
                 exit='closed'
