@@ -34,13 +34,12 @@ export default function Home() {
     return () => window.removeEventListener("scroll", handleScroll)
   }, [])
 
-  useEffect(() => {
-    window.scrollTo({ top: 0 })
-  }, [])
 
   useEffect(() => {
     focusableElements.current = document.querySelectorAll(".focusable-apps");
     focusElement(0);
+    window.scrollTo({ top: 0 })
+
     // Handle keyboard navigation
     const handleKeyDown = (e: KeyboardEvent) => {
       if (!focusableElements.current) return;
