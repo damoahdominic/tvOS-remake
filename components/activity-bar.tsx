@@ -163,7 +163,7 @@ export default function ActivityBar() {
                                     setCurrentTab("profile")
                                 }
                             }}>
-                                <Image src={"/icons/users/dominic.png"} alt="user" width={56} height={56} className="rounded-full" />
+                                <Image src={"/users/dominic.png"} alt="user" width={56} height={56} className="rounded-full" />
                             </motion.button>
                         </div>
                     </motion.div>
