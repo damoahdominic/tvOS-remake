@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useEffect } from "react"
+import { useState, useEffect, useRef } from "react"
 import { motion } from "framer-motion"
 import AppItem from "@/components/app-item"
 import { apps } from "@/data"
@@ -20,6 +20,9 @@ const container = {
 };
 
 export default function Home() {
+  const focusableElements = useRef<NodeListOf<HTMLDivElement> | null>(null);
+  const [focusedIndex, setFocusedIndex] = useState(0);
+
   const [scrolled, setScrolled] = useState(false)
   // const [focusedApp, setFocusedApp] = useState<string | null>(null)
 
@@ -35,6 +38,37 @@ export default function Home() {
     window.scrollTo({ top: 0 })
   }, [])
 
+  useEffect(() => {
+    focusableElements.current = document.querySelectorAll(".focusable-apps");
+    focusElement(0);
+    // Handle keyboard navigation
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (!focusableElements.current) return;
+
+      let newIndex = focusedIndex;
+      if (e.key === "ArrowDown" || e.key === "s") {
+        newIndex = Math.min(focusedIndex + 1, focusableElements.current.length - 1);
+      } else if (e.key === "ArrowUp" || e.key === "w") {
+        newIndex = Math.max(focusedIndex - 1, 0);
+      }
+
+      if (newIndex !== focusedIndex) {
+        focusElement(newIndex);
+        setFocusedIndex(newIndex);
+      }
+    };
+
+
+    document.addEventListener("keydown", handleKeyDown);
+    return () => document.removeEventListener("keydown", handleKeyDown);
+  }, [focusedIndex]);
+
+  const focusElement = (index: number) => {
+    if (focusableElements.current) {
+      focusableElements.current[index]?.focus();
+    }
+  };
+
   return (
     <div className="relative min-h-screen overflow-hidden">
       {/* Background Image */}
@@ -47,7 +81,7 @@ export default function Home() {
         }}
       />
 
-      <ActivityBar/>
+      <ActivityBar />
 
       {/* Main Content */}
       <div className="relative min-h-screen flex flex-col justify-end px-4">

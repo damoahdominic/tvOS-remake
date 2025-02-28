@@ -12,18 +12,18 @@ interface Props {
     id?: number
 }
 
-const AppItem = ({ shouldShowAppName = true, appIconUrl, appName, href, id }: Props) => {
+const AppItem = ({ shouldShowAppName = true, appIconUrl, appName, href }: Props) => {
     const router = useTransitionRouter()
 
     return (
         <motion.button
-            tabIndex={id}
+            tabIndex={0}
             whileHover={{ scale: 1.07 }}
             whileFocus={{ scale: 1.07 }}
             onClick={() => router.push(href)}
             // onFocus={() => setFocusedApp(app.id)}
             // onBlur={() => setFocusedApp(null)}
-            className={`relative group group-hover:shadow-2xl group-focus:shadow-2xl transition-all duration-300`}
+            className={`relative group group-hover:shadow-2xl group-focus:shadow-2xl transition-all duration-300 focusable-apps`}
         // transition={{ delay: i * 0.1 }}
         >
             <Squircle
