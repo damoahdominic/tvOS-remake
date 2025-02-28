@@ -5,6 +5,7 @@ import { motion } from "framer-motion"
 import AppItem from "@/components/app-item"
 import { apps } from "@/data"
 import { Squircle } from "@squircle-js/react"
+import ActivityBar from "@/components/activity-bar"
 
 const container = {
   hidden: { y: 100, opacity: 0 },
@@ -45,6 +46,8 @@ export default function Home() {
           backgroundPosition: "center",
         }}
       />
+
+      <ActivityBar/>
 
       {/* Main Content */}
       <div className="relative min-h-screen flex flex-col justify-end px-4">
