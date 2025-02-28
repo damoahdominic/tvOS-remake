@@ -268,7 +268,7 @@ export default function ActivityBar() {
                                         <div className="space-y-2">
                                             <h5 className="text-sm">SCENES</h5>
 
-                                            <motion.button className="flex items-center justify-center p-3 rounded-[15] gap-2 bg-black/50">
+                                            <motion.button className="flex items-center justify-center p-3 rounded-[15px] gap-2 bg-black/50">
                                                 <Image src={"/icons/moon.svg"} alt="Good Night" width={25} height={25} />
                                                 Good night
                                             </motion.button>
