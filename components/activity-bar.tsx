@@ -229,7 +229,7 @@ export default function ActivityBar() {
                                                     whileHover={{ scale: 1.05 }}
                                                     whileFocus={{ scale: 1.05 }}
                                                     key={i}
-                                                    className={`rounded-[15] px-3 flex items-center gap-2 p-2 bg-black/50 ${i === 0 ?
+                                                    className={`rounded-[15px] px-3 flex items-center gap-2 p-2 bg-black/50 ${i === 0 ?
                                                         "col-span-2 row-span-2 aspect-square"
                                                         : i === 1 || i === 2 || i === 3 || i === 4 ?
                                                             "col-span-2"
