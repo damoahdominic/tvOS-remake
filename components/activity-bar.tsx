@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from "react"
+// File: components/ActivityBar.tsx (Enhanced with navigation)
+import React, { useEffect, useState, forwardRef } from "react"
 import { motion, MotionConfig, Transition } from "framer-motion"
 import { Squircle } from "@squircle-js/react"
 import moment from "moment"
@@ -89,24 +90,72 @@ const Settings = [
     },
 ]
 
+// Define Tabs with an index for navigation
 const Tabs = [
     {
         name: "music",
-        image: "audio.svg"
+        image: "audio.svg",
+        index: 0
     },
     {
         name: "home",
-        image: "home.svg"
+        image: "home.svg",
+        index: 1
     },
     {
         name: "switch",
-        image: "switch.svg"
+        image: "switch.svg",
+        index: 2
     },
+    // Profile is special, but we need it in the same list for navigation
+    {
+        name: "profile",
+        image: "", // Will use user image instead
+        index: 3
+    }
 ]
 
 type ActivityTabs = "" | "profile" | "music" | "home" | "switch"
 
-export default function ActivityBar() {
+// Enhanced NavigationButton with ref forwarding
+const NavigationButton = forwardRef<HTMLButtonElement, {
+    tab: typeof Tabs[0];
+    currentTab: ActivityTabs;
+    onClick: () => void;
+    isProfile?: boolean;
+    isFocused?: boolean;
+}>(({ tab, currentTab, onClick, isProfile = false, isFocused = false }, ref) => {
+    return (
+        <motion.button
+            ref={ref}
+            className={`transition-all duration-500 ${currentTab === tab.name ? "bg-white rounded-full" : ""} ${isFocused ? "ring-2 ring-white ring-opacity-80" : ""}`}
+            onClick={onClick}
+        >
+            {isProfile ? (
+                <Image src={"/users/dominic.png"} alt="user" width={56} height={56} className="rounded-full" />
+            ) : (
+                <>
+                    <Image src={`/icons/light/${tab.image}`} alt={tab.name} width={56} height={56} className={`block ${"dark:hidden"}`} />
+                    <Image src={`/icons/${currentTab === tab.name ? "light" : "dark"}/${tab.image}`} alt={tab.name} width={56} height={56} className="hidden dark:block" />
+                </>
+            )}
+        </motion.button>
+    )
+});
+
+NavigationButton.displayName = "NavigationButton";
+
+interface EnhancedActivityBarProps {
+    getFocusRef?: (index: number) => React.RefObject<HTMLButtonElement> | null;
+    isFocused?: (index: number) => boolean;
+    onNavigateToGrid?: () => void;
+}
+
+export default function ActivityBar({
+    getFocusRef,
+    isFocused = () => false,
+    onNavigateToGrid
+}: EnhancedActivityBarProps) {
     const [currentTab, setCurrentTab] = useState<ActivityTabs>("")
     const [time, setTime] = useState<Date>(new Date());
 
@@ -118,14 +167,26 @@ export default function ActivityBar() {
         return () => clearInterval(interval); // Cleanup the interval on component unmount
     }, []);
 
+    // Handle S key press in activity bar to return to grid
+    useEffect(() => {
+        const handleKeyDown = (e: KeyboardEvent) => {
+            if (e.key.toLowerCase() === 's' && onNavigateToGrid) {
+                onNavigateToGrid();
+            }
+        };
+
+        document.addEventListener('keydown', handleKeyDown);
+        return () => document.removeEventListener('keydown', handleKeyDown);
+    }, [onNavigateToGrid]);
+
     return (
         <MotionConfig transition={transition}>
             <motion.div
-                variants={{ open: { opacity: 1, y:0 }, closed: { opacity: 0,y:20 } }}
+                variants={{ open: { opacity: 1, y: 0 }, closed: { opacity: 0, y: 20 } }}
                 initial='closed'
                 animate='open'
                 exit='closed'
-                transition={{delay:1}}
+                transition={{ delay: 1 }}
                 className="z-[100] position absolute top-10 right-5 flex flex-col items-end gap-2 text-black/40 dark:text-white/50">
                 <Squircle
                     asChild
@@ -139,32 +200,43 @@ export default function ActivityBar() {
                                 {moment(time).format('LT')}
                             </p>
 
-                            {
-                                Tabs.map((tab, i) => (
-                                    <motion.button key={i} className={`transition-all duration-500 ${currentTab === tab.name ? "bg-white rounded-full" : ""}`} onClick={() => {
+                            {/* Navigation-enabled tabs */}
+                            {Tabs.slice(0, 3).map((tab) => (
+                                <NavigationButton
+                                    key={tab.name}
+                                    tab={tab}
+                                    currentTab={currentTab}
+                                    // @ts-expect-error forget it
+                                    ref={getFocusRef ? getFocusRef(tab.index)?.current : undefined}
+                                    isFocused={isFocused(tab.index)}
+                                    onClick={() => {
                                         if (currentTab === tab.name) {
                                             setCurrentTab("")
                                         }
                                         else {
                                             setCurrentTab(tab.name as ActivityTabs)
                                         }
-                                    }}>
-                                        <Image src={`/icons/light/${tab.image}`} alt={tab.name} width={56} height={56} className={`block ${"dark:hidden"}`} />
-                                        <Image src={`/icons/${currentTab === tab.name ? "light" : "dark"}/${tab.image}`} alt={tab.name} width={56} height={56} className="hidden dark:block" />
-                                    </motion.button>
-                                ))
-                            }
+                                    }}
+                                />
+                            ))}
 
-                            <motion.button onClick={() => {
-                                if (currentTab === "profile") {
-                                    setCurrentTab("")
-                                }
-                                else {
-                                    setCurrentTab("profile")
-                                }
-                            }}>
-                                <Image src={"/users/dominic.png"} alt="user" width={56} height={56} className="rounded-full" />
-                            </motion.button>
+                            {/* Profile button (special case) */}
+                            <NavigationButton
+                                tab={Tabs[3]}
+                                currentTab={currentTab}
+                                // @ts-expect-error forget it
+                                ref={getFocusRef ? getFocusRef(3)?.current : undefined}
+                                isFocused={isFocused(3)}
+                                isProfile={true}
+                                onClick={() => {
+                                    if (currentTab === "profile") {
+                                        setCurrentTab("")
+                                    }
+                                    else {
+                                        setCurrentTab("profile")
+                                    }
+                                }}
+                            />
                         </div>
                     </motion.div>
                 </Squircle>

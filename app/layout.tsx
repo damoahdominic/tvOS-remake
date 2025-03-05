@@ -17,8 +17,8 @@ export const metadata: Metadata = {
 export default function RootLayout({ children, }: Readonly<{ children: React.ReactNode; }>) {
 
   return (
-    <ViewTransitions>
-      <html lang="en">
+    <html lang="en" suppressHydrationWarning>
+      <ViewTransitions>
         <body
           className={`${sfPro.className} antialiased`}
         >
@@ -35,7 +35,7 @@ export default function RootLayout({ children, }: Readonly<{ children: React.Rea
             </AppProvider>
           </main>
         </body>
-      </html>
-    </ViewTransitions>
+      </ViewTransitions>
+    </html>
   );
 }
