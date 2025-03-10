@@ -21,25 +21,6 @@ export function AppProvider({ children }: { children: ReactNode }) {
         // Handle keyboard navigation
         const handleKeyDown = (e: KeyboardEvent) => {
             switch (e.key) {
-                case "ArrowUp":
-                case "w":
-                    console.log("Move Up");
-                    break;
-                case "ArrowDown":
-                case "s":
-                    console.log("Move Down");
-                    break;
-                case "ArrowLeft":
-                case "a":
-                    console.log("Move Left");
-                    break;
-                case "ArrowRight":
-                case "d":
-                    console.log("Move Right");
-                    break;
-                case "Enter":
-                    console.log("Select");
-                    break;
                 case "Escape":
                     console.log("Escape");
                     if (pathname !== "/") {

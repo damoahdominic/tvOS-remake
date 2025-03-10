@@ -70,7 +70,7 @@ export default function useGridNavigation(
 
     // Handle keyboard navigation
     const handleKeyDown = useCallback((e: KeyboardEvent) => {
-        if (['w', 'a', 's', 'd'].includes(e.key.toLowerCase())) {
+        if (['w', 'a', 's', 'd', "enter"].includes(e.key.toLowerCase())) {
             e.preventDefault();
 
             setFocusedPosition(prev => {
@@ -107,6 +107,9 @@ export default function useGridNavigation(
                             newCol = prev.col + 1;
                             shouldUpdateFocus = true;
                         }
+                        break;
+                    case 'enter': // trigger click
+                        
                         break;
                 }
 
