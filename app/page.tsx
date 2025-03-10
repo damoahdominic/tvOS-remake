@@ -4,39 +4,56 @@ import { useState, useEffect } from "react"
 import { apps } from "@/data"
 import ActivityBar from "@/components/activity-bar"
 import TVOSGrid from "@/components/TVOSGrid"
-import useEnhancedNavigation from "@/hooks/useEnhancedNavigation"
+import useGridNavigation from "@/hooks/useGridNavigation"
 
+// Simple focus position debugger component
+function FocusDebugger({ position }: { position: { row: number; col: number } }) {
+    if (process.env.NODE_ENV !== 'development') return null;
+
+    return (
+        <div
+            style={{
+                position: 'fixed',
+                bottom: '10px',
+                left: '10px',
+                background: 'rgba(0,0,0,0.8)',
+                color: 'white',
+                padding: '10px',
+                borderRadius: '5px',
+                zIndex: 1000,
+                fontFamily: 'monospace',
+                fontSize: '12px',
+            }}
+        >
+            <div>Row: {position.row}</div>
+            <div>Col: {position.col}</div>
+        </div>
+    );
+}
 
 export default function Home() {
     const [scrolled, setScrolled] = useState(false)
-    const rowCount = 3;
-    const colCount = 6;
-    const activityItemCount = 4; // 3 tabs + profile button
 
-    // Use enhanced navigation hook
-    const {
-        isFocused,
-        getFocusRef,
-        navigateToGrid,
-        focusedPosition
-    } = useEnhancedNavigation(
-        rowCount,
-        colCount,
-        activityItemCount
-    );
+    // Direct grid navigation - no activity bar integration for simplicity
+    const { isFocused, getFocusRef, focusedPosition } = useGridNavigation(3, 6, 0, 0);
 
-    // Debug: log the current focused position
+    // Handle scroll events with debounce
     useEffect(() => {
-        console.log('Focus position:', focusedPosition);
-    }, [focusedPosition]);
+        let timeout: NodeJS.Timeout;
 
-    useEffect(() => {
         const handleScroll = () => {
-            setScrolled(window.scrollY > 50)
-        }
-        window.addEventListener("scroll", handleScroll)
-        return () => window.removeEventListener("scroll", handleScroll)
-    }, [])
+            clearTimeout(timeout);
+            timeout = setTimeout(() => {
+                setScrolled(window.scrollY > 50);
+            }, 50);
+        };
+
+        window.addEventListener("scroll", handleScroll);
+        return () => {
+            clearTimeout(timeout);
+            window.removeEventListener("scroll", handleScroll);
+        };
+    }, []);
 
     return (
         <div className="relative min-h-screen overflow-hidden">
@@ -51,21 +68,20 @@ export default function Home() {
             />
 
             {/* Activity Bar Component */}
-            <ActivityBar
-                getFocusRef={(index) => getFocusRef(0, index, 'activityBar')}
-                isFocused={(index) => isFocused(0, index, 'activityBar')}
-                onNavigateToGrid={navigateToGrid}
-            />
+            <ActivityBar />
 
+            {/* TVOSGrid with direct grid navigation for simplicity */}
             <TVOSGrid
                 apps={apps}
                 rowCount={3}
                 colCount={6}
                 scrolled={scrolled}
-                isFocused={(row, col) => isFocused(row, col, 'grid')}
-                getFocusRef={(row, col) => getFocusRef(row, col, 'grid')}
+                isFocused={isFocused}
+                getFocusRef={getFocusRef}
             />
+
+            {/* Debug focus position */}
+            <FocusDebugger position={focusedPosition} />
         </div>
     )
 }
-

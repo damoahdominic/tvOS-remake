@@ -17,8 +17,8 @@ interface TVOSGridProps {
     rowCount: number;
     colCount: number;
     scrolled?: boolean
-    isFocused: (row: number, col: number) => boolean;
-    getFocusRef: (row: number, col: number) => React.RefObject<HTMLButtonElement> | null;
+    isFocused?: (row: number, col: number) => boolean;
+    getFocusRef?: (row: number, col: number) => React.RefObject<HTMLButtonElement> | null;
 }
 
 const container = {
@@ -33,15 +33,20 @@ const container = {
     }
 };
 
-
 const TVOSGrid: React.FC<TVOSGridProps> = ({
     apps,
     rowCount,
     colCount,
     scrolled,
+    isFocused: externalIsFocused,
+    getFocusRef: externalGetFocusRef
 }) => {
-    // Use 0-based indexing for the hook
-    const { isFocused, getFocusRef } = useGridNavigation(rowCount, colCount, 0, 0);
+    // Use internal navigation if external props aren't provided
+    const { isFocused: internalIsFocused, getFocusRef: internalGetFocusRef } = useGridNavigation(rowCount, colCount, 0, 0);
+
+    // Use either external or internal navigation functions
+    const isFocused = externalIsFocused || internalIsFocused;
+    const getFocusRef = externalGetFocusRef || internalGetFocusRef;
 
     const [isPreparing, setIsPreparing] = useState(true)
     const [gridItems, setGridItems] = useState<{
@@ -64,7 +69,7 @@ const TVOSGrid: React.FC<TVOSGridProps> = ({
                     const ref = getFocusRef(row, col);
 
                     rowItems.push(
-                        <div key={app.id || `app-${row}-${col}`}>
+                        <div key={app.id || `app-${row}-${col}`} data-row={row} data-col={col}>
                             <AppItem
                                 shouldShowAppName={app.shouldShowAppName ?? true}
                                 appIconUrl={app.appIconUrl}
@@ -85,18 +90,35 @@ const TVOSGrid: React.FC<TVOSGridProps> = ({
             else {
                 rest.push(...rowItems)
             }
-
         }
 
         return { firstRow, rest };
     }, [apps, colCount, rowCount, isFocused, getFocusRef])
 
     useEffect(() => {
+        console.log(`TVOSGrid rendering with ${apps.length} apps, ${rowCount} rows, ${colCount} cols`);
         setIsPreparing(true)
         const items = renderAppsCallback()
         setGridItems(items)
         setIsPreparing(false)
     }, [renderAppsCallback])
+
+    // Log DOM structure after render to help debug
+    useEffect(() => {
+        if (!isPreparing && gridItems) {
+            console.log(`Grid items ready - first row: ${gridItems.firstRow.length}, rest: ${gridItems.rest.length}`);
+
+            // Check if refs are properly initialized
+            for (let row = 0; row < rowCount; row++) {
+                for (let col = 0; col < colCount; col++) {
+                    const ref = getFocusRef(row, col);
+                    if (row < 3 && col < 3) { // Just log a sample to avoid clutter
+                        console.log(`Ref at ${row},${col}: ${ref ? (ref.current ? 'has element' : 'no element') : 'no ref'}`);
+                    }
+                }
+            }
+        }
+    }, [isPreparing, gridItems, getFocusRef, rowCount, colCount]);
 
     return (
         isPreparing
@@ -122,7 +144,7 @@ const TVOSGrid: React.FC<TVOSGridProps> = ({
                         >
                             <div className="grid grid-cols-6 gap-7">
                                 {gridItems?.firstRow?.slice(0, 6).map((app, i) => (
-                                    <div key={i}>
+                                    <div key={i} className="first-row-item">
                                         {app}
                                     </div>
                                 ))}
@@ -135,7 +157,7 @@ const TVOSGrid: React.FC<TVOSGridProps> = ({
                 <motion.div animate={{ bottom: scrolled ? "3rem" : "3.9rem" }} className="relative px-8 py-12 cursor-pointer">
                     <motion.div variants={container} initial="hidden" animate="show" className="grid grid-cols-6 gap-7 relative">
                         {gridItems?.rest?.map((app, i) => (
-                            <div key={i}>
+                            <div key={i} className="rest-row-item">
                                 {app}
                             </div>
                         ))}

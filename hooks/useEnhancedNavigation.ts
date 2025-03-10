@@ -1,93 +1,72 @@
-// File: hooks/useEnhancedNavigation.ts
-import React,{ useState, useEffect, useCallback, useRef } from 'react';
+// File: hooks/useGridNavigation.ts
+import React, { useState, useEffect, useCallback, useRef } from 'react';
 
 interface Position {
     row: number;
     col: number;
-    zone: 'grid' | 'activityBar';
 }
 
-interface UseEnhancedNavigationReturn {
-    focusedPosition: Position;
-    isFocused: (row: number, col: number, zone: 'grid' | 'activityBar') => boolean;
-    getFocusRef: (row: number, col: number, zone: 'grid' | 'activityBar') => React.RefObject<HTMLButtonElement> | null;
-    navigateToGrid: () => void;
-    navigateToActivityBar: (col?: number) => void;
+interface UseGridNavigationReturn {
+    focusedPosition: {
+        row: number;
+        col: number;
+    };
+    isFocused: (row: number, col: number) => boolean;
+    getFocusRef: (row: number, col: number) => React.RefObject<HTMLButtonElement> | null;
 }
 
-export default function useEnhancedNavigation(
-    gridRowCount: number,
-    gridColCount: number,
-    activityBarItemCount: number,
+export default function useGridNavigation(
+    rowCount: number,
+    colCount: number,
     initialRow: number = 0,
     initialCol: number = 0
-): UseEnhancedNavigationReturn {
+): UseGridNavigationReturn {
     // Current focused position (using 0-based indexing internally)
     const [focusedPosition, setFocusedPosition] = useState<Position>({
         row: initialRow,
-        col: initialCol,
-        zone: 'grid'
+        col: initialCol
     });
 
-    // Create a 2D array of refs for grid items
-    const gridRefs = useRef<Array<Array<React.RefObject<HTMLButtonElement>>>>([]);
+    // Create a 2D array of refs to store references to all the app items
+    const appRefs = useRef<Array<Array<React.RefObject<HTMLButtonElement>>>>([]);
 
-    // Create array of refs for activity bar items
-    const activityBarRefs = useRef<Array<React.RefObject<HTMLButtonElement>>>([]);
+    // Track the last focused button to help with debugging
+    const lastFocusedButton = useRef<HTMLButtonElement | null>(null);
 
-    // Initialize the refs
+    // Initialize the 2D array of refs
     useEffect(() => {
-        // Initialize grid refs
-        // @ts-expect-error forget it
-        gridRefs.current = Array(gridRowCount).fill(0).map(() =>
-            Array(gridColCount).fill(0).map(() => React.createRef<HTMLButtonElement>())
+        // @ts-expect-error It works despite the TypeScript error
+        appRefs.current = Array(rowCount).fill(0).map(() =>
+            Array(colCount).fill(0).map(() => React.createRef<HTMLButtonElement>())
         );
+        
+        console.log(`Grid navigation initialized with ${rowCount} rows and ${colCount} columns`);
+    }, [rowCount, colCount]);
 
-        // Initialize activity bar refs
-        // @ts-expect-error forget it
-        activityBarRefs.current = Array(activityBarItemCount).fill(0).map(() =>
-            React.createRef<HTMLButtonElement>()
-        );
-    }, [gridRowCount, gridColCount, activityBarItemCount]);
-
-    // Navigation helper functions
-    const navigateToGrid = useCallback(() => {
-        const newPosition = {
-            row: 0,
-            col: Math.min(focusedPosition.col, gridColCount - 1),
-            zone: 'grid' as const
-        };
-
-        setFocusedPosition(newPosition);
-
-        // Focus the element at the new position
-        setTimeout(() => {
-            const targetRef = gridRefs.current[newPosition.row]?.[newPosition.col];
-            if (targetRef?.current) {
-                targetRef.current.focus();
-            }
-        }, 0);
-    }, [focusedPosition.col, gridColCount]);
-
-    const navigateToActivityBar = useCallback((col?: number) => {
-        const newCol = col !== undefined ? col : Math.min(focusedPosition.col, activityBarItemCount - 1);
-
-        const newPosition = {
-            row: 0,
-            col: newCol,
-            zone: 'activityBar' as const
-        };
-
-        setFocusedPosition(newPosition);
-
-        // Focus the element at the new position
-        setTimeout(() => {
-            const targetRef = activityBarRefs.current[newPosition.col];
-            if (targetRef?.current) {
-                targetRef.current.focus();
-            }
-        }, 0);
-    }, [focusedPosition.col, activityBarItemCount]);
+    // Handle smooth scrolling based on row position
+    const scrollToRow = useCallback((row: number, direction: 'up' | 'down') => {
+        // Determine the appropriate scroll position
+        let scrollTarget;
+        
+        if (row === 0) {
+            // First row - scroll to top
+            scrollTarget = 0;
+        } else if (row === 1) {
+            // Second row - scroll to middle position
+            scrollTarget = window.innerHeight * 0.2;
+        } else if (row >= 2) {
+            // Third row or below - scroll further down
+            scrollTarget = window.innerHeight * 0.4;
+        }
+        
+        // Apply smooth scrolling
+        window.scrollTo({
+            top: scrollTarget,
+            behavior: 'smooth'
+        });
+        
+        console.log(`Scrolling ${direction} to position ${scrollTarget}px for row ${row}`);
+    }, []);
 
     // Handle keyboard navigation
     const handleKeyDown = useCallback((e: KeyboardEvent) => {
@@ -95,112 +74,114 @@ export default function useEnhancedNavigation(
             e.preventDefault();
 
             setFocusedPosition(prev => {
-                const { row, col, zone } = prev;
-                let newRow = row;
-                let newCol = col;
-                let newZone = zone;
+                let newRow = prev.row;
+                let newCol = prev.col;
+                let shouldUpdateFocus = false;
+                let scrollDirection: 'up' | 'down' | null = null;
 
-                // Navigation logic based on current zone
-                if (zone === 'grid') {
-                    switch (e.key.toLowerCase()) {
-                        case 'w': // Up
-                            if (row === 0) {
-                                // When in the first row and pressing W, move to activity bar
-                                newZone = 'activityBar';
-                                newCol = Math.min(col, activityBarItemCount - 1); // Match column or use last available
-                                newRow = 0; // Activity bar is single row
-                            } else {
-                                // Normal grid up navigation
-                                newRow = Math.max(0, row - 1);
-                            }
-                            break;
-                        case 'a': // Left
-                            newCol = Math.max(0, col - 1);
-                            break;
-                        case 's': // Down
-                            newRow = Math.min(gridRowCount - 1, row + 1);
-                            break;
-                        case 'd': // Right
-                            newCol = Math.min(gridColCount - 1, col + 1);
-                            break;
-                    }
-                } else if (zone === 'activityBar') {
-                    switch (e.key.toLowerCase()) {
-                        case 'w': // Up - no action in activity bar (already at top)
-                            break;
-                        case 'a': // Left
-                            newCol = Math.max(0, col - 1);
-                            break;
-                        case 's': // Down - move back to grid
-                            newZone = 'grid';
-                            newRow = 0; // Go to first row
-                            break;
-                        case 'd': // Right
-                            newCol = Math.min(activityBarItemCount - 1, col + 1);
-                            break;
-                    }
+                switch (e.key.toLowerCase()) {
+                    case 'w': // Up
+                        if (prev.row > 0) {
+                            newRow = prev.row - 1;
+                            shouldUpdateFocus = true;
+                            scrollDirection = 'up';
+                        }
+                        break;
+                    case 'a': // Left
+                        if (prev.col > 0) {
+                            newCol = prev.col - 1;
+                            shouldUpdateFocus = true;
+                        }
+                        break;
+                    case 's': // Down
+                        if (prev.row < rowCount - 1) {
+                            newRow = prev.row + 1;
+                            shouldUpdateFocus = true;
+                            scrollDirection = 'down';
+                        }
+                        break;
+                    case 'd': // Right
+                        if (prev.col < colCount - 1) {
+                            newCol = prev.col + 1;
+                            shouldUpdateFocus = true;
+                        }
+                        break;
                 }
 
                 // Only update if position changed
-                if (newRow !== row || newCol !== col || newZone !== zone) {
-                    // Focus the element at the new position
-                    if (newZone === 'grid') {
-                        const targetRef = gridRefs.current[newRow]?.[newCol];
-                        if (targetRef?.current) {
-                            targetRef.current.focus();
-                        }
-                    } else if (newZone === 'activityBar') {
-                        const targetRef = activityBarRefs.current[newCol];
-                        if (targetRef?.current) {
-                            targetRef.current.focus();
-                        }
+                if (shouldUpdateFocus) {
+                    // Clear previous focus
+                    if (lastFocusedButton.current) {
+                        lastFocusedButton.current.blur();
                     }
-
-                    return { row: newRow, col: newCol, zone: newZone };
+                    
+                    // Important: Use setTimeout to let React render properly
+                    setTimeout(() => {
+                        // Focus the element at the new position
+                        const targetRef = appRefs.current[newRow]?.[newCol];
+                        if (targetRef?.current) {
+                            targetRef.current.focus();
+                            lastFocusedButton.current = targetRef.current;
+                            console.log(`Focused element at row=${newRow} col=${newCol}`);
+                            
+                            // Apply scrolling if needed
+                            if (scrollDirection) {
+                                scrollToRow(newRow, scrollDirection);
+                            }
+                        } else {
+                            console.warn(`No element found at row=${newRow} col=${newCol}`);
+                        }
+                    }, 50);
+                    
+                    return { row: newRow, col: newCol };
                 }
 
                 return prev;
             });
         }
-    }, [gridRowCount, gridColCount, activityBarItemCount]);
+    }, [rowCount, colCount, scrollToRow]);
 
     // Set up and clean up event listeners
     useEffect(() => {
         document.addEventListener('keydown', handleKeyDown);
 
-        // Initial focus
-        setTimeout(() => {
-            const initialRef = gridRefs.current[initialRow]?.[initialCol];
+        // Initial focus with a longer delay
+        const focusTimer = setTimeout(() => {
+            const initialRef = appRefs.current[initialRow]?.[initialCol];
             if (initialRef?.current) {
                 initialRef.current.focus();
+                lastFocusedButton.current = initialRef.current;
+                console.log(`Set initial focus at row=${initialRow} col=${initialCol}`);
+            } else {
+                console.warn(`Failed to set initial focus at row=${initialRow} col=${initialCol}`);
             }
-        }, 100);
+        }, 500); // Longer initial delay to ensure DOM is ready
 
         return () => {
             document.removeEventListener('keydown', handleKeyDown);
+            clearTimeout(focusTimer);
         };
     }, [handleKeyDown, initialRow, initialCol]);
 
-    // Function to check if a position is focused
-    const isFocused = (row: number, col: number, zone: 'grid' | 'activityBar'): boolean => {
-        return focusedPosition.row === row && focusedPosition.col === col && focusedPosition.zone === zone;
-    };
+    // Function to check if a tile is focused
+    const isFocused = useCallback((row: number, col: number): boolean => {
+        return focusedPosition.row === row && focusedPosition.col === col;
+    }, [focusedPosition]);
 
     // Function to get the ref for a specific position
-    const getFocusRef = (row: number, col: number, zone: 'grid' | 'activityBar'): React.RefObject<HTMLButtonElement> | null => {
-        if (zone === 'grid') {
-            return gridRefs.current[row]?.[col] || null;
-        } else if (zone === 'activityBar') {
-            return activityBarRefs.current[col] || null;
-        }
-        return null;
+    const getFocusRef = useCallback((row: number, col: number): React.RefObject<HTMLButtonElement> | null => {
+        return appRefs.current[row]?.[col] || null;
+    }, []);
+
+    // Return 1-indexed position for more intuitive use
+    const focusedPositionOneIndexed = {
+        row: focusedPosition.row + 1,
+        col: focusedPosition.col + 1
     };
 
     return {
-        focusedPosition,
+        focusedPosition: focusedPositionOneIndexed,
         isFocused,
-        getFocusRef,
-        navigateToGrid,
-        navigateToActivityBar
+        getFocusRef
     };
 }

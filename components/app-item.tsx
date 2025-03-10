@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { forwardRef, memo } from 'react'
 import { motion } from "framer-motion"
 import { useTransitionRouter } from "next-view-transitions"
 import Image from 'next/image'
@@ -11,22 +11,34 @@ interface Props {
     href: string
     id?: number
     focused?: boolean
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    ref:any
 }
 
-const AppItem = ({ shouldShowAppName = true, appIconUrl, appName, href, focused, ref }: Props) => {
+// Use both forwardRef and memo to prevent unnecessary re-renders
+const AppItem = memo(forwardRef<HTMLButtonElement, Props>(({
+    shouldShowAppName = true,
+    appIconUrl,
+    appName,
+    href,
+    focused
+}, ref) => {
     const router = useTransitionRouter()
+
+    // Add debugging for focus issues
+    React.useEffect(() => {
+        if (focused) {
+            console.log("AppItem focused:", appName);
+        }
+    }, [focused, appName]);
 
     return (
         <motion.button
             ref={ref}
             tabIndex={focused ? 0 : -1}
-            animate={{ scale: focused ? 1.07 : 1 }}
-            whileHover={{ scale: 1.07 }}
-            whileFocus={{ scale: 1.07 }}
+            animate={{ scale: focused ? 1.08 : 1 }}
+            whileHover={{ scale: 1.08 }}
+            whileFocus={{ scale: 1.08 }}
             onClick={() => router.push(href)}
-            className={`relative group group-hover:shadow-2xl group-focus:shadow-2xl transition-all duration-300 focusable-apps`}
+            className="relative group group-hover:shadow-2xl group-focus:shadow-2xl transition-all duration-300 focusable-apps w-full"
         >
             <Squircle
                 asChild
@@ -46,7 +58,7 @@ const AppItem = ({ shouldShowAppName = true, appIconUrl, appName, href, focused,
             </Squircle>
 
             {shouldShowAppName && <motion.span
-                className="mt-2 text-base text-white text-wrap opacity-0 group-hover:opacity-100 group-focus:opacity-100"
+                className={`mt-2 text-base text-white text-wrap ${focused ? 'opacity-100' : 'opacity-0 group-hover:opacity-100 group-focus:opacity-100'}`}
                 initial={{ y: -10 }}
                 animate={{ y: 0 }}
             >
@@ -54,6 +66,9 @@ const AppItem = ({ shouldShowAppName = true, appIconUrl, appName, href, focused,
             </motion.span>}
         </motion.button>
     )
-}
+}));
 
-export default AppItem
+// Add display name for better debugging
+AppItem.displayName = 'AppItem';
+
+export default AppItem;
