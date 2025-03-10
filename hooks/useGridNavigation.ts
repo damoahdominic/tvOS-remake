@@ -109,7 +109,10 @@ export default function useGridNavigation(
                         }
                         break;
                     case 'enter': // trigger click
-                        
+                        const elementById = document.getElementById(`app-${newRow}-${newCol}`);
+                        if (elementById) {
+                            elementById.click();
+                        }
                         break;
                 }
 

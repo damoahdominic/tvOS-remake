@@ -77,6 +77,8 @@ const TVOSGrid: React.FC<TVOSGridProps> = ({
                                 href={app.href}
                                 id={app.id}
                                 ref={ref}
+                                col={col}
+                                row={row}
                                 focused={focused}
                             />
                         </div>

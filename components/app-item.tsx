@@ -10,6 +10,8 @@ interface Props {
     appName: string
     href: string
     id?: number
+    col?: number
+    row?: number
     focused?: boolean
 }
 
@@ -19,6 +21,8 @@ const AppItem = memo(forwardRef<HTMLButtonElement, Props>(({
     appIconUrl,
     appName,
     href,
+    col,
+    row,
     focused
 }, ref) => {
     const router = useTransitionRouter()
@@ -33,6 +37,7 @@ const AppItem = memo(forwardRef<HTMLButtonElement, Props>(({
     return (
         <motion.button
             ref={ref}
+            id={`app-${row}-${col}`}
             tabIndex={focused ? 0 : -1}
             animate={{ scale: focused ? 1.08 : 1 }}
             whileHover={{ scale: 1.08 }}
