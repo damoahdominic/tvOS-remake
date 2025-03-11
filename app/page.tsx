@@ -5,6 +5,7 @@ import { apps } from "@/data"
 import ActivityBar from "@/components/activity-bar"
 import TVOSGrid from "@/components/TVOSGrid"
 import useGridNavigation from "@/hooks/useGridNavigation"
+import BackgroundCarousel from "@/components/BackgroundCarousel"
 
 // Simple focus position debugger component
 function FocusDebugger({ position }: { position: { row: number; col: number } }) {
@@ -36,6 +37,7 @@ export default function Home() {
 
     // Direct grid navigation - no activity bar integration for simplicity
     const { isFocused, getFocusRef, focusedPosition } = useGridNavigation(3, 6, 0, 0);
+    const [focusedApp, setFocusedApp] = useState(apps[0]);
 
     // Handle scroll events with debounce
     useEffect(() => {
@@ -55,17 +57,26 @@ export default function Home() {
         };
     }, []);
 
+    useEffect(() => {
+        if (focusedPosition.row === 1) {
+            setFocusedApp(apps[focusedPosition.col - 1]);
+        }
+    }, [focusedPosition]);
+
+
     return (
         <div className="relative min-h-screen overflow-hidden">
             {/* Background Image */}
-            <div
+            {/* <div
                 className={`fixed inset-0 transition-all duration-500 ${scrolled ? "blur-xl" : ""}`}
                 style={{
                     backgroundImage: `url(${"/os-bg.jpg"})`,
-                    backgroundSize: "cover",
+                    backgroundSize: "co ver",
                     backgroundPosition: "center",
                 }}
-            />
+            /> */}
+
+            <BackgroundCarousel scrolled={scrolled} focusedApp={focusedApp} />
 
             {/* Activity Bar Component */}
             <ActivityBar />
