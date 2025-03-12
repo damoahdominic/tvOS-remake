@@ -1,14 +1,26 @@
 "use client"
-import { createContext, useContext, useEffect, ReactNode } from "react";
+import { createContext, useContext, useEffect, ReactNode, useState } from "react";
 import { usePathname } from "next/navigation";
 import { useTransitionRouter } from 'next-view-transitions'
+import BootSequence from "@/components/boot-sequence";
 
-const AppContext = createContext({});
+const AppContext = createContext({
+    isLoaded: true
+});
 
 export function AppProvider({ children }: { children: ReactNode }) {
 
+    const [isLoaded, setIsLoaded] = useState(false);
+
     const pathname = usePathname()
     const router = useTransitionRouter()
+
+    useEffect(() => {
+        setTimeout(() => {
+            setIsLoaded(true)
+        }, 5000)
+
+    }, [])
 
     useEffect(() => {
         // Disable mouse movement
@@ -41,8 +53,13 @@ export function AppProvider({ children }: { children: ReactNode }) {
     }, [router, pathname]);
 
     return (
-        <AppContext.Provider value={{ }}>
-            {children}
+        <AppContext.Provider value={{ isLoaded }}>
+            {
+                !isLoaded ?
+                    <BootSequence/>
+                    :
+                    children
+            }
         </AppContext.Provider>
     );
 }

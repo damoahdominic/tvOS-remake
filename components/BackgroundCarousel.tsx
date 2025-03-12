@@ -2,6 +2,8 @@ import { AppItemType } from '@/data';
 import Image from 'next/image';
 import React, { useState, useEffect } from 'react';
 
+const imageTransition = 8000 // 8 seconds
+
 const BackgroundCarousel = ({ focusedApp, scrolled }: { focusedApp: AppItemType, scrolled: boolean }) => {
     const [currentBackgroundIndex, setCurrentBackgroundIndex] = useState(0);
     const [isTransitioning, setIsTransitioning] = useState(false);
@@ -22,7 +24,7 @@ const BackgroundCarousel = ({ focusedApp, scrolled }: { focusedApp: AppItemType,
                 setCurrentBackgroundIndex(prev => (prev + 1) % appBackgrounds.length);
                 setIsTransitioning(false);
             }, 500); // Half a second for fade-out before changing image
-        }, 8000); // Change every 8 seconds
+        }, imageTransition); // Change every 8 seconds
 
         return () => clearInterval(intervalId);
     }, [focusedApp]);
@@ -53,12 +55,12 @@ const BackgroundCarousel = ({ focusedApp, scrolled }: { focusedApp: AppItemType,
             />
 
             {/* App information overlay */}
-            <div className="absolute bottom-20 left-20 z-20 transition-opacity duration-500">
+            {/* <div className="absolute bottom-20 left-20 z-20 transition-opacity duration-500">
                 <h2 className="text-4xl text-white font-bold mb-2">{focusedApp.appName}</h2>
                 <p className="text-xl text-white opacity-80 max-w-md">
                     {focusedApp?.description || `Explore ${focusedApp.appName} content`}
                 </p>
-            </div>
+            </div> */}
         </div>
     );
 };
