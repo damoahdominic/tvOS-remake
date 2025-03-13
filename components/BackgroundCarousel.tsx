@@ -14,7 +14,7 @@ const BackgroundCarousel = ({ focusedApp, scrolled }: { focusedApp: AppItemType,
         setHasFinishedSplash(false);
     }, [focusedApp]);
 
-    // Effect for auto-playing through background images of the focused app
+    // Effect for splash screen
     useEffect(() => {
         if (!focusedApp) return;
 
@@ -63,7 +63,7 @@ const BackgroundCarousel = ({ focusedApp, scrolled }: { focusedApp: AppItemType,
             <div className="absolute inset-0 w-full h-full z-0 overflow-hidden">
                 {/* Background overlay with gradient */}
                 <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-black opacity-90 z-10" />
-                <div className='fixed inset-0 w-full h-full bg-pink-600'>
+                <div className='fixed inset-0 w-full h-full'>
                     <Image
                         width={1000}
                         height={1000}
@@ -101,7 +101,7 @@ const BackgroundCarousel = ({ focusedApp, scrolled }: { focusedApp: AppItemType,
                 />
                     :
                     focusedApp?.splash &&
-                    <div className='fixed inset-0 w-full h-full bg-pink-600'>
+                    <div className='fixed inset-0 w-full h-full'>
                         <Image
                             width={1000}
                             height={1000}
