@@ -73,7 +73,7 @@ const TVOSGrid: React.FC<TVOSGridProps> = ({
                         <motion.div animate={{ scale: focused ? 1.12 : 1 }}
                             whileHover={{ scale: 1.12 }}
                             whileFocus={{ scale: 1.12 }} key={app.id || `app-${row}-${col}`}
-                            className={cn("rounded-[30px] transition-all duration-300 ", { "app-item-shadow bg-black/70": focused })}>
+                            className={cn("rounded-[35px] transition-all duration-300 ", { "app-item-shadow bg-black/70": focused })}>
                             <AppItem
                                 shouldShowAppName={app.shouldShowAppName ?? true}
                                 appIconUrl={app.appIconUrl}
