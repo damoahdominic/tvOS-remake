@@ -111,3 +111,9 @@ body {
     @apply bg-background text-foreground;
   }
 }
+
+.app-item-shadow{
+box-shadow: 0px 93px 67px -5px rgba(0,0,0,1);
+-webkit-box-shadow: 0px 93px 67px -5px rgba(0,0,0,1);
+-moz-box-shadow: 0px 93px 67px -5px rgba(0,0,0,1);
+}

@@ -3,6 +3,7 @@ import useGridNavigation from '@/hooks/useGridNavigation';
 import AppItem from './app-item';
 import { motion } from "framer-motion"
 import { Squircle } from '@squircle-js/react';
+import { cn } from '@/lib/utils';
 
 interface AppIcon {
     id?: number;
@@ -69,7 +70,10 @@ const TVOSGrid: React.FC<TVOSGridProps> = ({
                     const ref = getFocusRef(row, col);
 
                     rowItems.push(
-                        <div key={app.id || `app-${row}-${col}`} data-row={row} data-col={col}>
+                        <motion.div animate={{ scale: focused ? 1.12 : 1 }}
+                            whileHover={{ scale: 1.12 }}
+                            whileFocus={{ scale: 1.12 }} key={app.id || `app-${row}-${col}`}
+                            className={cn("rounded-[30px] transition-all duration-300 ", { "app-item-shadow bg-black/70": focused })}>
                             <AppItem
                                 shouldShowAppName={app.shouldShowAppName ?? true}
                                 appIconUrl={app.appIconUrl}
@@ -81,7 +85,7 @@ const TVOSGrid: React.FC<TVOSGridProps> = ({
                                 row={row}
                                 focused={focused}
                             />
-                        </div>
+                        </motion.div>
                     );
                 }
             }
@@ -144,7 +148,7 @@ const TVOSGrid: React.FC<TVOSGridProps> = ({
                             animate={{ y: 0, opacity: 1 }}
                             transition={{ duration: 0.5 }}
                         >
-                            <div className="grid grid-cols-6 gap-7">
+                            <div className="grid grid-cols-6 gap-9">
                                 {gridItems?.firstRow?.slice(0, 6).map((app, i) => (
                                     <div key={i} className="first-row-item">
                                         {app}
@@ -157,7 +161,7 @@ const TVOSGrid: React.FC<TVOSGridProps> = ({
 
                 {/* Additional Content (for scrolling) */}
                 <motion.div animate={{ bottom: scrolled ? "3rem" : "3.9rem" }} className="relative px-8 py-12 cursor-pointer">
-                    <motion.div variants={container} initial="hidden" animate="show" className="grid grid-cols-6 gap-7 relative">
+                    <motion.div variants={container} initial="hidden" animate="show" className="grid grid-cols-6 gap-9 relative">
                         {gridItems?.rest?.map((app, i) => (
                             <div key={i} className="rest-row-item">
                                 {app}

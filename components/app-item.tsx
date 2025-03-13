@@ -3,6 +3,7 @@ import { motion } from "framer-motion"
 import { useTransitionRouter } from "next-view-transitions"
 import Image from 'next/image'
 import { Squircle } from "@squircle-js/react"
+import { cn } from '@/lib/utils'
 
 interface Props {
     shouldShowAppName: boolean
@@ -36,14 +37,13 @@ const AppItem = memo(forwardRef<HTMLButtonElement, Props>(({
 
     return (
         <motion.button
+            data-row={row}
+            data-col={col}
             ref={ref}
             id={`app-${row}-${col}`}
             tabIndex={focused ? 0 : -1}
-            animate={{ scale: focused ? 1.08 : 1 }}
-            whileHover={{ scale: 1.08 }}
-            whileFocus={{ scale: 1.08 }}
             onClick={() => router.push(href)}
-            className="relative group group-hover:shadow-2xl group-focus:shadow-2xl transition-all duration-300 focusable-apps w-full"
+            className={cn("relative group rounded-[30px] transition-all duration-500 focusable-apps w-full")}
         >
             <Squircle
                 asChild
@@ -51,7 +51,7 @@ const AppItem = memo(forwardRef<HTMLButtonElement, Props>(({
                 cornerSmoothing={1}
                 className="bg-black text-white"
             >
-                <motion.div className={`aspect-video w-full group-focus:shadow-2xl group-hover:shadow-2xl`}>
+                <motion.div className={`aspect-video w-full`}>
                     <Image
                         src={appIconUrl}
                         alt={`${appName}`}
@@ -62,13 +62,13 @@ const AppItem = memo(forwardRef<HTMLButtonElement, Props>(({
                 </motion.div>
             </Squircle>
 
-            {shouldShowAppName && <motion.span
-                className={`mt-2 text-base text-white text-wrap ${focused ? 'opacity-100' : 'opacity-0 group-hover:opacity-100 group-focus:opacity-100'}`}
+            <motion.span
+                className={`pt-2 text-base text-white text-wrap ${focused ? 'opacity-100' : 'opacity-0 group-hover:opacity-100 group-focus:opacity-100'}`}
                 initial={{ y: -10 }}
                 animate={{ y: 0 }}
             >
-                {appName}
-            </motion.span>}
+                {shouldShowAppName && appName}
+            </motion.span>
         </motion.button>
     )
 }));
