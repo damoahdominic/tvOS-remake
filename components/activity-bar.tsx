@@ -6,6 +6,7 @@ import moment from "moment";
 import Image from "next/image";
 import { Plus } from "lucide-react";
 import MusicPlayer from "./music-player";
+import AlertLarge from "./alerts/alert-large";
 
 const transition: Transition = {
   type: "scale",
@@ -179,6 +180,7 @@ export default function ActivityBar({
 }: EnhancedActivityBarProps) {
   const [currentTab, setCurrentTab] = useState<ActivityTabs>("");
   const [time, setTime] = useState<Date>(new Date());
+  const [onOpenModal, setOnOpenModal] = useState(false);
 
   // Effect hook to run on component mount
   useEffect(() => {
@@ -218,7 +220,7 @@ export default function ActivityBar({
         >
           <motion.div className="bg-white/50 dark:bg-[#1E1E1E]/50 h-[68px] flex items-center">
             <div className="flex items-center pr-2 gap-2">
-              <p className="text-xl font-bold pl-4">
+              <p onClick={() => setOnOpenModal(true)} className="text-xl font-bold pl-4">
                 {moment(time).format("LT")}
               </p>
 
@@ -354,6 +356,29 @@ export default function ActivityBar({
             )}
           </motion.div>
         )}
+
+        <AlertLarge
+          title="Sleep Now?"
+          description="Are you sure you want to sleep?"
+          open={onOpenModal}
+          actions={[
+            {
+              text: "Sleep",
+              onClick: () => {
+                setOnOpenModal(false);
+              },
+              variant: "primary",
+            },
+            {
+              text: "Cancel",
+              onClick: () => {
+                setOnOpenModal(false);
+              },
+              variant: "primary",
+            },
+          ]}
+          onOpenChange={setOnOpenModal}
+        />
       </motion.div>
     </MotionConfig>
   );

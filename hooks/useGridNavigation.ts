@@ -1,4 +1,5 @@
 // File: hooks/useGridNavigation.ts
+import { useDialogContext } from '@/providers/dialog-provider';
 import React, { useState, useEffect, useCallback, useRef } from 'react';
 
 interface Position {
@@ -68,8 +69,20 @@ export default function useGridNavigation(
         console.log(`Scrolling ${direction} to position ${scrollTarget}px for row ${row}`);
     }, []);
 
-    // Handle keyboard navigation
+    // This is the updated handleKeyDown function for your existing hook
+    // Import DialogContext at the top of your file:
+    // import { useDialogContext } from '../context/DialogContext';
+
+    // Inside your useGridNavigation hook:
+    const { isDialogOpen } = useDialogContext();
+
+    // Then update your existing handleKeyDown function:
     const handleKeyDown = useCallback((e: KeyboardEvent) => {
+        // Skip navigation when dialog is open
+        if (isDialogOpen) {
+            return;
+        }
+
         if (['w', 'a', 's', 'd', "enter"].includes(e.key.toLowerCase())) {
             e.preventDefault();
 
@@ -118,18 +131,30 @@ export default function useGridNavigation(
 
                 // Only update if position changed
                 if (shouldUpdateFocus) {
-                    // Clear previous focus
+                    // IMPORTANT: Clear previous focus FIRST
                     if (lastFocusedButton.current) {
                         lastFocusedButton.current.blur();
+
+                        // Remove any focus-related classes
+                        lastFocusedButton.current.classList.remove('focused-item');
+
+                        // If you're using data attributes for focus state
+                        lastFocusedButton.current.removeAttribute('data-focused');
                     }
 
-                    // Important: Use setTimeout to let React render properly
+                    // Wait for the blur to take effect
                     setTimeout(() => {
                         // Focus the element at the new position
                         const targetRef = appRefs.current[newRow]?.[newCol];
                         if (targetRef?.current) {
                             targetRef.current.focus();
+
+                            // Add any focus-related classes
+                            targetRef.current.classList.add('focused-item');
+
+                            // Store the new focused button
                             lastFocusedButton.current = targetRef.current;
+
                             console.log(`Focused element at row=${newRow} col=${newCol}`);
 
                             // Apply scrolling if needed
@@ -139,7 +164,7 @@ export default function useGridNavigation(
                         } else {
                             console.warn(`No element found at row=${newRow} col=${newCol}`);
                         }
-                    }, 50);
+                    }, 10); // Shorter timeout should be sufficient
 
                     return { row: newRow, col: newCol };
                 }
@@ -147,7 +172,7 @@ export default function useGridNavigation(
                 return prev;
             });
         }
-    }, [rowCount, colCount, scrollToRow]);
+    }, [rowCount, colCount, scrollToRow, isDialogOpen]); // Add isDialogOpen to dependency array
 
     // Set up and clean up event listeners
     useEffect(() => {

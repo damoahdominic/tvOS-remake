@@ -17,6 +17,8 @@ export interface AppItemType {
     description?: string
 }
 
+export const ALERT_DIALOG_ID = "tvos-dialog";
+
 export const apps = [
     {
         appIconUrl: "/apps/apple-tv.svg",
