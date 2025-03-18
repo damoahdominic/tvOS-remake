@@ -4,6 +4,7 @@ import Image from 'next/image'
 import React, { useEffect, useRef, useState } from 'react'
 import { ScrollArea } from "@/components/ui/scroll-area"
 import { motion, AnimatePresence } from 'framer-motion';
+import { useTransitionRouter } from 'next-view-transitions'
 
 // Define types for menu items
 interface MenuItem {
@@ -144,6 +145,7 @@ type Direction = 'forward' | 'backward';
 
 
 const Page = () => {
+    const router = useTransitionRouter()
     const [currentMenu, setCurrentMenu] = useState<string>('main');
     const [menuStack, setMenuStack] = useState<string[]>(['main']);
     const [focusedIndex, setFocusedIndex] = useState<number>(0);
@@ -224,6 +226,9 @@ const Page = () => {
 
             // Restore previous focus
             setFocusedIndex(previousFocusMap[prevMenu] || 0);
+        }
+        else {
+            router.back();
         }
     };
 
