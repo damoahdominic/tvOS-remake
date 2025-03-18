@@ -13,6 +13,7 @@ export function AppProvider({ children }: { children: ReactNode }) {
     const [isLoaded, setIsLoaded] = useState(false);
 
     const pathname = usePathname()
+    console.log("🚀 ~ AppProvider ~ pathname:", pathname)
     const router = useTransitionRouter()
 
     useEffect(() => {
@@ -35,7 +36,7 @@ export function AppProvider({ children }: { children: ReactNode }) {
             switch (e.key) {
                 case "Escape":
                     console.log("Escape");
-                    if (pathname !== "/") {
+                    if (pathname !== "/" && pathname !== "/settings") {
                         router.back()
                     }
                     break;
@@ -56,7 +57,7 @@ export function AppProvider({ children }: { children: ReactNode }) {
         <AppContext.Provider value={{ isLoaded }}>
             {
                 !isLoaded ?
-                    <BootSequence/>
+                    <BootSequence />
                     :
                     children
             }
