@@ -42,7 +42,7 @@ export default function useGridNavigation(
   // Track the last focused button to help with debugging
   const lastFocusedButton = useRef<HTMLButtonElement | null>(null);
 
-  // Track the last Active Dock App
+  // Track the last Active Dock App 
   const [lastActiveDockApp, setLastActiveDockApp] =
     useState<AppItemType | null>(null);
 
@@ -63,6 +63,10 @@ export default function useGridNavigation(
   }, [rowCount, colCount]);
 
   useEffect(() => {
+    // TODO: lastActiveDockApp should be made into a zustand store variable
+    // if lastActiveDockApp is null, then we should set it to the current dock app
+    // if lastActiveDockApp is not null, then we should set it to the current dock app
+
     if (focusedPosition.row === 0 && focusedPosition.col < dockApps.length) {
       const currentDockApp = dockApps[focusedPosition.col];
       setLastActiveDockApp(currentDockApp);
