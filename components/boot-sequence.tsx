@@ -10,7 +10,7 @@ const BootSequence = () => {
     >
       {/* Put your animation here */}
       {/* Booting... */}
-      <Image src="/Frame65.png" alt="Frame65" width={200} height={200} />
+      <Image src="/apple-D-logo.png" alt="Frame65" width={200} height={200} />
     </motion.div>
   );
 };
