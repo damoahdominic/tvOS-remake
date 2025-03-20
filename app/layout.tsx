@@ -5,6 +5,7 @@ import { ViewTransitions } from 'next-view-transitions'
 import { ThemeProvider } from "@/providers/theme-provider";
 import { AppProvider } from "@/providers/app-provider";
 import { DialogProvider } from "@/providers/dialog-provider";
+import { apps } from "@/data"
 
 
 // Font files can be colocated inside of `pages`
@@ -24,7 +25,7 @@ export default function RootLayout({ children, }: Readonly<{ children: React.Rea
           className={`${sfPro.className} antialiased`}
         >
           <main className="relative min-h-screen overflow-hidden">
-            <AppProvider>
+            <AppProvider appData={apps}>
               <DialogProvider>
                 <ThemeProvider
                   attribute="class"

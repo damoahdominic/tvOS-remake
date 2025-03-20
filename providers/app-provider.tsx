@@ -3,26 +3,53 @@ import { createContext, useContext, useEffect, ReactNode, useState } from "react
 import { usePathname } from "next/navigation";
 import { useTransitionRouter } from 'next-view-transitions'
 import BootSequence from "@/components/boot-sequence";
+import { useImagePreloader } from "@/hooks/useImagePreloader";
+import { AnimatePresence } from "framer-motion";
+import { AppItemType } from "@/data";
 
-const AppContext = createContext({
-    isLoaded: true
+interface AppContextType {
+    isLoaded: boolean;
+    loadingProgress: number;
+}
+
+const AppContext = createContext<AppContextType>({
+    isLoaded: false,
+    loadingProgress: 0
 });
 
-export function AppProvider({ children }: { children: ReactNode }) {
-
+export function AppProvider({
+    children,
+    appData
+}: {
+    children: ReactNode;
+    appData: AppItemType[];
+}) {
     const [isLoaded, setIsLoaded] = useState(false);
+    const [minBootTimeElapsed, setMinBootTimeElapsed] = useState(false);
+    const preloaderStatus = useImagePreloader(appData, 6); // Preload first 6 apps
 
-    const pathname = usePathname()
-    console.log("🚀 ~ AppProvider ~ pathname:", pathname)
-    const router = useTransitionRouter()
+    const pathname = usePathname();
+    const router = useTransitionRouter();
 
+    // Minimum boot time effect - ensures boot screen shows for at least 5 seconds
     useEffect(() => {
-        setTimeout(() => {
-            setIsLoaded(true)
-        }, 5000)
+        const timer = setTimeout(() => {
+            setMinBootTimeElapsed(true);
+        }, 5000);
 
-    }, [])
+        return () => clearTimeout(timer);
+    }, []);
 
+    // Set app as loaded when both conditions are met:
+    // 1. Minimum boot time has elapsed
+    // 2. Images are preloaded
+    useEffect(() => {
+        if (minBootTimeElapsed && preloaderStatus.isComplete) {
+            setIsLoaded(true);
+        }
+    }, [minBootTimeElapsed, preloaderStatus.isComplete]);
+
+    // User interaction handling
     useEffect(() => {
         // Disable mouse movement
         const preventMouseMove = (e: MouseEvent) => {
@@ -37,7 +64,7 @@ export function AppProvider({ children }: { children: ReactNode }) {
                 case "Escape":
                     console.log("Escape");
                     if (pathname !== "/" && pathname !== "/settings") {
-                        router.back()
+                        router.back();
                     }
                     break;
                 default:
@@ -54,13 +81,21 @@ export function AppProvider({ children }: { children: ReactNode }) {
     }, [router, pathname]);
 
     return (
-        <AppContext.Provider value={{ isLoaded }}>
-            {
-                !isLoaded ?
-                    <BootSequence />
-                    :
-                    children
-            }
+        <AppContext.Provider value={{
+            isLoaded,
+            loadingProgress: preloaderStatus.progress
+        }}>
+            <AnimatePresence>
+                {!isLoaded && (
+                    <BootSequence
+                        progress={preloaderStatus.progress}
+                    />
+                )}
+            </AnimatePresence>
+
+            <div className={`${!isLoaded ? 'opacity-0' : 'opacity-100'} transition-opacity duration-1000`}>
+                {children}
+            </div>
         </AppContext.Provider>
     );
 }
