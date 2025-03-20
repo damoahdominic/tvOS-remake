@@ -147,6 +147,7 @@ export default function useGridNavigation(
       window.removeEventListener("keydown", handleBackNavigation);
       window.removeEventListener("popstate", () => {});
     };
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [router, lastActiveDockApp]);
 
   // Handle smooth scrolling based on row position
