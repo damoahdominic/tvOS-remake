@@ -66,6 +66,16 @@ export default function Home() {
 
     return (
         <div className="relative min-h-screen overflow-hidden">
+            {/* Background Image */}
+            {/* <div
+                className={`fixed inset-0 transition-all duration-500 ${scrolled ? "blur-xl" : ""}`}
+                style={{
+                    backgroundImage: `url(${"/os-bg.jpg"})`,
+                    backgroundSize: "co ver",
+                    backgroundPosition: "center",
+                }}
+            /> */}
+
             <BackgroundCarousel scrolled={scrolled} focusedApp={focusedApp} />
 
             {/* Activity Bar Component */}

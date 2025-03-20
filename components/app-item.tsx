@@ -1,9 +1,10 @@
-import React, { forwardRef, memo } from 'react'
+import React, { forwardRef, memo, useContext } from 'react'
 import { motion } from "framer-motion"
 import { useTransitionRouter } from "next-view-transitions"
 import Image from 'next/image'
 import { Squircle } from "@squircle-js/react"
 import { cn } from '@/lib/utils'
+import { AppContextMenuContext } from '@/providers/context-menu-provider'
 
 interface Props {
     shouldShowAppName: boolean
@@ -24,9 +25,11 @@ const AppItem = memo(forwardRef<HTMLButtonElement, Props>(({
     href,
     col,
     row,
-    focused
+    focused,
+    id
 }, ref) => {
     const router = useTransitionRouter()
+    const { openContextMenu } = useContext(AppContextMenuContext)
 
     // Add debugging for focus issues
     React.useEffect(() => {
@@ -34,6 +37,14 @@ const AppItem = memo(forwardRef<HTMLButtonElement, Props>(({
             console.log("AppItem focused:", appName);
         }
     }, [focused, appName]);
+
+    // Handle right-click to open context menu
+    const handleContextMenu = (e: React.MouseEvent) => {
+        e.preventDefault()
+        // Use the id provided or generate one from row/col
+        const appId = id || `app-${row}-${col}`
+        openContextMenu(e, appName, appId)
+    }
 
     return (
         <motion.button
@@ -43,6 +54,7 @@ const AppItem = memo(forwardRef<HTMLButtonElement, Props>(({
             id={`app-${row}-${col}`}
             tabIndex={focused ? 0 : -1}
             onClick={() => router.push(href)}
+            onContextMenu={handleContextMenu} // Add context menu handler
             className={cn("relative group rounded-[30px] transition-all duration-500 focusable-apps w-full")}
         >
             <Squircle
