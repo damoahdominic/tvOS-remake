@@ -6,6 +6,7 @@ import { Squircle } from "@squircle-js/react"
 import { cn } from '@/lib/utils'
 import { AppContextMenuContext } from '@/providers/context-menu-provider'
 
+
 interface Props {
     shouldShowAppName: boolean
     appIconUrl: string
@@ -15,6 +16,7 @@ interface Props {
     col?: number
     row?: number
     focused?: boolean
+    isFolder?: boolean
 }
 
 // Use both forwardRef and memo to prevent unnecessary re-renders
@@ -26,7 +28,6 @@ const AppItem = memo(forwardRef<HTMLButtonElement, Props>(({
     col,
     row,
     focused,
-    id
 }, ref) => {
     const router = useTransitionRouter()
     const { openContextMenu } = useContext(AppContextMenuContext)
@@ -41,8 +42,8 @@ const AppItem = memo(forwardRef<HTMLButtonElement, Props>(({
     // Handle right-click to open context menu
     const handleContextMenu = (e: React.MouseEvent) => {
         e.preventDefault()
-        // Use the id provided or generate one from row/col
-        const appId = id || `app-${row}-${col}`
+        // Use the app name, ID, and specify if it's a folder
+        const appId = `app-${row}-${col}`
         openContextMenu(e, appName, appId)
     }
 
@@ -54,7 +55,7 @@ const AppItem = memo(forwardRef<HTMLButtonElement, Props>(({
             id={`app-${row}-${col}`}
             tabIndex={focused ? 0 : -1}
             onClick={() => router.push(href)}
-            onContextMenu={handleContextMenu} // Add context menu handler
+            onContextMenu={handleContextMenu}
             className={cn("relative group rounded-[30px] transition-all duration-500 focusable-apps w-full")}
         >
             <Squircle
