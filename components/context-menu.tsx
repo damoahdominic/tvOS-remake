@@ -95,8 +95,8 @@ const ContextMenu: React.FC<ContextMenuProps> = ({
 
     // Adjust position to make sure menu stays in viewport
     const adjustedPosition = {
-        x: Math.min(position.x, window.innerWidth - 300),
-        y: Math.min(position.y, window.innerHeight - (menuItems.length * 60 + 40)) // Added extra space for padding
+        x: Math.min(position.x, window?.innerWidth - 300),
+        y: Math.min(position.y, window?.innerHeight - (menuItems.length * 60 + 40)) // Added extra space for padding
     };
 
     const TVIcon = (props: { color: string }) => (
