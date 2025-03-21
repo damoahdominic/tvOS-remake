@@ -27,6 +27,7 @@ const ContextMenu: React.FC<ContextMenuProps> = ({
     const [focusedIndex, setFocusedIndex] = useState(0);
     const menuRef = useRef<HTMLDivElement>(null);
     const itemRefs = useRef<(HTMLButtonElement | null)[]>([]);
+    const [adjustedPosition, setAdjustedPosition] = useState<{ x: number; y: number }>({ x: 0, y: 0 });
 
     // Reset focused index when menu opens
     useEffect(() => {
@@ -94,10 +95,14 @@ const ContextMenu: React.FC<ContextMenuProps> = ({
     }, [isOpen, onClose]);
 
     // Adjust position to make sure menu stays in viewport
-    const adjustedPosition = {
-        x: Math.min(position.x, window?.innerWidth - 300),
-        y: Math.min(position.y, window?.innerHeight - (menuItems.length * 60 + 40)) // Added extra space for padding
-    };
+    useEffect(() => {
+        if (typeof window !== 'undefined') {
+            setAdjustedPosition({
+                x: Math.min(position.x, window.innerWidth - 300),
+                y: Math.min(position.y, window.innerHeight - (menuItems.length * 60 + 40))
+            });
+        }
+    }, [position, menuItems.length]);
 
     const TVIcon = (props: { color: string }) => (
         <svg
@@ -220,7 +225,7 @@ const ContextMenu: React.FC<ContextMenuProps> = ({
                                     <motion.button
                                         key={item.id}
                                         // eslint-disable-next-line @typescript-eslint/no-explicit-any
-                                        ref={(el:any) => (itemRefs.current[index] = el)}
+                                        ref={(el: any) => (itemRefs.current[index] = el)}
                                         className={`
                       w-full text-left py-3 px-5 outline-none rounded-2xl
                       flex items-center justify-between
