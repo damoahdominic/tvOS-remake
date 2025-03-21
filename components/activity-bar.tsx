@@ -26,6 +26,32 @@ const Users = [
   },
 ];
 
+// Move Tabs definition and create a type
+type Tab = {
+  name: string;
+  image: string;
+  index: number;
+};
+
+const Tabs: Tab[] = [
+  {
+    name: "music",
+    image: "audio.svg",
+    index: 0,
+  },
+  {
+    name: "switch",
+    image: "switch.svg",
+    index: 1,
+  },
+  // Profile is special, but we need it in the same list for navigation
+  {
+    name: "profile",
+    image: "", // Will use user image instead
+    index: 2,
+  },
+];
+
 export default function ActivityBar({
   getFocusRef,
   isFocused = () => false,
@@ -123,26 +149,6 @@ export default function ActivityBar({
       subTitle: "",
       iconOnly: true,
       alignment: "vertical",
-    },
-  ];
-
-  // Define Tabs with an index for navigation - removed home tab
-  const Tabs = [
-    {
-      name: "music",
-      image: "audio.svg",
-      index: 0,
-    },
-    {
-      name: "switch",
-      image: "switch.svg",
-      index: 1,
-    },
-    // Profile is special, but we need it in the same list for navigation
-    {
-      name: "profile",
-      image: "", // Will use user image instead
-      index: 2,
     },
   ];
 
@@ -336,7 +342,7 @@ type ActivityTabs = "" | "profile" | "music" | "switch";
 const NavigationButton = forwardRef<
   HTMLButtonElement,
   {
-    tab: (typeof Tabs)[0];
+    tab: Tab;
     currentTab: ActivityTabs;
     onClick: () => void;
     isProfile?: boolean;

@@ -27,6 +27,26 @@ const ContextMenu: React.FC<ContextMenuProps> = ({
     const [focusedIndex, setFocusedIndex] = useState(0);
     const menuRef = useRef<HTMLDivElement>(null);
     const itemRefs = useRef<(HTMLButtonElement | null)[]>([]);
+    // Add state for window dimensions
+    const [windowDimensions, setWindowDimensions] = useState({ width: 0, height: 0 });
+
+    // Initialize window dimensions on client side
+    useEffect(() => {
+        setWindowDimensions({
+            width: window.innerWidth,
+            height: window.innerHeight
+        });
+
+        const handleResize = () => {
+            setWindowDimensions({
+                width: window.innerWidth,
+                height: window.innerHeight
+            });
+        };
+
+        window.addEventListener('resize', handleResize);
+        return () => window.removeEventListener('resize', handleResize);
+    }, []);
 
     // Reset focused index when menu opens
     useEffect(() => {
@@ -93,10 +113,10 @@ const ContextMenu: React.FC<ContextMenuProps> = ({
         return () => document.removeEventListener('mousedown', handleClickOutside);
     }, [isOpen, onClose]);
 
-    // Adjust position to make sure menu stays in viewport
+    // Update the adjustedPosition calculation to use state instead of direct window access
     const adjustedPosition = {
-        x: Math.min(position.x, window.innerWidth - 300),
-        y: Math.min(position.y, window.innerHeight - (menuItems.length * 60 + 40)) // Added extra space for padding
+        x: Math.min(position.x, windowDimensions.width - 300),
+        y: Math.min(position.y, windowDimensions.height - (menuItems.length * 60 + 40))
     };
 
     const TVIcon = (props: { color: string }) => (
