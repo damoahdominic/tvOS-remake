@@ -21,6 +21,9 @@ interface UseGridNavigationReturn {
   ) => React.RefObject<HTMLButtonElement> | null;
 }
 
+// Add this helper at the top of the file
+const isBrowser = typeof window !== 'undefined';
+
 export default function useGridNavigation(
   rowCount: number,
   colCount: number,
@@ -86,6 +89,8 @@ export default function useGridNavigation(
 
   // Add an effect to handle the back/escape navigation
   useEffect(() => {
+    if (!isBrowser) return; // Skip if not in browser
+
     // Handle Escape/Backspace keys to return to last active dock app position
     const handleBackNavigation = (e: KeyboardEvent) => {
       if (e.key === "Escape" || e.key === "Backspace") {
@@ -152,6 +157,8 @@ export default function useGridNavigation(
 
   // Handle smooth scrolling based on row position
   const scrollToRow = useCallback((row: number, direction: "up" | "down") => {
+    if (!isBrowser) return; // Skip if not in browser
+
     // Determine the appropriate scroll position
     let scrollTarget;
 
@@ -289,6 +296,8 @@ export default function useGridNavigation(
 
   // Set up and clean up event listeners
   useEffect(() => {
+    if (!isBrowser) return; // Skip if not in browser
+
     document.addEventListener("keydown", handleKeyDown);
 
     // Initial focus with a longer delay

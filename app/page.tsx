@@ -41,6 +41,9 @@ export default function Home() {
 
     // Handle scroll events with debounce
     useEffect(() => {
+        // Only run on client side
+        if (typeof window === 'undefined') return;
+
         let timeout: NodeJS.Timeout;
 
         const handleScroll = () => {

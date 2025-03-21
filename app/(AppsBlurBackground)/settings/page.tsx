@@ -157,30 +157,33 @@ const Page = () => {
 
     // Handle keyboard navigation
     useEffect(() => {
-        const handleKeyDown = (e: KeyboardEvent) => {
-            if (e.key === 'ArrowUp' || e.key === 'w') {
-                e.preventDefault();
-                setFocusedIndex(prev => (prev > 0 ? prev - 1 : prev));
-            } else if (e.key === 'ArrowDown' || e.key === 's') {
-                e.preventDefault();
-                const maxIndex = settingsData[currentMenu].length - 1;
-                setFocusedIndex(prev => (prev < maxIndex ? prev + 1 : prev));
-            } else if (e.key === 'ArrowRight' || e.key === 'd' || e.key === 'Enter') {
-                e.preventDefault();
-                const selectedItem = settingsData[currentMenu][focusedIndex];
-                if (selectedItem && selectedItem.hasSubmenu) {
-                    navigateForward(selectedItem.id);
-                } else if (selectedItem.action) {
-                    selectedItem.action();
+        // Only add event listeners if window is defined (client-side)
+        if (typeof window !== 'undefined') {
+            const handleKeyDown = (e: KeyboardEvent) => {
+                if (e.key === 'ArrowUp' || e.key === 'w') {
+                    e.preventDefault();
+                    setFocusedIndex(prev => (prev > 0 ? prev - 1 : prev));
+                } else if (e.key === 'ArrowDown' || e.key === 's') {
+                    e.preventDefault();
+                    const maxIndex = settingsData[currentMenu].length - 1;
+                    setFocusedIndex(prev => (prev < maxIndex ? prev + 1 : prev));
+                } else if (e.key === 'ArrowRight' || e.key === 'd' || e.key === 'Enter') {
+                    e.preventDefault();
+                    const selectedItem = settingsData[currentMenu][focusedIndex];
+                    if (selectedItem && selectedItem.hasSubmenu) {
+                        navigateForward(selectedItem.id);
+                    } else if (selectedItem.action) {
+                        selectedItem.action();
+                    }
+                } else if (e.key === 'ArrowLeft' || e.key === 'a' || e.key === 'Escape' || e.key === 'Backspace') {
+                    e.preventDefault();
+                    navigateBack();
                 }
-            } else if (e.key === 'ArrowLeft' || e.key === 'a' || e.key === 'Escape' || e.key === 'Backspace') {
-                e.preventDefault();
-                navigateBack();
-            }
-        };
+            };
 
-        window.addEventListener('keydown', handleKeyDown);
-        return () => window.removeEventListener('keydown', handleKeyDown);
+            window.addEventListener('keydown', handleKeyDown);
+            return () => window.removeEventListener('keydown', handleKeyDown);
+        }
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [currentMenu, focusedIndex]);
 
