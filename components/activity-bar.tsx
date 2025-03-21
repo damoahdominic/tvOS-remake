@@ -93,7 +93,7 @@ export default function ActivityBar({
       subTitle: "",
       iconOnly: false,
       alignment: "vertical",
-      function: handlePowerOff, 
+      function: handlePowerOff,
     },
     {
       icon: "/icons/wifi.svg",
