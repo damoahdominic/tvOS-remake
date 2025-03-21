@@ -26,153 +26,6 @@ const Users = [
   },
 ];
 
-const Settings = [
-  {
-    icon: "/icons/power.svg",
-    title: "Power Off",
-    subTitle: "",
-    iconOnly: false,
-    alignment: "vertical",
-  },
-  {
-    icon: "/icons/wifi.svg",
-    title: "Wifi",
-    subTitle: "StarLink",
-    alignment: "horizontal",
-  },
-  {
-    icon: "/icons/dnd.svg",
-    title: "Do Not Disturb",
-    subTitle: "",
-    iconOnly: false,
-    alignment: "horizontal",
-  },
-  {
-    icon: "/icons/audio.svg",
-    title: "Audio",
-    subTitle: "",
-    iconOnly: false,
-    alignment: "horizontal",
-  },
-  {
-    icon: "/icons/timer.svg",
-    title: "Sleep Timer",
-    subTitle: "",
-    iconOnly: false,
-    alignment: "horizontal",
-  },
-  {
-    icon: "/icons/pad.svg",
-    title: "Game",
-    subTitle: "",
-    iconOnly: true,
-    alignment: "vertical",
-  },
-  {
-    icon: "/icons/accessibility.svg",
-    title: "Accessibility",
-    subTitle: "",
-    iconOnly: true,
-    alignment: "vertical",
-  },
-  {
-    icon: "/icons/lock.svg",
-    title: "Lock",
-    subTitle: "",
-    iconOnly: true,
-    alignment: "vertical",
-  },
-  {
-    icon: "/icons/search.svg",
-    title: "Search",
-    subTitle: "",
-    iconOnly: true,
-    alignment: "vertical",
-  },
-];
-
-// Define Tabs with an index for navigation - removed home tab
-const Tabs = [
-  {
-    name: "music",
-    image: "audio.svg",
-    index: 0,
-  },
-  {
-    name: "switch",
-    image: "switch.svg",
-    index: 1,
-  },
-  // Profile is special, but we need it in the same list for navigation
-  {
-    name: "profile",
-    image: "", // Will use user image instead
-    index: 2,
-  },
-];
-
-// Updated type definition - removed "home"
-type ActivityTabs = "" | "profile" | "music" | "switch";
-
-// Enhanced NavigationButton with ref forwarding
-const NavigationButton = forwardRef<
-  HTMLButtonElement,
-  {
-    tab: (typeof Tabs)[0];
-    currentTab: ActivityTabs;
-    onClick: () => void;
-    isProfile?: boolean;
-    isFocused?: boolean;
-  }
->(({ tab, currentTab, onClick, isProfile = false, isFocused = false }, ref) => {
-  return (
-    <motion.button
-      ref={ref}
-      className={`transition-all duration-500 ${
-        currentTab === tab.name ? "bg-white rounded-full" : ""
-      } ${isFocused ? "ring-2 ring-white ring-opacity-80" : ""}`}
-      onClick={onClick}
-    >
-      {isProfile ? (
-        <Image
-          src={"/users/dominic.png"}
-          alt="user"
-          width={56}
-          height={56}
-          className="rounded-full"
-        />
-      ) : (
-        <>
-          <Image
-            src={`/icons/light/${tab.image}`}
-            alt={tab.name}
-            width={56}
-            height={56}
-            className={`block ${"dark:hidden"}`}
-          />
-          <Image
-            src={`/icons/${currentTab === tab.name ? "light" : "dark"}/${
-              tab.image
-            }`}
-            alt={tab.name}
-            width={56}
-            height={56}
-            className="hidden dark:block"
-          />
-        </>
-      )}
-    </motion.button>
-  );
-});
-
-NavigationButton.displayName = "NavigationButton";
-
-interface EnhancedActivityBarProps {
-  getFocusRef?: (index: number) => React.RefObject<HTMLButtonElement> | null;
-  isFocused?: (index: number) => boolean;
-  onNavigateToGrid?: () => void;
-}
-
 export default function ActivityBar({
   getFocusRef,
   isFocused = () => false,
@@ -201,6 +54,97 @@ export default function ActivityBar({
     document.addEventListener("keydown", handleKeyDown);
     return () => document.removeEventListener("keydown", handleKeyDown);
   }, [onNavigateToGrid]);
+
+  // Function to open the power off modal
+  const handlePowerOff = () => {
+    setOnOpenModal(true);
+  };
+
+  const Settings = [
+    {
+      icon: "/icons/power.svg",
+      title: "Power Off",
+      subTitle: "",
+      iconOnly: false,
+      alignment: "vertical",
+      function: handlePowerOff, 
+    },
+    {
+      icon: "/icons/wifi.svg",
+      title: "Wifi",
+      subTitle: "StarLink",
+      alignment: "horizontal",
+    },
+    {
+      icon: "/icons/dnd.svg",
+      title: "Do Not Disturb",
+      subTitle: "",
+      iconOnly: false,
+      alignment: "horizontal",
+    },
+    {
+      icon: "/icons/audio.svg",
+      title: "Audio",
+      subTitle: "",
+      iconOnly: false,
+      alignment: "horizontal",
+    },
+    {
+      icon: "/icons/timer.svg",
+      title: "Sleep Timer",
+      subTitle: "",
+      iconOnly: false,
+      alignment: "horizontal",
+    },
+    {
+      icon: "/icons/pad.svg",
+      title: "Game",
+      subTitle: "",
+      iconOnly: true,
+      alignment: "vertical",
+    },
+    {
+      icon: "/icons/accessibility.svg",
+      title: "Accessibility",
+      subTitle: "",
+      iconOnly: true,
+      alignment: "vertical",
+    },
+    {
+      icon: "/icons/lock.svg",
+      title: "Lock",
+      subTitle: "",
+      iconOnly: true,
+      alignment: "vertical",
+    },
+    {
+      icon: "/icons/search.svg",
+      title: "Search",
+      subTitle: "",
+      iconOnly: true,
+      alignment: "vertical",
+    },
+  ];
+
+  // Define Tabs with an index for navigation - removed home tab
+  const Tabs = [
+    {
+      name: "music",
+      image: "audio.svg",
+      index: 0,
+    },
+    {
+      name: "switch",
+      image: "switch.svg",
+      index: 1,
+    },
+    // Profile is special, but we need it in the same list for navigation
+    {
+      name: "profile",
+      image: "", // Will use user image instead
+      index: 2,
+    },
+  ];
 
   return (
     <MotionConfig transition={transition}>
@@ -334,6 +278,7 @@ export default function ActivityBar({
                           ? "flex-row justify-start"
                           : "flex-col justify-center"
                       }`}
+                      onClick={settings.function ? settings.function : undefined}
                     >
                       <Image
                         src={settings.icon}
@@ -382,4 +327,66 @@ export default function ActivityBar({
       </motion.div>
     </MotionConfig>
   );
+}
+
+// Updated type definition - removed "home"
+type ActivityTabs = "" | "profile" | "music" | "switch";
+
+// Enhanced NavigationButton with ref forwarding
+const NavigationButton = forwardRef<
+  HTMLButtonElement,
+  {
+    tab: (typeof Tabs)[0];
+    currentTab: ActivityTabs;
+    onClick: () => void;
+    isProfile?: boolean;
+    isFocused?: boolean;
+  }
+>(({ tab, currentTab, onClick, isProfile = false, isFocused = false }, ref) => {
+  return (
+    <motion.button
+      ref={ref}
+      className={`transition-all duration-500 ${
+        currentTab === tab.name ? "bg-white rounded-full" : ""
+      } ${isFocused ? "ring-2 ring-white ring-opacity-80" : ""}`}
+      onClick={onClick}
+    >
+      {isProfile ? (
+        <Image
+          src={"/users/dominic.png"}
+          alt="user"
+          width={56}
+          height={56}
+          className="rounded-full"
+        />
+      ) : (
+        <>
+          <Image
+            src={`/icons/light/${tab.image}`}
+            alt={tab.name}
+            width={56}
+            height={56}
+            className={`block ${"dark:hidden"}`}
+          />
+          <Image
+            src={`/icons/${currentTab === tab.name ? "light" : "dark"}/${
+              tab.image
+            }`}
+            alt={tab.name}
+            width={56}
+            height={56}
+            className="hidden dark:block"
+          />
+        </>
+      )}
+    </motion.button>
+  );
+});
+
+NavigationButton.displayName = "NavigationButton";
+
+interface EnhancedActivityBarProps {
+  getFocusRef?: (index: number) => React.RefObject<HTMLButtonElement> | null;
+  isFocused?: (index: number) => boolean;
+  onNavigateToGrid?: () => void;
 }
