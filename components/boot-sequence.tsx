@@ -41,7 +41,7 @@ const BootSequence: React.FC<BootSequenceProps> = ({ progress = 0 }) => {
           initial={{ opacity: 0 }}
           animate={{ opacity: 0.7 }}
           transition={{ duration: 0.8 }}
-          className="mt-8 w-32 h-0.5 bg-gray-800 rounded-full overflow-hidden"
+          className="mt-48 w-[354px] h-[9px] bg-gray-800 rounded-[30px] overflow-hidden"
         >
           <motion.div
             initial={{ width: "5%" }}
@@ -51,13 +51,13 @@ const BootSequence: React.FC<BootSequenceProps> = ({ progress = 0 }) => {
               stiffness: 20,
               damping: 20,
             }}
-            className="h-full bg-white/40 rounded-full"
+            className="h-full bg-white rounded-[30px]"
           />
         </motion.div>
       )}
 
       {/* Optional loading text */}
-      {showProgress && (
+      {/* {showProgress && (
         <motion.p
           initial={{ opacity: 0 }}
           animate={{ opacity: 0.6 }}
@@ -66,7 +66,7 @@ const BootSequence: React.FC<BootSequenceProps> = ({ progress = 0 }) => {
         >
           Starting up...
         </motion.p>
-      )}
+      )} */}
 
       {/* Uncomment for debugging */}
       {/* <div className="absolute bottom-8 text-xs text-white/30">
