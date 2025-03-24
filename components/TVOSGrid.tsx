@@ -120,6 +120,7 @@ const TVOSGrid: React.FC<TVOSGridProps> = ({
     const items = renderAppsCallback();
     setGridItems(items);
     setIsPreparing(false);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [renderAppsCallback]);
 
   // Log DOM structure after render to help debug
