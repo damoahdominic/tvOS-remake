@@ -1,16 +1,77 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import Image from "next/image";
-const BootSequence = () => {
+
+interface BootSequenceProps {
+  progress?: number; // Loading progress (0-100)
+  loaded?: number; // Number of loaded images
+  total?: number; // Total number of images to load
+}
+
+const BootSequence: React.FC<BootSequenceProps> = ({ progress = 0 }) => {
+  const [showProgress, setShowProgress] = useState(false);
+
+  // Show progress bar after a delay
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setShowProgress(true);
+    }, 1500);
+
+    return () => clearTimeout(timer);
+  }, []);
+
   return (
     <motion.div
-      exit={{ z: -999999999, opacity: 0 }}
-      animate={{ z: 999999, opacity: 1 }}
-      className="bg-black flex items-center justify-center h-svh text-white"
+      initial={{ opacity: 1, zIndex: 999999 }}
+      exit={{ opacity: 0, zIndex: -999999999, transition: { duration: 1.2 } }}
+      className="bg-black fixed inset-0 flex flex-col items-center justify-center h-svh text-white"
     >
-      {/* Put your animation here */}
-      {/* Booting... */}
-      <Image src="/apple-D-logo.png" alt="Frame65" width={200} height={200} />
+      {/* Main logo/image */}
+      <motion.div
+        initial={{ scale: 0.9, opacity: 0 }}
+        animate={{ scale: 1, opacity: 1 }}
+        transition={{ duration: 1 }}
+      >
+        <Image src="/Frame65.png" alt="Frame65" width={200} height={200} />
+      </motion.div>
+
+      {/* Loading indicator */}
+      {showProgress && (
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 0.7 }}
+          transition={{ duration: 0.8 }}
+          className="mt-8 w-32 h-0.5 bg-gray-800 rounded-full overflow-hidden"
+        >
+          <motion.div
+            initial={{ width: "5%" }}
+            animate={{ width: `${progress}%` }}
+            transition={{
+              type: "spring",
+              stiffness: 20,
+              damping: 20,
+            }}
+            className="h-full bg-white/40 rounded-full"
+          />
+        </motion.div>
+      )}
+
+      {/* Optional loading text */}
+      {showProgress && (
+        <motion.p
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 0.6 }}
+          transition={{ delay: 0.2, duration: 0.8 }}
+          className="mt-4 text-xs text-white/60 font-light"
+        >
+          Starting up...
+        </motion.p>
+      )}
+
+      {/* Uncomment for debugging */}
+      {/* <div className="absolute bottom-8 text-xs text-white/30">
+        Loaded {loaded} of {total} images ({progress.toFixed(0)}%)
+      </div> */}
     </motion.div>
   );
 };
