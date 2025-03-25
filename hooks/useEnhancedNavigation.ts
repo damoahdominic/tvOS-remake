@@ -45,6 +45,9 @@ export default function useGridNavigation(
 
     // Handle smooth scrolling based on row position
     const scrollToRow = useCallback((row: number, direction: 'up' | 'down') => {
+        // Check if window is defined (client-side only)
+        if (typeof window === 'undefined') return;
+
         // Determine the appropriate scroll position
         let scrollTarget;
         
