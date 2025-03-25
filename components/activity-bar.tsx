@@ -63,6 +63,7 @@ export default function ActivityBar({
   const Settings = [
     {
       icon: "/icons/power.svg",
+      iconDark: "/icons/dark/powerOff.svg",
       title: "Power Off",
       subTitle: "",
       iconOnly: false,
@@ -77,6 +78,7 @@ export default function ActivityBar({
     },
     {
       icon: "/icons/dnd.svg",
+      iconDark: "/icons/dark/moonCircle.svg",
       title: "Do Not Disturb",
       subTitle: "",
       iconOnly: false,
@@ -84,6 +86,7 @@ export default function ActivityBar({
     },
     {
       icon: "/icons/audio.svg",
+      iconDark: "/icons/dark/audio1.svg",
       title: "Audio",
       subTitle: "",
       iconOnly: false,
@@ -91,6 +94,7 @@ export default function ActivityBar({
     },
     {
       icon: "/icons/timer.svg",
+      iconDark: "/icons/dark/timer.svg",
       title: "Sleep Timer",
       subTitle: "",
       iconOnly: false,
@@ -98,6 +102,7 @@ export default function ActivityBar({
     },
     {
       icon: "/icons/pad.svg",
+      iconDark: "/icons/dark/gamecontroller.svg",
       title: "Game",
       subTitle: "",
       iconOnly: true,
@@ -105,6 +110,7 @@ export default function ActivityBar({
     },
     {
       icon: "/icons/accessibility.svg",
+      iconDark: "/icons/dark/accessibility.svg",
       title: "Accessibility",
       subTitle: "",
       iconOnly: true,
@@ -112,6 +118,7 @@ export default function ActivityBar({
     },
     {
       icon: "/icons/lock.svg",
+      iconDark: "/icons/dark/figure.svg",
       title: "Lock",
       subTitle: "",
       iconOnly: true,
@@ -119,6 +126,7 @@ export default function ActivityBar({
     },
     {
       icon: "/icons/search.svg",
+      iconDark: "/icons/dark/search.svg",
       title: "Search",
       subTitle: "",
       iconOnly: true,
@@ -162,7 +170,7 @@ export default function ActivityBar({
           cornerSmoothing={1}
           className=" backdrop-blur-[50px] cursor-pointer"
         >
-          <motion.div className="bg-white/50 dark:bg-[#1E1E1E]/50 h-[68px] flex items-center">
+          <motion.div className="bg-white/50 dark:bg-[#1E1E1E]/50 h-[68px] flex items-center ">
             <div className="flex items-center pr-2 gap-2">
               <p onClick={() => setOnOpenModal(true)} className="text-xl font-bold pl-4">
                 {moment(time).format("LT")}
@@ -267,7 +275,7 @@ export default function ActivityBar({
                       whileHover={{ scale: 1.05 }}
                       whileFocus={{ scale: 1.05 }}
                       key={i}
-                      className={`rounded-[15px] px-3 flex items-center gap-2 p-2 bg-black/50 ${
+                      className={`rounded-[15px] px-3 flex items-center gap-2 p-2 bg-black/50 hover:bg-white group ${
                         i === 0
                           ? "col-span-2 row-span-2 aspect-square"
                           : i === 1 || i === 2 || i === 3 || i === 4
@@ -285,10 +293,17 @@ export default function ActivityBar({
                         width={135}
                         height={135}
                         alt={settings.title}
-                        className={` ${i === 0 ? "w-[65px]" : "w-[30px]"}`}
+                        className={`${i === 0 ? "w-[65px]" : "w-[30px]"} block group-hover:hidden`}
+                      />
+                      <Image
+                        src={settings.iconDark || settings.icon}
+                        width={135}
+                        height={135}
+                        alt={settings.title}
+                        className={`${i === 0 ? "w-[65px]" : "w-[30px]"} hidden group-hover:block`}
                       />
                       {!settings.iconOnly && (
-                        <p className={i > 0 ? "text-wrap w-[80px]" : ""}>
+                        <p className={`text-wrap w-[80px] ${i === 0 ? "text-white/50 group-hover:text-[#1E1E1E]" : "text-[#818181] group-hover:text-[#1E1E1E]"}`}>
                           {settings.title}
                         </p>
                       )}
@@ -346,7 +361,7 @@ const NavigationButton = forwardRef<
   return (
     <motion.button
       ref={ref}
-      className={`transition-all duration-500 ${
+      className={`transition-all duration-500  ${
         currentTab === tab.name ? "bg-white rounded-full" : ""
       } ${isFocused ? "ring-2 ring-white ring-opacity-80" : ""}`}
       onClick={onClick}
@@ -375,7 +390,7 @@ const NavigationButton = forwardRef<
             alt={tab.name}
             width={56}
             height={56}
-            className="hidden dark:block"
+            className="hidden dark:block "
           />
         </>
       )}

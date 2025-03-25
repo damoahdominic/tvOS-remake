@@ -353,7 +353,7 @@ const MusicPlayer: React.FC = () => {
             {/* Controls */}
             <div className='flex items-center gap-4'>
                 <button onClick={playPreviousSong}>
-                    <img src="/icons/backward.svg" alt='backward' width={30} height={30} />
+                    <img src="/icons/backward.png" alt='backward' width={30} height={30} />
                 </button>
                 <button 
                     onClick={togglePlayPause} 
@@ -361,7 +361,7 @@ const MusicPlayer: React.FC = () => {
                     className={audioError ? "cursor-not-allowed" : ""}
                 >
                     <img 
-                        src={isPlaying ? "/icons/pause.svg" : "/icons/play.svg"} 
+                        src={isPlaying ? "/icons/pause.png" : "/icons/play.png"} 
                         alt={isPlaying ? 'pause' : 'play'} 
                         width={30} 
                         height={30} 
@@ -369,7 +369,7 @@ const MusicPlayer: React.FC = () => {
                     />
                 </button>
                 <button onClick={playNextSong}>
-                    <img src="/icons/forward.svg" alt='forward' width={30} height={30} />
+                    <img src="/icons/forward.png" alt='forward' width={30} height={30} />
                 </button>
             </div>
         </motion.div>
