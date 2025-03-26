@@ -32,7 +32,12 @@ const BootSequence: React.FC<BootSequenceProps> = ({ progress = 0 }) => {
         animate={{ scale: 1, opacity: 1 }}
         transition={{ duration: 1 }}
       >
-        <Image src="/Frame65.png" alt="Frame65" width={200} height={200} />
+        <Image
+          src="/apple-D-logo.png"
+          alt="apple-D-logo"
+          width={200}
+          height={200}
+        />
       </motion.div>
 
       {/* Loading indicator */}
