@@ -5,13 +5,13 @@ import { ViewTransitions } from "next-view-transitions";
 import { ThemeProvider } from "@/providers/theme-provider";
 import { AppProvider } from "@/providers/app-provider";
 import { DialogProvider } from "@/providers/dialog-provider";
-import { apps, lockScreenImages } from "@/data";
+import { apps, LockScreenConfig, lockScreenImages } from "@/data";
 import { AppContextMenuProvider } from "@/providers/context-menu-provider";
 import { GridNavigationProvider } from "@/providers/grid-navigation-provider";
 import { LockScreenProvider } from "@/providers/lock-screen-provider";
 
 // Lock screen configuration
-const lockScreenConfig = {
+const lockScreenConfig: LockScreenConfig = {
   slideDuration: 20000,     // 20 seconds per slide
   fadeDuration: 1200,       // 1.2 second crossfade
   timeFormat: '12h',        // 12-hour format
