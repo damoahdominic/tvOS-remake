@@ -17,6 +17,88 @@ export interface AppItemType {
     description?: string
 }
 
+// types/lockscreen.ts
+export interface LockScreenImage {
+    id: string;
+    background: string;   // URL to background image
+    foreground?: string;  // Optional URL to foreground image (for layering effects)
+    title?: string;       // Optional title or description of the image
+    category?: string;    // Optional category for grouping (Nature, Cities, Animals, etc.)
+}
+
+
+
+// Sample data structure
+export const lockScreenImages: LockScreenImage[] = [
+    {
+        id: "1",
+        background: "/lockscreen/lock1background.png",
+        foreground: "/lockscreen/lock1foreground.png",
+    },
+    {
+        id: "2",
+        background: "/lockscreen/lock2background.png",
+    },
+    {
+        id: "3",
+        background: "/lockscreen/lock3background.png",
+        foreground: "/lockscreen/lock3foreground.png",
+    },
+    {
+        id: "4",
+        background: "/lockscreen/lock4background.png",
+        foreground: "/lockscreen/lock4foreground.png", // Example with foreground element
+    },
+    {
+        id: "5",
+        background: "/lockscreen/lock5background.png",
+        foreground: "/lockscreen/lock5foreground.png",
+    },
+    {
+        id: "6",
+        background: "/lockscreen/lock6background.png",
+        foreground: "/lockscreen/lock6foreground.png",
+    },
+    {
+        id: "7",
+        background: "/lockscreen/lock7background.png",
+        foreground: "/lockscreen/lock7foreground.png",
+    },
+    {
+        id: "8",
+        background: "/lockscreen/lock8background.png",
+        foreground: "/lockscreen/lock8foreground.png",
+    },
+    {
+        id: "9",
+        background: "/lockscreen/lock9background.png",
+    }
+];
+
+// Configuration options for the lock screen slideshow
+export interface LockScreenConfig {
+    slideDuration: number;    // How long each slide is shown (in ms)
+    fadeDuration: number;     // Duration of crossfade effect (in ms)
+    timeFormat: '12h' | '24h'; // Time format to display
+    timePosition: 'center' | 'bottom-left' | 'bottom-right' | 'top-left' | 'top-right';
+    timeScale: number;        // Size scale for the time
+    timeOpacity: number;      // Opacity for the time (0-1)
+    timeColor: string;        // Color for the time display
+    randomize: boolean;       // Whether to randomize the slideshow order
+}
+
+// Default configuration
+export const defaultLockScreenConfig: LockScreenConfig = {
+    slideDuration: 30000,     // 30 seconds per slide
+    fadeDuration: 1500,       // 1.5 second crossfade
+    timeFormat: '12h',
+    timePosition: 'center',
+    timeScale: 1,
+    timeOpacity: 0.8,
+    timeColor: 'rgba(255, 255, 255, 0.9)',
+    randomize: true
+};
+
 export const ALERT_DIALOG_ID = "tvos-dialog";
 
 export const apps = [

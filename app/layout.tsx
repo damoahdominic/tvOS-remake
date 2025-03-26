@@ -5,9 +5,22 @@ import { ViewTransitions } from "next-view-transitions";
 import { ThemeProvider } from "@/providers/theme-provider";
 import { AppProvider } from "@/providers/app-provider";
 import { DialogProvider } from "@/providers/dialog-provider";
-import { apps } from "@/data";
+import { apps, lockScreenImages } from "@/data";
 import { AppContextMenuProvider } from "@/providers/context-menu-provider";
 import { GridNavigationProvider } from "@/providers/grid-navigation-provider";
+import { LockScreenProvider } from "@/providers/lock-screen-provider";
+
+// Lock screen configuration
+const lockScreenConfig = {
+  slideDuration: 20000,     // 20 seconds per slide
+  fadeDuration: 1200,       // 1.2 second crossfade
+  timeFormat: '12h',        // 12-hour format
+  timePosition: 'center',   // Time in center
+  timeScale: 1,             // Normal size
+  timeColor: 'rgba(255, 255, 255, 0.9)',  // Nearly white
+  timeOpacity: 0.8,         // Slightly transparent
+  randomize: true           // Randomize slideshow order
+};
 
 // Font files can be colocated inside of `pages`
 const sfPro = localFont({ src: "./SF-Pro.ttf" });
@@ -34,7 +47,14 @@ export default function RootLayout({
               >
                 <DialogProvider>
                   <AppContextMenuProvider>
-                    <GridNavigationProvider>{children}</GridNavigationProvider>
+                    <LockScreenProvider
+                      images={lockScreenImages}
+                      config={lockScreenConfig}
+                      autoLockAfter={300000} // Auto-lock after 5 minutes of inactivity
+                      initialLocked={true}   // Start with lock screen shown
+                    >
+                      <GridNavigationProvider>{children}</GridNavigationProvider>
+                    </LockScreenProvider>
                   </AppContextMenuProvider>
                 </DialogProvider>
               </ThemeProvider>

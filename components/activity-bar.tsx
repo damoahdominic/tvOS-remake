@@ -7,6 +7,7 @@ import Image from "next/image";
 import { Plus } from "lucide-react";
 import MusicPlayer from "./music-player";
 import AlertLarge from "./alerts/alert-large";
+import { useLockScreen } from "@/providers/lock-screen-provider";
 
 const transition: Transition = {
   type: "scale",
@@ -60,6 +61,7 @@ export default function ActivityBar({
   const [currentTab, setCurrentTab] = useState<ActivityTabs>("");
   const [time, setTime] = useState<Date>(new Date());
   const [onOpenModal, setOnOpenModal] = useState(false);
+  const { lock } = useLockScreen();
 
   // Effect hook to run on component mount
   useEffect(() => {
@@ -331,6 +333,7 @@ export default function ActivityBar({
             {
               text: "Sleep",
               onClick: () => {
+                lock()
                 setOnOpenModal(false);
               },
               variant: "primary",
