@@ -2,10 +2,35 @@
 @tailwind components;
 @tailwind utilities;
 
+
+
+@font-face {
+    font-family: 'CompactRounded';
+    src: url('../public/fonts/SF-Compact-Rounded-Medium.otf') format('opentype');
+    font-weight: 500;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Pro';
+    src: url('../public/fonts/SF-Pro.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
 body {
   height: 100%;
   background: #000;
   overflow-x: hidden;
+  font-family: "Pro", sans-serif;
+}
+
+.font-compact {
+  font-family: "CompactRounded", sans-serif;
+}
+
+.font-pro {
+  font-family: "Pro", sans-serif;
 }
 
 /* Custom scrollbar */

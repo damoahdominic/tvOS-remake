@@ -1,29 +1,26 @@
 import type { Metadata } from "next";
-import localFont from "next/font/local";
 import "./globals.css";
 import { ViewTransitions } from "next-view-transitions";
 import { ThemeProvider } from "@/providers/theme-provider";
 import { AppProvider } from "@/providers/app-provider";
 import { DialogProvider } from "@/providers/dialog-provider";
-import { apps, LockScreenConfig, lockScreenImages } from "@/data";
+import { apps, LockScreenConfig, lockScreenImages, TimeLayout, TimePosition } from "@/data";
 import { AppContextMenuProvider } from "@/providers/context-menu-provider";
 import { GridNavigationProvider } from "@/providers/grid-navigation-provider";
 import { LockScreenProvider } from "@/providers/lock-screen-provider";
 
-// Lock screen configuration
+// LockScreen configuration
 const lockScreenConfig: LockScreenConfig = {
   slideDuration: 20000,     // 20 seconds per slide
   fadeDuration: 1200,       // 1.2 second crossfade
-  timeFormat: '12h',        // 12-hour format
-  timePosition: 'center',   // Time in center
-  timeScale: 1,             // Normal size
-  timeColor: 'rgba(255, 255, 255, 0.9)',  // Nearly white
-  timeOpacity: 0.8,         // Slightly transparent
-  randomize: true           // Randomize slideshow order
+  timeFormat: '12h',
+  timePosition: 'center' as TimePosition,
+  timeLayout: 'horizontal' as TimeLayout,
+  timeSize: 1.5,
+  timeOpacity: 0.9,
+  timeColor: 'rgba(255, 255, 255, 0.9)',
+  randomize: true
 };
-
-// Font files can be colocated inside of `pages`
-const sfPro = localFont({ src: "./SF-Pro.ttf" });
 
 export const metadata: Metadata = {
   title: "Apple tvOS",
@@ -36,7 +33,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <ViewTransitions>
-        <body className={`${sfPro.className} antialiased`}>
+        <body className={`antialiased`}>
           <main className="relative min-h-screen overflow-hidden">
             <AppProvider appData={apps}>
               <ThemeProvider
