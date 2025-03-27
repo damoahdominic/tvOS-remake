@@ -55,6 +55,7 @@ const Tabs: Tab[] = [
 
 export default function ActivityBar({
   getFocusRef,
+  isExpanded,
   isFocused = () => false,
   onNavigateToGrid,
 }: EnhancedActivityBarProps) {
@@ -167,9 +168,9 @@ export default function ActivityBar({
       <motion.div
         variants={{ open: { opacity: 1, y: 0 }, closed: { opacity: 0, y: 20 } }}
         initial="closed"
-        animate="open"
+        animate={isExpanded ? "closed" : "open"}
         exit="closed"
-        transition={{ delay: 1 }}
+        transition={{ delay: isExpanded ? 0 : 1 }}
         className="z-[100] position absolute top-10 right-5 flex flex-col items-end gap-2 text-black/40 dark:text-white/50"
       >
         <Squircle
@@ -412,5 +413,6 @@ NavigationButton.displayName = "NavigationButton";
 interface EnhancedActivityBarProps {
   getFocusRef?: (index: number) => React.RefObject<HTMLButtonElement> | null;
   isFocused?: (index: number) => boolean;
+  isExpanded?: boolean;
   onNavigateToGrid?: () => void;
 }

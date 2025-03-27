@@ -17,6 +17,7 @@ interface TVOSGridProps {
   apps: AppIcon[];
   rowCount: number;
   colCount: number;
+  isExpanded?: boolean;
   scrolled?: boolean;
   isFocused?: (row: number, col: number) => boolean;
   getFocusRef?: (
@@ -42,6 +43,7 @@ const TVOSGrid: React.FC<TVOSGridProps> = ({
   rowCount,
   colCount,
   scrolled,
+  isExpanded,
   isFocused: externalIsFocused,
   getFocusRef: externalGetFocusRef,
 }) => {
@@ -147,7 +149,7 @@ const TVOSGrid: React.FC<TVOSGridProps> = ({
     }
   }, [isPreparing, gridItems, getFocusRef, rowCount, colCount]);
 
-  return isPreparing ? (
+  return (isExpanded || isPreparing) ? (
     <></>
   ) : (
     <>

@@ -6,6 +6,7 @@ import ActivityBar from "@/components/activity-bar"
 import TVOSGrid from "@/components/TVOSGrid"
 import useGridNavigation from "@/hooks/useGridNavigation"
 import BackgroundCarousel from "@/components/BackgroundCarousel"
+import Image from "next/image"
 
 // Simple focus position debugger component
 function FocusDebugger({ position }: { position: { row: number; col: number } }) {
@@ -34,6 +35,8 @@ function FocusDebugger({ position }: { position: { row: number; col: number } })
 
 export default function Home() {
     const [scrolled, setScrolled] = useState(false)
+    const [isExpanded, setIsExpanded] = useState(false);
+
 
     // Direct grid navigation - no activity bar integration for simplicity
     const { isFocused, getFocusRef, focusedPosition } = useGridNavigation(3, 6, 0, 0);
@@ -60,6 +63,34 @@ export default function Home() {
         };
     }, []);
 
+    // User interaction handling
+    useEffect(() => {
+        // Handle keyboard navigation
+        const handleKeyDown = (e: KeyboardEvent) => {
+            switch (e.key) {
+                case "Escape":
+                    console.log("Escape");
+                    if (isExpanded) {
+                        toggleExpansion();
+                    }
+                    break;
+                default:
+                    break;
+            }
+        };
+
+        document.addEventListener("keydown", handleKeyDown);
+
+        return () => {
+            document.removeEventListener("keydown", handleKeyDown);
+        };
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [isExpanded]);
+
+    const toggleExpansion = () => {
+        setIsExpanded(!isExpanded);
+    };
+
     useEffect(() => {
         if (focusedPosition.row === 1) {
             setFocusedApp(apps[focusedPosition.col - 1]);
@@ -70,30 +101,35 @@ export default function Home() {
     return (
         <div className="relative min-h-screen overflow-hidden">
             {/* Background Image */}
-            {/* <div
-                className={`fixed inset-0 transition-all duration-500 ${scrolled ? "blur-xl" : ""}`}
-                style={{
-                    backgroundImage: `url(${"/os-bg.jpg"})`,
-                    backgroundSize: "co ver",
-                    backgroundPosition: "center",
-                }}
-            /> */}
-
-            <BackgroundCarousel scrolled={scrolled} focusedApp={focusedApp} />
+            <BackgroundCarousel scrolled={scrolled} focusedApp={focusedApp} isExpanded={isExpanded} />
 
             {/* Activity Bar Component */}
-            <ActivityBar />
+            <ActivityBar isExpanded={isExpanded} />
 
             {/* TVOSGrid with direct grid navigation for simplicity */}
             <TVOSGrid
                 apps={apps}
                 rowCount={3}
                 colCount={6}
+                isExpanded={isExpanded}
                 scrolled={scrolled}
                 isFocused={isFocused}
                 getFocusRef={getFocusRef}
             />
 
+            {/* Expand/Collapse Caret */}
+            <button
+                onClick={toggleExpansion}
+                className={`absolute left-1/2 transform -translate-x-1/2 z-10 transition-all duration-500 ${isExpanded ? 'hidden' : 'visible bottom-[40rem]'
+                    }`}
+            >
+                <Image src={"/chevron-up.svg"} alt='chevron' width={50} height={12}
+                    className={`transition-transform duration-500 ${isExpanded ? 'rotate-180' : 'rotate-0'
+                        }`}
+                />
+            </button>
+
+            
             {/* Debug focus position */}
             <FocusDebugger position={focusedPosition} />
         </div>

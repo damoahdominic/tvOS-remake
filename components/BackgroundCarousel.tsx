@@ -6,7 +6,7 @@ import React, { useState, useEffect, useRef } from 'react';
 const imageTransition = 8000; // 8 seconds
 const fadeTransitionDuration = 1.0; // 1 second fade transition
 
-const BackgroundCarousel = ({ focusedApp, scrolled }: { focusedApp: AppItemType, scrolled: boolean }) => {
+const BackgroundCarousel = ({ focusedApp, scrolled, isExpanded }: { focusedApp: AppItemType, scrolled: boolean, isExpanded: boolean }) => {
     const [hasFinishedSplash, setHasFinishedSplash] = useState(false);
     const [currentBackgroundIndex, setCurrentBackgroundIndex] = useState(0);
     const [isTransitioning, setIsTransitioning] = useState(false);
@@ -176,7 +176,7 @@ const BackgroundCarousel = ({ focusedApp, scrolled }: { focusedApp: AppItemType,
     return (
         <div className="absolute inset-0 w-full h-full z-0 overflow-hidden">
             {/* Background overlay with gradient */}
-            <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-black opacity-90 z-10" />
+            {!isExpanded && <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-black opacity-90 z-10" />}
 
             {/* Background images with crossfade */}
             <AnimatePresence mode="sync">
@@ -187,6 +187,22 @@ const BackgroundCarousel = ({ focusedApp, scrolled }: { focusedApp: AppItemType,
                 {renderBackground(focusedApp, true)}
             </AnimatePresence>
 
+            {/* Bottom Indicator - Only visible when expanded */}
+            {(focusedApp?.backgrounds && focusedApp?.backgrounds?.length > 1) && <div className={`absolute bottom-8 left-1/2 transform -translate-x-1/2 transition-opacity duration-500 z-50 ${isExpanded ? 'opacity-100' : 'opacity-0'
+                }`}>
+                <div className="px-4 py-2 rounded-full backdrop-blur-md bg-black bg-opacity-30 border border-white border-opacity-20 flex items-center space-x-3">
+                    {[...Array(focusedApp?.backgrounds?.length)].map((_, index) => (
+                        <div
+                            key={index}
+                            className={`w-2 h-2 rounded-full ${currentBackgroundIndex === index
+                                ? 'bg-white'
+                                : 'bg-white opacity-40'
+                                } cursor-pointer`}
+                            onClick={() => setCurrentBackgroundIndex(index)}
+                        />
+                    ))}
+                </div>
+            </div>}
             {/* App information overlay could be added here */}
         </div>
     );
