@@ -278,10 +278,7 @@ const LockScreen: React.FC<LockScreenProps> = ({
     // Get current time display settings
     const timeDisplay = getTimeDisplayConfig();
     const positionStyles = getPositionStyles(timeDisplay.position, timeDisplay.margin);
-
-    // Calculate font size based on size multiplier
-    const baseFontSize = 250; // Base size in pixels
-    const fontSize = Math.floor(baseFontSize * timeDisplay.size);
+    console.log("🚀 ~ slideshow[activeIndex].timeDisplay?.font:", slideshow[activeIndex].timeDisplay?.font)
 
     return (
         <motion.div
@@ -328,12 +325,12 @@ const LockScreen: React.FC<LockScreenProps> = ({
                             {timeDisplay.layout === 'horizontal' ? (
                                 // Horizontal layout (01:30)
                                 <motion.h1
-                                    className="text-center tracking-tight font-medium font-compact"
+                                    className={`text-center tracking-tight font-medium ${slideshow[activeIndex].timeDisplay?.font}`}
                                     style={{
                                         color: timeDisplay.color,
                                         opacity: timeDisplay.opacity,
                                         textShadow: '0 0 15px rgba(0, 0, 0, 0.25)',
-                                        fontSize: `${fontSize}px`,
+                                        fontSize: `25vw`,
                                         lineHeight: 1
                                     }}
                                     initial={{ scale: 0.9, opacity: 0 }}
@@ -345,7 +342,7 @@ const LockScreen: React.FC<LockScreenProps> = ({
                             ) : (
                                 // Stacked layout (01 above 30)
                                 <motion.div
-                                        className="flex flex-col items-center font-medium font-compact"
+                                    className={`text-center tracking-tight font-medium ${slideshow[activeIndex].timeDisplay?.font}`}
                                     initial={{ scale: 0.9, opacity: 0 }}
                                     animate={{ scale: 1, opacity: timeDisplay.opacity }}
                                     transition={{ duration: 0.5, ease: 'easeOut' }}
@@ -354,9 +351,8 @@ const LockScreen: React.FC<LockScreenProps> = ({
                                         className="text-center tracking-tight"
                                         style={{
                                             color: timeDisplay.color,
-                                            textShadow: '0 0 15px rgba(0, 0, 0, 0.25)',
-                                            fontSize: `${fontSize}px`,
-                                            lineHeight: 0.9
+                                            fontSize: `25vw`,
+                                            lineHeight: 0.8
                                         }}
                                     >
                                         {currentTime.hour.padStart(2, '0')}
@@ -366,8 +362,8 @@ const LockScreen: React.FC<LockScreenProps> = ({
                                         style={{
                                             color: timeDisplay.color,
                                             textShadow: '0 0 15px rgba(0, 0, 0, 0.25)',
-                                            fontSize: `${fontSize}px`,
-                                            lineHeight: 0.9
+                                            fontSize: `25vw`,
+                                            lineHeight: 0.8
                                         }}
                                     >
                                         {currentTime.minute}
@@ -393,7 +389,7 @@ const LockScreen: React.FC<LockScreenProps> = ({
             </AnimatePresence>
 
             {/* Unlock Instruction - Swipe Up - z-index 30 (above everything) */}
-            <motion.div
+            {/* <motion.div
                 className="absolute bottom-16 left-0 right-0 flex justify-center items-center z-[30]"
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 0.7, y: 0 }}
@@ -416,7 +412,7 @@ const LockScreen: React.FC<LockScreenProps> = ({
                     </svg>
                     <p className="text-white/70 text-sm">Swipe up to unlock</p>
                 </div>
-            </motion.div>
+            </motion.div> */}
 
             {/* Swipe Area for Touch Interactions - z-index 40 (interactive) */}
             <motion.div

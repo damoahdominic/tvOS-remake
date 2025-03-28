@@ -17,7 +17,6 @@ export interface AppItemType {
     description?: string
 }
 
-// Sample data structure
 export const lockScreenImages: LockScreenImage[] = [
     {
         id: "1",
@@ -27,7 +26,11 @@ export const lockScreenImages: LockScreenImage[] = [
             position: "right-center",
             layout: "stacked",
             color: "white",
-            opacity: 0.4
+            opacity: 0.4,
+            margin: {
+                right:-4
+            },
+            font: "font-compact"
         }
     },
     {
@@ -40,6 +43,7 @@ export const lockScreenImages: LockScreenImage[] = [
             position: "center",
             layout: "horizontal",
             color: "rgba(8, 8, 8, 0.4)",
+            font: "font-compact"
         }
     },
     {
@@ -49,10 +53,11 @@ export const lockScreenImages: LockScreenImage[] = [
         timeDisplay: {
             position: "left-center",
             layout: "horizontal",
-            color: "rgba(8, 8, 8, 0.4)",
+            color: "rgba(8, 8, 8, 0.5)",
             margin: {
-                left: -7
-            }
+                left: -13
+            },
+            font: "font-compact"
         }
     },
     {
@@ -62,11 +67,12 @@ export const lockScreenImages: LockScreenImage[] = [
         timeDisplay: {
             position: "top-center",
             layout: "horizontal",
-            color: "rgba(255, 255, 255, 0.4)",
+            color: "rgba(255, 255, 255, 0.9)",
             margin: {
                 top: -15
   
-            }
+            },
+            font: "font-compact"
         }
     },
     {
@@ -76,7 +82,11 @@ export const lockScreenImages: LockScreenImage[] = [
         timeDisplay: {
             position: "top-center",
             layout: "horizontal",
-            color: "rgba(255, 255, 255, 0.4)",
+            color: "rgba(255, 255, 255, 0.5)",
+            margin: {
+                top: -10
+            },
+            font: "font-new-york"
         }
     },
     {
@@ -86,7 +96,11 @@ export const lockScreenImages: LockScreenImage[] = [
         timeDisplay: {
             position: "top-center",
             layout: "horizontal",
-            color: "rgba(255, 255, 255, 0.4)",
+            color: "rgba(255, 255, 255, 0.5)",
+            margin: {
+                top: -10
+            },
+            font: "font-new-york"
         }
     },
     {
@@ -96,7 +110,11 @@ export const lockScreenImages: LockScreenImage[] = [
         timeDisplay: {
             position: "top-center",
             layout: "horizontal",
-            color: "rgba(8, 8, 8, 0.4)",
+            color: "rgba(8, 8, 8, 0.5)",
+            margin: {
+                top: -20
+            },
+            font: "font-new-york"
         }
     },
     {
@@ -106,7 +124,8 @@ export const lockScreenImages: LockScreenImage[] = [
         timeDisplay: {
             position: "top-right",
             layout: "horizontal",
-            color: "rgba(8, 8, 8, 0.4)",
+            color: "rgba(8, 8, 8, 0.5)",
+            font: "font-new-york"
         }
     },
     {
@@ -115,7 +134,8 @@ export const lockScreenImages: LockScreenImage[] = [
         timeDisplay: {
             position: "center",
             layout: "horizontal",
-            color: "rgba(255, 255, 255, 0.4)",
+            color: "rgba(255, 255, 255, 0.5)",
+            font: "font-new-york"
         }
     }
 ];
@@ -127,13 +147,14 @@ export interface LockScreenImage {
     foreground?: string;  // Optional URL to foreground image (for layering effects)
     title?: string;       // Optional title or description of the image
     category?: string;    // Optional category for grouping (Nature, Cities, Animals, etc.)
-    timeDisplay?: {       // Optional time display settings specific to this image
+    timeDisplay: {       // Optional time display settings specific to this image
         position?: TimePosition;
         layout?: TimeLayout;  // Horizontal or stacked
         size?: number;
         color?: string;
         opacity?: number;
         margin?: TimeMargin;  // Fine-tune positioning with margins
+        font: string
     };
 }
 
@@ -186,7 +207,7 @@ export const defaultLockScreenConfig: LockScreenConfig = {
     timeLayout: 'horizontal',
     timeSize: 1.5,            // 1.5x default size
     timeOpacity: 0.8,
-    timeColor: 'rgba(255, 255, 255, 0.9)',
+    timeColor: 'rgba(255, 255, 255, 0.5)',
     timeMargin: {
         top: 0,
         bottom: 0,

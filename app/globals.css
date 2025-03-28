@@ -12,6 +12,13 @@
 }
 
 @font-face {
+    font-family: 'NewYorkExtraLargeSemibold';
+    src: url('../public/fonts/NewYorkExtraLarge-Semibold.otf') format('opentype');
+    font-weight: 600;
+    font-style: normal;
+}
+
+@font-face {
     font-family: 'Pro';
     src: url('../public/fonts/SF-Pro.ttf') format('truetype');
     font-weight: normal;
@@ -23,6 +30,10 @@ body {
   background: #000;
   overflow-x: hidden;
   font-family: "Pro", sans-serif;
+}
+
+.font-new-york {
+  font-family: "NewYorkExtraLargeSemibold", sans-serif;
 }
 
 .font-compact {
