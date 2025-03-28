@@ -278,7 +278,6 @@ const LockScreen: React.FC<LockScreenProps> = ({
     // Get current time display settings
     const timeDisplay = getTimeDisplayConfig();
     const positionStyles = getPositionStyles(timeDisplay.position, timeDisplay.margin);
-    console.log("🚀 ~ slideshow[activeIndex].timeDisplay?.font:", slideshow[activeIndex].timeDisplay?.font)
 
     return (
         <motion.div
