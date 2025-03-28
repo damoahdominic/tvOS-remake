@@ -4,6 +4,7 @@ import AppItem from "./app-item";
 import { motion } from "framer-motion";
 import { Squircle } from "@squircle-js/react";
 import { cn } from "@/lib/utils";
+import Image from "next/image";
 
 interface AppIcon {
   id?: number;
@@ -19,6 +20,7 @@ interface TVOSGridProps {
   colCount: number;
   isExpanded?: boolean;
   scrolled?: boolean;
+  toggleExpansion: () => void;
   isFocused?: (row: number, col: number) => boolean;
   getFocusRef?: (
     row: number,
@@ -43,6 +45,7 @@ const TVOSGrid: React.FC<TVOSGridProps> = ({
   rowCount,
   colCount,
   scrolled,
+  toggleExpansion,
   isExpanded,
   isFocused: externalIsFocused,
   getFocusRef: externalGetFocusRef,
@@ -154,7 +157,17 @@ const TVOSGrid: React.FC<TVOSGridProps> = ({
   ) : (
     <>
       {/* Main Content */}
-      <div className="relative min-h-screen flex flex-col justify-end px-4">
+        <div className="relative min-h-screen flex flex-col justify-end px-4">
+          {/* Expand/Collapse Caret */}
+          <button
+            onClick={toggleExpansion}
+            className={`relative w-full flex justify-center z-10 transition-all duration-500 ${isExpanded ? 'hidden' : 'visible bottom-12'
+              }`}
+          >
+            <Image src={"/chevron-up.svg"} alt='chevron' width={50} height={12}
+              className={`transition-transform duration-500}`}
+            />
+          </button>
         {/* Dock */}
         <Squircle
           asChild

@@ -6,7 +6,6 @@ import ActivityBar from "@/components/activity-bar"
 import TVOSGrid from "@/components/TVOSGrid"
 import useGridNavigation from "@/hooks/useGridNavigation"
 import BackgroundCarousel from "@/components/BackgroundCarousel"
-import Image from "next/image"
 
 // Simple focus position debugger component
 function FocusDebugger({ position }: { position: { row: number; col: number } }) {
@@ -110,6 +109,7 @@ export default function Home() {
             <TVOSGrid
                 apps={apps}
                 rowCount={3}
+                toggleExpansion={toggleExpansion}
                 colCount={6}
                 isExpanded={isExpanded}
                 scrolled={scrolled}
@@ -117,17 +117,7 @@ export default function Home() {
                 getFocusRef={getFocusRef}
             />
 
-            {/* Expand/Collapse Caret */}
-            <button
-                onClick={toggleExpansion}
-                className={`absolute left-1/2 transform -translate-x-1/2 z-10 transition-all duration-500 ${isExpanded ? 'hidden' : 'visible bottom-[40rem]'
-                    }`}
-            >
-                <Image src={"/chevron-up.svg"} alt='chevron' width={50} height={12}
-                    className={`transition-transform duration-500 ${isExpanded ? 'rotate-180' : 'rotate-0'
-                        }`}
-                />
-            </button>
+           
 
             
             {/* Debug focus position */}
