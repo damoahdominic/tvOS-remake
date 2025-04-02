@@ -1,7 +1,6 @@
-// File: components/ActivityBar.tsx (Enhanced with navigation)
+// File: components/ActivityBar.tsx (Enhanced with expansion animation)
 import React, { useEffect, useState, forwardRef } from "react";
-import { motion, MotionConfig, Transition } from "framer-motion";
-import { Squircle } from "@squircle-js/react";
+import { motion, MotionConfig, Transition, AnimatePresence } from "framer-motion";
 import moment from "moment";
 import Image from "next/image";
 import { Plus } from "lucide-react";
@@ -10,8 +9,9 @@ import AlertLarge from "./alerts/alert-large";
 import { useLockScreen } from "@/providers/lock-screen-provider";
 
 const transition: Transition = {
-  type: "scale",
-  duration: 0.4,
+  type: "spring",
+  stiffness: 400,
+  damping: 30
 };
 
 const Users = [
@@ -62,6 +62,7 @@ export default function ActivityBar({
   const [currentTab, setCurrentTab] = useState<ActivityTabs>("");
   const [time, setTime] = useState<Date>(new Date());
   const [onOpenModal, setOnOpenModal] = useState(false);
+  const [isHovered, setIsHovered] = useState(false);
   const { lock } = useLockScreen();
 
   // Effect hook to run on component mount
@@ -99,6 +100,7 @@ export default function ActivityBar({
       alignment: "vertical",
       function: handlePowerOff,
     },
+    // ... rest of the settings array
     {
       icon: "/icons/wifi.svg",
       title: "Wifi",
@@ -163,6 +165,9 @@ export default function ActivityBar({
     },
   ];
 
+  // Determine if bar should be expanded
+  const shouldShowExpanded = isHovered || isFocused(0) || isFocused(1) || isFocused(2);
+
   return (
     <MotionConfig transition={transition}>
       <motion.div
@@ -173,18 +178,38 @@ export default function ActivityBar({
         transition={{ delay: isExpanded ? 0 : 1 }}
         className="z-[100] position absolute top-10 right-5 flex flex-col items-end gap-2 text-black/40 dark:text-white/50"
       >
-        <Squircle
-          asChild
-          cornerRadius={50}
-          cornerSmoothing={1}
-          className=" backdrop-blur-[50px] cursor-pointer"
-        >
-          <motion.div className="bg-white/50 dark:bg-[#1E1E1E]/50 h-[68px] flex items-center ">
-            <div className="flex items-center pr-2 gap-2">
-              <p onClick={() => setOnOpenModal(true)} className="text-xl font-bold pl-4">
-                {moment(time).format("LT")}
-              </p>
 
+        <motion.div
+          className="bg-white/50 dark:bg-[#1E1E1E]/50 rounded-full backdrop-blur-[50px] cursor-pointer h-[68px] border border-white/40 flex items-center"
+          onMouseEnter={() => setIsHovered(true)}
+          onMouseLeave={() => setIsHovered(false)}
+          initial={{ width: "auto" }}
+          animate={{
+            width: shouldShowExpanded ? "auto" : "auto",
+            transition: {
+              duration: 0.3,
+              ease: "easeInOut"
+            }
+          }}
+        >
+          <div className="flex items-center pr-2 gap-2">
+            <p onClick={() => setOnOpenModal(true)} className="text-xl font-bold pl-4">
+              {moment(time).format("LT")}
+            </p>
+
+            {/* Animated container for the tabs */}
+            <motion.div
+              className="flex items-center"
+              initial={{ width: 0, overflow: "hidden", opacity: 0 }}
+              animate={{
+                width: (shouldShowExpanded || currentTab !== "") ? "auto" : 0,
+                opacity: (shouldShowExpanded || currentTab !== "") ? 1 : 0,
+                transition: {
+                  duration: 0.3,
+                  ease: "easeInOut"
+                }
+              }}
+            >
               {/* Navigation-enabled tabs - updated to only show music and switch */}
               {Tabs.slice(0, 2).map((tab) => (
                 <NavigationButton
@@ -202,129 +227,134 @@ export default function ActivityBar({
                   }}
                 />
               ))}
+            </motion.div>
 
-              {/* Profile button (special case) - updated index */}
-              <NavigationButton
-                tab={Tabs[2]}
-                currentTab={currentTab}
-                ref={getFocusRef ? getFocusRef(2) : null}
-                isFocused={isFocused(2)}
-                isProfile={true}
-                onClick={() => {
-                  if (currentTab === "profile") {
-                    setCurrentTab("");
-                  } else {
-                    setCurrentTab("profile");
-                  }
-                }}
-              />
-            </div>
-          </motion.div>
-        </Squircle>
+            {/* Profile button (special case) - always visible */}
+            <NavigationButton
+              tab={Tabs[2]}
+              currentTab={currentTab}
+              ref={getFocusRef ? getFocusRef(2) : null}
+              isFocused={isFocused(2)}
+              isProfile={true}
+              onClick={() => {
+                if (currentTab === "profile") {
+                  setCurrentTab("");
+                } else {
+                  setCurrentTab("profile");
+                }
+              }}
+            />
+          </div>
+        </motion.div>
 
-        {currentTab !== "" && (
-          <motion.div className="rounded-[40px] bg-white/50 dark:bg-[#1E1E1E]/50 transition-[width] duration-500 text-black/40 dark:text-white/50 backdrop-blur-[50px] cursor-pointer p-5">
-            {currentTab === "profile" ? (
-              <motion.div
-                variants={{ open: { opacity: 1 }, closed: { opacity: 0 } }}
-                initial="closed"
-                animate="open"
-                exit="closed"
-                className="grid grid-cols-2 gap-4"
-              >
-                {Users.map((user, i) => {
-                  return (
-                    <motion.div
-                      whileHover={{ scale: 1.05 }}
-                      whileFocus={{ scale: 1.05 }}
-                      key={i}
-                      className="relative"
-                    >
-                      <Image
-                        src={user.image}
-                        width={135}
-                        height={135}
-                        alt={user.name}
-                        className="rounded-full"
-                      />
-                      {user.isActive && (
-                        <Image
-                          src={"/icons/checkmark.svg"}
-                          width={28}
-                          height={28}
-                          alt={"active"}
-                          className="absolute top-0 right-0"
-                        />
-                      )}
-
-                      <p className="text-center">{user.name}</p>
-                    </motion.div>
-                  );
-                })}
-
+        <AnimatePresence>
+          {currentTab !== "" && (
+            <motion.div
+              initial={{ opacity: 0, scale: 0.9, y: -10 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.9, y: -10 }}
+              className="rounded-[20px] bg-white/50 dark:bg-[#1E1E1E]/50 border border-white/40 transition-[width] duration-500 text-black/40 dark:text-white/50 backdrop-blur-[50px] cursor-pointer p-5"
+            >
+              {currentTab === "profile" ? (
                 <motion.div
-                  whileHover={{ scale: 1.05 }}
-                  whileFocus={{ scale: 1.05 }}
-                  className="size-[135px] bg-black/50 rounded-full flex items-center justify-center"
+                  variants={{ open: { opacity: 1 }, closed: { opacity: 0 } }}
+                  initial="closed"
+                  animate="open"
+                  exit="closed"
+                  className="grid grid-cols-2 gap-4"
                 >
-                  <Plus size={40} />
+                  {Users.map((user, i) => {
+                    return (
+                      <motion.div
+                        whileHover={{ scale: 1.05 }}
+                        whileFocus={{ scale: 1.05 }}
+                        key={i}
+                        className="relative"
+                      >
+                        <Image
+                          src={user.image}
+                          width={135}
+                          height={135}
+                          alt={user.name}
+                          className="rounded-full"
+                        />
+                        {user.isActive && (
+                          <Image
+                            src={"/icons/checkmark.svg"}
+                            width={28}
+                            height={28}
+                            alt={"active"}
+                            className="absolute top-0 right-0"
+                          />
+                        )}
+
+                        <p className="text-center">{user.name}</p>
+                      </motion.div>
+                    );
+                  })}
+
+                  <motion.div
+                    whileHover={{ scale: 1.05 }}
+                    whileFocus={{ scale: 1.05 }}
+                    className="size-[135px] bg-black/50 rounded-full flex items-center justify-center"
+                  >
+                    <Plus size={40} />
+                  </motion.div>
                 </motion.div>
-              </motion.div>
-            ) : currentTab === "switch" ? (
-              <motion.div
-                variants={{ open: { opacity: 1 }, closed: { opacity: 0 } }}
-                initial="closed"
-                animate="open"
-                exit="closed"
-                className="grid grid-cols-4 grid-rows-4 gap-3"
-              >
-                {Settings.map((settings, i) => {
-                  return (
-                    <motion.div
-                      whileHover={{ scale: 1.05 }}
-                      whileFocus={{ scale: 1.05 }}
-                      key={i}
-                      className={`rounded-[15px] px-3 flex items-center gap-2 p-2 bg-black/50 hover:bg-white group ${
-                        i === 0
+              ) : currentTab === "switch" ? (
+                <motion.div
+                  variants={{ open: { opacity: 1 }, closed: { opacity: 0 } }}
+                  initial="closed"
+                  animate="open"
+                  exit="closed"
+                  className="grid grid-cols-4 grid-rows-4 gap-3"
+                >
+                  {Settings.map((settings, i) => {
+                    return (
+                      <motion.div
+                        whileHover={{ scale: 1.05 }}
+                        whileFocus={{ scale: 1.05 }}
+                        key={i}
+                        className={`rounded-[15px] px-3 flex items-center gap-2 p-2 bg-black/50 hover:bg-white group ${i === 0
                           ? "col-span-2 row-span-2 aspect-square"
                           : i === 1 || i === 2 || i === 3 || i === 4
-                          ? "col-span-2"
-                          : "col-span-1"
-                      } ${
-                        settings.alignment === "horizontal"
-                          ? "flex-row justify-start"
-                          : "flex-col justify-center"
-                      }`}
-                      onClick={settings.function ? settings.function : undefined}
-                    >
-                      <Image
-                        src={settings.icon}
-                        width={135}
-                        height={135}
-                        alt={settings.title}
-                        className={`${i === 0 ? "w-[65px]" : "w-[30px]"} block group-hover:hidden`}
-                      />
-                      <Image
-                        src={settings.iconDark || settings.icon}
-                        width={135}
-                        height={135}
-                        alt={settings.title}
-                        className={`${i === 0 ? "w-[65px]" : "w-[30px]"} hidden group-hover:block`}
-                      />
-                      {!settings.iconOnly && (
-                        <p className={`text-wrap w-[80px] ${i === 0 ? "text-white/50 group-hover:text-[#1E1E1E]" : "text-[#818181] group-hover:text-[#1E1E1E]"}`}>
-                          {settings.title}
-                        </p>
-                      )}
-                    </motion.div>
-                  );
-                })}
-              </motion.div>
-            ) : (
-              currentTab === "music" && <MusicPlayer />
-            )}
-          </motion.div>
-        )}
+                            ? "col-span-2"
+                            : "col-span-1"
+                          } ${settings.alignment === "horizontal"
+                            ? "flex-row justify-start"
+                            : "flex-col justify-center"
+                          }`}
+                        onClick={settings.function ? settings.function : undefined}
+                      >
+                        <Image
+                          src={settings.icon}
+                          width={135}
+                          height={135}
+                          alt={settings.title}
+                          className={`${i === 0 ? "w-[65px]" : "w-[30px]"} block group-hover:hidden`}
+                        />
+                        <Image
+                          src={settings.iconDark || settings.icon}
+                          width={135}
+                          height={135}
+                          alt={settings.title}
+                          className={`${i === 0 ? "w-[65px]" : "w-[30px]"} hidden group-hover:block`}
+                        />
+                        {!settings.iconOnly && (
+                          <p className={`text-wrap w-[80px] ${i === 0 ? "text-white/50 group-hover:text-[#1E1E1E]" : "text-[#818181] group-hover:text-[#1E1E1E]"}`}>
+                            {settings.title}
+                          </p>
+                        )}
+                      </motion.div>
+                    );
+                  })}
+                </motion.div>
+              ) : (
+                currentTab === "music" && <MusicPlayer />
+              )}
+            </motion.div>
+          )}
+        </AnimatePresence>
 
         <AlertLarge
           title="Sleep Now?"
@@ -371,10 +401,10 @@ const NavigationButton = forwardRef<
   return (
     <motion.button
       ref={ref}
-      className={`transition-all duration-500  ${
-        currentTab === tab.name ? "bg-white rounded-full" : ""
-      } ${isFocused ? "ring-2 ring-white ring-opacity-80" : ""}`}
+      className={`transition-all duration-300 ${currentTab === tab.name ? "bg-white rounded-full" : ""
+        } ${isFocused ? "ring-2 ring-white ring-opacity-80" : ""}`}
       onClick={onClick}
+      whileTap={{ scale: 0.95 }}
     >
       {isProfile ? (
         <Image
@@ -394,13 +424,12 @@ const NavigationButton = forwardRef<
             className={`block ${"dark:hidden"}`}
           />
           <Image
-            src={`/icons/${currentTab === tab.name ? "light" : "dark"}/${
-              tab.image
-            }`}
+            src={`/icons/${currentTab === tab.name ? "light" : "dark"}/${tab.image
+              }`}
             alt={tab.name}
             width={56}
             height={56}
-            className="hidden dark:block "
+            className="hidden dark:block"
           />
         </>
       )}
