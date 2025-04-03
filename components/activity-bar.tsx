@@ -7,7 +7,6 @@ import { Plus } from "lucide-react";
 import MusicPlayer from "./activity-bar-apps/music-player";
 import AlertLarge from "./alerts/alert-large";
 import { useLockScreen } from "@/providers/lock-screen-provider";
-import { useTheme } from "next-themes";
 import Restrictions from "./activity-bar-apps/restrictions";
 import Game from "./activity-bar-apps/game";
 import Accessibility from "./activity-bar-apps/accessibility";
@@ -70,7 +69,6 @@ export default function ActivityBar({
   const [onOpenModal, setOnOpenModal] = useState(false);
   const [isHovered, setIsHovered] = useState(false);
   const { lock } = useLockScreen();
-  const { theme } = useTheme()
 
   // Effect hook to run on component mount
   useEffect(() => {
