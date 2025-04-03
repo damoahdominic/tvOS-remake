@@ -140,9 +140,11 @@ const AlertLargeBody = ({ open, onOpenChange, title, description, children, acti
                   actions.map((action, index) => (
                     <AlertButton
                       key={index}
+                      index={index}
                       text={action.text}
                       variant={action.variant}
                       onClick={action.onClick}
+                      setFocusedIndex={setFocusedIndex}
                       isFocused={focusedIndex === index}
                     />
                   ))
@@ -166,12 +168,14 @@ export default AlertLarge
 interface AlertButtonProps {
   children?: React.ReactNode,
   text?: string,
+  index?: number,
   onClick?: React.MouseEventHandler<HTMLButtonElement>
   variant?: AlertButtonType,
   isFocused?: boolean
+  setFocusedIndex?: React.Dispatch<React.SetStateAction<number>>
 }
 
-export const AlertButton = ({ children, text, onClick, isFocused }: AlertButtonProps) => {
+export const AlertButton = ({ children, text, onClick, isFocused, setFocusedIndex,index }: AlertButtonProps) => {
   const buttonRef = useRef<HTMLButtonElement>(null);
 
   // Sync DOM focus with isFocused prop
@@ -197,14 +201,15 @@ export const AlertButton = ({ children, text, onClick, isFocused }: AlertButtonP
     <motion.button
       ref={buttonRef}
       whileHover={{ scale: 1.05 }}
+      onHoverStart={() => setFocusedIndex && setFocusedIndex(index || 0)}
       initial={false}
       animate={isFocused ? { scale: 1.05 } : { scale: 1 }}
       tabIndex={0}
       onClick={onClick}
       data-focused={isFocused ? 'true' : 'false'}
-      className={`group focusable-alert-large-item rounded-md w-full px-2 py-1 flex items-center justify-center backdrop-blur-[50px] transition-all duration-500 ${isFocused
-          ? 'bg-white apple-active-item-shadow'
-          : 'bg-white/30'
+      className={`group focusable-alert-large-item rounded-md w-full px-2 py-1 flex items-center justify-center backdrop-blur-[50px] transition-all duration-500 hover:bg-white hover:apple-active-item-shadow ${isFocused
+        ? 'bg-white apple-active-item-shadow'
+        : 'bg-white/30'
         }`}
     >
       {
@@ -213,8 +218,8 @@ export const AlertButton = ({ children, text, onClick, isFocused }: AlertButtonP
           children
           :
           <h2 className={`text-2xl ${isFocused
-              ? 'text-black'
-              : 'text-white'
+            ? 'text-[#1E1E1E]'
+            : 'text-white group-hover:text-[#1E1E1E]'
             }`}>
             {text}
           </h2>

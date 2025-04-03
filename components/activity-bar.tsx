@@ -4,10 +4,15 @@ import { motion, MotionConfig, Transition, AnimatePresence } from "framer-motion
 import moment from "moment";
 import Image from "next/image";
 import { Plus } from "lucide-react";
-import MusicPlayer from "./music-player";
+import MusicPlayer from "./activity-bar-apps/music-player";
 import AlertLarge from "./alerts/alert-large";
 import { useLockScreen } from "@/providers/lock-screen-provider";
 import { useTheme } from "next-themes";
+import Restrictions from "./activity-bar-apps/restrictions";
+import Game from "./activity-bar-apps/game";
+import Accessibility from "./activity-bar-apps/accessibility";
+import AudioCast from "./activity-bar-apps/audio-cast";
+import SleepTimer from "./activity-bar-apps/sleep-timer";
 
 const transition: Transition = {
   type: "spring",
@@ -125,6 +130,7 @@ export default function ActivityBar({
       title: "Audio",
       subTitle: "",
       iconOnly: false,
+      function: () => setCurrentTab("audio-cast"),
       alignment: "horizontal",
     },
     {
@@ -133,6 +139,7 @@ export default function ActivityBar({
       title: "Sleep Timer",
       subTitle: "",
       iconOnly: false,
+      function: () => setCurrentTab("sleep-timer"),
       alignment: "horizontal",
     },
     {
@@ -141,6 +148,7 @@ export default function ActivityBar({
       title: "Game",
       subTitle: "",
       iconOnly: true,
+      function: () => setCurrentTab("game"),
       alignment: "vertical",
     },
     {
@@ -149,6 +157,7 @@ export default function ActivityBar({
       title: "Accessibility",
       subTitle: "",
       iconOnly: true,
+      function: () => setCurrentTab("accessibility"),
       alignment: "vertical",
     },
     {
@@ -157,6 +166,7 @@ export default function ActivityBar({
       title: "Lock",
       subTitle: "",
       iconOnly: true,
+      function: () => setCurrentTab("restrictions"),
       alignment: "vertical",
     },
     {
@@ -203,7 +213,7 @@ export default function ActivityBar({
 
             {/* Animated container for the tabs */}
             <motion.div
-              className="flex items-center"
+              className="flex items-center gap-1"
               initial={{ width: 0, overflow: "hidden", opacity: 0 }}
               animate={{
                 width: (shouldShowExpanded || currentTab !== "") ? "auto" : 0,
@@ -257,7 +267,7 @@ export default function ActivityBar({
               initial={{ opacity: 0, scale: 0.9, y: -10 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.9, y: -10 }}
-              className="rounded-[20px] bg-white/50 dark:bg-[#1E1E1E]/50 border border-white/40 transition-[width] duration-500 text-black/40 dark:text-white/50 backdrop-blur-[50px] cursor-pointer p-5"
+              className="rounded-[20px] bg-white/50 dark:bg-[#1E1E1E]/50 border border-white/40 transition-[width] duration-500 text-black/40 dark:text-white/50 backdrop-blur-[50px] cursor-pointer"
             >
               {currentTab === "profile" ? (
                 <motion.div
@@ -265,7 +275,7 @@ export default function ActivityBar({
                   initial="closed"
                   animate="open"
                   exit="closed"
-                  className="grid grid-cols-2 gap-4"
+                  className="grid grid-cols-2 gap-4  p-5"
                 >
                   {Users.map((user, i) => {
                     return (
@@ -311,7 +321,7 @@ export default function ActivityBar({
                   initial="closed"
                   animate="open"
                   exit="closed"
-                  className="grid grid-cols-4 grid-rows-4 gap-3"
+                  className="grid grid-cols-4 grid-rows-4 gap-3  p-5"
                 >
                   {Settings.map((settings, i) => {
                     return (
@@ -348,7 +358,19 @@ export default function ActivityBar({
                   })}
                 </motion.div>
               ) : (
-                currentTab === "music" && <MusicPlayer />
+                currentTab === "music" ? <MusicPlayer />
+                  :
+                  currentTab === "restrictions" ? <Restrictions onClick={() => setCurrentTab("switch")} />
+                    :
+                    currentTab === "game" ? <Game onClick={() => setCurrentTab("switch")} />
+                      :
+                      currentTab === "accessibility" ? <Accessibility onClick={() => setCurrentTab("switch")} />
+                        :
+                        currentTab === "audio-cast" ? <AudioCast onClick={() => setCurrentTab("switch")} />
+                          :
+                          currentTab === "sleep-timer" ? <SleepTimer onClick={() => setCurrentTab("switch")} />
+                            :
+                            null
               )}
             </motion.div>
           )}
@@ -383,7 +405,7 @@ export default function ActivityBar({
 }
 
 // Updated type definition - removed "home"
-type ActivityTabs = "" | "profile" | "music" | "switch";
+type ActivityTabs = "" | "profile" | "music" | "switch" | "restrictions" | "game" | "accessibility" | "audio-cast" | "sleep-timer";
 
 // Enhanced NavigationButton with ref forwarding
 const NavigationButton = forwardRef<
@@ -399,7 +421,7 @@ const NavigationButton = forwardRef<
   return (
     <motion.button
       ref={ref}
-      className={`transition-all duration-300 ${currentTab === tab.name ? "bg-white rounded-full" : ""
+      className={`transition-all hover:bg-white rounded-full duration-300 ${currentTab === tab.name ? "bg-white rounded-full" : ""
         } ${isFocused ? "ring-2 ring-white ring-opacity-80" : ""}`}
       onClick={onClick}
       whileTap={{ scale: 0.95 }}
@@ -417,16 +439,16 @@ const NavigationButton = forwardRef<
           <Image
             src={`/icons/light/${tab.image}`}
             alt={tab.name}
-            width={26}
-            height={26}
+            width={20}
+            height={20}
             className={`block ${"dark:hidden"}`}
           />
           <Image
             src={`/icons/${currentTab === tab.name ? "light" : "dark"}/${tab.image
               }`}
             alt={tab.name}
-            width={26}
-            height={26}
+            width={20}
+            height={20}
             className="hidden dark:block"
           />
         </div>

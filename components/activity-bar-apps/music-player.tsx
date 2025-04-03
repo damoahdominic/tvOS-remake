@@ -39,12 +39,12 @@ const MusicPlayer: React.FC = () => {
             initial='closed'
             animate='open'
             exit='closed'
-            className="flex items-center justify-center flex-col gap-4"
+            className="flex items-center justify-center flex-col gap-4  p-5"
         >
             {/* Album art and song info */}
             <div className='w-[330px] bg-white/50 dark:bg-black/50 p-4 rounded-xl flex items-center gap-2'>
                 <div className='relative'>
-                    <Image src={currentTrack.albumArt} alt='music' width={50} height={50} />
+                    <Image src={currentTrack.albumArt} alt='music' width={50} height={50} className='rounded-xl' />
                     <Image src="/icons/apple-music-small.svg" alt='music' width={14} height={14} className='absolute bottom-0 right-0' />
                 </div>
 
@@ -82,15 +82,15 @@ const MusicPlayer: React.FC = () => {
             </div>
 
             {/* Controls */}
-            <div className='flex items-center gap-4'>
-                <button onClick={playPreviousSong}>
+            <div className='flex items-center gap-1'>
+                <button className='hover:bg-white rounded-full transition-all duration-300 h-[56px] w-[56px] flex items-center justify-center' onClick={playPreviousSong}>
                     <Image src="/icons/light/prev.svg" className='dark:hidden block' alt='prev' width={30} height={30} />
                     <Image src="/icons/light/prev.svg" className='hidden dark:block' alt='prev' width={30} height={30} />
                 </button>
                 <button
                     onClick={togglePlayPause}
                     disabled={!canPlay || audioError}
-                    className={audioError ? "cursor-not-allowed" : ""}
+                    className={audioError ? "cursor-not-allowed" : "hover:bg-white rounded-full transition-all duration-300 h-[56px] w-[56px] flex items-center justify-center"}
                 >
                     <Image
                         src={isPlaying ? "/icons/light/pause.svg" : "/icons/light/play.svg"}
@@ -108,7 +108,7 @@ const MusicPlayer: React.FC = () => {
                     />
 
                 </button>
-                <button onClick={playNextSong}>
+                <button className='hover:bg-white rounded-full transition-all duration-300 h-[56px] w-[56px] flex items-center justify-center' onClick={playNextSong}>
                     <Image src="/icons/light/next.svg" className='dark:hidden block' alt='next' width={30} height={30} />
                     <Image src="/icons/light/next.svg" className='hidden dark:block' alt='next' width={30} height={30} />
                 </button>
