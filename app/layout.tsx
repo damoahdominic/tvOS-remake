@@ -8,6 +8,8 @@ import { apps, LockScreenConfig, lockScreenImages, TimeLayout, TimePosition } fr
 import { AppContextMenuProvider } from "@/providers/context-menu-provider";
 import { GridNavigationProvider } from "@/providers/grid-navigation-provider";
 import { LockScreenProvider } from "@/providers/lock-screen-provider";
+import { AudioProvider } from "@/providers/audio-provider";
+import { defaultTracks } from "@/data/audio-tracks";
 
 // LockScreen configuration
 const lockScreenConfig: LockScreenConfig = {
@@ -42,18 +44,20 @@ export default function RootLayout({
                 enableSystem
                 disableTransitionOnChange
               >
-                <DialogProvider>
-                  <AppContextMenuProvider>
-                    <LockScreenProvider
-                      images={lockScreenImages}
-                      config={lockScreenConfig}
-                      autoLockAfter={300000} // Auto-lock after 5 minutes of inactivity
-                      initialLocked={true}   // Start with lock screen shown
-                    >
-                      <GridNavigationProvider>{children}</GridNavigationProvider>
-                    </LockScreenProvider>
-                  </AppContextMenuProvider>
-                </DialogProvider>
+                <AudioProvider initialTracks={defaultTracks}>
+                  <DialogProvider>
+                    <AppContextMenuProvider>
+                      <LockScreenProvider
+                        images={lockScreenImages}
+                        config={lockScreenConfig}
+                        autoLockAfter={300000} // Auto-lock after 5 minutes of inactivity
+                        initialLocked={true}   // Start with lock screen shown
+                      >
+                        <GridNavigationProvider>{children}</GridNavigationProvider>
+                      </LockScreenProvider>
+                    </AppContextMenuProvider>
+                  </DialogProvider>
+                </AudioProvider>
               </ThemeProvider>
             </AppProvider>
           </main>

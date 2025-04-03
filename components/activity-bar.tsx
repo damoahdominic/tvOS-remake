@@ -1,4 +1,4 @@
-// File: components/ActivityBar.tsx (Enhanced with expansion animation)
+"use client"
 import React, { useEffect, useState, forwardRef } from "react";
 import { motion, MotionConfig, Transition, AnimatePresence } from "framer-motion";
 import moment from "moment";
@@ -7,6 +7,7 @@ import { Plus } from "lucide-react";
 import MusicPlayer from "./music-player";
 import AlertLarge from "./alerts/alert-large";
 import { useLockScreen } from "@/providers/lock-screen-provider";
+import { useTheme } from "next-themes";
 
 const transition: Transition = {
   type: "spring",
@@ -64,6 +65,8 @@ export default function ActivityBar({
   const [onOpenModal, setOnOpenModal] = useState(false);
   const [isHovered, setIsHovered] = useState(false);
   const { lock } = useLockScreen();
+  const { theme } = useTheme()
+  console.log("🚀 ~ theme:", theme)
 
   // Effect hook to run on component mount
   useEffect(() => {
@@ -92,8 +95,8 @@ export default function ActivityBar({
 
   const Settings = [
     {
-      icon: "/icons/power.svg",
-      iconDark: "/icons/dark/powerOff.svg",
+      icon: "/icons/light/power.svg",
+      iconDark: "/icons/dark/power.svg",
       title: "Power Off",
       subTitle: "",
       iconOnly: false,
@@ -103,28 +106,29 @@ export default function ActivityBar({
     // ... rest of the settings array
     {
       icon: "/icons/wifi.svg",
-      title: "Wifi",
+      iconDark: "/icons/wifi.svg",
+      title: "Wi-Fi Starlink",
       subTitle: "StarLink",
       alignment: "horizontal",
     },
     {
-      icon: "/icons/dnd.svg",
-      iconDark: "/icons/dark/moonCircle.svg",
+      icon: "/icons/light/dnd.svg",
+      iconDark: "/icons/dark/dnd.svg",
       title: "Do Not Disturb",
       subTitle: "",
       iconOnly: false,
       alignment: "horizontal",
     },
     {
-      icon: "/icons/audio.svg",
-      iconDark: "/icons/dark/audio1.svg",
+      icon: "/icons/light/audio-cast.svg",
+      iconDark: "/icons/dark/audio-cast.svg",
       title: "Audio",
       subTitle: "",
       iconOnly: false,
       alignment: "horizontal",
     },
     {
-      icon: "/icons/timer.svg",
+      icon: "/icons/light/timer.svg",
       iconDark: "/icons/dark/timer.svg",
       title: "Sleep Timer",
       subTitle: "",
@@ -132,7 +136,7 @@ export default function ActivityBar({
       alignment: "horizontal",
     },
     {
-      icon: "/icons/pad.svg",
+      icon: "/icons/light/game.svg",
       iconDark: "/icons/dark/gamecontroller.svg",
       title: "Game",
       subTitle: "",
@@ -140,7 +144,7 @@ export default function ActivityBar({
       alignment: "vertical",
     },
     {
-      icon: "/icons/accessibility.svg",
+      icon: "/icons/light/accessibility.svg",
       iconDark: "/icons/dark/accessibility.svg",
       title: "Accessibility",
       subTitle: "",
@@ -148,15 +152,15 @@ export default function ActivityBar({
       alignment: "vertical",
     },
     {
-      icon: "/icons/lock.svg",
-      iconDark: "/icons/dark/figure.svg",
+      icon: "/icons/light/child-lock.svg",
+      iconDark: "/icons/dark/child-lock.svg",
       title: "Lock",
       subTitle: "",
       iconOnly: true,
       alignment: "vertical",
     },
     {
-      icon: "/icons/search.svg",
+      icon: "/icons/light/search.svg",
       iconDark: "/icons/dark/search.svg",
       title: "Search",
       subTitle: "",
@@ -176,7 +180,7 @@ export default function ActivityBar({
         animate={isExpanded ? "closed" : "open"}
         exit="closed"
         transition={{ delay: isExpanded ? 0 : 1 }}
-        className="z-[100] position absolute top-10 right-5 flex flex-col items-end gap-2 text-black/40 dark:text-white/50"
+        className="z-[100] position absolute top-10 right-5 flex flex-col items-end gap-2 text-[#1E1E1E]/85 dark:text-white/50"
       >
 
         <motion.div
@@ -193,7 +197,7 @@ export default function ActivityBar({
           }}
         >
           <div className="flex items-center pr-2 gap-2">
-            <p onClick={() => setOnOpenModal(true)} className="text-xl font-bold pl-4">
+            <p className="text-xl font-bold pl-4">
               {moment(time).format("LT")}
             </p>
 
@@ -315,7 +319,7 @@ export default function ActivityBar({
                         whileHover={{ scale: 1.05 }}
                         whileFocus={{ scale: 1.05 }}
                         key={i}
-                        className={`rounded-[15px] px-3 flex items-center gap-2 p-2 bg-black/50 hover:bg-white group ${i === 0
+                        className={`rounded-[15px] px-3 flex items-center gap-2 p-2 bg-white/60 dark:bg-[#1E1E1E]/50 hover:bg-white group ${i === 0
                           ? "col-span-2 row-span-2 aspect-square"
                           : i === 1 || i === 2 || i === 3 || i === 4
                             ? "col-span-2"
@@ -327,21 +331,15 @@ export default function ActivityBar({
                         onClick={settings.function ? settings.function : undefined}
                       >
                         <Image
-                          src={settings.icon}
+                          src={(!theme || theme === "dark") ? settings.iconDark : settings.icon}
                           width={135}
                           height={135}
                           alt={settings.title}
-                          className={`${i === 0 ? "w-[65px]" : "w-[30px]"} block group-hover:hidden`}
+                          className={`${i === 0 ? "w-[65px]" : "w-[30px]"}`}
                         />
-                        <Image
-                          src={settings.iconDark || settings.icon}
-                          width={135}
-                          height={135}
-                          alt={settings.title}
-                          className={`${i === 0 ? "w-[65px]" : "w-[30px]"} hidden group-hover:block`}
-                        />
+
                         {!settings.iconOnly && (
-                          <p className={`text-wrap w-[80px] ${i === 0 ? "text-white/50 group-hover:text-[#1E1E1E]" : "text-[#818181] group-hover:text-[#1E1E1E]"}`}>
+                          <p className={`text-wrap leading-tight w-[80px] text-[#1E1E1E]/85 dark:text-white/80 group-hover:text-[#1E1E1E]/85 `}>
                             {settings.title}
                           </p>
                         )}
@@ -415,23 +413,23 @@ const NavigationButton = forwardRef<
           className="rounded-full"
         />
       ) : (
-        <>
+        <div className="flex items-center justify-center w-[56px] h-[56px]">
           <Image
             src={`/icons/light/${tab.image}`}
             alt={tab.name}
-            width={56}
-            height={56}
+            width={26}
+            height={26}
             className={`block ${"dark:hidden"}`}
           />
           <Image
             src={`/icons/${currentTab === tab.name ? "light" : "dark"}/${tab.image
               }`}
             alt={tab.name}
-            width={56}
-            height={56}
+            width={26}
+            height={26}
             className="hidden dark:block"
           />
-        </>
+        </div>
       )}
     </motion.button>
   );
