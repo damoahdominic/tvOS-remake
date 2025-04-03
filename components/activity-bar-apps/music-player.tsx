@@ -85,7 +85,7 @@ const MusicPlayer: React.FC = () => {
             <div className='flex items-center gap-1'>
                 <button className='hover:bg-white rounded-full transition-all duration-300 h-[56px] w-[56px] flex items-center justify-center' onClick={playPreviousSong}>
                     <Image src="/icons/light/prev.svg" className='dark:hidden block' alt='prev' width={30} height={30} />
-                    <Image src="/icons/light/prev.svg" className='hidden dark:block' alt='prev' width={30} height={30} />
+                    <Image src="/icons/dark/prev.svg" className='hidden dark:block' alt='prev' width={30} height={30} />
                 </button>
                 <button
                     onClick={togglePlayPause}
@@ -110,7 +110,7 @@ const MusicPlayer: React.FC = () => {
                 </button>
                 <button className='hover:bg-white rounded-full transition-all duration-300 h-[56px] w-[56px] flex items-center justify-center' onClick={playNextSong}>
                     <Image src="/icons/light/next.svg" className='dark:hidden block' alt='next' width={30} height={30} />
-                    <Image src="/icons/light/next.svg" className='hidden dark:block' alt='next' width={30} height={30} />
+                    <Image src="/icons/dark/next.svg" className='hidden dark:block' alt='next' width={30} height={30} />
                 </button>
             </div>
         </motion.div>

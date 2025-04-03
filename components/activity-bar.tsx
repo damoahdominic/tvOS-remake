@@ -71,7 +71,6 @@ export default function ActivityBar({
   const [isHovered, setIsHovered] = useState(false);
   const { lock } = useLockScreen();
   const { theme } = useTheme()
-  console.log("🚀 ~ theme:", theme)
 
   // Effect hook to run on component mount
   useEffect(() => {
@@ -144,7 +143,7 @@ export default function ActivityBar({
     },
     {
       icon: "/icons/light/game.svg",
-      iconDark: "/icons/dark/gamecontroller.svg",
+      iconDark: "/icons/dark/game.svg",
       title: "Game",
       subTitle: "",
       iconOnly: true,
@@ -329,7 +328,7 @@ export default function ActivityBar({
                         whileHover={{ scale: 1.05 }}
                         whileFocus={{ scale: 1.05 }}
                         key={i}
-                        className={`rounded-[15px] px-3 flex items-center gap-2 p-2 bg-white/60 dark:bg-[#1E1E1E]/50 hover:bg-white group ${i === 0
+                        className={`rounded-[15px] group px-3 flex items-center gap-2 p-2 bg-white/60 dark:bg-[#1E1E1E]/50 hover:bg-white group ${i === 0
                           ? "col-span-2 row-span-2 aspect-square"
                           : i === 1 || i === 2 || i === 3 || i === 4
                             ? "col-span-2"
@@ -341,11 +340,19 @@ export default function ActivityBar({
                         onClick={settings.function ? settings.function : undefined}
                       >
                         <Image
-                          src={(!theme || theme === "dark") ? settings.iconDark : settings.icon}
+                          src={settings.icon}
                           width={135}
                           height={135}
                           alt={settings.title}
-                          className={`${i === 0 ? "w-[65px]" : "w-[30px]"}`}
+                          className={`${i === 0 ? "w-[65px]" : "w-[30px]"} dark:hidden block group-hover:block`}
+                        />
+
+                        <Image
+                          src={settings.iconDark}
+                          width={135}
+                          height={135}
+                          alt={settings.title}
+                          className={`${i === 0 ? "w-[65px]" : "w-[30px]"} dark:block hidden group-hover:hidden`}
                         />
 
                         {!settings.iconOnly && (
