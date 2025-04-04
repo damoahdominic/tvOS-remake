@@ -13,7 +13,7 @@ const AudioCast = ({ onClick }: Props) => {
             <div className='h-[1px] w-full bg-black/40 dark:bg-white/40' />
 
             <motion.button
-                className={`transition-all bg-white/85 px-3 hover:bg-white text-xl font-[510] text-[#1E1E1E]/85 rounded-xl duration-300 h-[50px] flex items-center justify-between gap-3`}
+                className={`transition-all bg-white/50 text-[#1E1E1E]/85 dark:bg-black/50 dark:text-white/85 px-3 hover:bg-white text-xl font-[510] group rounded-xl duration-300 h-[50px] flex items-center justify-between gap-3`}
                 onClick={onClick}
             >
                 <Image src={"/icons/light/system-speakers.svg"} alt="Speakers" width={35} height={35} className='dark:hidden block'/>
