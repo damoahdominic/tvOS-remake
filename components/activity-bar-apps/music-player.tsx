@@ -83,34 +83,33 @@ const MusicPlayer: React.FC = () => {
 
             {/* Controls */}
             <div className='flex items-center gap-1'>
-                <button className='hover:bg-white rounded-full transition-all duration-300 h-[56px] w-[56px] flex items-center justify-center' onClick={playPreviousSong}>
-                    <Image src="/icons/light/prev.svg" className='dark:hidden block' alt='prev' width={30} height={30} />
-                    <Image src="/icons/dark/prev.svg" className='hidden dark:block' alt='prev' width={30} height={30} />
+                <button className='hover:bg-white rounded-full transition-all group duration-300 h-[56px] w-[56px] flex items-center justify-center' onClick={playPreviousSong}>
+                    <Image src="/icons/light/prev.svg" className='dark:hidden block group-hover:block' alt='prev' width={30} height={30} />
+                    <Image src="/icons/dark/prev.svg" className='dark:block hidden group-hover:hidden' alt='prev' width={30} height={30} />
                 </button>
                 <button
                     onClick={togglePlayPause}
                     disabled={!canPlay || audioError}
-                    className={audioError ? "cursor-not-allowed" : "hover:bg-white rounded-full transition-all duration-300 h-[56px] w-[56px] flex items-center justify-center"}
+                    className={audioError ? "cursor-not-allowed" : "hover:bg-white rounded-full group transition-all duration-300 h-[56px] w-[56px] flex items-center justify-center"}
                 >
                     <Image
                         src={isPlaying ? "/icons/light/pause.svg" : "/icons/light/play.svg"}
                         alt={isPlaying ? 'pause' : 'play'}
                         width={30}
                         height={30}
-                        className={`dark:hidden block ${(!canPlay || audioError) ? "opacity-80" : ""}`}
+                        className={`dark:hidden block group-hover:block ${(!canPlay || audioError) ? "opacity-80" : ""}`}
                     />
                     <Image
                         src={isPlaying ? "/icons/dark/pause.svg" : "/icons/dark/play.svg"}
                         alt={isPlaying ? 'pause' : 'play'}
                         width={30}
                         height={30}
-                        className={`hidden dark:block ${(!canPlay || audioError) ? "opacity-80" : ""}`}
+                        className={`dark:block hidden group-hover:hidden ${(!canPlay || audioError) ? "opacity-80" : ""}`}
                     />
-
                 </button>
-                <button className='hover:bg-white rounded-full transition-all duration-300 h-[56px] w-[56px] flex items-center justify-center' onClick={playNextSong}>
-                    <Image src="/icons/light/next.svg" className='dark:hidden block' alt='next' width={30} height={30} />
-                    <Image src="/icons/dark/next.svg" className='hidden dark:block' alt='next' width={30} height={30} />
+                <button className='hover:bg-white rounded-full transition-all duration-300 group h-[56px] w-[56px] flex items-center justify-center' onClick={playNextSong}>
+                    <Image src="/icons/light/next.svg" className='dark:hidden block group-hover:block' alt='next' width={30} height={30} />
+                    <Image src="/icons/dark/next.svg" className='dark:block hidden group-hover:hidden' alt='next' width={30} height={30} />
                 </button>
             </div>
         </motion.div>

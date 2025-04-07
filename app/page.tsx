@@ -6,6 +6,7 @@ import ActivityBar from "@/components/activity-bar"
 import TVOSGrid from "@/components/TVOSGrid"
 import useGridNavigation from "@/hooks/useGridNavigation"
 import BackgroundCarousel from "@/components/BackgroundCarousel"
+import { ModeToggle } from "@/components/mode-toggle"
 
 // Simple focus position debugger component
 function FocusDebugger({ position }: { position: { row: number; col: number } }) {
@@ -117,9 +118,9 @@ export default function Home() {
                 getFocusRef={getFocusRef}
             />
 
-           
 
-            
+
+            <ModeToggle />
             {/* Debug focus position */}
             <FocusDebugger position={focusedPosition} />
         </div>
