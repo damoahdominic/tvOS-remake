@@ -8,7 +8,7 @@ export const defaultTracks: Track[] = [
         artist: "Kwesi Arthur",
         duration: 251, // in seconds
         albumArt: "/icons/Grind Day - Kwesi Arthur.png",
-        audioSrc: "/audio/Grind Day - Kwesi Arthur.mp3"
+        audioSrc: "/audio/Grind-Day-Kwesi-Arthur.mp3"
     },
     {
         id: 2,
@@ -16,7 +16,7 @@ export const defaultTracks: Track[] = [
         artist: "Sarkodie",
         duration: 274,
         albumArt: "/icons/Original Sarkodie.png",
-        audioSrc: "/audio/Original - Sarkodie.mp3"
+        audioSrc: "/audio/Original-Sarkodie.mp3"
     },
     {
         id: 3,
@@ -24,7 +24,7 @@ export const defaultTracks: Track[] = [
         artist: "Kwesi Arthur",
         duration: 192,
         albumArt: "/icons/Anthem - Kwesi Arthur.png",
-        audioSrc: "/audio/Anthem - Kwesi Arthur.mp3"
+        audioSrc: "/audio/Anthem - Kwesi-Arthur.mp3"
     },
     {
         id: 4,
@@ -32,7 +32,7 @@ export const defaultTracks: Track[] = [
         artist: "La meme gang",
         duration: 311,
         albumArt: "/icons/Placebo - DarkoVibes.png",
-        audioSrc: "/audio/Placebo - DarkoVibes.mp3"
+        audioSrc: "/audio/Placebo-DarkoVibes.mp3"
     },
     {
         id: 5,
@@ -40,6 +40,6 @@ export const defaultTracks: Track[] = [
         artist: "Kwesi Arthur",
         duration: 305,
         albumArt: "/icons/Pray For Me Kwesi Arthur.png",
-        audioSrc: "/audio/Pray For Me - Kwesi Arthur.mp3"
+        audioSrc: "/audio/PrayvFor-Me-Kwesi-Arthur.mp3"
     }
 ];
