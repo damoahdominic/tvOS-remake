@@ -90,7 +90,7 @@ const BackgroundCarousel = ({ focusedApp, scrolled, isExpanded }: { focusedApp: 
 
     // Helper function to determine what image source to use
     const getImageSource = (app: AppItemType, isCurrent: boolean = true): {
-        backgroundSrc: string | undefined,
+        background: string | { image: string, content?: React.ReactNode } | undefined,
         foregroundSrc: string | undefined,
         isSplash: boolean
     } => {
@@ -100,7 +100,7 @@ const BackgroundCarousel = ({ focusedApp, scrolled, isExpanded }: { focusedApp: 
                 // Special case: if app has only splash but no backgrounds, always show splash
                 (!app.backgrounds || app.backgrounds.length === 0));
 
-        const backgroundSrc = showSplash
+        const background = showSplash
             ? app.splash?.background
             : (app.backgrounds && app.backgrounds.length > 0
                 ? app.backgrounds[isCurrent ? currentBackgroundIndex : 0]
@@ -109,7 +109,7 @@ const BackgroundCarousel = ({ focusedApp, scrolled, isExpanded }: { focusedApp: 
         const foregroundSrc = showSplash ? app.splash?.foreground : undefined;
 
         return {
-            backgroundSrc,
+            background,
             foregroundSrc,
             isSplash: showSplash || false
         };
@@ -117,9 +117,9 @@ const BackgroundCarousel = ({ focusedApp, scrolled, isExpanded }: { focusedApp: 
 
     // Helper function to render a background image with motion
     const renderBackground = (app: AppItemType, isCurrent: boolean = true) => {
-        const { backgroundSrc, foregroundSrc, isSplash } = getImageSource(app, isCurrent);
+        const { background, foregroundSrc, isSplash } = getImageSource(app, isCurrent);
 
-        if (!backgroundSrc) {
+        if (!background) {
             // If no background image found, render a fallback black background
             return (
                 <motion.div
@@ -145,7 +145,7 @@ const BackgroundCarousel = ({ focusedApp, scrolled, isExpanded }: { focusedApp: 
                 <Image
                     width={1000}
                     height={1000}
-                    src={backgroundSrc}
+                    src={typeof background === "string" ? background : background.image}
                     alt={`${app.appName} background`}
                     className={`fixed inset-0 w-full h-svh object-cover ${scrolled ? "blur-xl" : ""}`}
                 />
@@ -161,6 +161,10 @@ const BackgroundCarousel = ({ focusedApp, scrolled, isExpanded }: { focusedApp: 
                         />
                     </div>
                 )}
+
+                {typeof background === "object" && background.content && <div className={`relative w-full h-full text-8xl ${scrolled ? "blur-xl" : ""}`}>
+                    {background.content}
+                </div>}
             </motion.div>
         );
     };
