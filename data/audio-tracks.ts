@@ -8,7 +8,7 @@ export const defaultTracks: Track[] = [
         artist: "Kwesi Arthur",
         duration: 251, // in seconds
         albumArt: "/icons/Grind Day - Kwesi Arthur.png",
-        audioSrc: "/audio/Grind-Day-Kwesi-Arthur.mp3"
+        audioSrc: "https://res.cloudinary.com/dgfdign4l/video/upload/v1744136830/Grind_Day_-_Kwesi_Arthur_ntr8n0.mp3"
     },
     {
         id: 2,
@@ -16,7 +16,7 @@ export const defaultTracks: Track[] = [
         artist: "Sarkodie",
         duration: 274,
         albumArt: "/icons/Original Sarkodie.png",
-        audioSrc: "/audio/Original-Sarkodie.mp3"
+        audioSrc: "https://res.cloudinary.com/dgfdign4l/video/upload/v1744136830/Original_-_Sarkodie_slh4pz.mp3"
     },
     {
         id: 3,
@@ -24,7 +24,7 @@ export const defaultTracks: Track[] = [
         artist: "Kwesi Arthur",
         duration: 192,
         albumArt: "/icons/Anthem - Kwesi Arthur.png",
-        audioSrc: "/audio/Anthem - Kwesi-Arthur.mp3"
+        audioSrc: "https://res.cloudinary.com/dgfdign4l/video/upload/v1744136829/Anthem_-_Kwesi_Arthur_gcrqv6.mp3"
     },
     {
         id: 4,
@@ -32,7 +32,7 @@ export const defaultTracks: Track[] = [
         artist: "La meme gang",
         duration: 311,
         albumArt: "/icons/Placebo - DarkoVibes.png",
-        audioSrc: "/audio/Placebo-DarkoVibes.mp3"
+        audioSrc: "https://res.cloudinary.com/dgfdign4l/video/upload/v1744136830/Placebo_-_DarkoVibes_rheahi.mp3"
     },
     {
         id: 5,
@@ -40,6 +40,6 @@ export const defaultTracks: Track[] = [
         artist: "Kwesi Arthur",
         duration: 305,
         albumArt: "/icons/Pray For Me Kwesi Arthur.png",
-        audioSrc: "/audio/PrayvFor-Me-Kwesi-Arthur.mp3"
+        audioSrc: "https://res.cloudinary.com/dgfdign4l/video/upload/v1744136830/Pray_For_Me_-_Kwesi_Arthur_nr9vl9.mp3"
     }
 ];
