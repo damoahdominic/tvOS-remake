@@ -45,7 +45,7 @@ export function useImagePreloader(apps: AppItemType[], limit: number = 6): Prelo
 
             // Add first background image if it exists
             if (app.backgrounds && app.backgrounds.length > 0) {
-                imagesToLoad.push(app.backgrounds[0]);
+                imagesToLoad.push(app.backgrounds[0].image);
             }
         });
 

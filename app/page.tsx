@@ -40,8 +40,7 @@ export default function Home() {
 
     // Direct grid navigation - no activity bar integration for simplicity
     const { isFocused, getFocusRef, focusedPosition } = useGridNavigation(3, 6, 0, 0);
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const [focusedApp, setFocusedApp] = useState<any>(apps[0]);
+    const [focusedApp, setFocusedApp] = useState(apps[0]);
 
     // Handle scroll events with debounce
     useEffect(() => {

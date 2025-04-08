@@ -14,7 +14,6 @@ export interface AppItemType {
         image: string
         content?: React.ReactNode
     }[]
-    description?: string
 }
 
 export const lockScreenImages: LockScreenImage[] = [
@@ -219,7 +218,7 @@ export const defaultLockScreenConfig: LockScreenConfig = {
 
 export const ALERT_DIALOG_ID = "tvos-dialog";
 
-export const apps = [
+export const apps : AppItemType[] = [
     {
         appIconUrl: "/apps/apple-tv.svg",
         appName: "Apple TV",
@@ -265,7 +264,6 @@ export const apps = [
                     <p className="text-4xl">Play 200+ Games. No in-App Purchases. No Ads.</p>
                 </div>
             },
-            "/temp2.jpg",
         ]
     },
     {
