@@ -162,8 +162,17 @@ const BackgroundCarousel = ({ focusedApp, scrolled, isExpanded }: { focusedApp: 
                     </div>
                 )}
 
-                {typeof background === "object" && background.content && <div className={`relative w-full h-full text-8xl ${scrolled ? "blur-xl" : ""}`}>
+                {typeof background === "object" && background.content && <div className={`relative !size-full text-7xl ${scrolled ? "blur-xl" : ""}`}>
                     {background.content}
+                    <div className="relative px-10 top-20 left-14 hidden">
+                        <Image src={"/apps/foreground/severance.svg"} width={368} height={61} alt={"severance"} />
+                    </div>
+                    <div className="relative px-10 size-full items-center hidden justify-center">
+                        <Image src={"/apps/foreground/apple-tv.svg"} className="absolute top-5 left-10" width={200} height={61} alt={"severance"} />
+                        <div className="size-full flex items-center justify-center">
+                            <Image src={"/apps/foreground/dom-n-larry.svg"} className="pb-20" width={400} height={61} alt={"severance"} />
+                        </div>
+                    </div>
                 </div>}
             </motion.div>
         );
