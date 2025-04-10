@@ -218,7 +218,7 @@ export const defaultLockScreenConfig: LockScreenConfig = {
 
 export const ALERT_DIALOG_ID = "tvos-dialog";
 
-export const apps : AppItemType[] = [
+export const apps: AppItemType[] = [
     {
         appIconUrl: "/apps/apple-tv.svg",
         appName: "Apple TV",
@@ -232,14 +232,14 @@ export const apps : AppItemType[] = [
         backgrounds: [
             {
                 image: "/app-bg/apple-tv/1.png",
-                content: <div className="relative px-10 top-20 left-14">
+                content: <div className="relative px-10 top-[7%] left-[3%]">
                     <Image src={"/apps/foreground/severance.svg"} width={368} height={61} alt={"severance"} />
                 </div>
             },
             {
                 image: "/app-bg/apple-tv/2.png",
                 content: <div className="relative px-10 size-full flex items-center justify-center">
-                    <Image src={"/apps/foreground/apple-tv.svg"} className="absolute top-5 left-10" width={200} height={61} alt={"severance"} />
+                    <Image src={"/apps/foreground/apple-tv.svg"} className="absolute top-[3%] left-[4%]" width={200} height={61} alt={"severance"} />
                     <div className="size-full flex items-center justify-center">
                         <Image src={"/apps/foreground/dom-n-larry.svg"} className="pb-20" width={400} height={61} alt={"severance"} />
                     </div>
@@ -294,35 +294,35 @@ export const apps : AppItemType[] = [
         backgrounds: [
             {
                 image: "/app-bg/fitness/1.png",
-                content: <div className="relative px-10 top-20  gap-3 size-full flex-col flex items-center justify-center font-semibold text-white">
+                content: <div className="relative top-[2%] gap-3 size-full flex-col flex items-center justify-center font-semibold text-white">
                     <Image src={"/apps/foreground/fitness.svg"} width={168} height={61} alt={"fitness"} />
                     <p className="text-7xl">Fitness for all.<br />Fitness for you.</p>
                 </div>
             },
             {
                 image: "/app-bg/fitness/2.png",
-                content: <div className="relative px-10 top-20  gap-3 size-full flex-col flex items-center justify-center font-semibold text-white">
+                content: <div className="relative top-[5%] gap-3 size-full flex-col flex items-center justify-center font-semibold text-white">
                     <Image src={"/apps/foreground/fitness.svg"} width={168} height={61} alt={"fitness"} />
                     <p className="text-7xl">Yoga with Tim</p>
                 </div>
             },
             {
                 image: "/app-bg/fitness/3.png",
-                content: <div className="relative px-10 top-20  gap-3 size-full flex-col flex items-center justify-center font-semibold text-white">
+                content: <div className="relative top-[5%] gap-3 size-full flex-col flex items-center justify-center font-semibold text-white">
                     <Image src={"/apps/foreground/fitness.svg"} width={168} height={61} alt={"fitness"} />
                     <p className="text-6xl">Fitness for all.<br />Fitness for you.</p>
                 </div>
             },
             {
                 image: "/app-bg/fitness/4.png",
-                content: <div className="relative px-10 left-20 h-full flex-col gap-3 flex justify-center font-semibold text-white">
+                content: <div className="relative left-[3%] h-full flex-col gap-3 flex justify-center font-semibold text-white">
                     <Image src={"/apps/foreground/fitness.svg"} width={168} height={61} alt={"fitness"} />
                     <p className="text-6xl">Make your move</p>
                 </div>
             },
             {
                 image: "/app-bg/fitness/5.png",
-                content: <div className="absolute top-20 left-20">
+                content: <div className="absolute top-[5%] left-[3%]">
                     <Image src={"/apps/foreground/fitness.svg"} width={268} height={61} alt={"fitness"} />
                 </div>
             },
@@ -341,42 +341,42 @@ export const apps : AppItemType[] = [
         backgrounds: [
             {
                 image: "/app-bg/photos/1.png",
-                content: <div className="relative px-10 top-20  gap-3 left-20 font-semibold text-white">
+                content: <div className="relative px-10 top-[5%] gap-3 font-semibold text-white">
                     <h2 className="text-4xl">Trip to the Hamptons</h2>
                     <p className="text-xl">August 2022</p>
                 </div>
             },
             {
                 image: "/app-bg/photos/2.png",
-                content: <div className="relative px-10 top-20  gap-3 size-full flex-col flex items-center justify-center font-semibold text-white">
+                content: <div className="relative px-10 top-[5%] gap-3 size-full flex-col flex items-center justify-center font-semibold text-white">
                     <h2 className="text-4xl">Trip to the Hamptons</h2>
                     <p className="text-xl">March 2024</p>
                 </div>
             },
             {
                 image: "/app-bg/photos/3.png",
-                content: <div className="relative px-10 left-20 h-full flex-col gap-3 flex justify-center font-semibold text-white">
+                content: <div className="relative px-10 h-full flex-col gap-3 flex justify-center font-semibold text-white">
                     <h2 className="text-4xl">Trip to the Hamptons</h2>
                     <p className="text-xl">March 2024</p>
                 </div>
             },
             {
                 image: "/app-bg/photos/4.png",
-                content: <div className="relative px-10 top-20  gap-3 left-20 font-semibold text-white">
+                content: <div className="relative px-10 top-[5%] gap-3 font-semibold text-white">
                     <h2 className="text-4xl">Weekend Trip</h2>
                     <p className="text-xl">Trip to the Hamptons</p>
                 </div>
             },
             {
                 image: "/app-bg/photos/5.png",
-                content: <div className="relative px-10 top-20  gap-3 size-full flex-col flex items-center justify-center font-semibold text-white">
+                content: <div className="relative px-10 top-[5%] gap-3 size-full flex-col flex items-center justify-center font-semibold text-white">
                     <h2 className="text-4xl">Landscape Shots</h2>
                     <p className="text-xl">July 2023</p>
                 </div>
             },
             {
                 image: "/app-bg/photos/6.png",
-                content: <div className="relative px-10 left-20 h-full flex-col gap-3 flex justify-center font-semibold text-white">
+                content: <div className="relative px-10 h-full flex-col gap-3 flex justify-center font-semibold text-white">
                     <h2 className="text-4xl">Accra Ghana</h2>
                     <p className="text-xl">December 2024</p>
                 </div>
