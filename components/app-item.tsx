@@ -71,14 +71,15 @@ const AppItem = memo(
           onContextMenu={handleContextMenu}
           onMouseEnter={handleMouseEnter}
           className={cn(
-            "relative group rounded-[30px] transition-all duration-500 focusable-apps w-full"
+            "relative group rounded-t-[80px] transition-all duration-500 grid focusable-apps w-full",
+            // { "bg-black/30 backdrop-blur-md shadow-black/30": focused && shouldShowAppName }
           )}
         >
           <Squircle
             asChild
             cornerRadius={30}
             cornerSmoothing={1}
-            className="bg-black text-white"
+            className="bg-black text-white app-item-shadow"
           >
             <motion.div className={`aspect-video w-full`}>
               <Image
@@ -91,17 +92,18 @@ const AppItem = memo(
             </motion.div>
           </Squircle>
 
-          <motion.span
-            className={`pt-2 text-base text-white text-wrap ${
-              focused
-                ? "opacity-100"
-                : "opacity-0 group-hover:opacity-100 group-focus:opacity-100"
-            }`}
+          {shouldShowAppName && focused && <div className="transition-all duration-500 absolute -z-10 top-[0%] app-item-shadow left-0 w-full h-2/3 bg-black/60 backdrop-blur-xl rounded-full"></div>}
+
+          {shouldShowAppName && <motion.span
+            className={`mt-1 text-xl font-semibold text-white text-wrap ${focused
+              ? "opacity-100 shadow-2xl"
+              : "opacity-0 group-hover:opacity-100 group-focus:opacity-100"
+              }`}
             initial={{ y: -10 }}
             animate={{ y: 0 }}
           >
-            {shouldShowAppName && appName}
-          </motion.span>
+            {appName}
+          </motion.span>}
         </motion.button>
       );
     }
