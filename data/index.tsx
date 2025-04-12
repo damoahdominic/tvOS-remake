@@ -18,21 +18,6 @@ export interface AppItemType {
 
 export const lockScreenImages: LockScreenImage[] = [
     {
-        id: "1",
-        background: "/lockscreen/lock1background.png",
-        foreground: "/lockscreen/lock1foreground.png",
-        timeDisplay: {
-            position: "right-center",
-            layout: "stacked",
-            color: "white",
-            opacity: 0.4,
-            margin: {
-                right: -4
-            },
-            font: "font-compact"
-        }
-    },
-    {
         id: "2",
         background: "/lockscreen/lock2background.png",
         timeDisplay: {
