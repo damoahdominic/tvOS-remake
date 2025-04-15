@@ -1,5 +1,5 @@
 import Image from "next/image";
-
+import { GrBottomCorner } from "react-icons/gr";
 export interface AppItemType {
   appIconUrl: string;
   appName: string;
@@ -489,6 +489,44 @@ export const apps: AppItemType[] = [
     ],
   },
   {
+    appIconUrl: "/apps/apple-music.svg",
+    appName: "Apple Music",
+    href: "/apple-music",
+    hasSplashScreen: false,
+    shouldShowAppName: true,
+    backgrounds: [
+      {
+        image: "/app-bg/apple-music/bg1.png",
+        content: (
+          <div className="relative px-10 gap-3 size-full flex-col flex items-center justify-center  text-white">
+            <div className="w-[80%] flex justify-between">
+                <div className="rotate-360"><GrBottomCorner /></div>
+                <div className=""><GrBottomCorner /></div>
+
+            </div>
+            <div className="text-left w-[80%] bg-red-500">
+              <p className="text-4xl ">THE AGENDA</p>
+              <p className="text-2xl">Nemzz and Cnetral Cee have a "DILEMMA"</p>
+            </div>
+            <div className="w-[80%] flex justify-between">
+                <div className="rotate-90"><GrBottomCorner /></div>
+                <div className=""><GrBottomCorner /></div>
+
+            </div>
+          </div>
+        ),
+      },
+      //   {
+      //     image: "/app-bg/apple-music/bg2.png",
+      //     content: (
+      //       <div className="relative px-10 gap-3 size-full flex-col flex items-center justify-center text-white">
+      //         <p className="text-4xl">coming.</p>
+      //       </div>
+      //     ),
+      //   },
+    ],
+  },
+  {
     appIconUrl: "/apps/app-store.svg",
     appName: "App Store",
     href: "/app-store",
@@ -705,25 +743,6 @@ export const apps: AppItemType[] = [
     appIconUrl: "/apps/fox-sports.svg",
     appName: "Fox Sports",
     href: "/fox-sports",
-    hasSplashScreen: false,
-    shouldShowAppName: true,
-    backgrounds: [
-      {
-        image: "/app-bg/fitness/1.png",
-        content: (
-          <div className="relative px-10 bg-black  gap-3 size-full flex-col flex items-center justify-center font-semibold text-white">
-            <p className="text-4xl">
-              Play 200+ Games. No in-App Purchases. No Ads.
-            </p>
-          </div>
-        ),
-      },
-    ],
-  },
-  {
-    appIconUrl: "/apps/apple-music.svg",
-    appName: "Apple Music",
-    href: "/apple-music",
     hasSplashScreen: false,
     shouldShowAppName: true,
     backgrounds: [
