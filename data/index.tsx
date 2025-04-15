@@ -1,5 +1,6 @@
+import { AppleMusicBackground } from "@/components/appple-music-background";
 import Image from "next/image";
-import { GrBottomCorner } from "react-icons/gr";
+import { GrBottomCorner, GrTopCorner } from "react-icons/gr";
 export interface AppItemType {
   appIconUrl: string;
   appName: string;
@@ -498,32 +499,48 @@ export const apps: AppItemType[] = [
       {
         image: "/app-bg/apple-music/bg1.png",
         content: (
-          <div className="relative px-10 gap-3 size-full flex-col flex items-center justify-center  text-white">
-            <div className="w-[80%] flex justify-between">
-                <div className="rotate-360"><GrBottomCorner /></div>
-                <div className=""><GrBottomCorner /></div>
-
-            </div>
-            <div className="text-left w-[80%] bg-red-500">
-              <p className="text-4xl ">THE AGENDA</p>
-              <p className="text-2xl">Nemzz and Cnetral Cee have a "DILEMMA"</p>
-            </div>
-            <div className="w-[80%] flex justify-between">
-                <div className="rotate-90"><GrBottomCorner /></div>
-                <div className=""><GrBottomCorner /></div>
-
-            </div>
-          </div>
+          <AppleMusicBackground
+            title="THE AGENDA"
+            description='Nemzz and Central Cee have a "DILEMMA"'
+          />
         ),
       },
-      //   {
-      //     image: "/app-bg/apple-music/bg2.png",
-      //     content: (
-      //       <div className="relative px-10 gap-3 size-full flex-col flex items-center justify-center text-white">
-      //         <p className="text-4xl">coming.</p>
-      //       </div>
-      //     ),
-      //   },
+      {
+        image: "/app-bg/apple-music/bg2.png",
+        content: (
+          <AppleMusicBackground
+            title="R&B NOW"
+            description='ODUMODUBLVK takes on a leadership role on "LEGOLAS"'
+          />
+        ),
+      },
+      {
+        image: "/app-bg/apple-music/bg3.png",
+        content: (
+          <AppleMusicBackground
+            title="AFRICA NOW"
+            description='ODUMODUBLVK takes on a leadership role on "LEGOLAS".'
+          />
+        ),
+      },
+      {
+        image: "/app-bg/apple-music/bg4.png",
+        content: (
+          <AppleMusicBackground
+            title="RAP LIFE"
+            description={`Riky Rick's "Chise Ngaposta" is a bold salute ro a high-flying icon.`}
+          />
+        ),
+      },
+      {
+        image: "/app-bg/apple-music/bg5.png",
+        content: (
+          <AppleMusicBackground
+            title="Riky Rick's 'Chise Ngaposta” is a bold salute ro a high-flying icon."
+            description="The R&B queen re-emerges as a soul diva."
+          />
+        ),
+      },
     ],
   },
   {
