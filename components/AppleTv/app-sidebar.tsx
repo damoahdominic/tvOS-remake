@@ -38,6 +38,7 @@ const items = [
 export function AppSidebar() {
     const [time, setTime] = React.useState<Date>(new Date());
     const [showAlternativeUserView, setShowAlternativeUserView] = React.useState<boolean>(false);
+    const [isReady, setIsReady] = React.useState<boolean>(false);
 
     // Effect hook to run on component mount
     React.useEffect(() => {
@@ -46,6 +47,14 @@ export function AppSidebar() {
         }, 1000);
         return () => clearInterval(interval); // Cleanup the interval on component unmount
     }, []);
+
+    React.useEffect(() => {
+        setIsReady(true);
+    }, []);
+
+    if (!isReady) {
+        return null;
+    }
 
     return (
         <Sidebar variant="floating">
@@ -89,7 +98,7 @@ export function AppSidebar() {
                                 return (
                                     <SidebarMenuItem key={item.title}>
                                         <SidebarMenuButton asChild>
-                                            <a href={item.url} className={`bg-transparent rounded-lg pl-2 hover:bg-white hover:text-[#1E1E1ED9] font-[510] h-[50px] ${window.location.hash === item.url ? "bg-white/5" : "bg-transparent"} transition-all duration-500`}>
+                                            <a href={item.url} className={`rounded-lg pl-2 font-[510] h-[50px] ${window?.location?.hash === item.url ? "bg-white/5" : "bg-transparent"} hover:bg-white hover:text-[#1E1E1E]/85 transition-all duration-300`}>
                                                 <div className={`rounded-full size-8 bg-white/10 flex items-center justify-center`}>
                                                     <item.icon className="size-4" />
                                                 </div>
