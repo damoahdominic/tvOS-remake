@@ -98,7 +98,7 @@ export function AppSidebar() {
                                 return (
                                     <SidebarMenuItem key={item.title}>
                                         <SidebarMenuButton asChild>
-                                            <a href={item.url} className={`rounded-lg pl-2 font-[510] h-[50px] ${window?.location?.hash === item.url ? "bg-white/5" : "bg-transparent"} hover:bg-white hover:text-[#1E1E1E]/85 transition-all duration-300`}>
+                                            <a href={item.url} className={`rounded-lg pl-2 font-[510] h-[50px] ${window?.location?.hash === item.url ? "!bg-white/5" : "!bg-transparent"} hover:!bg-white hover:!text-[#1E1E1E]/85 transition-all duration-300`}>
                                                 <div className={`rounded-full size-8 bg-white/10 flex items-center justify-center`}>
                                                     <item.icon className="size-4" />
                                                 </div>
