@@ -12,7 +12,7 @@ type AppleTvPageTypes = "search" | "home" | "library"
 
 const Page = () => {
     const [open, setOpen] = React.useState(false)
-    const [currentPage, setCurrentPage] = React.useState<AppleTvPageTypes>('search')
+    const [currentPage, setCurrentPage] = React.useState<AppleTvPageTypes>('home')
 
     // get the value with # in the url say #search show be return search
     React.useEffect(() => {
