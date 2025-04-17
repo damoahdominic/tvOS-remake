@@ -8,7 +8,7 @@ interface Props {
 
 const HomePage = ({ open, setOpen }:Props) => {
   return (
-      <div className='px-5'>
+      <div className='px-10 space-y-8'>
           <AppleTvSideToggler open={open} setOpen={setOpen} page='home' />
           HomePage
       </div>

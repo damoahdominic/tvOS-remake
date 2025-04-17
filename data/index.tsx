@@ -207,7 +207,7 @@ export const apps: AppItemType[] = [
     {
         appIconUrl: "/apps/apple-tv.svg",
         appName: "Apple TV",
-        href: "/apple-tv#search",
+        href: "/apple-tv#home",
         shouldShowAppName: false,
         hasSplashScreen: true,
         splash: {
