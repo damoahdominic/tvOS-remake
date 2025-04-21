@@ -106,6 +106,7 @@ export default function Home() {
             {/* Activity Bar Component */}
             <ActivityBar isExpanded={isExpanded} />
 
+
             {/* TVOSGrid with direct grid navigation for simplicity */}
             <TVOSGrid
                 apps={apps}

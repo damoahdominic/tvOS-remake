@@ -1,19 +1,21 @@
-import { AppItemType } from '@/data';
+import { AppItemType, apps } from '@/data';
 import { AnimatePresence, motion } from 'framer-motion';
 import Image from 'next/image';
 import React, { useState, useEffect, useRef } from 'react';
 
 const imageTransition = 8000; // 8 seconds
-const fadeTransitionDuration = 1.0; // 1 second fade transition
+const fadeTransitionDuration = 0.5; // 0.5 seconds fade transition (slower but still snappy)
 
 const BackgroundCarousel = ({ focusedApp, scrolled, isExpanded }: { focusedApp: AppItemType, scrolled: boolean, isExpanded: boolean }) => {
     const [hasFinishedSplash, setHasFinishedSplash] = useState(false);
     const [currentBackgroundIndex, setCurrentBackgroundIndex] = useState(0);
     const [isTransitioning, setIsTransitioning] = useState(false);
+    const [transitionDirection, setTransitionDirection] = useState<'left' | 'right'>('right');
 
-    // Track the previous app to handle crossfades
+    // Track the previous app and position for transitions
     const previousAppRef = useRef<AppItemType | null>(null);
     const [previousApp, setPreviousApp] = useState<AppItemType | null>(null);
+    const previousPositionRef = useRef<{ row: number; col: number } | null>(null);
 
     // Add a key to force re-render when needed
     const [forceRenderKey, setForceRenderKey] = useState(0);
@@ -22,10 +24,34 @@ const BackgroundCarousel = ({ focusedApp, scrolled, isExpanded }: { focusedApp: 
     useEffect(() => {
         if (!focusedApp) return;
 
+        // Get current position from the app index
+        const currentPosition = {
+            row: 1, // Always row 1 for apps
+            col: apps.findIndex(app => app.appName === focusedApp.appName) + 1
+        };
+
         // Only treat as a change if the app ID is different
         if (!previousAppRef.current || previousAppRef.current.appName !== focusedApp.appName) {
             setPreviousApp(previousAppRef.current);
             previousAppRef.current = focusedApp;
+
+            // Determine transition direction based on position changes
+            if (previousPositionRef.current) {
+                const prevPos = previousPositionRef.current;
+                const newPos = currentPosition;
+
+                // If rows are different, use row comparison
+                if (prevPos.row !== newPos.row) {
+                    setTransitionDirection(newPos.row > prevPos.row ? 'right' : 'left');
+                }
+                // If rows are same, use column comparison
+                else {
+                    setTransitionDirection(newPos.col > prevPos.col ? 'right' : 'left');
+                }
+            }
+
+            // Update previous position
+            previousPositionRef.current = currentPosition;
 
             // Reset splash state for the new app
             setHasFinishedSplash(false);
@@ -133,13 +159,23 @@ const BackgroundCarousel = ({ focusedApp, scrolled, isExpanded }: { focusedApp: 
             );
         }
 
+        const initialX = transitionDirection === 'right' ? -15 : 15;
+        const exitX = transitionDirection === 'right' ? 15 : -15;
+
         return (
             <motion.div
                 key={`${app.appName}-${isSplash ? 'splash' : 'bg'}-${isCurrent ? 'current' : 'previous'}-${forceRenderKey}`}
-                initial={{ opacity: 0 }}
-                animate={{ opacity: isCurrent ? 1 : 0 }}
-                exit={{ opacity: 0 }}
-                transition={{ duration: fadeTransitionDuration, ease: "easeInOut" }}
+                initial={{ opacity: 0, x: isCurrent ? initialX : -initialX }}
+                animate={{ opacity: isCurrent ? 1 : 0, x: 0 }}
+                exit={{ opacity: 0, x: isCurrent ? exitX : -exitX }}
+                transition={{ 
+                    duration: fadeTransitionDuration,
+                    ease: [0.4, 0, 0.2, 1],
+                    opacity: { 
+                        duration: fadeTransitionDuration * 0.8,
+                        delay: isCurrent ? fadeTransitionDuration * 0.2 : 0 // Delay the entering animation
+                    }
+                }}
                 className="fixed inset-0 w-full h-full"
             >
                 <Image
