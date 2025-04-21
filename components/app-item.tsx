@@ -57,6 +57,7 @@ const AppItem = memo(
       const handleMouseEnter = () => {
         if (typeof row === "number" && typeof col === "number") {
           setFocusedPosition({ row, col });
+          console.log({ row, col })
         }
       };
 
