@@ -494,7 +494,7 @@ export const apps: AppItemType[] = [
     appName: "Apple Music",
     href: "/apple-music",
     hasSplashScreen: false,
-    shouldShowAppName: true,
+    shouldShowAppName: false,
     backgrounds: [
       {
         image: "/app-bg/apple-music/bg1.png",
