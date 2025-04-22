@@ -1,8 +1,9 @@
 <div align="center">
     <h1> Apple tvOS®</h1>
 </div>
-
-<img src="./github/ss1.png" width="700" alt="Screenshot">
+<div align="center">
+    <img src="./github/ss1.png" width="700" alt="Screenshot">
+</div>
 
 Welcome to the **tvOS Remake** project! This project is built using [Next.js](https://nextjs.org) and styled with [Tailwind CSS](https://tailwindcss.com). 🚀
 
