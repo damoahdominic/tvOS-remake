@@ -5,7 +5,6 @@
     <img src="./github/ss1.png" width="700" alt="Screenshot">
 </div>
 <br />
-<br />
 <div align="center">
     Welcome to the <strong>tvOS Remake</strong> project! This project is built using <a href="https://nextjs.org">Next.js</a> and styled with <a href="https://tailwindcss.com">Tailwind CSS</a>.
 </div>
