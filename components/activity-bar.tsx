@@ -13,6 +13,8 @@ import Accessibility from "./activity-bar-apps/accessibility";
 import AudioCast from "./activity-bar-apps/audio-cast";
 import SleepTimer from "./activity-bar-apps/sleep-timer";
 import { useAudio } from "@/providers/audio-provider";
+import * as wave from "@/public/lottie/wave.json";
+import { useLottie } from "lottie-react";
 
 const transition: Transition = {
   type: "spring",
@@ -70,7 +72,14 @@ export default function ActivityBar({
   const [onOpenModal, setOnOpenModal] = useState(false);
   const [isHovered, setIsHovered] = useState(false);
   const { lock } = useLockScreen();
-  const { isPlaying } = useAudio()
+  const { isPlaying } = useAudio();
+
+  const defaultOptions = {
+    animationData: wave,
+    loop: true,
+  };
+
+  const { View } = useLottie(defaultOptions);
 
   // Effect hook to run on component mount
   useEffect(() => {
@@ -224,7 +233,13 @@ export default function ActivityBar({
                   setCurrentTab("music");
                 }
               }}
-            />}
+            >
+              <>
+                <div className=""> Test
+                  <div className="w-full">{View}</div>
+                </div>
+              </>
+            </NavigationButton>}
 
             {/* Animated container for the tabs */}
             <motion.div

@@ -28,7 +28,7 @@ const BootSequence: React.FC<BootSequenceProps> = ({ progress = 0 }) => {
     >
       {/* Main logo/image */}
       <motion.div
-        initial={{ scale: 0.9, opacity: 0 }}
+        initial={{ scale: 1, opacity: 0 }}
         animate={{ scale: 1, opacity: 1 }}
         transition={{ duration: 1 }}
       >
