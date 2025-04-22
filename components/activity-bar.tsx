@@ -14,7 +14,11 @@ import AudioCast from "./activity-bar-apps/audio-cast";
 import SleepTimer from "./activity-bar-apps/sleep-timer";
 import { useAudio } from "@/providers/audio-provider";
 import waveAnimation from "@/public/lottie/wave.json";
-import Lottie from "lottie-react";
+import waveLightAnimation from "@/public/lottie/wave-light.json";
+import dynamic from "next/dynamic";
+// import Lottie from "lottie-react";
+
+const Lottie = dynamic(() => import("lottie-react"), {})
 
 const transition: Transition = {
   type: "spring",
@@ -228,9 +232,18 @@ export default function ActivityBar({
                 }
               }}
             >
-              <div className="w-[40px]">
-                <Lottie animationData={waveAnimation} width={20} />
+              {currentTab ? <div className="w-[40px]">
+                <Lottie animationData={waveAnimation} />
               </div>
+                :
+                <>
+                  <div className="w-[40px] block dark:hidden group-hover:block">
+                    <Lottie animationData={waveAnimation} />
+                  </div>
+                  <div className="w-[40px] hidden dark:block group-hover:hidden">
+                    <Lottie animationData={waveLightAnimation} />
+                  </div>
+                </>}
             </NavigationButton>}
 
             {/* Animated container for the tabs */}
