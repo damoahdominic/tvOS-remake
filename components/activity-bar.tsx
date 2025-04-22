@@ -12,6 +12,7 @@ import Game from "./activity-bar-apps/game";
 import Accessibility from "./activity-bar-apps/accessibility";
 import AudioCast from "./activity-bar-apps/audio-cast";
 import SleepTimer from "./activity-bar-apps/sleep-timer";
+import { useAudio } from "@/providers/audio-provider";
 
 const transition: Transition = {
   type: "spring",
@@ -69,6 +70,7 @@ export default function ActivityBar({
   const [onOpenModal, setOnOpenModal] = useState(false);
   const [isHovered, setIsHovered] = useState(false);
   const { lock } = useLockScreen();
+  const { isPlaying } = useAudio()
 
   // Effect hook to run on component mount
   useEffect(() => {
@@ -208,6 +210,22 @@ export default function ActivityBar({
               {moment(time).format("LT")}
             </p>
 
+            {/* Audio button with wave animation (special case) - always visible when music is playing */}
+            {isPlaying && <NavigationButton
+              tab={Tabs[0]}
+              currentTab={currentTab}
+              ref={getFocusRef ? getFocusRef(0) : null}
+              isFocused={isFocused(0)}
+              isProfile={false}
+              onClick={() => {
+                if (currentTab === "music") {
+                  setCurrentTab("");
+                } else {
+                  setCurrentTab("music");
+                }
+              }}
+            />}
+
             {/* Animated container for the tabs */}
             <motion.div
               className="flex items-center gap-1"
@@ -221,8 +239,9 @@ export default function ActivityBar({
                 }
               }}
             >
+
               {/* Navigation-enabled tabs - updated to only show music and switch */}
-              {Tabs.slice(0, 2).map((tab) => (
+              {Tabs.slice(isPlaying ? 1 : 0, 2).map((tab) => (
                 <NavigationButton
                   key={tab.name}
                   tab={tab}
@@ -421,8 +440,9 @@ const NavigationButton = forwardRef<
     onClick: () => void;
     isProfile?: boolean;
     isFocused?: boolean;
+    children?: React.ReactNode;
   }
->(({ tab, currentTab, onClick, isProfile = false, isFocused = false }, ref) => {
+>(({ tab, currentTab, onClick, isProfile = false, isFocused = false, ...props }, ref) => {
   return (
     <motion.button
       ref={ref}
@@ -431,33 +451,34 @@ const NavigationButton = forwardRef<
       onClick={onClick}
       whileTap={{ scale: 0.95 }}
     >
-      {isProfile ? (
-        <Image
-          src={"/users/dominic.png"}
-          alt="user"
-          width={56}
-          height={56}
-          className="rounded-full"
-        />
-      ) : (
-        <div className="flex items-center group justify-center w-[56px] h-[56px]">
+      {props.children ? props.children :
+        isProfile ? (
           <Image
-            src={`/icons/light/${tab.image}`}
-            alt={tab.name}
-            width={20}
-            height={20}
-            className={`block dark:hidden group-hover:block`}
+            src={"/users/dominic.png"}
+            alt="user"
+            width={56}
+            height={56}
+            className="rounded-full"
           />
-          <Image
-            src={`/icons/${currentTab === tab.name ? "light" : "dark"}/${tab.image
-              }`}
-            alt={tab.name}
-            width={20}
-            height={20}
-            className="hidden dark:block group-hover:hidden"
-          />
-        </div>
-      )}
+        ) : (
+          <div className="flex items-center group justify-center w-[56px] h-[56px]">
+            <Image
+              src={`/icons/light/${tab.image}`}
+              alt={tab.name}
+              width={20}
+              height={20}
+              className={`block dark:hidden group-hover:block`}
+            />
+            <Image
+              src={`/icons/${currentTab === tab.name ? "light" : "dark"}/${tab.image
+                }`}
+              alt={tab.name}
+              width={20}
+              height={20}
+              className="hidden dark:block group-hover:hidden"
+            />
+          </div>
+        )}
     </motion.button>
   );
 });
