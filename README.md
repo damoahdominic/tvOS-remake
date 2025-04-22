@@ -6,7 +6,7 @@
 </div>
 
 <div align="center">
-    Welcome to the **tvOS Remake** project! This project is built using [Next.js](https://nextjs.org) and styled with [Tailwind CSS](https://tailwindcss.com).
+    Welcome to the <strong>tvOS Remake</strong> project! This project is built using <a href="https://nextjs.org">Next.js</a> and styled with <a href="https://tailwindcss.com">Tailwind CSS</a>.
 </div>
 
 ## Try it out! 🚀
