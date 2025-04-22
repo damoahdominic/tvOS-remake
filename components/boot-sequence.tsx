@@ -9,7 +9,7 @@ interface BootSequenceProps {
 }
 
 const BootSequence: React.FC<BootSequenceProps> = ({ progress = 0 }) => {
-  const [showProgress, setShowProgress] = useState(false);
+  const [showProgress, setShowProgress] = useState(true);
 
   // Show progress bar after a delay
   useEffect(() => {
