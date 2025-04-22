@@ -4,7 +4,17 @@
 
 Welcome to the **tvOS Remake** project! This project is built using [Next.js](https://nextjs.org) and styled with [Tailwind CSS](https://tailwindcss.com). 🚀
 
-## Getting Started 🏁
+## Try it out! 🚀
+
+Experience the tvOS interface remake in action! Visit our live demo at [tvos.ddamoah.com](https://tvos.ddamoah.com).
+
+Key features you can try:
+- Grid-based navigation using arrow keys
+- Smooth animations and transitions 
+- Dynamic app backgrounds
+- Dark/light mode toggle
+
+## Getting Started with the Code 🏁
 
 First, clone the repository and install the dependencies:
 
@@ -35,23 +45,3 @@ bun dev
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result. 🌐
 
 You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file. ✨
-
-## Project Overview 📺
-
-This project aims to recreate the Apple tvOS interface using modern web technologies. We leverage the power of Next.js for server-side rendering and Tailwind CSS for utility-first styling. 
-
-### Features ✨
-
-- **Next.js**: Fast and optimized React framework.
-- **Tailwind CSS**: Highly customizable, low-level CSS framework.
-- **Responsive Design**: Works on all screen sizes.
-- **Dynamic Content**: Easily manage and update content.
-
-## Learn More 📚
-
-To learn more about the technologies used in this project, check out the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - Learn about Next.js features and API.
-- [Tailwind CSS Documentation](https://tailwindcss.com/docs) - Learn how to style your application with Tailwind CSS.
-- [Learn Next.js](https://nextjs.org/learn) - An interactive Next.js tutorial.
-
