@@ -1,6 +1,6 @@
 <div align="center">
-<h1 style="border-bottom: none"> Apple tvOS®</h1>
-<h2 style="border-bottom: none">Remake with Next.js and Tailwind CSS</h2>
+<div style="font-size: 2.5em; font-weight: bold; margin-bottom: 0.5em"> Apple tvOS®</div>
+<div style="font-size: 1.8em; font-weight: bold">Remake with Next.js and Tailwind CSS</div>
 </div>
 
 <img src="./github/ss1.png" width="700" alt="Screenshot">
