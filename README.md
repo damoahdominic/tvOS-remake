@@ -4,20 +4,14 @@
 <div align="center">
     <img src="./github/ss1.png" width="700" alt="Screenshot">
 </div>
-
+<br />
 <div align="center">
-    Welcome to the **tvOS Remake** project! This project is built using [Next.js](https://nextjs.org) and styled with [Tailwind CSS](https://tailwindcss.com).
+    Welcome to the <strong>tvOS Remake</strong> project! This project is built using <a href="https://nextjs.org">Next.js</a> and styled with <a href="https://tailwindcss.com">Tailwind CSS</a>.
 </div>
 
 ## Try it out! 🚀
 
-Experience the tvOS interface remake in action! Visit our live demo at [tvos.ddamoah.com](https://tvos.ddamoah.com).
-
-Key features you can try:
-- Grid-based navigation using arrow keys
-- Smooth animations and transitions 
-- Dynamic app backgrounds
-- Dark/light mode toggle
+Experience the tvOS remake in action! Visit our live demo at [tvos.ddamoah.com](https://tvos.ddamoah.com).
 
 ## Getting Started with the Code 🏁
 
