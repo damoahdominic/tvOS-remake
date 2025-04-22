@@ -1,5 +1,7 @@
-#  Apple tvOS® 
-## Remake with Next.js and Tailwind CSS
+<div align="center">
+<h1 style="border-bottom: none"> Apple tvOS®</h1>
+<h2 style="border-bottom: none">Remake with Next.js and Tailwind CSS</h2>
+</div>
 
 <img src="./github/ss1.png" width="700" alt="Screenshot">
 
