@@ -13,8 +13,8 @@ import Accessibility from "./activity-bar-apps/accessibility";
 import AudioCast from "./activity-bar-apps/audio-cast";
 import SleepTimer from "./activity-bar-apps/sleep-timer";
 import { useAudio } from "@/providers/audio-provider";
-import * as wave from "@/public/lottie/wave.json";
-import { useLottie } from "lottie-react";
+import waveAnimation from "@/public/lottie/wave.json";
+import Lottie from "lottie-react";
 
 const transition: Transition = {
   type: "spring",
@@ -74,12 +74,6 @@ export default function ActivityBar({
   const { lock } = useLockScreen();
   const { isPlaying } = useAudio();
 
-  const defaultOptions = {
-    animationData: wave,
-    loop: true,
-  };
-
-  const { View } = useLottie(defaultOptions);
 
   // Effect hook to run on component mount
   useEffect(() => {
@@ -234,11 +228,9 @@ export default function ActivityBar({
                 }
               }}
             >
-              <>
-                <div className=""> Test
-                  <div className="w-full">{View}</div>
-                </div>
-              </>
+              <div className="w-[40px]">
+                <Lottie animationData={waveAnimation} width={20} />
+              </div>
             </NavigationButton>}
 
             {/* Animated container for the tabs */}
@@ -457,7 +449,7 @@ const NavigationButton = forwardRef<
     isFocused?: boolean;
     children?: React.ReactNode;
   }
->(({ tab, currentTab, onClick, isProfile = false, isFocused = false, ...props }, ref) => {
+>(({ tab, currentTab, onClick, isProfile = false, isFocused = false, children }, ref) => {
   return (
     <motion.button
       ref={ref}
@@ -466,34 +458,36 @@ const NavigationButton = forwardRef<
       onClick={onClick}
       whileTap={{ scale: 0.95 }}
     >
-      {props.children ? props.children :
-        isProfile ? (
-          <Image
-            src={"/users/dominic.png"}
-            alt="user"
-            width={56}
-            height={56}
-            className="rounded-full"
-          />
-        ) : (
-          <div className="flex items-center group justify-center w-[56px] h-[56px]">
-            <Image
-              src={`/icons/light/${tab.image}`}
-              alt={tab.name}
-              width={20}
-              height={20}
-              className={`block dark:hidden group-hover:block`}
-            />
-            <Image
-              src={`/icons/${currentTab === tab.name ? "light" : "dark"}/${tab.image
-                }`}
-              alt={tab.name}
-              width={20}
-              height={20}
-              className="hidden dark:block group-hover:hidden"
-            />
-          </div>
-        )}
+      {isProfile ? (
+        <Image
+          src={"/users/dominic.png"}
+          alt="user"
+          width={56}
+          height={56}
+          className="rounded-full"
+        />
+      ) : (
+        <div className="flex items-center group justify-center w-[56px] h-[56px]">
+          {children ? children :
+            <>
+              <Image
+                src={`/icons/light/${tab.image}`}
+                alt={tab.name}
+                width={20}
+                height={20}
+                className={`block dark:hidden group-hover:block`}
+              />
+              <Image
+                src={`/icons/${currentTab === tab.name ? "light" : "dark"}/${tab.image
+                  }`}
+                alt={tab.name}
+                width={20}
+                height={20}
+                className="hidden dark:block group-hover:hidden"
+              />
+            </>}
+        </div>
+      )}
     </motion.button>
   );
 });
