@@ -18,8 +18,8 @@ export interface AppItemType {
 
 export const lockScreenImages: LockScreenImage[] = [
     {
-        id: "2",
-        background: "/lockscreen/lock2background.png",
+        id: "1",
+        background: "/lockscreen/lock1background.png",
         timeDisplay: {
             margin: {
                 top: 10
@@ -31,9 +31,9 @@ export const lockScreenImages: LockScreenImage[] = [
         }
     },
     {
-        id: "3",
-        background: "/lockscreen/lock3background.png",
-        foreground: "/lockscreen/lock3foreground.png",
+        id: "2",
+        background: "/lockscreen/lock2background.png",
+        foreground: "/lockscreen/lock2foreground.png",
         timeDisplay: {
             position: "left-center",
             layout: "horizontal",
@@ -45,76 +45,36 @@ export const lockScreenImages: LockScreenImage[] = [
         }
     },
     {
-        id: "4",
-        background: "/lockscreen/lock4background.png",
-        foreground: "/lockscreen/lock4foreground.png", // Example with foreground element
+        id: "3",
+        background: "/lockscreen/lock3background.png",
+        foreground: "/lockscreen/lock3foreground.png",
         timeDisplay: {
             position: "top-center",
             layout: "horizontal",
             color: "rgba(255, 255, 255, 0.9)",
             margin: {
                 top: -15
-
             },
             font: "font-compact"
         }
     },
     {
+        id: "4",
+        background: "/lockscreen/lock4background.png",
+        foreground: "/lockscreen/lock4foreground.png",
+        timeDisplay: {
+            position: "top-center",
+            layout: "horizontal",
+            color: "rgba(255, 255, 255, 0.5)",
+            margin: {
+                top: -10
+            },
+            font: "font-new-york"
+        }
+    },
+    {
         id: "5",
         background: "/lockscreen/lock5background.png",
-        foreground: "/lockscreen/lock5foreground.png",
-        timeDisplay: {
-            position: "top-center",
-            layout: "horizontal",
-            color: "rgba(255, 255, 255, 0.5)",
-            margin: {
-                top: -10
-            },
-            font: "font-new-york"
-        }
-    },
-    {
-        id: "6",
-        background: "/lockscreen/lock6background.png",
-        foreground: "/lockscreen/lock6foreground.png",
-        timeDisplay: {
-            position: "top-center",
-            layout: "horizontal",
-            color: "rgba(255, 255, 255, 0.5)",
-            margin: {
-                top: -10
-            },
-            font: "font-new-york"
-        }
-    },
-    {
-        id: "7",
-        background: "/lockscreen/lock7background.png",
-        foreground: "/lockscreen/lock7foreground.png",
-        timeDisplay: {
-            position: "top-center",
-            layout: "horizontal",
-            color: "rgba(8, 8, 8, 0.5)",
-            margin: {
-                top: -20
-            },
-            font: "font-new-york"
-        }
-    },
-    {
-        id: "8",
-        background: "/lockscreen/lock8background.png",
-        foreground: "/lockscreen/lock8foreground.png",
-        timeDisplay: {
-            position: "top-right",
-            layout: "horizontal",
-            color: "rgba(8, 8, 8, 0.5)",
-            font: "font-new-york"
-        }
-    },
-    {
-        id: "9",
-        background: "/lockscreen/lock9background.png",
         timeDisplay: {
             position: "center",
             layout: "horizontal",
