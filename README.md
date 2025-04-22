@@ -1,5 +1,7 @@
 # 🍎 tvOS Remake with Next.js and Tailwind CSS 🎉
 
+<img src="./github/ss1.png" width="800" alt="Screenshot">
+
 Welcome to the **tvOS Remake** project! This project is built using [Next.js](https://nextjs.org) and styled with [Tailwind CSS](https://tailwindcss.com). 🚀
 
 ## Getting Started 🏁
