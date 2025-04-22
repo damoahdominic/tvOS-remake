@@ -11,13 +11,7 @@
 
 ## Try it out! 🚀
 
-Experience the tvOS interface remake in action! Visit our live demo at [tvos.ddamoah.com](https://tvos.ddamoah.com).
-
-Key features you can try:
-- Grid-based navigation using arrow keys
-- Smooth animations and transitions 
-- Dynamic app backgrounds
-- Dark/light mode toggle
+Experience the tvOS remake in action! Visit our live demo at [tvos.ddamoah.com](https://tvos.ddamoah.com).
 
 ## Getting Started with the Code 🏁
 
