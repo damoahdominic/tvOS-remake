@@ -388,30 +388,16 @@ const LockScreen: React.FC<LockScreenProps> = ({
             </AnimatePresence>
 
             {/* Unlock Instruction - Swipe Up - z-index 30 (above everything) */}
-            {/* <motion.div
-                className="absolute bottom-16 left-0 right-0 flex justify-center items-center z-[30]"
+            <motion.div
+                className="absolute bottom-16 left-0 right-0 flex justify-center items-center z-[30] h-14 bg-gradient-to-r w-1/3 mx-auto from-transparent via-black/70 to-transparent"
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 0.7, y: 0 }}
                 transition={{ delay: 1, duration: 0.5 }}
             >
                 <div className="flex flex-col items-center">
-                    <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="24"
-                        height="24"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="white"
-                        strokeWidth="2"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        className="mb-2"
-                    >
-                        <path d="M12 5v14M5 12l7-7 7 7" />
-                    </svg>
-                    <p className="text-white/70 text-sm">Swipe up to unlock</p>
+                    <p className="text-white text-xl font-medium">Tap here to unlock</p>
                 </div>
-            </motion.div> */}
+            </motion.div>
 
             {/* Swipe Area for Touch Interactions - z-index 40 (interactive) */}
             <motion.div
