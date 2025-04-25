@@ -2,7 +2,7 @@
 import { useDialogContext } from "@/providers/dialog-provider";
 import React, { useState, useEffect, useCallback, useRef } from "react";
 import { AppItemType, apps } from "@/data";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { useGridNavigationContext } from "@/providers/grid-navigation-provider";
 
 interface Position {
@@ -31,7 +31,7 @@ export default function useGridNavigation(
 ): UseGridNavigationReturn {
   const router = useRouter();
   const { focusedPosition, setFocusedPosition } = useGridNavigationContext();
-
+  const pathname = usePathname();
   const dockApps = apps.slice(0, 6); // Get first 6 apps
 
   // Create a 2D array of refs to store references to all the app items
@@ -65,8 +65,7 @@ export default function useGridNavigation(
       const currentDockApp = dockApps[focusedPosition.col];
       setLastActiveDockApp(currentDockApp);
       console.log(
-        `Active dock app: ${dockApps[focusedPosition.col].appName} (${
-          dockApps[focusedPosition.col].href
+        `Active dock app: ${dockApps[focusedPosition.col].appName} (${dockApps[focusedPosition.col].href
         })`
       );
     } else {
@@ -141,7 +140,7 @@ export default function useGridNavigation(
 
     return () => {
       window.removeEventListener("keydown", handleBackNavigation);
-      window.removeEventListener("popstate", () => {});
+      window.removeEventListener("popstate", () => { });
     };
   }, [router, lastActiveDockApp, setFocusedPosition]);
 
@@ -181,7 +180,7 @@ export default function useGridNavigation(
   const handleKeyDown = useCallback(
     (e: KeyboardEvent) => {
       // Skip navigation when dialog is open
-      if (isDialogOpen) {
+      if (isDialogOpen || !isBrowser || pathname.includes("/")) {
         return;
       }
 

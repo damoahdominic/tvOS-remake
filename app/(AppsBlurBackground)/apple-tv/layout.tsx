@@ -4,12 +4,7 @@ export default function AppleTvLayout({ children, }: Readonly<{ children: React.
     return (
         <div className='flex flex-col items-center justify-center h-screen'>
             <div
-                className={`fixed inset-0 transition-all duration-500 blur-3xl`}
-                style={{
-                    backgroundImage: `url(${"/apple-tv/background.png"})`,
-                    backgroundSize: "cover",
-                    backgroundPosition: "center",
-                }}
+                className={`fixed inset-0 transition-all duration-500 backdrop-blur-3xl`}
             />
             <div className='fixed inset-0 bg-black opacity-30' />
 

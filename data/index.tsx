@@ -682,7 +682,7 @@ export const apps: AppItemType[] = [
   {
     appIconUrl: "/apps/movies-itune.svg",
     appName: "Movies Itune",
-    href: "/moview-itune",
+    href: "/movies-itune",
     hasSplashScreen: false,
     shouldShowAppName: true,
     backgrounds: [
