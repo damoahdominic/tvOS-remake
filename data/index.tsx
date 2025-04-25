@@ -1,6 +1,5 @@
 import { AppleMusicBackground } from "@/components/appple-music-background";
 import Image from "next/image";
-import { GrBottomCorner, GrTopCorner } from "react-icons/gr";
 export interface AppItemType {
   appIconUrl: string;
   appName: string;
@@ -177,19 +176,6 @@ export const apps: AppItemType[] = [
       foreground: "/app-bg/apple-tv/splash-fg.svg",
     },
     backgrounds: [
-      {
-        image: "/app-bg/apple-tv/1.png",
-        content: (
-          <div className="relative px-10 top-[7%] left-[3%]">
-            <Image
-              src={"/apps/foreground/severance.svg"}
-              width={368}
-              height={61}
-              alt={"severance"}
-            />
-          </div>
-        ),
-      },
       {
         image: "/app-bg/apple-tv/2.png",
         content: (
@@ -682,7 +668,7 @@ export const apps: AppItemType[] = [
   {
     appIconUrl: "/apps/movies-itune.svg",
     appName: "Movies Itune",
-    href: "/moview-itune",
+    href: "/movies-itune",
     hasSplashScreen: false,
     shouldShowAppName: true,
     backgrounds: [

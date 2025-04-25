@@ -9,7 +9,7 @@ interface Props {
 
 const AppleTvSideToggler = ({ open, setOpen, page }: Props) => {
     return (
-        <button onClick={() => setOpen(!open)} className='flex gap-2 items-center group pt-3'>
+        <button onClick={() => setOpen(!open)} className='flex gap-2 items-center group pt-3 z-50 relative'>
             <Image src={"/apple-tv/caret-left.svg"} alt="caret-left" width={8} height={16} className={open ? 'rotate-180' : ''} />
 
             <div className='p-2 pr-4 rounded-full flex items-center gap-2 bg-[#1e1e1e]/50'>

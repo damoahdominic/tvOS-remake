@@ -4,12 +4,7 @@ export default function AppLayout({ children, }: Readonly<{ children: React.Reac
     return (
         <div className='flex flex-col items-center justify-center h-screen'>
             <div
-                className={`fixed inset-0 transition-all duration-500 blur-2xl`}
-                style={{
-                    backgroundImage: `url(${"/os-bg.jpg"})`,
-                    backgroundSize: "cover",
-                    backgroundPosition: "center",
-                }}
+                className={`fixed inset-0 transition-all duration-500 backdrop-blur-3xl`}
             />
             <div className='fixed inset-0 bg-black opacity-30' />
 

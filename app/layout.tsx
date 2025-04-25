@@ -10,6 +10,7 @@ import { GridNavigationProvider } from "@/providers/grid-navigation-provider";
 import { LockScreenProvider } from "@/providers/lock-screen-provider";
 import { AudioProvider } from "@/providers/audio-provider";
 import { defaultTracks } from "@/data/audio-tracks";
+import BackgroundProvider from "@/providers/background-provider";
 
 // LockScreen configuration
 const lockScreenConfig: LockScreenConfig = {
@@ -53,7 +54,11 @@ export default function RootLayout({
                         autoLockAfter={300000} // Auto-lock after 5 minutes of inactivity
                         initialLocked={true}   // Start with lock screen shown
                       >
-                        <GridNavigationProvider>{children}</GridNavigationProvider>
+                        <GridNavigationProvider>
+                          <BackgroundProvider>
+                            {children}
+                          </BackgroundProvider>
+                        </GridNavigationProvider>
                       </LockScreenProvider>
                     </AppContextMenuProvider>
                   </DialogProvider>
