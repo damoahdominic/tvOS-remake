@@ -2885,6 +2885,11 @@ react-style-singleton@^2.2.2, react-style-singleton@^2.2.3:
     get-nonce "^1.0.0"
     tslib "^2.0.0"
 
+react-tilt@^1.0.2:
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/react-tilt/-/react-tilt-1.0.2.tgz#89e1749939275204ebbc04565778abf972196cbe"
+  integrity sha512-21tUUsmuw5id/6NDtKqwYTG4taVnw+BoUwIG6YsgPC9GI6cx4BnBuSqgriQYAYcv3bdGNzecaBL+rvQRAm28bg==
+
 react@^18.2.0:
   version "18.3.1"
   resolved "https://registry.yarnpkg.com/react/-/react-18.3.1.tgz#49ab892009c53933625bd16b2533fc754cab2891"
