@@ -6,6 +6,7 @@ import { Squircle } from "@squircle-js/react";
 import { cn } from "@/lib/utils";
 import { AppContextMenuContext } from "@/providers/context-menu-provider";
 import useGridNavigation from "@/hooks/useGridNavigation";
+import ParallaxWrapper from "./parallax-wrapper";
 
 interface Props {
   shouldShowAppName: boolean;
@@ -76,6 +77,7 @@ const AppItem = memo(
             // { "bg-black/30 backdrop-blur-md shadow-black/30": focused && shouldShowAppName }
           )}
         >
+          <ParallaxWrapper>
           <Squircle
             asChild
             cornerRadius={30}
@@ -92,7 +94,7 @@ const AppItem = memo(
               />
             </motion.div>
           </Squircle>
-
+          </ParallaxWrapper>
           {shouldShowAppName && focused && <div className="transition-all duration-500 absolute -z-10 top-[0%] app-item-shadow left-0 w-full h-2/3 bg-black/60 backdrop-blur-xl rounded-full"></div>}
 
           {shouldShowAppName && <motion.span
