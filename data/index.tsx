@@ -1,6 +1,5 @@
 import { AppleMusicBackground } from "@/components/appple-music-background";
 import Image from "next/image";
-import { GrBottomCorner, GrTopCorner } from "react-icons/gr";
 export interface AppItemType {
   appIconUrl: string;
   appName: string;

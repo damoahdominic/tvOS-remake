@@ -389,13 +389,13 @@ const LockScreen: React.FC<LockScreenProps> = ({
 
             {/* Unlock Instruction - Swipe Up - z-index 30 (above everything) */}
             <motion.div
-                className="absolute bottom-16 left-0 right-0 flex justify-center items-center z-[30] h-14 bg-gradient-to-r w-1/3 mx-auto from-transparent via-black/70 to-transparent"
+                className="absolute bottom-16 left-0 right-0 flex justify-center items-center z-[30] h-14 bg-gradient-to-r w-full"
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 0.7, y: 0 }}
                 transition={{ delay: 1, duration: 0.5 }}
             >
-                <div className="flex flex-col items-center">
-                    <p className="text-white text-xl font-medium">Tap here to unlock</p>
+                <div className="unlock-button">
+                    <span className="shimmer-text">Tap here to unlock</span>
                 </div>
             </motion.div>
 

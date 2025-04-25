@@ -175,6 +175,44 @@ box-shadow: 0px 93px 67px -5px rgba(0,0,0,1);
 }
 
 
+.unlock-button {
+  padding: 10px 24px;
+  background: rgba(255, 255, 255, 0.5);
+  backdrop-filter: blur(90px);
+  -webkit-backdrop-filter: blur(90px);
+  border-radius: 24px;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
+  cursor: pointer;
+  overflow: hidden;
+  position: relative;
+}
+
+/* SHIMMER TEXT ONLY */
+.shimmer-text {
+  font-size: 16px;
+  font-weight: 500;
+  position: relative;
+  color: white;
+  background: linear-gradient(90deg, #ffffff 0%, #1e1e1e 80%, #ffffff 100%);
+  background-size: 200%;
+  font-weight: 600;
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+  animation: shimmer-text 5s infinite linear;
+}
+
+@keyframes shimmer-text {
+  0% {
+    background-position: -200% center;
+  }
+  100% {
+    background-position: 200% center;
+  }
+}
+
+
 
 @layer base {
   * {
