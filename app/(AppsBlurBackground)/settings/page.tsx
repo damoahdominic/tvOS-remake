@@ -258,7 +258,7 @@ const Page = () => {
             }
         })
     };
-    
+
 
     return (
         <div className='h-full'>
@@ -268,7 +268,7 @@ const Page = () => {
             {/* Main Content */}
             <div className='grid grid-cols-2 w-full h-full'>
                 {/* Logo with App Details */}
-                <div className='flex flex-col items-center justify-center text-center gap-8'>
+                <div className='flex flex-col items-center justify-center text-center gap-8 mb-[20%]'>
                     {/* Apple logo */}
                     <Image
                         src="/apple-logo-blur.svg"
@@ -279,14 +279,28 @@ const Page = () => {
                     />
 
                     {/* App Details */}
-                    <div>
-                        {/* <h1 className='text-2xl font-bold'>Apple TV</h1>
-                            <p className='text-sm'>Version 1.0.0</p> */}
+                    <div className='w-1/2'>
+                        <AnimatePresence mode="wait">
+                            <motion.div
+                                key={`${currentMenu}-${focusedIndex}`}
+                                className="text-center text-white/60"
+                                initial={{ opacity: 0 }}
+                                animate={{ opacity: 1 }}
+                                exit={{ opacity: 0 }}
+                                transition={{ duration: 0.3 }}
+                            >
+                                {settingsData[currentMenu][focusedIndex]?.description ? (
+                                    <p className="text-base">{settingsData[currentMenu][focusedIndex].description}</p>
+                                ) : (
+                                    <p className="text-xs">Use arrow keys to navigate • Press right arrow or Enter to select • Press left arrow or Esc to go back</p>
+                                )}
+                            </motion.div>
+                        </AnimatePresence>
                     </div>
                 </div>
 
                 {/* Menu Items */}
-                <ScrollArea className="h-[80svh] w-full mt-4 flex items-center">
+                <ScrollArea className="h-[80svh] mt-[5%] w-full flex items-center">
                     <AnimatePresence initial={false} custom={direction} mode="wait">
                         <motion.div
                             key={currentMenu}
@@ -322,16 +336,6 @@ const Page = () => {
                         </motion.div>
                     </AnimatePresence>
                 </ScrollArea>
-
-                {/* Instructions */}
-                <motion.div
-                    className="absolute bottom-6 left-0 right-0 text-center text-white/60"
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 0.6 }}
-                    transition={{ delay: 1 }}
-                >
-                    <p>Use arrow keys to navigate • Press right arrow or Enter to select • Press left arrow or Esc to go back</p>
-                </motion.div>
             </div>
         </div>
     )
