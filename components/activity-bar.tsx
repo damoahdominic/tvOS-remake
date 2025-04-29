@@ -114,14 +114,15 @@ export default function ActivityBar({
       iconOnly: false,
       alignment: "vertical",
       function: handlePowerOff,
+      // layoutId: "power-off"
     },
-    // ... rest of the settings array
     {
       icon: "/icons/wifi.svg",
       iconDark: "/icons/wifi.svg",
       title: "Wi-Fi Starlink",
       subTitle: "StarLink",
       alignment: "horizontal",
+      // layoutId: "wifi"
     },
     {
       icon: "/icons/light/dnd.svg",
@@ -130,6 +131,7 @@ export default function ActivityBar({
       subTitle: "",
       iconOnly: false,
       alignment: "horizontal",
+      // layoutId: "do-not-disturb"
     },
     {
       icon: "/icons/light/audio-cast.svg",
@@ -139,6 +141,7 @@ export default function ActivityBar({
       iconOnly: false,
       function: () => setCurrentTab("audio-cast"),
       alignment: "horizontal",
+      // layoutId: "audio-cast"
     },
     {
       icon: "/icons/light/timer.svg",
@@ -148,6 +151,7 @@ export default function ActivityBar({
       iconOnly: false,
       function: () => setCurrentTab("sleep-timer"),
       alignment: "horizontal",
+      // layoutId: "sleep-timer"
     },
     {
       icon: "/icons/light/game.svg",
@@ -157,6 +161,7 @@ export default function ActivityBar({
       iconOnly: true,
       function: () => setCurrentTab("game"),
       alignment: "vertical",
+      // layoutId: "game"
     },
     {
       icon: "/icons/light/accessibility.svg",
@@ -166,6 +171,7 @@ export default function ActivityBar({
       iconOnly: true,
       function: () => setCurrentTab("accessibility"),
       alignment: "vertical",
+      // layoutId: "accessibility"
     },
     {
       icon: "/icons/light/child-lock.svg",
@@ -175,6 +181,7 @@ export default function ActivityBar({
       iconOnly: true,
       function: () => setCurrentTab("restrictions"),
       alignment: "vertical",
+      // layoutId: "restrictions"
     },
     {
       icon: "/icons/light/search.svg",
@@ -183,6 +190,7 @@ export default function ActivityBar({
       subTitle: "",
       iconOnly: true,
       alignment: "vertical",
+      layoutId: "search"
     },
   ];
 
@@ -305,6 +313,7 @@ export default function ActivityBar({
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.9, y: -10 }}
               className="rounded-[20px] bg-white/50 dark:bg-[#1E1E1E]/50 border border-white/40 transition-[width] duration-500 text-black/40 dark:text-white/50 backdrop-blur-[50px] cursor-pointer"
+            layout
             >
               {currentTab === "profile" ? (
                 <motion.div
@@ -345,6 +354,7 @@ export default function ActivityBar({
                   })}
 
                   <motion.div
+
                     whileHover={{ scale: 1.05 }}
                     whileFocus={{ scale: 1.05 }}
                     className="size-[135px] bg-black/50 rounded-full flex items-center justify-center"
@@ -359,11 +369,12 @@ export default function ActivityBar({
                   animate="open"
                   exit="closed"
                   className="grid grid-cols-4 grid-rows-4 gap-3  p-5"
+
                 >
                   {Settings.map((settings, i) => {
                     return (
                       <motion.div
-                      
+
                         whileHover={{ scale: 1.05 }}
                         whileFocus={{ scale: 1.05 }}
                         key={i}
@@ -377,6 +388,9 @@ export default function ActivityBar({
                             : "flex-col justify-center"
                           }`}
                         onClick={settings.function ? settings.function : undefined}
+                        layoutId={settings.layoutId ?? ""}
+
+
                       >
 
                         <Image
