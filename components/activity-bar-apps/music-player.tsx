@@ -99,7 +99,10 @@ const MusicPlayer: React.FC = () => {
         >
           <Progress
             value={audioError ? 0 : progressPercentage}
-            className="h-1"
+            className={clsx(
+              "h-1 transition-all duration-300 ease-in",
+              isDragging && "h-2"
+            )}
           />
         </div>
         <div className="flex items-center justify-between gap-4 w-full text-[#1E1E1E]/85 dark:text-white/80">
