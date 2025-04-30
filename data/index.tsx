@@ -511,7 +511,7 @@ export const apps: AppItemType[] = [
         ),
       },
     ],
-    shouldShowAppName: false,
+    shouldShowAppName: true,
   },
   {
     appIconUrl: "/apps/netflix.svg",
