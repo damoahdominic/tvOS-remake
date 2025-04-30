@@ -6,6 +6,7 @@ import { Squircle } from "@squircle-js/react";
 import { cn } from "@/lib/utils";
 import { AppContextMenuContext } from "@/providers/context-menu-provider";
 import useGridNavigation from "@/hooks/useGridNavigation";
+import ParallaxWrapper from "./parallax-wrapper";
 
 interface Props {
   shouldShowAppName: boolean;
@@ -76,23 +77,24 @@ const AppItem = memo(
             // { "bg-black/30 backdrop-blur-md shadow-black/30": focused && shouldShowAppName }
           )}
         >
-          <Squircle
-            asChild
-            cornerRadius={30}
-            cornerSmoothing={1}
-            className="bg-black text-white app-item-shadow"
-          >
-            <motion.div className={`aspect-video w-full`}>
-              <Image
-                src={appIconUrl}
-                alt={`${appName}`}
-                className="w-full h-full object-cover"
-                width={1000}
-                height={1000}
-              />
-            </motion.div>
-          </Squircle>
-
+          <ParallaxWrapper>
+            <Squircle
+              asChild
+              cornerRadius={30}
+              cornerSmoothing={1}
+              className="bg-black text-white app-item-shadow"
+            >
+              <motion.div className={`aspect-video w-full`}>
+                <Image
+                  src={appIconUrl}
+                  alt={`${appName}`}
+                  className="w-full h-full object-cover"
+                  width={1000}
+                  height={1000}
+                />
+              </motion.div>
+            </Squircle>
+          </ParallaxWrapper>
           {shouldShowAppName && focused && <div className="transition-all duration-500 absolute -z-10 top-[0%] app-item-shadow left-0 w-full h-1/2 bg-black/5 backdrop-blur-sm rounded-full"></div>}
 
           {shouldShowAppName && <motion.span
