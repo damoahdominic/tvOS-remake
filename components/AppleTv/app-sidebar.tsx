@@ -1,5 +1,4 @@
 "use client"
-import { Calendar, Home, Search } from "lucide-react"
 import * as React from "react"
 import { motion } from "framer-motion"
 
@@ -15,23 +14,24 @@ import {
 } from "@/components/ui/sidebar"
 import Image from "next/image"
 import moment from "moment"
+import { Squircle } from "@squircle-js/react"
 
 // Menu items.
 const items = [
     {
         title: "Search",
         url: "#search",
-        icon: Search,
+        icon: "search.svg",
     },
     {
         title: "Home",
         url: "#home",
-        icon: Home,
+        icon: "home.svg",
     },
     {
         title: "Library",
         url: "#library",
-        icon: Calendar,
+        icon: "stack.svg",
     },
 ]
 
@@ -97,14 +97,22 @@ export function AppSidebar() {
                             {items.map((item) => {
                                 return (
                                     <SidebarMenuItem key={item.title}>
-                                        <SidebarMenuButton asChild>
-                                            <a href={item.url} className={`rounded-lg pl-2 font-[510] h-[50px] ${window?.location?.hash === item.url ? "!bg-white/5" : "!bg-transparent"} hover:!bg-white hover:!text-[#1E1E1E]/85 transition-all duration-300`}>
-                                                <div className={`rounded-full size-8 bg-white/10 flex items-center justify-center`}>
-                                                    <item.icon className="size-4" />
-                                                </div>
-                                                <span className="">{item.title}</span>
-                                            </a>
-                                        </SidebarMenuButton>
+                                        <Squircle
+                                            asChild
+                                            cornerRadius={15}
+                                            cornerSmoothing={1}
+                                            className="bg-black text-white app-item-shadow group"
+                                        >
+                                            <SidebarMenuButton asChild>
+                                                <a href={item.url} className={`rounded-lg pl-2 font-[510] sidebar-menu-item h-[50px] ${window?.location?.hash === item.url ? "!bg-white/5" : "!bg-transparent"} hover:!bg-white hover:!text-[#1E1E1E]/85 transition-all duration-300`}>
+                                                    <div className={`rounded-full size-8 bg-white/10 circle-image flex items-center justify-center`}>
+                                                        <Image src={`/apple-tv/light/${item.icon}`} alt={item.title} width={16} height={16} className='' />
+                                                        <Image src={`/apple-tv/dark/${item.icon}`} alt={item.title} width={16} height={16} className='hidden absolute circle-image-active' />
+                                                    </div>
+                                                    <span className="">{item.title}</span>
+                                                </a>
+                                            </SidebarMenuButton>
+                                        </Squircle>
                                     </SidebarMenuItem>
                                 )
                             })}

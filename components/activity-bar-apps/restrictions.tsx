@@ -25,7 +25,7 @@ const Restrictions = ({ onClick }: Props) => {
             </div>
 
             <motion.button
-                className={`transition-all bg-white/85 hover:bg-white text-xl font-[510] text-[#1E1E1E]/85 rounded-xl duration-300 h-[45px] w-[260px]`}
+                className={`transition-all bg-white/85 dark:bg-[#1E1E1E]/85 text-[#1E1E1E]/85 dark:text-white/85 hover:bg-white hover:text-[#1E1E1E] hover:dark:text-[#1E1E1E] hover:dark:bg-white text-xl font-[510] rounded-xl duration-300 h-[45px] w-[260px]`}
                 onClick={onClick}
             >
                 Settings

@@ -307,6 +307,11 @@
     "@jridgewell/resolve-uri" "^3.1.0"
     "@jridgewell/sourcemap-codec" "^1.4.14"
 
+"@marcreichel/apple-tv-card@^1.0.2":
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/@marcreichel/apple-tv-card/-/apple-tv-card-1.0.2.tgz#50316ef3dd88b7bde40096ab42e62d5356d5a303"
+  integrity sha512-ZNh8OGwL6ahBkq6is4xpQhV4ynQCe9GjDlwhw2qQuoTo9tyXDqL6X9jmhCZXPm0N2otQKix9H459wi/pdWTnIw==
+
 "@napi-rs/wasm-runtime@^0.2.9":
   version "0.2.9"
   resolved "https://registry.yarnpkg.com/@napi-rs/wasm-runtime/-/wasm-runtime-0.2.9.tgz#7278122cf94f3b36d8170a8eee7d85356dfa6a96"

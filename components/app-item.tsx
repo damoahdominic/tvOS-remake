@@ -93,11 +93,11 @@ const AppItem = memo(
             </motion.div>
           </Squircle>
 
-          {shouldShowAppName && focused && <div className="transition-all duration-500 absolute -z-10 top-[0%] app-item-shadow left-0 w-full h-2/3 bg-black/60 backdrop-blur-xl rounded-full"></div>}
+          {shouldShowAppName && focused && <div className="transition-all duration-500 absolute -z-10 top-[0%] app-item-shadow left-0 w-full h-1/2 bg-black/5 backdrop-blur-sm rounded-full"></div>}
 
           {shouldShowAppName && <motion.span
             className={`mt-1 text-xl font-semibold text-white text-wrap ${focused
-              ? "opacity-100 shadow-2xl"
+              ? "opacity-100 "
               : "opacity-0 group-hover:opacity-100 group-focus:opacity-100"
               }`}
             initial={{ y: -10 }}

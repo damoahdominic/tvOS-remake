@@ -50,7 +50,7 @@ const SearchPage = ({ open, setOpen }: Props) => {
                 <div className='space-y-5'>
                     <div className='flex items-end justify-between gap-4'>
                         <div className='flex items-center gap-4 flex-1'>
-                            <Image src={"/apple-tv/search.svg"} width={32} height={32} alt={"search"} />
+                            <Image src={"/apple-tv/light/search.svg"} width={32} height={32} alt={"search"} />
                             <input value={searchQuery} className='text-4xl flex-1 text-white/50 font-medium bg-transparent border-none outline-none placeholder:text-white/50 focus:outline-none' placeholder='Movies, Shows, Cast and More' />
                             {searchQuery.length > 0 && <X onClick={() => setSearchQuery('')} className='cursor-pointer' />}
                         </div>

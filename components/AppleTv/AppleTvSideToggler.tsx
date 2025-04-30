@@ -15,11 +15,11 @@ const AppleTvSideToggler = ({ open, setOpen, page }: Props) => {
             <div className='p-2 pr-4 rounded-full flex items-center gap-2 bg-[#1e1e1e]/50'>
                 <div className={`rounded-full size-8 bg-white/10 flex items-center justify-center`}>
                     {
-                        page === "home" ? <Image src={"/apple-tv/home.svg"} alt="home" width={16} height={16} />
+                        page === "home" ? <Image src={"/apple-tv/light/home.svg"} alt="home" width={16} height={16} />
                             :
-                            page === "library" ? <Image src={"/apple-tv/stack.svg"} alt="library" width={16} height={16} />
+                            page === "library" ? <Image src={"/apple-tv/light/stack.svg"} alt="library" width={16} height={16} />
                                 :
-                                <Image src={"/apple-tv/search.svg"} alt="search" width={16} height={16} />
+                                <Image src={"/apple-tv/light/search.svg"} alt="search" width={16} height={16} />
                     }
                 </div>
 

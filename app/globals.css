@@ -3,7 +3,6 @@
 @tailwind utilities;
 
 
-
 @font-face {
     font-family: 'CompactRounded';
     src: url('../public/fonts/SF-Compact-Rounded-Medium.otf') format('opentype');
@@ -81,6 +80,20 @@ body {
 * {
   transition-property: transform, opacity, blur;
   transition-duration: 200ms;
+}
+
+.sidebar-menu-item:hover .circle-image{
+ background-color: #F2F2F2;
+ transition-property: all;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    transition-duration: 300ms;
+}
+
+.sidebar-menu-item:hover img.circle-image-active{
+ display: block;
+ transition-property: all;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    transition-duration: 300ms;
 }
 
 @layer base {

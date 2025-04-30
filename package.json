@@ -10,6 +10,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@marcreichel/apple-tv-card": "^1.0.2",
     "@radix-ui/react-alert-dialog": "^1.1.6",
     "@radix-ui/react-context-menu": "^2.2.6",
     "@radix-ui/react-dialog": "^1.1.7",

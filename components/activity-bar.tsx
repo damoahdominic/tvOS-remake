@@ -16,6 +16,7 @@ import { useAudio } from "@/providers/audio-provider";
 import waveAnimation from "@/public/lottie/wave.json";
 import waveLightAnimation from "@/public/lottie/wave-light.json";
 import dynamic from "next/dynamic";
+import { useTransitionRouter } from "next-view-transitions";
 // import Lottie from "lottie-react";
 
 const Lottie = dynamic(() => import("lottie-react"), {})
@@ -77,6 +78,7 @@ export default function ActivityBar({
   const [isHovered, setIsHovered] = useState(false);
   const { lock } = useLockScreen();
   const { isPlaying } = useAudio();
+  const router = useTransitionRouter();
 
 
   // Effect hook to run on component mount
@@ -104,6 +106,10 @@ export default function ActivityBar({
     setOnOpenModal(true);
   };
 
+  const gotoSettings = () => {
+    router.push("/settings");
+  }
+
   const Settings = [
     {
       icon: "/icons/light/power.svg",
@@ -121,6 +127,7 @@ export default function ActivityBar({
       title: "Wi-Fi Starlink",
       subTitle: "StarLink",
       alignment: "horizontal",
+      function: gotoSettings,
     },
     {
       icon: "/icons/light/dnd.svg",
@@ -182,6 +189,7 @@ export default function ActivityBar({
       subTitle: "",
       iconOnly: true,
       alignment: "vertical",
+      function: gotoSettings,
     },
   ];
 

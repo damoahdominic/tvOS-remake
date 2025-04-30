@@ -13,14 +13,14 @@ const AudioCast = ({ onClick }: Props) => {
             <div className='h-[1px] w-full bg-black/40 dark:bg-white/40' />
 
             <motion.button
-                className={`transition-all bg-white/50 text-[#1E1E1E]/85 dark:bg-black/50 dark:text-white/85 px-3 hover:bg-white text-xl font-[510] group rounded-xl duration-300 h-[50px] flex items-center justify-between gap-3`}
+                className={`transition-all bg-white/85 dark:bg-[#1E1E1E]/85 text-[#1E1E1E]/85 dark:text-white/85 hover:bg-white hover:text-[#1E1E1E] hover:dark:text-[#1E1E1E] hover:dark:bg-white px-3 text-xl font-[510] group rounded-xl duration-300 h-[50px] flex items-center justify-between gap-3`}
                 onClick={onClick}
             >
-                <Image src={"/icons/light/system-speakers.svg"} alt="Speakers" width={35} height={35} className='dark:hidden block'/>
-                <Image src={"/icons/dark/system-speakers.svg"} alt="Speakers" width={35} height={35} className='hidden dark:block'/>
+                <Image src={"/icons/light/system-speakers.svg"} alt="Speakers" width={35} height={35} className='dark:hidden block  group-hover:block transition-all duration-300'/>
+                <Image src={"/icons/dark/system-speakers.svg"} alt="Speakers" width={35} height={35} className='hidden dark:block  group-hover:hidden transition-all duration-300'/>
                 System Speakers
-                <Image src={"/icons/light/checkmark.svg"} alt="checkmark" width={15} height={15} className='dark:hidden block ml-3' />
-                <Image src={"/icons/dark/checkmark.svg"} alt="checkmark" width={15} height={15} className='hidden dark:block ml-3' />
+                <Image src={"/icons/light/checkmark.svg"} alt="checkmark" width={15} height={15} className='dark:hidden block  group-hover:block transition-all duration-300 ml-3' />
+                <Image src={"/icons/dark/checkmark.svg"} alt="checkmark" width={15} height={15} className='hidden dark:block group-hover:hidden transition-all duration-300 ml-3' />
             </motion.button>
         </div>
     )
