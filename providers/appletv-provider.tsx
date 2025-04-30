@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 // providers/appletv-provider.tsx
 import React, { createContext, useContext, useState, useEffect, useRef, ReactNode } from 'react';
 import { Direction, JumpBackItem } from '@/types';
@@ -44,8 +45,9 @@ export const AppleTVProvider: React.FC<NavigationProviderProps> = ({
     const [isAutoPaused, setIsAutoPaused] = useState(false);
 
     // Refs for timer management
-    const timerIntervalRef = useRef<NodeJS.Timeout | null>(null);
+    // const timerIntervalRef = useRef<number | null>(null);
     const lastInteractionTimeRef = useRef<number>(Date.now());
+    const animationFrameRef = useRef<number | null>(null);
 
     // Function to reset timer when user interacts
     const resetTimer = () => {
@@ -61,17 +63,16 @@ export const AppleTVProvider: React.FC<NavigationProviderProps> = ({
         resetTimer();
     };
 
-    // Set up the timer effect
+    // Set up the timer effect with requestAnimationFrame for smoother updates
     useEffect(() => {
-        // Clear any existing interval
-        if (timerIntervalRef.current) {
-            clearInterval(timerIntervalRef.current);
+        // Clear any existing animation frame
+        if (animationFrameRef.current) {
+            cancelAnimationFrame(animationFrameRef.current);
         }
 
-        // Only start the timer if auto-changing is not paused
+        // Only update if auto-changing is not paused
         if (!isAutoPaused) {
-            // Create a new interval to update the progress
-            timerIntervalRef.current = setInterval(() => {
+            const updateProgress = () => {
                 const currentTime = Date.now();
                 const elapsedTime = (currentTime - lastInteractionTimeRef.current) / 1000;
 
@@ -81,15 +82,20 @@ export const AppleTVProvider: React.FC<NavigationProviderProps> = ({
                 } else {
                     // Update progress
                     setTimerProgress(elapsedTime / autoChangeDuration);
+
+                    // Continue the animation loop
+                    animationFrameRef.current = requestAnimationFrame(updateProgress);
                 }
-            }, 50); // Update frequently for smooth progress bar
+            };
+
+            // Start the animation loop
+            animationFrameRef.current = requestAnimationFrame(updateProgress);
         }
 
-        // Clean up the interval on unmount
+        // Clean up the animation frame on unmount or when dependencies change
         return () => {
-            if (timerIntervalRef.current) {
-                clearInterval(timerIntervalRef.current);
-                timerIntervalRef.current = null;
+            if (animationFrameRef.current) {
+                cancelAnimationFrame(animationFrameRef.current);
             }
         };
     }, [selectedIndex, items.length, autoChangeDuration, isAutoPaused]);

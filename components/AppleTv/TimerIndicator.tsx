@@ -1,6 +1,6 @@
 // components/TimerIndicator.tsx
-import React from 'react';
-import { motion } from 'framer-motion';
+import React, { useEffect } from 'react';
+import { motion, useAnimation } from 'framer-motion';
 
 interface TimerIndicatorProps {
     isActive: boolean;
@@ -16,13 +16,29 @@ export const TimerIndicator: React.FC<TimerIndicatorProps> = ({
     total
 }) => {
     // Calculate width based on whether it's active or not
-    // The active indicator is wider and all indicators together should take a reasonable space
     const baseWidth = 60; // Base width of the active indicator in pixels
     const inactiveWidth = 8; // Width of inactive indicators
     const gap = 4; // Gap between indicators
 
-    // Adjust layout to center all indicators properly
-    // const containerWidth = (baseWidth - inactiveWidth) * (1 / total) + inactiveWidth;
+    // Use Framer Motion's animation controls for smoother animations
+    const controls = useAnimation();
+
+    // Update the animation whenever progress changes
+    useEffect(() => {
+        if (isActive) {
+            // Animate the width smoothly
+            controls.start({
+                width: `${progress * 100}%`,
+                transition: {
+                    duration: 0.1, // Short duration for frequent updates
+                    ease: "linear" // Linear easing for constant speed
+                }
+            });
+        } else {
+            // Reset when not active
+            controls.set({ width: 0 });
+        }
+    }, [isActive, progress, controls]);
 
     return (
         <div
@@ -37,14 +53,10 @@ export const TimerIndicator: React.FC<TimerIndicatorProps> = ({
             {isActive && (
                 <motion.div
                     className="absolute top-0 left-0 h-full bg-white"
+                    initial={{ width: 0 }}
+                    animate={controls}
                     style={{
-                        width: `${progress * 100}%`,
-                        // Add slight glow effect for active indicator
                         boxShadow: '0 0 4px rgba(255, 255, 255, 0.5)'
-                    }}
-                    transition={{
-                        duration: 0.1,
-                        ease: "linear"
                     }}
                 />
             )}
