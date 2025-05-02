@@ -130,7 +130,7 @@ function AppleTvSideToggler({ page }: IMediaModal) {
                                 className='pointer-events-none fixed inset-0 left-10 z-50'
                             >
                                 <motion.div
-                                    className='pointer-events-auto relative flex flex-col overflow-hidden bg-black/50 backdrop-blur-xl border w-[250px] h-[95%] px-4'
+                                    className='pointer-events-auto relative flex flex-col overflow-hidden bg-black/80 backdrop-blur-3xl border w-[250px] h-[95%] px-4'
                                     layoutId={`dialog-${uniqueId}`}
                                     tabIndex={-1}
                                     style={{
