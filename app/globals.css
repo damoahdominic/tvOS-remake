@@ -274,21 +274,3 @@ box-shadow: 0px 93px 67px -5px rgba(0,0,0,1);
 }
 
 
-
-
-
-
-
-
-
-
-
-
-.image-magnifier-container {
-  cursor: none;
-}
-
-/* Optional: Add transition for smoother appearance */
-.magnifier {
-  transition: opacity 0.2s ease;
-}
