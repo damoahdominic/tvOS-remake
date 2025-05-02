@@ -209,7 +209,7 @@ export default function ActivityBar({
       >
 
         <motion.div
-          className="bg-white/50 dark:bg-[#1E1E1E]/50 rounded-full backdrop-blur-[50px] cursor-pointer h-[68px] border border-white/40 flex items-center"
+          className="bg-white/50 dark:bg-[#1E1E1E]/50 rounded-full backdrop-blur-[50px] cursor-pointer h-[68px] border border-[0.2px] border-white/10 flex items-center"
           onMouseEnter={() => setIsHovered(true)}
           onMouseLeave={() => setIsHovered(false)}
           initial={{ width: "auto" }}
