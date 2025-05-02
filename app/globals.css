@@ -96,6 +96,17 @@ body {
     transition-duration: 300ms;
 }
 
+svg {
+      width: 40px;
+      height: 40px;
+    }
+
+  rect {
+    fill: #1E1E1E;
+    rx: 3; /* rounded corners */
+    transition: height 0.15s ease, y 0.15s ease;
+  }
+
 @layer base {
   :root {
     --background: 0 0% 100%;

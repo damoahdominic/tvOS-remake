@@ -1,16 +1,13 @@
 "use client"
 
-import { AppSidebar } from '@/components/AppleTv/app-sidebar'
 import HomePage from '@/components/AppleTv/HomePage'
 import LibraryPage from '@/components/AppleTv/LibraryPage'
 import SearchPage from '@/components/AppleTv/SearchPage'
-import { SidebarProvider } from '@/components/ui/sidebar'
 import React from 'react'
 
 type AppleTvPageTypes = "search" | "home" | "library"
 
 const Page = () => {
-    const [open, setOpen] = React.useState(false)
     const [currentPage, setCurrentPage] = React.useState<AppleTvPageTypes>('home')
 
     // get the value with # in the url say #search show be return search
@@ -37,18 +34,15 @@ const Page = () => {
     }, [])
 
     return (
-        <SidebarProvider open={open} onOpenChange={setOpen} defaultOpen={false}>
-            <AppSidebar />
-            <main className='relative w-full h-svh'>
-                {
-                    currentPage === "home" ? <HomePage open={open} setOpen={setOpen} />
+        <main className='relative w-full h-svh'>
+            {
+                currentPage === "home" ? <HomePage />
+                    :
+                    currentPage === "library" ? <LibraryPage />
                         :
-                        currentPage === "library" ? <LibraryPage open={open} setOpen={setOpen} />
-                            :
-                            <SearchPage open={open} setOpen={setOpen} />
-                }
-            </main>
-        </SidebarProvider>
+                        <SearchPage />
+            }
+        </main>
     )
 }
 

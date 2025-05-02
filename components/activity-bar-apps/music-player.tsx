@@ -42,13 +42,13 @@ const MusicPlayer: React.FC = () => {
             className="flex items-center justify-center flex-col gap-4  p-5"
         >
             {/* Album art and song info */}
-            <div className='w-[330px] bg-white/50 dark:bg-black/50 p-4 rounded-xl flex items-center gap-2'>
+            <div className='w-[330px] transition-all duration-300 bg-white/50 dark:bg-black/50 text-[#1E1E1E]/85 dark:text-white/80 hover:bg-white hover:text-[#1E1E1E]/80 hover:dark:text-[#1E1E1E]/80 hover:dark:bg-white p-4 rounded-xl flex items-center gap-2'>
                 <div className='relative'>
                     <Image src={currentTrack.albumArt} alt='music' width={50} height={50} className='rounded-xl' />
                     <Image src="/icons/apple-music-small.svg" alt='music' width={14} height={14} className='absolute bottom-0 right-0' />
                 </div>
 
-                <div className='-space-y-1.5 text-[#1E1E1E]/85 dark:text-white/80'>
+                <div className='-space-y-1.5'>
                     <p className='font-medium text-base'>{currentTrack.title}</p>
                     <p className='text-base'>{currentTrack.artist}</p>
                     {audioError && (
@@ -73,7 +73,7 @@ const MusicPlayer: React.FC = () => {
                         });
                     } : undefined}
                 >
-                    <Progress value={audioError ? 0 : progressPercentage} className="h-1" />
+                    <Progress value={audioError ? 0 : progressPercentage} className="h-1 active:h-2 hover:h-2 transition-all" />
                 </div>
                 <div className='flex items-center justify-between gap-4 w-full text-[#1E1E1E]/85 dark:text-white/80'>
                     <p>{audioError ? "0:00" : formatTime(currentTime)}</p>

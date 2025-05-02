@@ -242,7 +242,17 @@ export default function ActivityBar({
               }}
             >
               {currentTab ? <div className="w-[40px]">
-                <Lottie animationData={waveAnimation} />
+                <div className="visualizer-wrapper">
+                  <svg id="visualizer" viewBox="0 0 60 60" preserveAspectRatio="xMidYMid meet">
+                    {/* <!-- 6 bars spaced evenly --> */}
+                    <rect x="3" y="25" width="4" height="10"></rect>
+                    <rect x="13" y="25" width="4" height="10"></rect>
+                    <rect x="23" y="25" width="4" height="10"></rect>
+                    <rect x="33" y="25" width="4" height="10"></rect>
+                    <rect x="43" y="25" width="4" height="10"></rect>
+                    <rect x="53" y="25" width="4" height="10"></rect>
+                  </svg>
+                </div>
               </div>
                 :
                 <>
@@ -371,7 +381,7 @@ export default function ActivityBar({
                   {Settings.map((settings, i) => {
                     return (
                       <motion.div
-                      
+
                         whileHover={{ scale: 1.05 }}
                         whileFocus={{ scale: 1.05 }}
                         key={i}

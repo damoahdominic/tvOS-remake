@@ -106,6 +106,10 @@ export const AudioProvider: React.FC<AudioProviderProps> = ({
     const [errorMessage, setErrorMessage] = useState<string>("");
     const [shouldPlayAfterSeek, setShouldPlayAfterSeek] = useState<boolean>(false);
     const [tracks] = useState<Track[]>(initialTracks);
+    const [audioContext, setAudioContext] = useState<AudioContext | null>(null);
+    const [analyser, setAnalyser] = useState<AnalyserNode | null>(null);
+    const [dataArray, setDataArray] = useState<Uint8Array | null>(null);
+    const [rects, setRects] = useState<Element[]>([]);
 
     // Refs
     const intervalRef = useRef<number | null>(null);
@@ -334,7 +338,8 @@ export const AudioProvider: React.FC<AudioProviderProps> = ({
             console.log("Auto-playing track");
             // Use a short timeout to avoid potential race conditions
             setTimeout(() => {
-                safePlay().catch(error => {
+                safePlay()
+                    .catch(error => {
                     console.error("Error auto-playing after load:", error);
                     setIsPlaying(false);
                     setErrorMessage(`Auto-play error: ${error instanceof Error ? error.message : "Unknown error"}`);
@@ -375,6 +380,11 @@ export const AudioProvider: React.FC<AudioProviderProps> = ({
         setIsPlaying(false);
     };
 
+    useEffect(() => {
+        const rects = document.querySelectorAll('svg rect');
+        setRects(Array.from(rects));
+    }, []);
+
     // When currentTrack changes, load and play the new track
     useEffect(() => {
         if (!currentTrack || !audioRef.current) return;
@@ -387,7 +397,16 @@ export const AudioProvider: React.FC<AudioProviderProps> = ({
         setErrorMessage("");
         setShouldPlayAfterSeek(false);
         playPromiseRef.current = null;
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+
+
+        const playHandler = audioRef.current.addEventListener('play', () => {
+            if (!audioContext) {
+                setupAudio();
+            }
+        });
+
+        return () => playHandler
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [currentTrackIndex, currentTrack?.audioSrc]);
 
     // Handle play/pause state changes
@@ -407,8 +426,56 @@ export const AudioProvider: React.FC<AudioProviderProps> = ({
         return () => {
             clearProgressInterval();
         };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [isPlaying]);
+
+    function setupAudio() {
+        // const ctx = new (window.AudioContext)();
+        // console.log("🚀 ~ setupAudio ~ ctx:", ctx)
+        // const source = ctx.createMediaElementSource(audioRef.current!);
+        // console.log("🚀 ~ setupAudio ~ source:", source)
+        // const analyser = ctx.createAnalyser();
+        // console.log("🚀 ~ setupAudio ~ analyser:", analyser)
+        // analyser.fftSize = 128;
+        // setDataArray(new Uint8Array(analyser.frequencyBinCount));
+        
+        // source.connect(analyser);
+        // analyser.connect(ctx.destination);
+        // setAnalyser(analyser);
+        // setAudioContext(ctx);
+        animate();
+    }
+
+    function animate() {
+        requestAnimationFrame(animate);
+
+        if (!analyser) return;
+
+        analyser.getByteFrequencyData(dataArray as Uint8Array);
+
+        const centerIndex = Math.floor(dataArray!.length / 2);
+        const spacing = 4;
+
+        const orderedIndexes = [
+            centerIndex,
+            centerIndex - spacing,
+            centerIndex + spacing,
+            centerIndex - spacing * 2,
+            centerIndex + spacing * 2,
+            centerIndex - spacing * 3
+        ];
+
+        rects.forEach((rect, i) => {
+            const value = dataArray![orderedIndexes[i]] || 0;
+            const maxHeight = 30;
+            const minHeight = 10;
+            const height = Math.max(minHeight, Math.min(maxHeight, value / 4));
+            const y = 30 - height / 2; // vertically centered
+
+            rect.setAttribute('height', height.toFixed(2));
+            rect.setAttribute('y', y.toFixed(2));
+        });
+    }
 
     // Function to toggle loop mode
     const toggleLoopMode = () => {
@@ -470,6 +537,13 @@ export const AudioProvider: React.FC<AudioProviderProps> = ({
                 onCanPlay={handleCanPlay}
                 onError={handleError}
                 preload="auto"
+                onLoadedData={(e) => {
+                    if (e.currentTarget.readyState >= 2) {
+                        setCanPlay(true);
+                        setAudioError(false);
+                        setErrorMessage("");
+                    }
+                }}
             />
         </AudioContext.Provider>
     );

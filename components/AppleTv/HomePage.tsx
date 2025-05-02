@@ -6,12 +6,7 @@ import { JumpBackInSection } from './JumpBackInSection'
 import { jumpBackItems } from '@/data/jumpBackItems'
 import { AppleTVProvider } from '@/providers/appletv-provider'
 
-interface Props {
-    open: boolean
-    setOpen: (open: boolean) => void
-}
-
-const HomePage = ({ open, setOpen }: Props) => {
+const HomePage = () => {
     // Listen for mouse movement to pause auto-rotation when user is active
     useEffect(() => {
         let mouseTimeout: NodeJS.Timeout;
@@ -46,7 +41,7 @@ const HomePage = ({ open, setOpen }: Props) => {
                 {/* Dynamic Background */}
                 <BackgroundImage />
                 <div className='px-10 space-y-8'>
-                    <AppleTvSideToggler open={open} setOpen={setOpen} page='home' />
+                    <AppleTvSideToggler page='home' />
 
                     {/* Main Content */}
                     <ContentArea />
