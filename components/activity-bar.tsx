@@ -216,7 +216,7 @@ export default function ActivityBar({
       >
 
         <motion.div
-          className="bg-white/50 dark:bg-[#1E1E1E]/50 rounded-full backdrop-blur-[50px] cursor-pointer h-[68px] border border-[0.2px] border-white/10 flex items-center"
+          className="bg-white/50 dark:bg-[#1E1E1E]/50 rounded-full backdrop-blur-[50px] cursor-pointer h-[68px] border-[0.2px] border-white/10 flex items-center"
           onMouseEnter={() => setIsHovered(true)}
           onMouseLeave={() => setIsHovered(false)}
           initial={{ width: "auto" }}
@@ -266,7 +266,7 @@ export default function ActivityBar({
 
             {/* Animated container for the tabs */}
             <motion.div
-              className="flex items-center gap-1"
+              className="flex items-center gap-2"
               initial={{ width: 0, overflow: "hidden", opacity: 0 }}
               animate={{
                 width: (shouldShowExpanded || currentTab !== "") ? "auto" : 0,

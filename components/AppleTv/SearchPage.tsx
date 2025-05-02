@@ -9,8 +9,7 @@ import { X } from 'lucide-react'
 
 const SearchPage = () => {
     const [searchQuery, setSearchQuery] = useState('');
-    const [searchResults, setSearchResults] = useState<string[]>([]);
-    console.log("🚀 ~ SearchPage ~ searchResults:", searchResults)
+    // const [searchResults, setSearchResults] = useState<string[]>([]);
 
     const handleInputChange = (value: string) => {
         setSearchQuery(value);
@@ -18,14 +17,14 @@ const SearchPage = () => {
         // Example: Simple search functionality
         if (value.trim()) {
             // In a real app, you would fetch from an API here
-            const mockResults = [
-                'Movies containing: ' + value,
-                'Shows containing: ' + value,
-                'Actors named: ' + value,
-            ];
-            setSearchResults(mockResults);
+            // const mockResults = [
+            //     'Movies containing: ' + value,
+            //     'Shows containing: ' + value,
+            //     'Actors named: ' + value,
+            // ];
+            // setSearchResults(mockResults);
         } else {
-            setSearchResults([]);
+            // setSearchResults([]);
         }
     };
 
@@ -63,7 +62,7 @@ const SearchPage = () => {
 
                 {/* Search Items */}
                 <div className='space-y-5'>
-                    <h1 className='text-2xl font-medium'>Browse</h1>
+                    <h1 className='text-2xl font-medium text-white'>Browse</h1>
                     <div className='grid grid-cols-3 gap-8'>
                         {
                             searchItems.map((item, index) => {
