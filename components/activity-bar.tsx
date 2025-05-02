@@ -42,32 +42,13 @@ const Users = [
 ];
 
 // Move Tabs definition and create a type
+
 type Tab = {
   name: string;
   image: string | React.ReactNode;
   index: number;
 };
 
-const Tabs: Tab[] = [
-  {
-    name: "music",
-    image: <div className="w-[40px]">
-      <Lottie autoplay={false} animationData={waveAnimation} />
-    </div>,
-    index: 0,
-  },
-  {
-    name: "switch",
-    image: "switch.svg",
-    index: 1,
-  },
-  // Profile is special, but we need it in the same list for navigation
-  {
-    name: "profile",
-    image: "", // Will use user image instead
-    index: 2,
-  },
-];
 
 export default function ActivityBar({
   getFocusRef,
@@ -82,10 +63,12 @@ export default function ActivityBar({
   const { lock } = useLockScreen();
   const { isPlaying } = useAudio();
   const router = useTransitionRouter();
+  const [isReady, setIsReady] = useState(false);
 
 
   // Effect hook to run on component mount
   useEffect(() => {
+    setIsReady(true); // Set the component as ready
     const interval = setInterval(() => {
       setTime(new Date()); // Update the time every second
     }, 1000);
@@ -112,6 +95,8 @@ export default function ActivityBar({
   const gotoSettings = () => {
     router.push("/settings");
   }
+
+  if(!isReady) return null
 
   const Settings = [
     {
@@ -196,6 +181,26 @@ export default function ActivityBar({
     },
   ];
 
+  const Tabs: Tab[] = [
+    {
+      name: "music",
+      image: <div className="w-[40px]">
+        <Lottie autoplay={false} animationData={waveAnimation} />
+      </div>,
+      index: 0,
+    },
+    {
+      name: "switch",
+      image: "switch.svg",
+      index: 1,
+    },
+    // Profile is special, but we need it in the same list for navigation
+    {
+      name: "profile",
+      image: "", // Will use user image instead
+      index: 2,
+    },
+  ];
   // Determine if bar should be expanded
   const shouldShowExpanded = isHovered || isFocused(0) || isFocused(1) || isFocused(2);
 
