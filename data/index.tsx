@@ -202,6 +202,193 @@ export const apps: AppItemType[] = [
     ],
   },
   {
+    appIconUrl: "/apps/photos.svg",
+    appName: "Photos",
+    href: "/photos",
+    hasSplashScreen: true,
+    splash: {
+      background: "/app-bg/photos/splash-bg.png",
+      foreground: "/app-bg/photos/splash-fg.svg",
+    },
+    shouldShowAppName: false,
+    backgrounds: [
+      {
+        image: "/app-bg/photos/1.png",
+        content: (
+          <div className="relative px-10 top-[5%] gap-3 font-semibold text-white">
+            <h2 className="text-4xl">Trip to the Hamptons</h2>
+            <p className="text-xl">August 2022</p>
+          </div>
+        ),
+      },
+      {
+        image: "/app-bg/photos/2.png",
+        content: (
+          <div className="relative px-10 top-[5%] gap-3 size-full flex-col flex items-center justify-center font-semibold text-white">
+            <h2 className="text-4xl">Trip to the Hamptons</h2>
+            <p className="text-xl">March 2024</p>
+          </div>
+        ),
+      },
+      {
+        image: "/app-bg/photos/3.png",
+        content: (
+          <div className="relative px-10 h-full flex-col gap-3 flex justify-center font-semibold text-white">
+            <h2 className="text-4xl">Trip to the Hamptons</h2>
+            <p className="text-xl">March 2024</p>
+          </div>
+        ),
+      },
+      {
+        image: "/app-bg/photos/4.png",
+        content: (
+          <div className="relative px-10 top-[5%] gap-3 font-semibold text-white">
+            <h2 className="text-4xl">Weekend Trip</h2>
+            <p className="text-xl">Trip to the Hamptons</p>
+          </div>
+        ),
+      },
+      {
+        image: "/app-bg/photos/5.png",
+        content: (
+          <div className="relative px-10 top-[5%] gap-3 size-full flex-col flex items-center justify-center font-semibold text-white">
+            <h2 className="text-4xl">Landscape Shots</h2>
+            <p className="text-xl">July 2023</p>
+          </div>
+        ),
+      },
+      {
+        image: "/app-bg/photos/6.png",
+        content: (
+          <div className="relative px-10 h-full flex-col gap-3 flex justify-center font-semibold text-white">
+            <h2 className="text-4xl">Accra Ghana</h2>
+            <p className="text-xl">December 2024</p>
+          </div>
+        ),
+      },
+    ],
+  },
+  
+  {
+    appIconUrl: "/apps/apple-music.svg",
+    appName: "Apple Music",
+    href: "/apple-music",
+    hasSplashScreen: false,
+    shouldShowAppName: false,
+    backgrounds: [
+      {
+        image: "/app-bg/apple-music/bg1.png",
+        content: (
+          <AppleMusicBackground
+            title="THE AGENDA"
+            description='Nemzz and Central Cee have a "DILEMMA"'
+          />
+        ),
+      },
+      {
+        image: "/app-bg/apple-music/bg2.png",
+        content: (
+          <AppleMusicBackground
+            title="R&B NOW"
+            description='ODUMODUBLVK takes on a leadership role on "LEGOLAS"'
+          />
+        ),
+      },
+      {
+        image: "/app-bg/apple-music/bg3.png",
+        content: (
+          <AppleMusicBackground
+            title="AFRICA NOW"
+            description='ODUMODUBLVK takes on a leadership role on "LEGOLAS".'
+          />
+        ),
+      },
+      {
+        image: "/app-bg/apple-music/bg4.png",
+        content: (
+          <AppleMusicBackground
+            title="RAP LIFE"
+            description={`Riky Rick's "Chise Ngaposta" is a bold salute ro a high-flying icon.`}
+          />
+        ),
+      },
+      {
+        image: "/app-bg/apple-music/bg5.png",
+        content: (
+          <AppleMusicBackground
+            title="Riky Rick's 'Chise Ngaposta” is a bold salute ro a high-flying icon."
+            description="The R&B queen re-emerges as a soul diva."
+          />
+        ),
+      },
+    ],
+  },
+  {
+    appIconUrl: "/apps/app-store.svg",
+    appName: "App Store",
+    href: "/app-store",
+    hasSplashScreen: true,
+    splash: {
+      background: "/app-bg/store/splash-bg.png",
+      foreground: "/app-bg/store/splash-fg.svg",
+    },
+    backgrounds: [
+      {
+        image: "/app-bg/fitness/1.png",
+        content: (
+          <div className="relative px-10 bg-black  gap-3 size-full flex-col flex items-center justify-center font-semibold text-white">
+            <p className="text-4xl">
+              Play 200+ Games. No in-App Purchases. No Ads.
+            </p>
+          </div>
+        ),
+      },
+    ],
+    shouldShowAppName: false,
+  },
+  {
+    appIconUrl: "/apps/arcade.svg",
+    appName: "Arcade",
+    href: "/arcade",
+    shouldShowAppName: false,
+    hasSplashScreen: true,
+    splash: {
+      background: "/app-bg/arcade/splash-bg.png",
+      foreground: "/app-bg/arcade/splash-fg.svg",
+    },
+    backgrounds: [
+      {
+        image: "/app-bg/fitness/1.png",
+        content: (
+          <div className="relative px-10 bg-black  gap-3 size-full flex-col flex items-center justify-center font-semibold text-white">
+            <p className="text-4xl">
+              Play 200+ Games. No in-App Purchases. No Ads.
+            </p>
+          </div>
+        ),
+      },
+    ],
+  },
+  {
+    appIconUrl: "/apps/settings.svg",
+    appName: "Settings",
+    href: "/settings",
+    hasSplashScreen: false,
+    shouldShowAppName: false,
+    backgrounds: [
+      {
+        image: "/app-bg/fitness/1.png",
+        content: (
+          <div className="relative px-10 bg-black  gap-3 size-full flex-col flex items-center justify-center font-semibold text-white">
+            <p className="text-4xl">
+              Play 200+ Games. No in-App Purchases. No Ads.
+            </p>
+          </div>
+        ),
+      },
+    ],
+  },
+  {
     appIconUrl: "/apps/apple-podcast.svg",
     appName: "Apple Podcast",
     href: "/apple-podcast",
@@ -255,29 +442,6 @@ export const apps: AppItemType[] = [
                 />
               </div>
             </div>
-          </div>
-        ),
-      },
-    ],
-  },
-  {
-    appIconUrl: "/apps/arcade.svg",
-    appName: "Arcade",
-    href: "/arcade",
-    shouldShowAppName: false,
-    hasSplashScreen: true,
-    splash: {
-      background: "/app-bg/arcade/splash-bg.png",
-      foreground: "/app-bg/arcade/splash-fg.svg",
-    },
-    backgrounds: [
-      {
-        image: "/app-bg/fitness/1.png",
-        content: (
-          <div className="relative px-10 bg-black  gap-3 size-full flex-col flex items-center justify-center font-semibold text-white">
-            <p className="text-4xl">
-              Play 200+ Games. No in-App Purchases. No Ads.
-            </p>
           </div>
         ),
       },
@@ -368,150 +532,6 @@ export const apps: AppItemType[] = [
         ),
       },
     ],
-  },
-  {
-    appIconUrl: "/apps/photos.svg",
-    appName: "Photos",
-    href: "/photos",
-    hasSplashScreen: true,
-    splash: {
-      background: "/app-bg/photos/splash-bg.png",
-      foreground: "/app-bg/photos/splash-fg.svg",
-    },
-    shouldShowAppName: false,
-    backgrounds: [
-      {
-        image: "/app-bg/photos/1.png",
-        content: (
-          <div className="relative px-10 top-[5%] gap-3 font-semibold text-white">
-            <h2 className="text-4xl">Trip to the Hamptons</h2>
-            <p className="text-xl">August 2022</p>
-          </div>
-        ),
-      },
-      {
-        image: "/app-bg/photos/2.png",
-        content: (
-          <div className="relative px-10 top-[5%] gap-3 size-full flex-col flex items-center justify-center font-semibold text-white">
-            <h2 className="text-4xl">Trip to the Hamptons</h2>
-            <p className="text-xl">March 2024</p>
-          </div>
-        ),
-      },
-      {
-        image: "/app-bg/photos/3.png",
-        content: (
-          <div className="relative px-10 h-full flex-col gap-3 flex justify-center font-semibold text-white">
-            <h2 className="text-4xl">Trip to the Hamptons</h2>
-            <p className="text-xl">March 2024</p>
-          </div>
-        ),
-      },
-      {
-        image: "/app-bg/photos/4.png",
-        content: (
-          <div className="relative px-10 top-[5%] gap-3 font-semibold text-white">
-            <h2 className="text-4xl">Weekend Trip</h2>
-            <p className="text-xl">Trip to the Hamptons</p>
-          </div>
-        ),
-      },
-      {
-        image: "/app-bg/photos/5.png",
-        content: (
-          <div className="relative px-10 top-[5%] gap-3 size-full flex-col flex items-center justify-center font-semibold text-white">
-            <h2 className="text-4xl">Landscape Shots</h2>
-            <p className="text-xl">July 2023</p>
-          </div>
-        ),
-      },
-      {
-        image: "/app-bg/photos/6.png",
-        content: (
-          <div className="relative px-10 h-full flex-col gap-3 flex justify-center font-semibold text-white">
-            <h2 className="text-4xl">Accra Ghana</h2>
-            <p className="text-xl">December 2024</p>
-          </div>
-        ),
-      },
-    ],
-  },
-  {
-    appIconUrl: "/apps/apple-music.svg",
-    appName: "Apple Music",
-    href: "/apple-music",
-    hasSplashScreen: false,
-    shouldShowAppName: false,
-    backgrounds: [
-      {
-        image: "/app-bg/apple-music/bg1.png",
-        content: (
-          <AppleMusicBackground
-            title="THE AGENDA"
-            description='Nemzz and Central Cee have a "DILEMMA"'
-          />
-        ),
-      },
-      {
-        image: "/app-bg/apple-music/bg2.png",
-        content: (
-          <AppleMusicBackground
-            title="R&B NOW"
-            description='ODUMODUBLVK takes on a leadership role on "LEGOLAS"'
-          />
-        ),
-      },
-      {
-        image: "/app-bg/apple-music/bg3.png",
-        content: (
-          <AppleMusicBackground
-            title="AFRICA NOW"
-            description='ODUMODUBLVK takes on a leadership role on "LEGOLAS".'
-          />
-        ),
-      },
-      {
-        image: "/app-bg/apple-music/bg4.png",
-        content: (
-          <AppleMusicBackground
-            title="RAP LIFE"
-            description={`Riky Rick's "Chise Ngaposta" is a bold salute ro a high-flying icon.`}
-          />
-        ),
-      },
-      {
-        image: "/app-bg/apple-music/bg5.png",
-        content: (
-          <AppleMusicBackground
-            title="Riky Rick's 'Chise Ngaposta” is a bold salute ro a high-flying icon."
-            description="The R&B queen re-emerges as a soul diva."
-          />
-        ),
-      },
-    ],
-  },
-  {
-    appIconUrl: "/apps/app-store.svg",
-    appName: "App Store",
-    href: "/app-store",
-    hasSplashScreen: true,
-    splash: {
-      background: "/app-bg/store/splash-bg.png",
-      foreground: "/app-bg/store/splash-fg.svg",
-    },
-    backgrounds: [
-      {
-        image: "/app-bg/fitness/1.png",
-        content: (
-          <div className="relative px-10 bg-black  gap-3 size-full flex-col flex items-center justify-center font-semibold text-white">
-            <p className="text-4xl">
-              Play 200+ Games. No in-App Purchases. No Ads.
-            </p>
-          </div>
-        ),
-      },
-    ],
-    shouldShowAppName: true,
   },
   {
     appIconUrl: "/apps/netflix.svg",
@@ -631,25 +651,6 @@ export const apps: AppItemType[] = [
     appIconUrl: "/apps/showmax.svg",
     appName: "ShowMax",
     href: "/showmax",
-    hasSplashScreen: false,
-    shouldShowAppName: true,
-    backgrounds: [
-      {
-        image: "/app-bg/fitness/1.png",
-        content: (
-          <div className="relative px-10 bg-black  gap-3 size-full flex-col flex items-center justify-center font-semibold text-white">
-            <p className="text-4xl">
-              Play 200+ Games. No in-App Purchases. No Ads.
-            </p>
-          </div>
-        ),
-      },
-    ],
-  },
-  {
-    appIconUrl: "/apps/settings.svg",
-    appName: "Settings",
-    href: "/settings",
     hasSplashScreen: false,
     shouldShowAppName: true,
     backgrounds: [

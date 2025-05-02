@@ -157,7 +157,7 @@ const TVOSGrid: React.FC<TVOSGridProps> = ({
   ) : (
     <>
       {/* Main Content */}
-        <div className="relative min-h-screen flex flex-col justify-end px-4">
+        <div className="relative min-h-screen flex flex-col justify-end px-4 ">
           {/* Expand/Collapse Caret */}
           <button
             onClick={toggleExpansion}
@@ -173,7 +173,7 @@ const TVOSGrid: React.FC<TVOSGridProps> = ({
           asChild
           cornerRadius={30}
           cornerSmoothing={1}
-          className="bg-black/30"
+          className="bg-white/30 dark:bg-black/30"
         >
           <motion.div
             className="w-full px-6 py-4 relative bottom-8 backdrop-blur-xl"
