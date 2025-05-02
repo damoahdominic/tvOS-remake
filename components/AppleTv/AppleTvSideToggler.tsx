@@ -180,12 +180,12 @@ function AppleTvSideToggler({ page }: IMediaModal) {
                                                     cornerSmoothing={1}
                                                     className="w-full app-item-shadow group"
                                                 >
-                                                    <a href={item.url} className={`rounded-lg pl-2 font-[510] gap-2 flex items-center sidebar-menu-item h-[50px] ${window?.location?.hash === item.url ? "!bg-white/5" : "!bg-transparent"} hover:!bg-white hover:!text-[#1E1E1E]/85 transition-all duration-300`}>
+                                                    <a href={item.url} className={`rounded-lg pl-2 font-[510] gap-2 flex items-center sidebar-menu-item h-[50px] ${window?.location?.hash === item.url ? "!bg-white/5" : "!bg-transparent"} hover:!bg-white hover:!text-[#1E1E1E]/85 text-white transition-all duration-300`}>
                                                         <div className={`rounded-full size-8 bg-white/10 circle-image flex items-center justify-center`}>
                                                             <Image src={`/apple-tv/light/${item.icon}`} alt={item.title} width={16} height={16} className='' />
                                                             <Image src={`/apple-tv/dark/${item.icon}`} alt={item.title} width={16} height={16} className='hidden absolute circle-image-active' />
                                                         </div>
-                                                        <span className="">{item.title}</span>
+                                                        <span className="text">{item.title}</span>
                                                     </a>
                                                 </Squircle>
                                             )
