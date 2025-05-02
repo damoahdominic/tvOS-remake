@@ -3,7 +3,7 @@
 3 (DONE)
 4 (DONE)
 5
-6
+6 foreground delay.
 16 (DONE)
 
 
