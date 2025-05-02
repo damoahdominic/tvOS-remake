@@ -44,14 +44,16 @@ const Users = [
 // Move Tabs definition and create a type
 type Tab = {
   name: string;
-  image: string;
+  image: string | React.ReactNode;
   index: number;
 };
 
 const Tabs: Tab[] = [
   {
     name: "music",
-    image: "audio.svg",
+    image: <div className="w-[40px]">
+      <Lottie autoplay={false} animationData={waveAnimation} />
+    </div>,
     index: 0,
   },
   {
@@ -243,15 +245,7 @@ export default function ActivityBar({
             >
               {currentTab ? <div className="w-[40px]">
                 <div className="visualizer-wrapper">
-                  <svg id="visualizer" viewBox="0 0 60 60" preserveAspectRatio="xMidYMid meet">
-                    {/* <!-- 6 bars spaced evenly --> */}
-                    <rect x="3" y="25" width="4" height="10"></rect>
-                    <rect x="13" y="25" width="4" height="10"></rect>
-                    <rect x="23" y="25" width="4" height="10"></rect>
-                    <rect x="33" y="25" width="4" height="10"></rect>
-                    <rect x="43" y="25" width="4" height="10"></rect>
-                    <rect x="53" y="25" width="4" height="10"></rect>
-                  </svg>
+                  <Lottie animationData={waveAnimation} />
                 </div>
               </div>
                 :
@@ -503,23 +497,27 @@ const NavigationButton = forwardRef<
       ) : (
         <div className="flex items-center group justify-center w-[56px] h-[56px]">
           {children ? children :
-            <>
-              <Image
-                src={`/icons/light/${tab.image}`}
-                alt={tab.name}
-                width={20}
-                height={20}
-                className={`block dark:hidden group-hover:block`}
-              />
-              <Image
-                src={`/icons/${currentTab === tab.name ? "light" : "dark"}/${tab.image
-                  }`}
-                alt={tab.name}
-                width={20}
-                height={20}
-                className="hidden dark:block group-hover:hidden"
-              />
-            </>}
+            typeof tab.image === "string" ?
+              <>
+                <Image
+                  src={`/icons/light/${tab.image}`}
+                  alt={tab.name}
+                  width={20}
+                  height={20}
+                  className={`block dark:hidden group-hover:block`}
+                />
+                <Image
+                  src={`/icons/${currentTab === tab.name ? "light" : "dark"}/${tab.image
+                    }`}
+                  alt={tab.name}
+                  width={20}
+                  height={20}
+                  className="hidden dark:block group-hover:hidden"
+                />
+              </>
+              :
+              tab.image
+          }
         </div>
       )}
     </motion.button>

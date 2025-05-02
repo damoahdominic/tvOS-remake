@@ -84,7 +84,7 @@ function AppleTvSideToggler({ page }: IMediaModal) {
         <>
             <MotionConfig transition={transition}>
                 <motion.div
-                    className='flex gap-2 items-center group pt-3 z-50 relative w-[300px] h-fit cursor-pointer'
+                    className='flex gap-1 items-center group pt-3 z-50 relative w-[300px] h-fit cursor-pointer'
                     layoutId={`dialog-${uniqueId}`}
                     style={{
                         borderRadius: '12px',
@@ -94,7 +94,7 @@ function AppleTvSideToggler({ page }: IMediaModal) {
                     }}
                 >
                     {!isMenuModalOpen && <>
-                        <Image src={"/apple-tv/caret-left.svg"} alt="caret-left" width={8} height={16} />
+                        <Image src={"/apple-tv/caret-left.svg"} alt="caret-left" width={10} height={16} />
 
                         <div className='p-2 pr-4 rounded-full flex items-center gap-2 bg-[#1e1e1e]/50'>
                             <div className={`rounded-full size-8 bg-white/10 flex items-center justify-center`}>
