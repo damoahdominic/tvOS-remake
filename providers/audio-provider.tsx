@@ -463,6 +463,7 @@ export const AudioProvider: React.FC<AudioProviderProps> = ({
 
             {/* Hidden audio element */}
             <audio
+                id='audio'
                 ref={audioRef}
                 src={currentTrack?.audioSrc}
                 onTimeUpdate={handleTimeUpdate}
@@ -470,6 +471,13 @@ export const AudioProvider: React.FC<AudioProviderProps> = ({
                 onCanPlay={handleCanPlay}
                 onError={handleError}
                 preload="auto"
+                onLoadedData={(e) => {
+                    if (e.currentTarget.readyState >= 2) {
+                        setCanPlay(true);
+                        setAudioError(false);
+                        setErrorMessage("");
+                    }
+                 }}
             />
         </AudioContext.Provider>
     );

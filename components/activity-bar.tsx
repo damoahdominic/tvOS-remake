@@ -42,30 +42,13 @@ const Users = [
 ];
 
 // Move Tabs definition and create a type
+
 type Tab = {
   name: string;
-  image: string;
+  image: string | React.ReactNode;
   index: number;
 };
 
-const Tabs: Tab[] = [
-  {
-    name: "music",
-    image: "audio.svg",
-    index: 0,
-  },
-  {
-    name: "switch",
-    image: "switch.svg",
-    index: 1,
-  },
-  // Profile is special, but we need it in the same list for navigation
-  {
-    name: "profile",
-    image: "", // Will use user image instead
-    index: 2,
-  },
-];
 
 export default function ActivityBar({
   getFocusRef,
@@ -80,10 +63,12 @@ export default function ActivityBar({
   const { lock } = useLockScreen();
   const { isPlaying } = useAudio();
   const router = useTransitionRouter();
+  const [isReady, setIsReady] = useState(false);
 
 
   // Effect hook to run on component mount
   useEffect(() => {
+    setIsReady(true); // Set the component as ready
     const interval = setInterval(() => {
       setTime(new Date()); // Update the time every second
     }, 1000);
@@ -110,6 +95,8 @@ export default function ActivityBar({
   const gotoSettings = () => {
     router.push("/settings");
   }
+
+  if(!isReady) return null
 
   const Settings = [
     {
@@ -194,6 +181,26 @@ export default function ActivityBar({
     },
   ];
 
+  const Tabs: Tab[] = [
+    {
+      name: "music",
+      image: <div className="w-[40px]">
+        <Lottie autoplay={false} animationData={waveAnimation} />
+      </div>,
+      index: 0,
+    },
+    {
+      name: "switch",
+      image: "switch.svg",
+      index: 1,
+    },
+    // Profile is special, but we need it in the same list for navigation
+    {
+      name: "profile",
+      image: "", // Will use user image instead
+      index: 2,
+    },
+  ];
   // Determine if bar should be expanded
   const shouldShowExpanded = isHovered || isFocused(0) || isFocused(1) || isFocused(2);
 
@@ -209,7 +216,7 @@ export default function ActivityBar({
       >
 
         <motion.div
-          className="bg-white/50 dark:bg-[#1E1E1E]/50 rounded-full backdrop-blur-[50px] cursor-pointer h-[68px] border border-[0.2px] border-white/10 flex items-center"
+          className="bg-white/50 dark:bg-[#1E1E1E]/50 rounded-full backdrop-blur-[50px] cursor-pointer h-[68px] border-[0.2px] border-white/10 flex items-center"
           onMouseEnter={() => setIsHovered(true)}
           onMouseLeave={() => setIsHovered(false)}
           initial={{ width: "auto" }}
@@ -242,7 +249,9 @@ export default function ActivityBar({
               }}
             >
               {currentTab ? <div className="w-[40px]">
-                <Lottie animationData={waveAnimation} />
+                <div className="visualizer-wrapper">
+                  <Lottie animationData={waveAnimation} />
+                </div>
               </div>
                 :
                 <>
@@ -257,7 +266,7 @@ export default function ActivityBar({
 
             {/* Animated container for the tabs */}
             <motion.div
-              className="flex items-center gap-1"
+              className="flex items-center gap-2"
               initial={{ width: 0, overflow: "hidden", opacity: 0 }}
               animate={{
                 width: (shouldShowExpanded || currentTab !== "") ? "auto" : 0,
@@ -371,7 +380,7 @@ export default function ActivityBar({
                   {Settings.map((settings, i) => {
                     return (
                       <motion.div
-                      
+
                         whileHover={{ scale: 1.05 }}
                         whileFocus={{ scale: 1.05 }}
                         key={i}
@@ -493,23 +502,27 @@ const NavigationButton = forwardRef<
       ) : (
         <div className="flex items-center group justify-center w-[56px] h-[56px]">
           {children ? children :
-            <>
-              <Image
-                src={`/icons/light/${tab.image}`}
-                alt={tab.name}
-                width={20}
-                height={20}
-                className={`block dark:hidden group-hover:block`}
-              />
-              <Image
-                src={`/icons/${currentTab === tab.name ? "light" : "dark"}/${tab.image
-                  }`}
-                alt={tab.name}
-                width={20}
-                height={20}
-                className="hidden dark:block group-hover:hidden"
-              />
-            </>}
+            typeof tab.image === "string" ?
+              <>
+                <Image
+                  src={`/icons/light/${tab.image}`}
+                  alt={tab.name}
+                  width={20}
+                  height={20}
+                  className={`block dark:hidden group-hover:block`}
+                />
+                <Image
+                  src={`/icons/${currentTab === tab.name ? "light" : "dark"}/${tab.image
+                    }`}
+                  alt={tab.name}
+                  width={20}
+                  height={20}
+                  className="hidden dark:block group-hover:hidden"
+                />
+              </>
+              :
+              tab.image
+          }
         </div>
       )}
     </motion.button>

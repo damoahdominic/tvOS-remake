@@ -7,17 +7,9 @@ import TVKeyboard from '../tv-keyboard'
 import { X } from 'lucide-react'
 
 
-interface Props {
-    open: boolean
-    setOpen: (open: boolean) => void
-}
-
-
-
-const SearchPage = ({ open, setOpen }: Props) => {
+const SearchPage = () => {
     const [searchQuery, setSearchQuery] = useState('');
-    const [searchResults, setSearchResults] = useState<string[]>([]);
-    console.log("🚀 ~ SearchPage ~ searchResults:", searchResults)
+    // const [searchResults, setSearchResults] = useState<string[]>([]);
 
     const handleInputChange = (value: string) => {
         setSearchQuery(value);
@@ -25,14 +17,14 @@ const SearchPage = ({ open, setOpen }: Props) => {
         // Example: Simple search functionality
         if (value.trim()) {
             // In a real app, you would fetch from an API here
-            const mockResults = [
-                'Movies containing: ' + value,
-                'Shows containing: ' + value,
-                'Actors named: ' + value,
-            ];
-            setSearchResults(mockResults);
+            // const mockResults = [
+            //     'Movies containing: ' + value,
+            //     'Shows containing: ' + value,
+            //     'Actors named: ' + value,
+            // ];
+            // setSearchResults(mockResults);
         } else {
-            setSearchResults([]);
+            // setSearchResults([]);
         }
     };
 
@@ -43,7 +35,7 @@ const SearchPage = ({ open, setOpen }: Props) => {
     };
     return (
         <div className='px-10 space-y-8'>
-            <AppleTvSideToggler open={open} setOpen={setOpen} page='search' />
+            <AppleTvSideToggler page='search' />
 
             <div className='flex-1 flex flex-col justify-center gap-10'>
                 {/* Header */}
@@ -70,7 +62,7 @@ const SearchPage = ({ open, setOpen }: Props) => {
 
                 {/* Search Items */}
                 <div className='space-y-5'>
-                    <h1 className='text-2xl font-medium'>Browse</h1>
+                    <h1 className='text-2xl font-medium text-white'>Browse</h1>
                     <div className='grid grid-cols-3 gap-8'>
                         {
                             searchItems.map((item, index) => {
