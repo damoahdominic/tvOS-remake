@@ -17,6 +17,7 @@ import waveAnimation from "@/public/lottie/wave.json";
 import waveLightAnimation from "@/public/lottie/wave-light.json";
 import dynamic from "next/dynamic";
 import { useTransitionRouter } from "next-view-transitions";
+import { ActivityItemsWrapper } from "./activity-items-wrapper";
 // import ParallaxWrapper from "./parallax-wrapper";
 // import Lottie from "lottie-react";
 
@@ -317,12 +318,13 @@ export default function ActivityBar({
 
         <AnimatePresence>
           {currentTab !== "" && (
-            <motion.div
-              initial={{ opacity: 0, scale: 0.9, y: -10 }}
-              animate={{ opacity: 1, scale: 1, y: 0 }}
-              exit={{ opacity: 0, scale: 0.9, y: -10 }}
-              className="rounded-[20px] bg-white/50 dark:bg-[#1E1E1E]/50 border border-white/40 transition-[width] duration-500 text-black/40 dark:text-white/50 backdrop-blur-[50px] cursor-pointer"
-            >
+            // <motion.div
+            //   initial={{ opacity: 0, scale: 0.9, y: -10 }}
+            //   animate={{ opacity: 1, scale: 1, y: 0 }}
+            //   exit={{ opacity: 0, scale: 0.1, y: -100 }}
+            //   className="rounded-[20px] bg-white/50 dark:bg-[#1E1E1E]/50 border border-white/40 transition-[width] duration-500 text-black/40 dark:text-white/50 backdrop-blur-[50px] cursor-pointer"
+            // >
+            <div className="cursor-pointer">
               {currentTab === "profile" ? (
                 <motion.div
                   variants={{ open: { opacity: 1 }, closed: { opacity: 0 } }}
@@ -370,6 +372,8 @@ export default function ActivityBar({
                   </motion.div>
                 </motion.div>
               ) : currentTab === "switch" ? (
+                <ActivityItemsWrapper animatePresence={true}>
+
                 <motion.div
                   variants={{ open: { opacity: 1 }, closed: { opacity: 0 } }}
                   initial="closed"
@@ -380,7 +384,7 @@ export default function ActivityBar({
                   {Settings.map((settings, i) => {
                     return (
                       <motion.div
-
+                        layoutId={settings.title}
                         whileHover={{ scale: 1.05 }}
                         whileFocus={{ scale: 1.05 }}
                         key={i}
@@ -421,6 +425,8 @@ export default function ActivityBar({
                     );
                   })}
                 </motion.div>
+                </ActivityItemsWrapper>
+
               ) : (
                 currentTab === "music" ? <MusicPlayer />
                   :
@@ -436,7 +442,9 @@ export default function ActivityBar({
                             :
                             null
               )}
-            </motion.div>
+              
+            {/* </motion.div> */}
+            </div>
           )}
         </AnimatePresence>
 
