@@ -108,8 +108,8 @@ export default function ActivityBar({
       iconOnly: false,
       alignment: "vertical",
       function: handlePowerOff,
+      layoutId: "power-off"
     },
-    // ... rest of the settings array
     {
       icon: "/icons/wifi.svg",
       iconDark: "/icons/wifi.svg",
@@ -117,6 +117,7 @@ export default function ActivityBar({
       subTitle: "StarLink",
       alignment: "horizontal",
       function: gotoSettings,
+      layoutId: "wifi-starlink"
     },
     {
       icon: "/icons/light/dnd.svg",
@@ -125,6 +126,7 @@ export default function ActivityBar({
       subTitle: "",
       iconOnly: false,
       alignment: "horizontal",
+      layoutId: "do-not-disturb"
     },
     {
       icon: "/icons/light/audio-cast.svg",
@@ -134,6 +136,7 @@ export default function ActivityBar({
       iconOnly: false,
       function: () => setCurrentTab("audio-cast"),
       alignment: "horizontal",
+      layoutId: "audio-cast"
     },
     {
       icon: "/icons/light/timer.svg",
@@ -143,6 +146,7 @@ export default function ActivityBar({
       iconOnly: false,
       function: () => setCurrentTab("sleep-timer"),
       alignment: "horizontal",
+      layoutId: "sleep-timer"
     },
     {
       icon: "/icons/light/game.svg",
@@ -152,6 +156,7 @@ export default function ActivityBar({
       iconOnly: true,
       function: () => setCurrentTab("game"),
       alignment: "vertical",
+      layoutId: "game"
     },
     {
       icon: "/icons/light/accessibility.svg",
@@ -161,6 +166,7 @@ export default function ActivityBar({
       iconOnly: true,
       function: () => setCurrentTab("accessibility"),
       alignment: "vertical",
+      layoutId: "accessibility"
     },
     {
       icon: "/icons/light/child-lock.svg",
@@ -170,6 +176,7 @@ export default function ActivityBar({
       iconOnly: true,
       function: () => setCurrentTab("restrictions"),
       alignment: "vertical",
+      layoutId: "lock"
     },
     {
       icon: "/icons/light/search.svg",
@@ -179,6 +186,7 @@ export default function ActivityBar({
       iconOnly: true,
       alignment: "vertical",
       function: gotoSettings,
+      layoutId: "search"
     },
   ];
 
@@ -384,7 +392,7 @@ export default function ActivityBar({
                   {Settings.map((settings, i) => {
                     return (
                       <motion.div
-                        layoutId={settings.title}
+                        layoutId={settings.layoutId}
                         whileHover={{ scale: 1.05 }}
                         whileFocus={{ scale: 1.05 }}
                         key={i}
