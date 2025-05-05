@@ -1,9 +1,10 @@
 import { settings } from "@/data/settings";
 import { motion } from "framer-motion";
 import Image from "next/image";
-
+import {ActivityItemsWrapper} from "../activity-items-wrapper";
 export default function Settings({ settingsActionMap }: { settingsActionMap: Record<string, () => void> }) {
     return (
+        <ActivityItemsWrapper>
         <motion.div
             variants={{ open: { opacity: 1 }, closed: { opacity: 0 } }}
             initial="closed"
@@ -55,5 +56,7 @@ export default function Settings({ settingsActionMap }: { settingsActionMap: Rec
                     </motion.div>
                 );
             })}
-        </motion.div>);
+        </motion.div>
+        </ActivityItemsWrapper>
+);
 }

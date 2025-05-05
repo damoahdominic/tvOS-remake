@@ -235,7 +235,7 @@ export default function ActivityBar({
           </div>
         </motion.div>
 
-        {/* <AnimatePresence> */}
+        <AnimatePresence mode="popLayout">
   {currentTab !== "" && (
     <motion.div
       key={currentTab}
@@ -244,6 +244,7 @@ export default function ActivityBar({
       exit={{ opacity: 0, scale: 0.95}}
       transition={{ duration: 0.25 }}
       className="w-full h-full sticky top-0"
+      layout
     >
       {currentTab === "profile" && <Users />}
       {currentTab === "switch" && <Settings settingsActionMap={settingsActionMap} />}
@@ -255,7 +256,7 @@ export default function ActivityBar({
       {currentTab === "sleep-timer" && <SleepTimer onClick={() => setCurrentTab("switch")} />}
     </motion.div>
   )}
-{/* </AnimatePresence> */}
+</AnimatePresence>
 
 
         <AlertLarge
