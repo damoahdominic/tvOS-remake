@@ -87,7 +87,7 @@ export interface SettingItem {
       subTitle: "",
       iconOnly: true,
       alignment: "vertical",
-      layoutId: "lock",
+      layoutId: "restrictions",
       actionKey: "setRestrictions",
     },
     {
