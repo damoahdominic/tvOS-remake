@@ -235,14 +235,20 @@ export default function ActivityBar({
           </div>
         </motion.div>
 
+        {/* <AnimatePresence mode="wait"> */}
         <AnimatePresence mode="popLayout">
   {currentTab !== "" && (
     <motion.div
       key={currentTab}
       initial={{ opacity: 0, scale: 0.98 }}
-      animate={{ opacity: 1, scale: 1}}
-      exit={{ opacity: 0, scale: 0.95}}
-      transition={{ duration: 0.95 }}
+      animate={{ opacity: 1, scale: 1 }}
+      exit={{ opacity: 0, scale: 0.98 }}
+      transition={{ 
+        type: "spring",
+        stiffness: 200,
+        damping: 30,
+        mass: 1
+      }}
       className="w-full h-full sticky top-0"
       layout
     >
