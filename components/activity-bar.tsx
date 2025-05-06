@@ -3,7 +3,7 @@ import React, { useEffect, useState, forwardRef } from "react";
 import { motion, MotionConfig, Transition, AnimatePresence } from "framer-motion";
 import moment from "moment";
 import Image from "next/image";
-import { Plus } from "lucide-react";
+// import { Plus } from "lucide-react";
 import MusicPlayer from "./activity-bar-apps/music-player";
 import AlertLarge from "./alerts/alert-large";
 import { useLockScreen } from "@/providers/lock-screen-provider";
@@ -17,6 +17,9 @@ import waveAnimation from "@/public/lottie/wave.json";
 import waveLightAnimation from "@/public/lottie/wave-light.json";
 import dynamic from "next/dynamic";
 import { useTransitionRouter } from "next-view-transitions";
+// import { ActivityItemsWrapper } from "./activity-items-wrapper";
+import Users from "./activity-bar-items/users";
+import Settings from "./activity-bar-items/settings";
 // import ParallaxWrapper from "./parallax-wrapper";
 // import Lottie from "lottie-react";
 
@@ -28,18 +31,6 @@ const transition: Transition = {
   damping: 30
 };
 
-const Users = [
-  {
-    name: "Dominic",
-    image: "/users/dominic.png",
-    isActive: true,
-  },
-  {
-    name: "Larry",
-    image: "/users/larry.png",
-    isActive: false,
-  },
-];
 
 // Move Tabs definition and create a type
 
@@ -96,90 +87,19 @@ export default function ActivityBar({
     router.push("/settings");
   }
 
-  if(!isReady) return null
+  if (!isReady) return null
 
-  const Settings = [
-    {
-      icon: "/icons/light/power.svg",
-      iconDark: "/icons/dark/power.svg",
-      title: "Power Off",
-      subTitle: "",
-      iconOnly: false,
-      alignment: "vertical",
-      function: handlePowerOff,
-    },
-    // ... rest of the settings array
-    {
-      icon: "/icons/wifi.svg",
-      iconDark: "/icons/wifi.svg",
-      title: "Wi-Fi Starlink",
-      subTitle: "StarLink",
-      alignment: "horizontal",
-      function: gotoSettings,
-    },
-    {
-      icon: "/icons/light/dnd.svg",
-      iconDark: "/icons/dark/dnd.svg",
-      title: "Do Not Disturb",
-      subTitle: "",
-      iconOnly: false,
-      alignment: "horizontal",
-    },
-    {
-      icon: "/icons/light/audio-cast.svg",
-      iconDark: "/icons/dark/audio-cast.svg",
-      title: "Audio",
-      subTitle: "",
-      iconOnly: false,
-      function: () => setCurrentTab("audio-cast"),
-      alignment: "horizontal",
-    },
-    {
-      icon: "/icons/light/timer.svg",
-      iconDark: "/icons/dark/timer.svg",
-      title: "Sleep Timer",
-      subTitle: "",
-      iconOnly: false,
-      function: () => setCurrentTab("sleep-timer"),
-      alignment: "horizontal",
-    },
-    {
-      icon: "/icons/light/game.svg",
-      iconDark: "/icons/dark/game.svg",
-      title: "Game",
-      subTitle: "",
-      iconOnly: true,
-      function: () => setCurrentTab("game"),
-      alignment: "vertical",
-    },
-    {
-      icon: "/icons/light/accessibility.svg",
-      iconDark: "/icons/dark/accessibility.svg",
-      title: "Accessibility",
-      subTitle: "",
-      iconOnly: true,
-      function: () => setCurrentTab("accessibility"),
-      alignment: "vertical",
-    },
-    {
-      icon: "/icons/light/child-lock.svg",
-      iconDark: "/icons/dark/child-lock.svg",
-      title: "Lock",
-      subTitle: "",
-      iconOnly: true,
-      function: () => setCurrentTab("restrictions"),
-      alignment: "vertical",
-    },
-    {
-      icon: "/icons/light/search.svg",
-      iconDark: "/icons/dark/search.svg",
-      title: "Search",
-      subTitle: "",
-      iconOnly: true,
-      alignment: "vertical",
-      function: gotoSettings,
-    },
-  ];
+
+  const settingsActionMap: Record<string, () => void> = {
+    handlePowerOff: handlePowerOff,
+    gotoSettings: gotoSettings,
+    setAudioCast: () => setCurrentTab("audio-cast"),
+    setSleepTimer: () => setCurrentTab("sleep-timer"),
+    setGame: () => setCurrentTab("game"),
+    setAccessibility: () => setCurrentTab("accessibility"),
+    setRestrictions: () => setCurrentTab("restrictions"),
+  };
+
 
   const Tabs: Tab[] = [
     {
@@ -315,130 +235,35 @@ export default function ActivityBar({
           </div>
         </motion.div>
 
-        <AnimatePresence>
-          {currentTab !== "" && (
-            <motion.div
-              initial={{ opacity: 0, scale: 0.9, y: -10 }}
-              animate={{ opacity: 1, scale: 1, y: 0 }}
-              exit={{ opacity: 0, scale: 0.9, y: -10 }}
-              className="rounded-[20px] bg-white/50 dark:bg-[#1E1E1E]/50 border border-white/40 transition-[width] duration-500 text-black/40 dark:text-white/50 backdrop-blur-[50px] cursor-pointer"
-            >
-              {currentTab === "profile" ? (
-                <motion.div
-                  variants={{ open: { opacity: 1 }, closed: { opacity: 0 } }}
-                  initial="closed"
-                  animate="open"
-                  exit="closed"
-                  className="grid grid-cols-2 gap-4  p-5"
-                >
-                  {Users.map((user, i) => {
-                    return (
-                      <motion.div
-                        whileHover={{ scale: 1.05 }}
-                        whileFocus={{ scale: 1.05 }}
-                        key={i}
-                        className="relative"
-                      >
-                        <Image
-                          src={user.image}
-                          width={135}
-                          height={135}
-                          alt={user.name}
-                          className="rounded-full"
-                        />
-                        {user.isActive && (
-                          <Image
-                            src={"/icons/checkmark.svg"}
-                            width={28}
-                            height={28}
-                            alt={"active"}
-                            className="absolute top-0 right-0"
-                          />
-                        )}
+        {/* <AnimatePresence mode="wait"> */}
+        <AnimatePresence mode="popLayout">
+  {currentTab !== "" && (
+    <motion.div
+      key={currentTab}
+      initial={{ opacity: 0, scale: 0.98 }}
+      animate={{ opacity: 1, scale: 1 }}
+      exit={{ opacity: 0, scale: 0.98 }}
+      transition={{ 
+        type: "spring",
+        stiffness: 200,
+        damping: 30,
+        mass: 1
+      }}
+      className="w-full h-full sticky top-0"
+      layout
+    >
+      {currentTab === "profile" && <Users />}
+      {currentTab === "switch" && <Settings settingsActionMap={settingsActionMap} />}
+      {currentTab === "music" && <MusicPlayer />}
+      {currentTab === "restrictions" && <Restrictions onClick={() => setCurrentTab("switch")} />}
+      {currentTab === "game" && <Game onClick={() => setCurrentTab("switch")} />}
+      {currentTab === "accessibility" && <Accessibility onClick={() => setCurrentTab("switch")} />}
+      {currentTab === "audio-cast" && <AudioCast onClick={() => setCurrentTab("switch")} />}
+      {currentTab === "sleep-timer" && <SleepTimer onClick={() => setCurrentTab("switch")} />}
+    </motion.div>
+  )}
+</AnimatePresence>
 
-                        <p className="text-center">{user.name}</p>
-                      </motion.div>
-                    );
-                  })}
-
-                  <motion.div
-                    whileHover={{ scale: 1.05 }}
-                    whileFocus={{ scale: 1.05 }}
-                    className="size-[135px] bg-black/50 rounded-full flex items-center justify-center"
-                  >
-                    <Plus size={40} />
-                  </motion.div>
-                </motion.div>
-              ) : currentTab === "switch" ? (
-                <motion.div
-                  variants={{ open: { opacity: 1 }, closed: { opacity: 0 } }}
-                  initial="closed"
-                  animate="open"
-                  exit="closed"
-                  className="grid grid-cols-4 grid-rows-4 gap-3  p-5"
-                >
-                  {Settings.map((settings, i) => {
-                    return (
-                      <motion.div
-
-                        whileHover={{ scale: 1.05 }}
-                        whileFocus={{ scale: 1.05 }}
-                        key={i}
-                        className={`rounded-[15px] group px-3 flex items-center gap-2 p-2 bg-white/60 dark:bg-[#1E1E1E]/50 hover:!bg-white ${i === 0
-                          ? "col-span-2 row-span-2 aspect-square"
-                          : i === 1 || i === 2 || i === 3 || i === 4
-                            ? "col-span-2"
-                            : "col-span-1"
-                          } ${settings.alignment === "horizontal"
-                            ? "flex-row justify-start"
-                            : "flex-col justify-center"
-                          }`}
-                        onClick={settings.function ? settings.function : undefined}
-                      >
-
-                        <Image
-                          src={settings.icon}
-                          width={135}
-                          height={135}
-                          alt={settings.title}
-                          className={`${i === 0 ? "w-[65px]" : "w-[30px]"} dark:hidden block group-hover:block`}
-                        />
-
-                        <Image
-                          src={settings.iconDark}
-                          width={135}
-                          height={135}
-                          alt={settings.title}
-                          className={`${i === 0 ? "w-[65px]" : "w-[30px]"} dark:block hidden group-hover:hidden`}
-                        />
-
-                        {!settings.iconOnly && (
-                          <p className={`text-wrap leading-tight w-[80px] text-[#1E1E1E]/85 dark:text-white/80 group-hover:text-[#1E1E1E]/85 `}>
-                            {settings.title}
-                          </p>
-                        )}
-                      </motion.div>
-                    );
-                  })}
-                </motion.div>
-              ) : (
-                currentTab === "music" ? <MusicPlayer />
-                  :
-                  currentTab === "restrictions" ? <Restrictions onClick={() => setCurrentTab("switch")} />
-                    :
-                    currentTab === "game" ? <Game onClick={() => setCurrentTab("switch")} />
-                      :
-                      currentTab === "accessibility" ? <Accessibility onClick={() => setCurrentTab("switch")} />
-                        :
-                        currentTab === "audio-cast" ? <AudioCast onClick={() => setCurrentTab("switch")} />
-                          :
-                          currentTab === "sleep-timer" ? <SleepTimer onClick={() => setCurrentTab("switch")} />
-                            :
-                            null
-              )}
-            </motion.div>
-          )}
-        </AnimatePresence>
 
         <AlertLarge
           title="Sleep Now?"
