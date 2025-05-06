@@ -2,9 +2,11 @@ import { users } from "@/data/users";
 import { motion } from "framer-motion";
 import Image from "next/image";
 import { Plus } from "lucide-react";
+import { ActivityItemsWrapper } from "../activity-items-wrapper";
 
 export default function Users() {
     return (
+        <ActivityItemsWrapper animatePresence={true}>
         <motion.div
             variants={{ open: { opacity: 1 }, closed: { opacity: 0 } }}
             initial="closed"
@@ -50,5 +52,7 @@ export default function Users() {
             >
                 <Plus size={40} />
             </motion.div>
-        </motion.div>);
+        </motion.div>
+        </ActivityItemsWrapper>
+        );
 }

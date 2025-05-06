@@ -5,6 +5,7 @@ import { motion } from "framer-motion";
 import Image from "next/image";
 import { useAudio } from "@/providers/audio-provider";
 import clsx from "clsx";
+import { ActivityItemsWrapper } from "../activity-items-wrapper";
 
 // MusicPlayer component that USES the audio context but doesn't provide it
 const MusicPlayer: React.FC = () => {
@@ -35,6 +36,7 @@ const MusicPlayer: React.FC = () => {
   }
 
   return (
+    <ActivityItemsWrapper animatePresence={true}>
     <motion.div
       variants={{ open: { opacity: 1 }, closed: { opacity: 0 } }}
       initial='closed'
@@ -161,6 +163,7 @@ const MusicPlayer: React.FC = () => {
         </button>
       </div>
     </motion.div>
+    </ActivityItemsWrapper>
   );
 };
 
