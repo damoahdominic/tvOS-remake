@@ -20,7 +20,7 @@ export default function Settings({ settingsActionMap }: { settingsActionMap: Rec
                             whileHover={{ scale: 1.05 }}
                             whileFocus={{ scale: 1.05 }}
                             key={i + settings.title}
-                            className={`rounded-[15px] group px-3 flex items-center gap-2 p-2 bg-white/60 dark:bg-[#1E1E1E]/50 hover:!bg-white ${i === 0
+                            className={`rounded-[15px] group px-3 flex hover:cursor-pointer items-center gap-2 p-2 bg-white/60 dark:bg-[#1E1E1E]/50 hover:!bg-white ${i === 0
                                 ? "col-span-2 row-span-2 aspect-square"
                                 : i === 1 || i === 2 || i === 3 || i === 4
                                     ? "col-span-2"
