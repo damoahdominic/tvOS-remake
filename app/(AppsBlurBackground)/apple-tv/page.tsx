@@ -1,7 +1,7 @@
 "use client"
 
 import HomePage from '@/components/AppleTv/HomePage'
-import LibraryPage from '@/components/AppleTv/LibraryPage'
+// import LibraryPage from '@/components/AppleTv/LibraryPage'
 import SearchPage from '@/components/AppleTv/SearchPage'
 import React from 'react'
 
@@ -37,8 +37,8 @@ const Page = () => {
         <main className='relative w-full h-svh'>
             {
                 currentPage === "home" ? <HomePage />
-                    :
-                    currentPage === "library" ? <LibraryPage />
+                    // :
+                    // currentPage === "library" ? <LibraryPage />
                         :
                         <SearchPage />
             }

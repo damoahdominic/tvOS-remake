@@ -30,11 +30,11 @@ const items = [
         url: "#home",
         icon: "home.svg",
     },
-    {
-        title: "Library",
-        url: "#library",
-        icon: "stack.svg",
-    },
+    // {
+    //     title: "Library",
+    //     url: "#library",
+    //     icon: "stack.svg",
+    // },
 ]
 
 function AppleTvSideToggler({ page }: IMediaModal) {
