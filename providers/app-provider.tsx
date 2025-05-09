@@ -100,7 +100,7 @@ export function AppProvider({
                 )}
             </AnimatePresence>
 
-            <div className={`${!isLoaded ? 'opacity-0' : 'opacity-100'} transition-opacity duration-1000`}>
+            <div className={`${!isLoaded ? 'opacity-0' : 'opacity-100 z-50'} transition-opacity duration-1000`}>
                 {children}
             </div>
         </AppContext.Provider>

@@ -7,7 +7,7 @@ import React from 'react'
 
 type AppleTvPageTypes = "search" | "home" | "library"
 
-const Page = () => {
+export default function Page() {
     const [currentPage, setCurrentPage] = React.useState<AppleTvPageTypes>('home')
 
     // get the value with # in the url say #search show be return search
@@ -39,11 +39,9 @@ const Page = () => {
                 currentPage === "home" ? <HomePage />
                     // :
                     // currentPage === "library" ? <LibraryPage />
-                        :
-                        <SearchPage />
+                    :
+                    <SearchPage />
             }
         </main>
     )
 }
-
-export default Page
