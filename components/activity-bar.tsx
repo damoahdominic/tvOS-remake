@@ -237,32 +237,32 @@ export default function ActivityBar({
 
         {/* <AnimatePresence mode="wait"> */}
         <AnimatePresence mode="popLayout">
-  {currentTab !== "" && (
-    <motion.div
-      key={currentTab}
-      initial={{ opacity: 0, scale: 0.98 }}
-      animate={{ opacity: 1, scale: 1 }}
-      exit={{ opacity: 0, scale: 0.98 }}
-      transition={{ 
-        type: "spring",
-        stiffness: 200,
-        damping: 30,
-        mass: 1
-      }}
-      className="w-full h-full sticky top-0"
-      layout
-    >
-      {currentTab === "profile" && <Users />}
-      {currentTab === "switch" && <Settings settingsActionMap={settingsActionMap} />}
-      {currentTab === "music" && <MusicPlayer />}
-      {currentTab === "restrictions" && <Restrictions onClick={() => setCurrentTab("switch")} />}
-      {currentTab === "game" && <Game onClick={() => setCurrentTab("switch")} />}
-      {currentTab === "accessibility" && <Accessibility onClick={() => setCurrentTab("switch")} />}
-      {currentTab === "audio-cast" && <AudioCast onClick={() => setCurrentTab("switch")} />}
-      {currentTab === "sleep-timer" && <SleepTimer onClick={() => setCurrentTab("switch")} />}
-    </motion.div>
-  )}
-</AnimatePresence>
+          {currentTab !== "" && (
+            <motion.div
+              key={currentTab}
+              initial={{ opacity: 0, scale: 0.98 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0.98 }}
+              transition={{
+                type: "spring",
+                stiffness: 200,
+                damping: 30,
+                mass: 1
+              }}
+              className="w-full h-full sticky top-0"
+              layout
+            >
+              {currentTab === "profile" && <Users />}
+              {currentTab === "switch" && <Settings settingsActionMap={settingsActionMap} />}
+              {currentTab === "music" && <MusicPlayer />}
+              {currentTab === "restrictions" && <Restrictions onClick={() => setCurrentTab("switch")} />}
+              {currentTab === "game" && <Game onClick={() => setCurrentTab("switch")} />}
+              {currentTab === "accessibility" && <Accessibility onClick={() => setCurrentTab("switch")} />}
+              {currentTab === "audio-cast" && <AudioCast onClick={() => setCurrentTab("switch")} />}
+              {currentTab === "sleep-timer" && <SleepTimer onClick={() => setCurrentTab("switch")} />}
+            </motion.div>
+          )}
+        </AnimatePresence>
 
 
         <AlertLarge

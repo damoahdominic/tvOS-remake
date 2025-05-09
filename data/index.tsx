@@ -1,5 +1,6 @@
 import { AppleMusicBackground } from "@/components/appple-music-background";
 import Image from "next/image";
+import { motion } from "framer-motion";
 export interface AppItemType {
   appIconUrl: string;
   appName: string;
@@ -164,6 +165,11 @@ export const defaultLockScreenConfig: LockScreenConfig = {
 
 export const ALERT_DIALOG_ID = "tvos-dialog";
 
+const titleTransition = { duration: 0.45, delay: 0.5 };
+const subtitleTransition = { duration: 0.45, delay: 0.85 };
+const animate = { opacity: 1, x: 0 };
+const initial = { opacity: 0, x: -20 };
+
 export const apps: AppItemType[] = [
   {
     appIconUrl: "/apps/apple-tv.svg",
@@ -216,8 +222,8 @@ export const apps: AppItemType[] = [
         image: "/app-bg/photos/1.png",
         content: (
           <div className="relative px-10 top-[5%] gap-3 font-semibold text-white">
-            <h2 className="text-4xl">Trip to the Hamptons</h2>
-            <p className="text-xl">August 2022</p>
+            <motion.h2 initial={initial} animate={animate} transition={titleTransition} exit={initial} whileInView={animate} className="text-4xl">Trip to the Hamptons</motion.h2>
+            <motion.p initial={initial} animate={animate} transition={subtitleTransition} exit={initial} whileInView={animate} className="text-xl">August 2022</motion.p>
           </div>
         ),
       },
@@ -225,8 +231,8 @@ export const apps: AppItemType[] = [
         image: "/app-bg/photos/2.png",
         content: (
           <div className="relative px-10 top-[5%] gap-3 size-full flex-col flex items-center justify-center font-semibold text-white">
-            <h2 className="text-4xl">Trip to the Hamptons</h2>
-            <p className="text-xl">March 2024</p>
+            <motion.h2 initial={initial} animate={animate} transition={titleTransition} exit={initial} whileInView={animate} className="text-4xl">Trip to the Hamptons</motion.h2>
+            <motion.p initial={initial} animate={animate} transition={subtitleTransition} exit={initial} whileInView={animate} className="text-xl">March 2024</motion.p>
           </div>
         ),
       },
@@ -234,8 +240,8 @@ export const apps: AppItemType[] = [
         image: "/app-bg/photos/3.png",
         content: (
           <div className="relative px-10 h-full flex-col gap-3 flex justify-center font-semibold text-white">
-            <h2 className="text-4xl">Trip to the Hamptons</h2>
-            <p className="text-xl">March 2024</p>
+            <motion.h2 initial={initial} animate={animate} transition={titleTransition} exit={initial} whileInView={animate} className="text-4xl">Trip to the Hamptons</motion.h2>
+            <motion.p initial={initial} animate={animate} transition={subtitleTransition} exit={initial} whileInView={animate} className="text-xl">March 2024</motion.p>
           </div>
         ),
       },
@@ -243,8 +249,8 @@ export const apps: AppItemType[] = [
         image: "/app-bg/photos/4.png",
         content: (
           <div className="relative px-10 top-[5%] gap-3 font-semibold text-white">
-            <h2 className="text-4xl">Weekend Trip</h2>
-            <p className="text-xl">Trip to the Hamptons</p>
+            <motion.h2 initial={initial} animate={animate} transition={titleTransition} exit={initial} whileInView={animate} className="text-4xl">Weekend Trip</motion.h2>
+            <motion.p initial={initial} animate={animate} transition={subtitleTransition} exit={initial} whileInView={animate} className="text-xl">Trip to the Hamptons</motion.p>
           </div>
         ),
       },
@@ -252,8 +258,8 @@ export const apps: AppItemType[] = [
         image: "/app-bg/photos/5.png",
         content: (
           <div className="relative px-10 top-[5%] gap-3 size-full flex-col flex items-center justify-center font-semibold text-white">
-            <h2 className="text-4xl">Landscape Shots</h2>
-            <p className="text-xl">July 2023</p>
+            <motion.h2 initial={initial} animate={animate} transition={titleTransition} exit={initial} whileInView={animate} className="text-4xl">Landscape Shots</motion.h2>
+            <motion.p initial={initial} animate={animate} transition={subtitleTransition} exit={initial} whileInView={animate} className="text-xl">July 2023</motion.p>
           </div>
         ),
       },
@@ -261,8 +267,8 @@ export const apps: AppItemType[] = [
         image: "/app-bg/photos/6.png",
         content: (
           <div className="relative px-10 h-full flex-col gap-3 flex justify-center font-semibold text-white">
-            <h2 className="text-4xl">Accra Ghana</h2>
-            <p className="text-xl">December 2024</p>
+            <motion.h2 initial={initial} animate={animate} transition={titleTransition} exit={initial} whileInView={animate} className="text-4xl">Accra Ghana</motion.h2>
+            <motion.p initial={initial} animate={animate} transition={subtitleTransition} exit={initial} whileInView={animate} className="text-xl">December 2024</motion.p>
           </div>
         ),
       },

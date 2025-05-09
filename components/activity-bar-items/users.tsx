@@ -48,9 +48,9 @@ export default function Users() {
             <motion.div
                 whileHover={{ scale: 1.05 }}
                 whileFocus={{ scale: 1.05 }}
-                className="size-[135px] bg-black/50 rounded-full flex items-center justify-center"
+                    className="size-[135px] cursor-pointer bg-black/50 text-white/80 hover:bg-white hover:text-[#1e1e1e]/80 dark:hover:bg-white dark:hover:text-[#1e1e1e]/80 transition-colors duration-300 rounded-full flex items-center justify-center"
             >
-                <Plus size={40} />
+                <Plus size={45} />
             </motion.div>
         </motion.div>
         </ActivityItemsWrapper>
