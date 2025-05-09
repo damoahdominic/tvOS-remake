@@ -8,7 +8,7 @@ import Link from 'next/link';
 import moment from 'moment';
 import { Squircle } from '@squircle-js/react';
 
-interface IMediaModal {
+interface IMenu {
     page: "home" | "library" | "search"
 }
 const transition: Transition = {
@@ -37,7 +37,7 @@ const items = [
     // },
 ]
 
-function AppleTvSideToggler({ page }: IMediaModal) {
+function AppleTvSideToggler({ page }: IMenu) {
     const [time, setTime] = React.useState<Date>(new Date());
     const [showAlternativeUserView, setShowAlternativeUserView] = React.useState<boolean>(false);
     const [isReady, setIsReady] = React.useState<boolean>(false);
@@ -80,6 +80,12 @@ function AppleTvSideToggler({ page }: IMediaModal) {
         return null;
     }
 
+    const onRoute = (url: string) => {
+        if (window?.location?.hash !== url) {
+            window.location.hash = url
+        }
+    }
+
     return (
         <>
             <MotionConfig transition={transition}>
@@ -111,7 +117,7 @@ function AppleTvSideToggler({ page }: IMediaModal) {
                         </div>
                     </>}
                 </motion.div>
-                <AnimatePresence initial={false} mode='sync'>
+                <AnimatePresence initial={false} mode='popLayout'>
                     {isMenuModalOpen && (
                         <>
                             <motion.div
@@ -173,21 +179,21 @@ function AppleTvSideToggler({ page }: IMediaModal) {
                                     <div className='space-y-2'>
                                         {items.map((item) => {
                                             return (
-                                                <Squircle
-                                                    asChild
-                                                    key={item.title}
-                                                    cornerRadius={15}
-                                                    cornerSmoothing={1}
-                                                    className="w-full app-item-shadow group"
-                                                >
-                                                    <a href={item.url} className={`rounded-lg pl-2 font-[510] gap-2 flex items-center sidebar-menu-item h-[50px] ${window?.location?.hash === item.url ? "!bg-white/5" : "!bg-transparent"} hover:!bg-white hover:!text-[#1E1E1E]/85 text-white transition-all duration-300`}>
-                                                        <div className={`rounded-full size-8 bg-white/10 circle-image flex items-center justify-center`}>
-                                                            <Image src={`/apple-tv/light/${item.icon}`} alt={item.title} width={16} height={16} className='' />
-                                                            <Image src={`/apple-tv/dark/${item.icon}`} alt={item.title} width={16} height={16} className='hidden absolute circle-image-active' />
+                                                <div key={item.title}>
+                                                    <Squircle
+                                                        cornerRadius={15}
+                                                        cornerSmoothing={1}
+                                                        className="w-full app-item-shadow group"
+                                                    >
+                                                        <div onClick={() => { onRoute(item.url) }} className={`rounded-lg pl-2 font-[510] gap-2 cursor-pointer group flex items-center sidebar-menu-item h-[50px] ${window?.location?.hash === item.url ? "!bg-white/5" : "!bg-transparent"} hover:!bg-white hover:!text-[#1E1E1E]/85 text-white transition-all duration-300`}>
+                                                            <div className={`rounded-full size-8 bg-white/10 flex items-center justify-center`}>
+                                                                <Image src={`/apple-tv/light/${item.icon}`} alt={item.title} width={16} height={16} className='' />
+                                                                <Image src={`/apple-tv/dark/${item.icon}`} alt={item.title} width={16} height={16} className='hidden absolute group-hover:block' />
+                                                            </div>
+                                                            <span className="text">{item.title}</span>
                                                         </div>
-                                                        <span className="text">{item.title}</span>
-                                                    </a>
-                                                </Squircle>
+                                                    </Squircle>
+                                                </div>
                                             )
                                         })}
                                     </div>

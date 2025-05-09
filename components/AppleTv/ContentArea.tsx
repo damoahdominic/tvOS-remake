@@ -11,7 +11,7 @@ export const ContentArea: React.FC = () => {
     const currentItem = items[selectedIndex];
 
     return (
-        <div className="relative z-10 h-full flex items-center">
+        <div className="fixed top-1/3 transform -translate-y-1/2">
             <div className="max-w-lg">
                 <AnimatePresence mode="wait">
                     <motion.div
