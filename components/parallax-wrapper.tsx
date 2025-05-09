@@ -26,7 +26,6 @@ interface ParallaxWrapperProps {
   className?: string;
   maxTilt?: number; // optional customization
   perspective?: number;
-  scale?: number;
   speed?: number;
 }
 
@@ -35,7 +34,6 @@ const ParallaxWrapper: React.FC<ParallaxWrapperProps> = ({
   className = '',
   maxTilt = 15,
   perspective = 1000,
-  scale = 1.05,
   speed = 300,
 }) => {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -51,7 +49,7 @@ const ParallaxWrapper: React.FC<ParallaxWrapperProps> = ({
     const rotateX = (maxTilt / 2 - y * maxTilt).toFixed(2);
     const rotateY = (x * maxTilt - maxTilt / 2).toFixed(2);
 
-    container.style.transform = `perspective(${perspective}px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(${scale})`;
+    container.style.transform = `perspective(${perspective}px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
   };
 
   const handleMouseLeave = () => {
