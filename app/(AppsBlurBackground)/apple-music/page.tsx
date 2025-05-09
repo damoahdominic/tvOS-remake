@@ -1,12 +1,12 @@
+import AppNotAvailable from '@/components/empty-views/AppNotAvailable'
 import React from 'react'
 
 const Page = () => {
     return (
-        <div className=''>
-
+        <div>
+            <AppNotAvailable />
         </div>
     )
 }
 
 export default Page
-

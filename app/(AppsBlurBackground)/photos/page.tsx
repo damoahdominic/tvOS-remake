@@ -1,9 +1,10 @@
 import React from 'react'
+import AppNotAvailable from '@/components/empty-views/AppNotAvailable'
 
 const Page = () => {
     return (
-        <div className=''>
-
+        <div>
+            <AppNotAvailable />
         </div>
     )
 }
