@@ -4,6 +4,7 @@ import React, { createContext, useContext, useState, useEffect, ReactNode } from
 import { AnimatePresence } from 'framer-motion';
 import LockScreen from '@/components/lock-screen';
 import { LockScreenConfig, LockScreenImage } from '@/data';
+import VolumeControl from '@/components/VolumeControl';
 
 // Define context types
 interface LockScreenContextType {
@@ -99,6 +100,9 @@ export const LockScreenProvider: React.FC<LockScreenProviderProps> = ({
                         />
                     )}
                 </AnimatePresence>
+
+                <VolumeControl />
+
             </div>
         </LockScreenContext.Provider>
     );

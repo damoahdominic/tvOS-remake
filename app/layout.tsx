@@ -11,7 +11,6 @@ import { LockScreenProvider } from "@/providers/lock-screen-provider";
 import { AudioProvider } from "@/providers/audio-provider";
 import { defaultTracks } from "@/data/audio-tracks";
 import BackgroundProvider from "@/providers/background-provider";
-import { VolumeControl } from "@/components/VolumeControl";
 
 // LockScreen configuration
 const lockScreenConfig: LockScreenConfig = {
@@ -57,7 +56,6 @@ export default function RootLayout({
                       >
                         <GridNavigationProvider>
                           <BackgroundProvider>
-                            <VolumeControl />
                             {children}
                           </BackgroundProvider>
                         </GridNavigationProvider>

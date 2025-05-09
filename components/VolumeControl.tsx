@@ -5,7 +5,7 @@ import React, { useState, useEffect, useRef } from 'react';
 // import { Volume2, VolumeX, Volume1 } from 'lucide-react';
 import { useAudio } from '@/providers/audio-provider';
 
-export const VolumeControl = () => {
+export default function VolumeControl(){
     const { audioRef } = useAudio();
     const [volume, setVolume] = useState(50);
     const [isVisible, setIsVisible] = useState(false);
@@ -117,7 +117,7 @@ export const VolumeControl = () => {
 
     return (
         <div
-            className={`fixed right-0 top-1/2 transform -translate-y-1/2 flex items-center rounded-l-lg p-4 transition-all duration-300 ease-in-out ${isVisible ? 'translate-x-0' : 'translate-x-full'
+            className={`fixed !z-[99999999999] right-0 top-1/2 transform -translate-y-1/2 flex items-center rounded-l-lg p-4 transition-all duration-300 ease-in-out ${isVisible ? 'translate-x-0' : 'translate-x-full'
                 }`}
         >
             <div className="flex flex-col items-center justify-center gap-2">
