@@ -364,14 +364,7 @@ export const apps: AppItemType[] = [
     },
     backgrounds: [
       {
-        image: "/app-bg/fitness/1.png",
-        content: (
-          <div className="relative px-10 bg-black  gap-3 size-full flex-col flex items-center justify-center font-semibold text-white">
-            <p className="text-4xl">
-              Play 200+ Games. No in-App Purchases. No Ads.
-            </p>
-          </div>
-        ),
+        image: "/app-bg/arcade/1.png",
       },
     ],
   },

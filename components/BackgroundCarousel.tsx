@@ -170,9 +170,9 @@ const BackgroundCarousel = ({ focusedApp, scrolled, isExpanded }: { focusedApp: 
         return (
             <motion.div
                 key={`${app.appName}-${isSplash ? 'splash' : 'bg'}-${isCurrent ? 'current' : 'previous'}-${forceRenderKey}`}
-                initial={{ opacity: 0, x: isCurrent ? initialX : -initialX }}
+                initial={{ opacity: 0, x: isCurrent ? -initialX : initialX }}
                 animate={{ opacity: isCurrent ? 1 : 0, x: 0 }}
-                exit={{ opacity: 0, x: isCurrent ? exitX : -exitX }}
+                exit={{ opacity: 0, x: isCurrent ? -exitX : exitX }}
                 transition={{
                     duration: fadeTransitionDuration,
                     ease: [0.4, 0, 0.2, 1],
@@ -193,14 +193,14 @@ const BackgroundCarousel = ({ focusedApp, scrolled, isExpanded }: { focusedApp: 
 
                 {/* Render splash foreground if showing splash */}
                 {foregroundSrc && (
-                    <div className={`absolute top-1/4 left-1/2 transform -translate-x-1/2 -translate-y-1/4 ${scrolled ? "blur-xl" : ""}`}>
+                    <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.35, delay: 0.5, type: "tween" }} className={`absolute top-1/4 left-1/2 transform -translate-x-1/2 -translate-y-1/4 ${scrolled ? "blur-xl" : ""}`}>
                         <Image
                             src={foregroundSrc}
                             alt={`${app.appName} foreground`}
                             width={500}
                             height={500}
                         />
-                    </div>
+                    </motion.div>
                 )}
 
                 {typeof background === "object" && background.content && <div className={`relative !size-full text-7xl ${scrolled ? "blur-xl" : ""}`}>
