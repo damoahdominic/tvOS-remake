@@ -6,6 +6,11 @@ import React, { useState, useEffect, useRef } from 'react';
 const imageTransition = 8000; // 8 seconds
 const fadeTransitionDuration = 0.5; // 0.5 seconds fade transition (slower but still snappy)
 
+const titleTransition = { duration: 0.45, delay: 0.5 };
+const subtitleTransition = { duration: 0.45, delay: 0.85 };
+const animate = { opacity: 1, x: 0 };
+const initial = { opacity: 0, x: -20 };
+
 const BackgroundCarousel = ({ focusedApp, scrolled, isExpanded }: { focusedApp: AppItemType, scrolled: boolean, isExpanded: boolean }) => {
     const [hasFinishedSplash, setHasFinishedSplash] = useState(false);
     const [currentBackgroundIndex, setCurrentBackgroundIndex] = useState(0);
@@ -168,10 +173,10 @@ const BackgroundCarousel = ({ focusedApp, scrolled, isExpanded }: { focusedApp: 
                 initial={{ opacity: 0, x: isCurrent ? initialX : -initialX }}
                 animate={{ opacity: isCurrent ? 1 : 0, x: 0 }}
                 exit={{ opacity: 0, x: isCurrent ? exitX : -exitX }}
-                transition={{ 
+                transition={{
                     duration: fadeTransitionDuration,
                     ease: [0.4, 0, 0.2, 1],
-                    opacity: { 
+                    opacity: {
                         duration: fadeTransitionDuration * 0.8,
                         delay: isCurrent ? fadeTransitionDuration * 0.2 : 0 // Delay the entering animation
                     }
@@ -214,8 +219,8 @@ const BackgroundCarousel = ({ focusedApp, scrolled, isExpanded }: { focusedApp: 
                         <p className="text-7xl">Fitness for all.<br />Fitness for you.</p>
                     </div>
                     <div className="relative hidden px-10 top-[5%] gap-3 font-semibold text-white">
-                        <h2 className="text-4xl">Trip to the Hamptons</h2>
-                        <p className="text-xl">August 2022</p>
+                        <motion.h2 initial={initial} animate={animate} transition={titleTransition} exit={initial} whileInView={animate} className="text-4xl">Trip to the Hamptons</motion.h2>
+                        <motion.p initial={initial} animate={animate} transition={subtitleTransition} exit={initial} whileInView={animate} className="text-xl">August 2022</motion.p>
                     </div>
                 </div>}
             </motion.div>
@@ -245,7 +250,7 @@ const BackgroundCarousel = ({ focusedApp, scrolled, isExpanded }: { focusedApp: 
             </AnimatePresence>
 
             {/* Bottom Indicator - Only visible when expanded */}
-            {(focusedApp?.backgrounds && focusedApp?.backgrounds?.length > 1) && <div className={`absolute bottom-8 left-1/2 transform -translate-x-1/2 transition-opacity duration-500 z-50 ${isExpanded ? 'opacity-100' : 'opacity-0'
+            {(isExpanded && focusedApp?.backgrounds && focusedApp?.backgrounds?.length > 1) && <div className={`absolute bottom-8 left-1/2 transform -translate-x-1/2 transition-opacity duration-500 z-50 ${isExpanded ? 'opacity-100' : 'opacity-0'
                 }`}>
                 <div className="px-4 py-2 rounded-full backdrop-blur-md bg-black bg-opacity-30 border border-white border-opacity-20 flex items-center space-x-3">
                     {[...Array(focusedApp?.backgrounds?.length)].map((_, index) => (

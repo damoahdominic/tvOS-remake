@@ -87,7 +87,7 @@ const TVOSGrid: React.FC<TVOSGridProps> = ({
               whileHover={{ scale: 1.12 }}
               whileFocus={{ scale: 1.12 }}
               key={app.id || `app-${row}-${col}`}
-              className={cn("transition-all duration-300 ", {
+              className={cn("transition-all duration-300 focus:!outline-none focus-visible:outline-none focus-visible:ring-0", {
                 "": focused,
               })}
             >

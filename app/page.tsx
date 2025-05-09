@@ -6,6 +6,7 @@ import ActivityBar from "@/components/activity-bar"
 import TVOSGrid from "@/components/TVOSGrid"
 import useGridNavigation from "@/hooks/useGridNavigation"
 import { ModeToggle } from "@/components/mode-toggle"
+import { useAppContext } from "@/providers/app-provider"
 
 // Simple focus position debugger component
 function FocusDebugger({ position }: { position: { row: number; col: number } }) {
@@ -34,7 +35,7 @@ function FocusDebugger({ position }: { position: { row: number; col: number } })
 
 export default function Home() {
     const [scrolled, setScrolled] = useState(false)
-    const [isExpanded, setIsExpanded] = useState(false);
+    const {isFullscreen,setIsFullscreen} = useAppContext()
 
 
     // Direct grid navigation - no activity bar integration for simplicity
@@ -68,7 +69,7 @@ export default function Home() {
             switch (e.key) {
                 case "Escape":
                     console.log("Escape");
-                    if (isExpanded) {
+                    if (isFullscreen) {
                         toggleExpansion();
                     }
                     break;
@@ -83,16 +84,16 @@ export default function Home() {
             document.removeEventListener("keydown", handleKeyDown);
         };
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [isExpanded]);
+    }, [isFullscreen]);
 
     const toggleExpansion = () => {
-        setIsExpanded(!isExpanded);
+        setIsFullscreen(!isFullscreen);
     };
 
     return (
         <div className="relative min-h-screen overflow-hidden">
             {/* Activity Bar Component */}
-            <ActivityBar isExpanded={isExpanded} />
+            <ActivityBar isExpanded={isFullscreen} />
 
 
             {/* TVOSGrid with direct grid navigation for simplicity */}
@@ -101,15 +102,14 @@ export default function Home() {
                 rowCount={3}
                 toggleExpansion={toggleExpansion}
                 colCount={6}
-                isExpanded={isExpanded}
+                isExpanded={isFullscreen}
                 scrolled={scrolled}
                 isFocused={isFocused}
                 getFocusRef={getFocusRef}
             />
 
-
-
             <ModeToggle />
+            
             {/* Debug focus position */}
             <FocusDebugger position={focusedPosition} />
         </div>

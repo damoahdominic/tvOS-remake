@@ -2,8 +2,7 @@
 import { useDialogContext } from "@/providers/dialog-provider";
 import React, { useState, useEffect, useCallback, useRef } from "react";
 import { AppItemType, apps } from "@/data";
-import { usePathname, useRouter } from "next/navigation";
-import { useGridNavigationContext } from "@/providers/grid-navigation-provider";
+import { useRouter } from "next/navigation";
 
 interface Position {
   row: number;
@@ -11,17 +10,19 @@ interface Position {
 }
 
 interface UseGridNavigationReturn {
-  focusedPosition: Position;
+  focusedPosition: {
+    row: number;
+    col: number;
+  };
   isFocused: (row: number, col: number) => boolean;
   getFocusRef: (
     row: number,
     col: number
   ) => React.RefObject<HTMLButtonElement> | null;
-  setFocusedPosition: (position: Position) => void;
 }
 
 // Add this helper at the top of the file
-const isBrowser = typeof window !== "undefined";
+const isBrowser = typeof window !== 'undefined';
 
 export default function useGridNavigation(
   rowCount: number,
@@ -30,8 +31,12 @@ export default function useGridNavigation(
   initialCol: number = 0
 ): UseGridNavigationReturn {
   const router = useRouter();
-  const { focusedPosition, setFocusedPosition } = useGridNavigationContext();
-  const pathname = usePathname();
+  // Current focused position (using 0-based indexing internally)
+  const [focusedPosition, setFocusedPosition] = useState<Position>({
+    row: initialRow,
+    col: initialCol,
+  });
+
   const dockApps = apps.slice(0, 6); // Get first 6 apps
 
   // Create a 2D array of refs to store references to all the app items
@@ -40,7 +45,7 @@ export default function useGridNavigation(
   // Track the last focused button to help with debugging
   const lastFocusedButton = useRef<HTMLButtonElement | null>(null);
 
-  // Track the last Active Dock App
+  // Track the last Active Dock App 
   const [lastActiveDockApp, setLastActiveDockApp] =
     useState<AppItemType | null>(null);
 
@@ -61,6 +66,10 @@ export default function useGridNavigation(
   }, [rowCount, colCount]);
 
   useEffect(() => {
+    // TODO: lastActiveDockApp should be made into a zustand store variable
+    // if lastActiveDockApp is null, then we should set it to the current dock app
+    // if lastActiveDockApp is not null, then we should set it to the current dock app
+
     if (focusedPosition.row === 0 && focusedPosition.col < dockApps.length) {
       const currentDockApp = dockApps[focusedPosition.col];
       setLastActiveDockApp(currentDockApp);
@@ -142,7 +151,8 @@ export default function useGridNavigation(
       window.removeEventListener("keydown", handleBackNavigation);
       window.removeEventListener("popstate", () => { });
     };
-  }, [router, lastActiveDockApp, setFocusedPosition]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [router, lastActiveDockApp]);
 
   // Handle smooth scrolling based on row position
   const scrollToRow = useCallback((row: number, direction: "up" | "down") => {
@@ -174,114 +184,114 @@ export default function useGridNavigation(
   }, []);
 
   // This is the updated handleKeyDown function for your existing hook
+  // Import DialogContext at the top of your file:
+  // import { useDialogContext } from '../context/DialogContext';
+
+  // Inside your useGridNavigation hook:
   const { isDialogOpen } = useDialogContext();
 
   // Then update your existing handleKeyDown function:
   const handleKeyDown = useCallback(
     (e: KeyboardEvent) => {
       // Skip navigation when dialog is open
-      if (isDialogOpen || !isBrowser || pathname.includes("/")) {
+      if (isDialogOpen) {
         return;
       }
 
       if (["w", "a", "s", "d", "enter"].includes(e.key.toLowerCase())) {
         e.preventDefault();
 
-        let newRow = focusedPosition.row;
-        let newCol = focusedPosition.col;
-        let shouldUpdateFocus = false;
-        let scrollDirection: "up" | "down" | null = null;
+        setFocusedPosition((prev) => {
+          let newRow = prev.row;
+          let newCol = prev.col;
+          let shouldUpdateFocus = false;
+          let scrollDirection: "up" | "down" | null = null;
 
-        switch (e.key.toLowerCase()) {
-          case "w": // Up
-            if (focusedPosition.row > 0) {
-              newRow = focusedPosition.row - 1;
-              shouldUpdateFocus = true;
-              scrollDirection = "up";
-              scrollToRow(newRow, scrollDirection);
-            }
-            break;
-          case "a": // Left
-            if (focusedPosition.col > 0) {
-              newCol = focusedPosition.col - 1;
-              shouldUpdateFocus = true;
-            }
-            break;
-          case "s": // Down
-            if (focusedPosition.row < rowCount - 1) {
-              newRow = focusedPosition.row + 1;
-              shouldUpdateFocus = true;
-              scrollDirection = "down";
-              scrollToRow(newRow, scrollDirection);
-            }
-            break;
-          case "d": // Right
-            if (focusedPosition.col < colCount - 1) {
-              newCol = focusedPosition.col + 1;
-              shouldUpdateFocus = true;
-            }
-            break;
-          case "enter": // trigger click
-            const elementById = document.getElementById(
-              `app-${newRow}-${newCol}`
-            );
-            if (elementById) {
-              elementById.click();
-            }
-            break;
-        }
-
-        // Only update if position changed
-        if (shouldUpdateFocus) {
-          // IMPORTANT: Clear previous focus FIRST
-          if (lastFocusedButton.current) {
-            lastFocusedButton.current.blur();
-
-            // Remove any focus-related classes
-            lastFocusedButton.current.classList.remove("focused-item");
-
-            // If you're using data attributes for focus state
-            lastFocusedButton.current.removeAttribute("data-focused");
-          }
-
-          // Wait for the blur to take effect
-          setTimeout(() => {
-            // Focus the element at the new position
-            const targetRef = appRefs.current[newRow]?.[newCol];
-            if (targetRef?.current) {
-              targetRef.current.focus();
-
-              // Add any focus-related classes
-              targetRef.current.classList.add("focused-item");
-
-              // Store the new focused button
-              lastFocusedButton.current = targetRef.current;
-
-              console.log(`Focused element at row=${newRow} col=${newCol}`);
-
-              // Apply scrolling if needed
-              if (scrollDirection) {
+          switch (e.key.toLowerCase()) {
+            case "w": // Up
+              if (prev.row > 0) {
+                newRow = prev.row - 1;
+                shouldUpdateFocus = true;
+                scrollDirection = "up";
                 scrollToRow(newRow, scrollDirection);
               }
-            } else {
-              console.warn(`No element found at row=${newRow} col=${newCol}`);
-            }
-          }, 10); // Shorter timeout should be sufficient
+              break;
+            case "a": // Left
+              if (prev.col > 0) {
+                newCol = prev.col - 1;
+                shouldUpdateFocus = true;
+              }
+              break;
+            case "s": // Down
+              if (prev.row < rowCount - 1) {
+                newRow = prev.row + 1;
+                shouldUpdateFocus = true;
+                scrollDirection = "down";
+                scrollToRow(newRow, scrollDirection);
+              }
+              break;
+            case "d": // Right
+              if (prev.col < colCount - 1) {
+                newCol = prev.col + 1;
+                shouldUpdateFocus = true;
+              }
+              break;
+            case "enter": // trigger click
+              const elementById = document.getElementById(
+                `app-${newRow}-${newCol}`
+              );
+              if (elementById) {
+                elementById.click();
+              }
+              break;
+          }
 
-          // Update focus position directly
-          setFocusedPosition({ row: newRow, col: newCol });
-        }
+          // Only update if position changed
+          if (shouldUpdateFocus) {
+            // IMPORTANT: Clear previous focus FIRST
+            if (lastFocusedButton.current) {
+              lastFocusedButton.current.blur();
+
+              // Remove any focus-related classes
+              lastFocusedButton.current.classList.remove("focused-item");
+
+              // If you're using data attributes for focus state
+              lastFocusedButton.current.removeAttribute("data-focused");
+            }
+
+            // Wait for the blur to take effect
+            setTimeout(() => {
+              // Focus the element at the new position
+              const targetRef = appRefs.current[newRow]?.[newCol];
+              if (targetRef?.current) {
+                targetRef.current.focus();
+
+                // Add any focus-related classes
+                targetRef.current.classList.add("focused-item");
+
+                // Store the new focused button
+                lastFocusedButton.current = targetRef.current;
+
+                console.log(`Focused element at row=${newRow} col=${newCol}`);
+
+                // Apply scrolling if needed
+                if (scrollDirection) {
+                  scrollToRow(newRow, scrollDirection);
+                }
+              } else {
+                console.warn(`No element found at row=${newRow} col=${newCol}`);
+              }
+            }, 10); // Shorter timeout should be sufficient
+
+            return { row: newRow, col: newCol };
+          }
+
+          return prev;
+        });
       }
     },
-    [
-      rowCount,
-      colCount,
-      scrollToRow,
-      isDialogOpen,
-      setFocusedPosition,
-      focusedPosition,
-    ]
-  );
+    [rowCount, colCount, scrollToRow, isDialogOpen]
+  ); // Add isDialogOpen to dependency array
 
   // Set up and clean up event listeners
   useEffect(() => {
@@ -335,6 +345,5 @@ export default function useGridNavigation(
     focusedPosition: focusedPositionOneIndexed,
     isFocused,
     getFocusRef,
-    setFocusedPosition,
   };
 }

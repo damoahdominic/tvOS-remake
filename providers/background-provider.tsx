@@ -3,12 +3,13 @@ import BackgroundCarousel from '@/components/BackgroundCarousel';
 import { apps } from '@/data';
 import useGridNavigation from '@/hooks/useGridNavigation';
 import React, { useEffect, useState } from 'react'
+import { useAppContext } from './app-provider';
 
 const BackgroundProvider = ({
     children,
 }: Readonly<{ children: React.ReactNode }>) => {
     const [scrolled, setScrolled] = useState(false)
-    const [isExpanded, setIsExpanded] = useState(false);
+    const { isFullscreen } = useAppContext()
 
 
     // Direct grid navigation - no activity bar integration for simplicity
@@ -44,7 +45,7 @@ const BackgroundProvider = ({
 
     return (
         <>
-            <BackgroundCarousel scrolled={scrolled} focusedApp={focusedApp} isExpanded={isExpanded} />
+            <BackgroundCarousel scrolled={scrolled} focusedApp={focusedApp} isExpanded={isFullscreen} />
             {children}
         </>
     )

@@ -10,11 +10,15 @@ import { AppItemType } from "@/data";
 interface AppContextType {
     isLoaded: boolean;
     loadingProgress: number;
+    isFullscreen: boolean;
+    setIsFullscreen: (isFullscreen: boolean) => void;
 }
 
 const AppContext = createContext<AppContextType>({
     isLoaded: false,
-    loadingProgress: 0
+    loadingProgress: 0,
+    isFullscreen: false,
+    setIsFullscreen: () => {},
 });
 
 export function AppProvider({
@@ -27,6 +31,7 @@ export function AppProvider({
     const [isLoaded, setIsLoaded] = useState(false);
     const [minBootTimeElapsed, setMinBootTimeElapsed] = useState(false);
     const preloaderStatus = useImagePreloader(appData, 6); // Preload first 6 apps
+    const [isFullscreen, setIsFullscreen] = useState(false);
 
     const pathname = usePathname();
     const router = useTransitionRouter();
@@ -83,6 +88,8 @@ export function AppProvider({
     return (
         <AppContext.Provider value={{
             isLoaded,
+            isFullscreen,
+            setIsFullscreen,
             loadingProgress: preloaderStatus.progress
         }}>
             <AnimatePresence>

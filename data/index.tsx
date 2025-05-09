@@ -398,7 +398,7 @@ export const apps: AppItemType[] = [
     appIconUrl: "/apps/apple-podcast.svg",
     appName: "Apple Podcast",
     href: "/apple-podcast",
-    shouldShowAppName: false,
+    shouldShowAppName: true,
     hasSplashScreen: true,
     splash: {
       background: "/app-bg/podcast/splash-bg.png",
@@ -457,7 +457,7 @@ export const apps: AppItemType[] = [
     appIconUrl: "/apps/fitness.svg",
     appName: "Fitness",
     href: "/fitness",
-    shouldShowAppName: false,
+    shouldShowAppName: true,
     hasSplashScreen: false,
     backgrounds: [
       {

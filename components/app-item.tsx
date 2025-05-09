@@ -5,7 +5,7 @@ import Image from "next/image";
 import { Squircle } from "@squircle-js/react";
 import { cn } from "@/lib/utils";
 import { AppContextMenuContext } from "@/providers/context-menu-provider";
-import useGridNavigation from "@/hooks/useGridNavigation";
+// import useGridNavigation from "@/hooks/useGridNavigation";
 import ParallaxWrapper from "./parallax-wrapper";
 
 interface Props {
@@ -37,7 +37,7 @@ const AppItem = memo(
     ) => {
       const router = useTransitionRouter();
       const { openContextMenu } = useContext(AppContextMenuContext);
-      const { setFocusedPosition } = useGridNavigation(3, 6, 0, 0);
+      // const { setFocusedPosition } = useGridNavigation(3, 6, 0, 0);
 
       // Add debugging for focus issues
       React.useEffect(() => {
@@ -57,7 +57,7 @@ const AppItem = memo(
       // Handle hover to update focus
       const handleMouseEnter = () => {
         if (typeof row === "number" && typeof col === "number") {
-          setFocusedPosition({ row, col });
+          // setFocusedPosition({ row, col });
           console.log({ row, col })
         }
       };
