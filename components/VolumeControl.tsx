@@ -2,17 +2,22 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 "use client"
 import React, { useState, useEffect, useRef } from 'react';
-// import { Volume2, VolumeX, Volume1 } from 'lucide-react';
+import { Volume2, VolumeX, Volume1 } from 'lucide-react';
 import { useAudio } from '@/providers/audio-provider';
+import { motion } from 'framer-motion';
 
-export default function VolumeControl(){
+export default function VolumeControl() {
     const { audioRef } = useAudio();
     const [volume, setVolume] = useState(50);
     const [isVisible, setIsVisible] = useState(false);
     // const [isChanging, setIsChanging] = useState(false);
     const timeoutRef = useRef<any>(null);
+    const [isAtLimit, setIsAtLimit] = useState(false);
+    const [limitDirection, setLimitDirection] = useState<'min' | 'max' | null>(null);
     const [isMuted, setIsMuted] = useState(false);
     const previousVolumeRef = useRef(50);
+    const [numberOfClicks, setNumberOfClicks] = useState(0);
+    const [showLarge, setShowLarge] = useState(true);
 
     // Initialize volume value based on audio element
     useEffect(() => {
@@ -24,7 +29,7 @@ export default function VolumeControl(){
     }, [audioRef]);
 
     useEffect(() => {
-        const handleKeyDown = (e:any) => {
+        const handleKeyDown = (e: any) => {
             if (e.key === '+' || e.key === '=') {
                 handleVolumeChange(Math.min(volume + 5, 100));
             } else if (e.key === '-' || e.key === '_') {
@@ -38,9 +43,39 @@ export default function VolumeControl(){
         return () => window.removeEventListener('keydown', handleKeyDown);
     }, [volume, isMuted]);
 
-    const handleVolumeChange = (newVolume:any) => {
+    useEffect(() => {
+        if (numberOfClicks === 1) {
+            setShowLarge(true);
+        } else {
+            setShowLarge(false);
+        }
+    }, [numberOfClicks]);
+
+    const handleVolumeChange = (newVolume: any) => {
         setVolume(newVolume);
         setIsVisible(true);
+        setNumberOfClicks((prevClicks) => prevClicks + 1);
+
+        if(newVolume === 0) {
+            setIsAtLimit(true);
+            setLimitDirection('min');
+            setTimeout(() => {
+                setIsAtLimit(false);
+                setLimitDirection(null);
+            }, 300);
+        } else if(newVolume === 100) {
+            setIsAtLimit(true);
+            setLimitDirection("max");
+            setTimeout(() => {
+                setIsAtLimit(false);
+                setLimitDirection(null);
+            }, 300);
+        }
+        else {
+            setIsAtLimit(false);
+            setLimitDirection(null);
+        }
+
         // setIsChanging(true);
 
         // Apply the volume to the audio element
@@ -67,6 +102,9 @@ export default function VolumeControl(){
             // setIsChanging(false);
             setTimeout(() => {
                 setIsVisible(false);
+            }, 300); // Match the transition time
+            setTimeout(() => {
+                setNumberOfClicks(0);
             }, 300); // Match the transition time
         }, 2000);
     };
@@ -109,11 +147,11 @@ export default function VolumeControl(){
         }
     };
 
-    // const getVolumeIcon = () => {
-    //     if (isMuted || volume === 0) return <VolumeX className="text-white" />;
-    //     if (volume < 50) return <Volume1 className="text-white" />;
-    //     return <Volume2 className="text-white" />;
-    // };
+    const getVolumeIcon = () => {
+        if (isMuted || volume === 0) return <VolumeX className="size-6 text-[#1e1e1e]" />;
+        if (volume < 50) return <Volume1 className="size-6 text-[#1e1e1e]" />;
+        return <Volume2 className="size-6 text-[#1e1e1e]" />;
+    };
 
     return (
         <div
@@ -127,7 +165,7 @@ export default function VolumeControl(){
                 >
                     {getVolumeIcon()}
                 </button> */}
-                <div className="relative h-48 w-2 bg-black/30 rounded-full overflow-hidden">
+                <motion.div animate={{ width: showLarge ? '32px' : isAtLimit ? '4px' : '8px', top: (!showLarge && isAtLimit) ? (limitDirection === 'max' ? '-2svh' : '2svh') : '0' }} className={`relative h-[40svh] bg-black/30 rounded-full overflow-hidden`}>
                     <div
                         className="absolute bottom-0 w-full bg-white transition-all duration-300 ease-in-out"
                         style={{ height: isMuted ? '0%' : `${volume}%` }}
@@ -139,7 +177,12 @@ export default function VolumeControl(){
                             handleVolumeChange(Math.round(percentage));
                         }}
                     />
-                </div>
+
+                    {showLarge &&
+                        <div className='absolute bottom-2 w-full z-10 flex items-center justify-center transition-all duration-300 ease-in-out'>
+                            {getVolumeIcon()}
+                        </div>}
+                </motion.div>
                 {/* <span className="text-white text-sm font-medium mt-1">
                     {isMuted ? 'Muted' : `${volume}%`}
                 </span> */}
