@@ -165,8 +165,8 @@ export const defaultLockScreenConfig: LockScreenConfig = {
 
 export const ALERT_DIALOG_ID = "tvos-dialog";
 
-const titleTransition = { duration: 0.45, delay: 0.5 };
-const subtitleTransition = { duration: 0.45, delay: 0.85 };
+const titleTransition = { duration: 0.45, delay: 1 };
+const subtitleTransition = { duration: 0.45, delay: 1.35 };
 const animate = { opacity: 1, x: 0 };
 const initial = { opacity: 0, x: -20 };
 
@@ -221,54 +221,54 @@ export const apps: AppItemType[] = [
       {
         image: "/app-bg/photos/1.png",
         content: (
-          <div className="relative px-10 top-[5%] gap-3 font-semibold text-white">
-            <motion.h2 initial={initial} animate={animate} transition={titleTransition} exit={initial} whileInView={animate} className="text-4xl">Trip to the Hamptons</motion.h2>
-            <motion.p initial={initial} animate={animate} transition={subtitleTransition} exit={initial} whileInView={animate} className="text-xl">August 2022</motion.p>
+          <div className="relative px-10 top-[5%] gap-5 font-semibold text-white">
+            <motion.h2 initial={initial} animate={animate} transition={titleTransition} exit={initial} className="text-4xl">Trip to the Hamptons</motion.h2>
+            <motion.p initial={initial} animate={animate} transition={subtitleTransition} exit={initial} className="text-xl">August 2022</motion.p>
           </div>
         ),
       },
       {
         image: "/app-bg/photos/2.png",
         content: (
-          <div className="relative px-10 top-[5%] gap-3 size-full flex-col flex items-center justify-center font-semibold text-white">
-            <motion.h2 initial={initial} animate={animate} transition={titleTransition} exit={initial} whileInView={animate} className="text-4xl">Trip to the Hamptons</motion.h2>
-            <motion.p initial={initial} animate={animate} transition={subtitleTransition} exit={initial} whileInView={animate} className="text-xl">March 2024</motion.p>
+          <div className="relative px-10 top-[5%] gap-5 size-full flex-col flex items-center justify-center font-semibold text-white">
+            <motion.h2 initial={initial} animate={animate} transition={titleTransition} exit={initial} className="text-4xl">Trip to the Hamptons</motion.h2>
+            <motion.p initial={initial} animate={animate} transition={subtitleTransition} exit={initial} className="text-xl">March 2024</motion.p>
           </div>
         ),
       },
       {
         image: "/app-bg/photos/3.png",
         content: (
-          <div className="relative px-10 h-full flex-col gap-3 flex justify-center font-semibold text-white">
-            <motion.h2 initial={initial} animate={animate} transition={titleTransition} exit={initial} whileInView={animate} className="text-4xl">Trip to the Hamptons</motion.h2>
-            <motion.p initial={initial} animate={animate} transition={subtitleTransition} exit={initial} whileInView={animate} className="text-xl">March 2024</motion.p>
+          <div className="relative px-10 h-full flex-col gap-5 flex justify-center font-semibold text-white">
+            <motion.h2 initial={initial} animate={animate} transition={titleTransition} exit={initial} className="text-4xl">Trip to the Hamptons</motion.h2>
+            <motion.p initial={initial} animate={animate} transition={subtitleTransition} exit={initial} className="text-xl">March 2024</motion.p>
           </div>
         ),
       },
       {
         image: "/app-bg/photos/4.png",
         content: (
-          <div className="relative px-10 top-[5%] gap-3 font-semibold text-white">
-            <motion.h2 initial={initial} animate={animate} transition={titleTransition} exit={initial} whileInView={animate} className="text-4xl">Weekend Trip</motion.h2>
-            <motion.p initial={initial} animate={animate} transition={subtitleTransition} exit={initial} whileInView={animate} className="text-xl">Trip to the Hamptons</motion.p>
+          <div className="relative px-10 top-[5%] gap-5 font-semibold text-white">
+            <motion.h2 initial={initial} animate={animate} transition={titleTransition} exit={initial} className="text-4xl">Weekend Trip</motion.h2>
+            <motion.p initial={initial} animate={animate} transition={subtitleTransition} exit={initial} className="text-xl">Trip to the Hamptons</motion.p>
           </div>
         ),
       },
       {
         image: "/app-bg/photos/5.png",
         content: (
-          <div className="relative px-10 top-[5%] gap-3 size-full flex-col flex items-center justify-center font-semibold text-white">
-            <motion.h2 initial={initial} animate={animate} transition={titleTransition} exit={initial} whileInView={animate} className="text-4xl">Landscape Shots</motion.h2>
-            <motion.p initial={initial} animate={animate} transition={subtitleTransition} exit={initial} whileInView={animate} className="text-xl">July 2023</motion.p>
+          <div className="relative px-10 top-[5%] gap-5 size-full flex-col flex items-center justify-center font-semibold text-white">
+            <motion.h2 initial={initial} animate={animate} transition={titleTransition} exit={initial} className="text-4xl">Landscape Shots</motion.h2>
+            <motion.p initial={initial} animate={animate} transition={subtitleTransition} exit={initial} className="text-xl">July 2023</motion.p>
           </div>
         ),
       },
       {
         image: "/app-bg/photos/6.png",
         content: (
-          <div className="relative px-10 h-full flex-col gap-3 flex justify-center font-semibold text-white">
-            <motion.h2 initial={initial} animate={animate} transition={titleTransition} exit={initial} whileInView={animate} className="text-4xl">Accra Ghana</motion.h2>
-            <motion.p initial={initial} animate={animate} transition={subtitleTransition} exit={initial} whileInView={animate} className="text-xl">December 2024</motion.p>
+          <div className="relative px-10 h-full flex-col gap-5 flex justify-center font-semibold text-white">
+            <motion.h2 initial={initial} animate={animate} transition={titleTransition} exit={initial} className="text-4xl">Accra Ghana</motion.h2>
+            <motion.p initial={initial} animate={animate} transition={subtitleTransition} exit={initial} className="text-xl">December 2024</motion.p>
           </div>
         ),
       },
@@ -474,7 +474,7 @@ export const apps: AppItemType[] = [
       {
         image: "/app-bg/fitness/2.png",
         content: (
-          <div className="relative top-[5%] gap-3 size-full flex-col flex items-center justify-center font-semibold text-white">
+          <div className="relative top-[5%] gap-5 size-full flex-col flex items-center justify-center font-semibold text-white">
             <Image
               src={"/apps/foreground/fitness.svg"}
               width={168}
@@ -488,7 +488,7 @@ export const apps: AppItemType[] = [
       {
         image: "/app-bg/fitness/3.png",
         content: (
-          <div className="relative top-[5%] gap-3 size-full flex-col flex items-center justify-center font-semibold text-white">
+          <div className="relative top-[5%] gap-5 size-full flex-col flex items-center justify-center font-semibold text-white">
             <Image
               src={"/apps/foreground/fitness.svg"}
               width={168}

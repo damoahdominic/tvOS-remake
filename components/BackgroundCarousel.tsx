@@ -1,21 +1,27 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { AppItemType, apps } from '@/data';
 import { AnimatePresence, motion } from 'framer-motion';
 import Image from 'next/image';
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, cloneElement, isValidElement } from 'react';
 
 const imageTransition = 8000; // 8 seconds
-const fadeTransitionDuration = 0.5; // 0.5 seconds fade transition (slower but still snappy)
+const fadeTransitionDuration = 0.5; // 0.5 seconds fade transition
 
+// Define these outside to avoid recreating on each render
 const titleTransition = { duration: 0.45, delay: 0.5 };
 const subtitleTransition = { duration: 0.45, delay: 0.85 };
 const animate = { opacity: 1, x: 0 };
 const initial = { opacity: 0, x: -20 };
+const exit = { opacity: 0, x: -20 };
 
 const BackgroundCarousel = ({ focusedApp, scrolled, isExpanded }: { focusedApp: AppItemType, scrolled: boolean, isExpanded: boolean }) => {
     const [hasFinishedSplash, setHasFinishedSplash] = useState(false);
     const [currentBackgroundIndex, setCurrentBackgroundIndex] = useState(0);
     const [isTransitioning, setIsTransitioning] = useState(false);
     const [transitionDirection, setTransitionDirection] = useState<'left' | 'right'>('right');
+
+    // Animation trigger counter - incremented whenever we want to restart animations
+    const [animationTrigger, setAnimationTrigger] = useState(0);
 
     // Track the previous app and position for transitions
     const previousAppRef = useRef<AppItemType | null>(null);
@@ -65,6 +71,9 @@ const BackgroundCarousel = ({ focusedApp, scrolled, isExpanded }: { focusedApp: 
             // Force a re-render to ensure splash screens show correctly
             setForceRenderKey(prev => prev + 1);
 
+            // Increment animation trigger to restart animations
+            setAnimationTrigger(prev => prev + 1);
+
             // Start transition
             setIsTransitioning(true);
 
@@ -90,6 +99,9 @@ const BackgroundCarousel = ({ focusedApp, scrolled, isExpanded }: { focusedApp: 
                 // Only transition to backgrounds if the app has backgrounds
                 if (focusedApp.backgrounds && focusedApp.backgrounds.length > 0) {
                     setHasFinishedSplash(true);
+
+                    // Increment animation trigger to restart animations
+                    setAnimationTrigger(prev => prev + 1);
                 }
             }, 4000);
 
@@ -97,6 +109,9 @@ const BackgroundCarousel = ({ focusedApp, scrolled, isExpanded }: { focusedApp: 
         } else {
             // No splash screen, show backgrounds immediately
             setHasFinishedSplash(true);
+
+            // Increment animation trigger to restart animations
+            setAnimationTrigger(prev => prev + 1);
         }
     }, [focusedApp]);
 
@@ -118,6 +133,11 @@ const BackgroundCarousel = ({ focusedApp, scrolled, isExpanded }: { focusedApp: 
         return () => clearInterval(intervalId);
     }, [focusedApp, hasFinishedSplash]);
 
+    // Trigger animation restart when background index changes
+    useEffect(() => {
+        // Increment animation trigger to restart animations
+        setAnimationTrigger(prev => prev + 1);
+    }, [currentBackgroundIndex]);
 
     // Helper function to determine what image source to use
     const getImageSource = (app: AppItemType, isCurrent: boolean = true): {
@@ -146,6 +166,82 @@ const BackgroundCarousel = ({ focusedApp, scrolled, isExpanded }: { focusedApp: 
         };
     };
 
+    // Function to recursively clone and add keys to motion elements
+    const deepCloneWithKeys = (element: React.ReactNode, keyPrefix: string): React.ReactNode => {
+        if (!isValidElement(element)) {
+            return element;
+        }
+
+        const elementType:any = element.type;
+        const isMotionElement =
+            typeof elementType === 'object' &&
+            elementType !== null &&
+            'displayName' in elementType &&
+            elementType.displayName?.includes('Motion');
+        
+        const props:any = element.props;
+
+        // Clone children recursively
+        const newChildren = React.Children.map(props.children, child =>
+            deepCloneWithKeys(child, `${keyPrefix}-child-${Math.random().toString(36).substr(2, 9)}`)
+        );
+
+        // For motion elements, enforce animations by adding our animation trigger
+        if (isMotionElement) {
+            return cloneElement(element, {
+                ...props,
+                key: `${keyPrefix}-${animationTrigger}`,
+                children: newChildren,
+                initial: props.initial || initial,
+                animate: props.animate || animate,
+                exit: props.exit || exit,
+                // Don't override existing transitions but ensure there is one
+                transition: props.transition ||
+                    (element.type === motion.h2 ? titleTransition :
+                        element.type === motion.p ? subtitleTransition :
+                            { duration: 0.4 })
+            });
+        }
+
+        // For non-motion elements, just clone with new children
+        return cloneElement(element, {
+            ...props,
+            key: `${keyPrefix}-${animationTrigger}`,
+            children: newChildren
+        });
+    };
+
+    // Function to render background content with proper animation
+    const renderBackgroundContent = (background: any, indexInArray: number) => {
+        if (typeof background !== "object" || !background.content) {
+            return null;
+        }
+
+        // Create a unique key for this content based on multiple factors
+        const contentKey = `content-${focusedApp.appName}-${indexInArray}-${animationTrigger}`;
+
+        return (
+            <div
+                key={contentKey}
+                className={`relative size-full text-7xl ${scrolled ? "blur-xl" : ""}`}
+            >
+                <AnimatePresence mode="wait">
+                    <motion.div
+                        key={`content-wrapper-${contentKey}`}
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        exit={{ opacity: 0 }}
+                        transition={{ duration: 0.3 }}
+                        className="w-full h-full"
+                    >
+                        {/* Recursively clone the content with proper keys */}
+                        {deepCloneWithKeys(background.content, `bg-content-${indexInArray}`)}
+                    </motion.div>
+                </AnimatePresence>
+            </div>
+        );
+    };
+
     // Helper function to render a background image with motion
     const renderBackground = (app: AppItemType, isCurrent: boolean = true) => {
         const { background, foregroundSrc, isSplash } = getImageSource(app, isCurrent);
@@ -154,7 +250,7 @@ const BackgroundCarousel = ({ focusedApp, scrolled, isExpanded }: { focusedApp: 
             // If no background image found, render a fallback black background
             return (
                 <motion.div
-                    key={`${app.appName}-fallback-${isCurrent ? 'current' : 'previous'}`}
+                    key={`${app.appName}-fallback-${isCurrent ? 'current' : 'previous'}-${animationTrigger}`}
                     initial={{ opacity: 0 }}
                     animate={{ opacity: isCurrent ? 1 : 0 }}
                     exit={{ opacity: 0 }}
@@ -167,9 +263,14 @@ const BackgroundCarousel = ({ focusedApp, scrolled, isExpanded }: { focusedApp: 
         const initialX = transitionDirection === 'right' ? -15 : 15;
         const exitX = transitionDirection === 'right' ? 15 : -15;
 
+        // Find the index of this background in the array (for proper keying)
+        const backgroundIndex = typeof background === "object" && app.backgrounds
+            ? app.backgrounds.findIndex(bg => bg === background)
+            : -1;
+
         return (
             <motion.div
-                key={`${app.appName}-${isSplash ? 'splash' : 'bg'}-${isCurrent ? 'current' : 'previous'}-${forceRenderKey}`}
+                key={`${app.appName}-${isSplash ? 'splash' : 'bg'}-${backgroundIndex}-${isCurrent ? 'current' : 'previous'}-${animationTrigger}-${forceRenderKey}`}
                 initial={{ opacity: 0, x: isCurrent ? -initialX : initialX }}
                 animate={{ opacity: isCurrent ? 1 : 0, x: 0 }}
                 exit={{ opacity: 0, x: isCurrent ? -exitX : exitX }}
@@ -188,12 +289,18 @@ const BackgroundCarousel = ({ focusedApp, scrolled, isExpanded }: { focusedApp: 
                     height={1000}
                     src={typeof background === "string" ? background : background.image}
                     alt={`${app.appName} background`}
-                    className={`fixed inset-0 w-full h-svh object-cover ${scrolled ? "blur-xl" : ""}`}
+                    className={`fixed inset-0 w-full h-svh object-cover transition-all duration-300 ${scrolled ? "blur-xl" : ""}`}
                 />
 
                 {/* Render splash foreground if showing splash */}
                 {foregroundSrc && (
-                    <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.35, delay: 0.5, type: "tween" }} className={`absolute top-1/4 left-1/2 transform -translate-x-1/2 -translate-y-1/4 ${scrolled ? "blur-xl" : ""}`}>
+                    <motion.div
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        exit={{ opacity: 0 }}
+                        transition={{ duration: 0.35, delay: 0.5, type: "tween" }}
+                        className={`absolute top-1/4 left-1/2 transform -translate-x-1/2 -translate-y-1/4 ${scrolled ? "blur-xl" : ""}`}
+                    >
                         <Image
                             src={foregroundSrc}
                             alt={`${app.appName} foreground`}
@@ -203,30 +310,12 @@ const BackgroundCarousel = ({ focusedApp, scrolled, isExpanded }: { focusedApp: 
                     </motion.div>
                 )}
 
-                {typeof background === "object" && background.content && <div className={`relative !size-full text-7xl ${scrolled ? "blur-xl" : ""}`}>
-                    {background.content}
-                    <div className="relative px-10 top-[7%] left-[3%] hidden">
-                        <Image src={"/apps/foreground/severance.svg"} width={368} height={61} alt={"severance"} />
-                    </div>
-                    <div className="relative px-10 size-full items-center hidden justify-center">
-                        <Image src={"/apps/foreground/apple-tv.svg"} className="absolute top-[3%] left-[4%]" width={200} height={61} alt={"severance"} />
-                        <div className="size-full flex items-center justify-center">
-                            <Image src={"/apps/foreground/dom-n-larry.svg"} className="pb-20" width={400} height={61} alt={"severance"} />
-                        </div>
-                    </div>
-                    <div className="hidden relative top-[2%] gap-3 size-full flex-col items-center justify-center font-semibold text-white">
-                        <Image src={"/apps/foreground/fitness.svg"} width={168} height={61} alt={"fitness"} />
-                        <p className="text-7xl">Fitness for all.<br />Fitness for you.</p>
-                    </div>
-                    <div className="relative hidden px-10 top-[5%] gap-3 font-semibold text-white">
-                        <motion.h2 initial={initial} animate={animate} transition={titleTransition} exit={initial} whileInView={animate} className="text-4xl">Trip to the Hamptons</motion.h2>
-                        <motion.p initial={initial} animate={animate} transition={subtitleTransition} exit={initial} whileInView={animate} className="text-xl">August 2022</motion.p>
-                    </div>
-                </div>}
+                {/* Render content if it exists - use our improved function with index */}
+                {typeof background === "object" && background.content &&
+                    renderBackgroundContent(background, backgroundIndex >= 0 ? backgroundIndex : currentBackgroundIndex)}
             </motion.div>
         );
     };
-
 
     // If no focused app, show a default background
     if (!focusedApp) {
@@ -250,22 +339,27 @@ const BackgroundCarousel = ({ focusedApp, scrolled, isExpanded }: { focusedApp: 
             </AnimatePresence>
 
             {/* Bottom Indicator - Only visible when expanded */}
-            {(isExpanded && focusedApp?.backgrounds && focusedApp?.backgrounds?.length > 1) && <div className={`absolute bottom-8 left-1/2 transform -translate-x-1/2 transition-opacity duration-500 z-50 ${isExpanded ? 'opacity-100' : 'opacity-0'
-                }`}>
-                <div className="px-4 py-2 rounded-full backdrop-blur-md bg-black bg-opacity-30 border border-white border-opacity-20 flex items-center space-x-3">
-                    {[...Array(focusedApp?.backgrounds?.length)].map((_, index) => (
-                        <div
-                            key={index}
-                            className={`w-2 h-2 rounded-full ${currentBackgroundIndex === index
-                                ? 'bg-white'
-                                : 'bg-white opacity-40'
-                                } cursor-pointer`}
-                            onClick={() => setCurrentBackgroundIndex(index)}
-                        />
-                    ))}
+            {(isExpanded && focusedApp?.backgrounds && focusedApp?.backgrounds?.length > 1) && (
+                <div className={`absolute bottom-8 left-1/2 transform -translate-x-1/2 transition-opacity duration-500 z-50 ${isExpanded ? 'opacity-100' : 'opacity-0'
+                    }`}>
+                    <div className="px-4 py-2 rounded-full backdrop-blur-md bg-black bg-opacity-30 border border-white border-opacity-20 flex items-center space-x-3">
+                        {[...Array(focusedApp?.backgrounds?.length)].map((_, index) => (
+                            <div
+                                key={`indicator-${index}`}
+                                className={`w-2 h-2 rounded-full ${currentBackgroundIndex === index
+                                        ? 'bg-white'
+                                        : 'bg-white opacity-40'
+                                    } cursor-pointer`}
+                                onClick={() => {
+                                    setCurrentBackgroundIndex(index);
+                                    // Increment animation trigger to restart animations
+                                    setAnimationTrigger(prev => prev + 1);
+                                }}
+                            />
+                        ))}
+                    </div>
                 </div>
-            </div>}
-            {/* App information overlay could be added here */}
+            )}
         </div>
     );
 };
