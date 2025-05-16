@@ -236,6 +236,23 @@ const BackgroundCarousel = ({ focusedApp, scrolled, isExpanded }: { focusedApp: 
                     >
                         {/* Recursively clone the content with proper keys */}
                         {deepCloneWithKeys(background.content, `bg-content-${indexInArray}`)}
+                        <div className="relative px-10 top-[7%] left-[3%] hidden">
+                            <Image src={"/apps/foreground/severance.svg"} width={368} height={61} alt={"severance"} />
+                        </div>
+                        <div className="relative px-10 size-full items-center hidden justify-center">
+                            <Image src={"/apps/foreground/apple-tv.svg"} className="absolute top-[3%] left-[4%]" width={200} height={61} alt={"severance"} />
+                            <div className="size-full flex items-center justify-center">
+                                <Image src={"/apps/foreground/dom-n-larry.svg"} className="pb-20" width={400} height={61} alt={"severance"} />
+                            </div>
+                        </div>
+                        <div className="hidden relative top-[2%] gap-3 size-full flex-col items-center justify-center font-semibold text-white">
+                            <Image src={"/apps/foreground/fitness.svg"} width={168} height={61} alt={"fitness"} />
+                            <p className="text-7xl">Fitness for all.<br />Fitness for you.</p>
+                        </div>
+                        <div className="relative hidden px-10 top-[5%] gap-3 font-semibold text-white">
+                            <motion.h2 initial={initial} animate={animate} transition={titleTransition} exit={initial} whileInView={animate} className="text-4xl">Trip to the Hamptons</motion.h2>
+                            <motion.p initial={initial} animate={animate} transition={subtitleTransition} exit={initial} whileInView={animate} className="text-xl">August 2022</motion.p>
+                        </div>
                     </motion.div>
                 </AnimatePresence>
             </div>
