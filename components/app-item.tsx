@@ -6,8 +6,8 @@ import { Squircle } from "@squircle-js/react";
 import { cn } from "@/lib/utils";
 import { AppContextMenuContext } from "@/providers/context-menu-provider";
 // import useGridNavigation from "@/hooks/useGridNavigation";
-import ParallaxWrapper from "./parallax-wrapper";
-
+// import ParallaxWrapper from "./parallax-wrapper";
+import Atropos from 'atropos/react';
 interface Props {
   shouldShowAppName: boolean;
   appIconUrl: string;
@@ -77,7 +77,15 @@ const AppItem = memo(
             // { "bg-black/30 backdrop-blur-md shadow-black/30": focused && shouldShowAppName }
           )}
         >
-          <ParallaxWrapper>
+          <Atropos
+            activeOffset={focused ? 0 : 40}
+            shadowScale={1.05}
+            shadow={false}
+            stretchZ={50}
+            rotateYInvert={true}
+            rotateXInvert={true}
+            innerClassName={"!bg-transparent rounded-[30px]"}
+          >
             <Squircle
               asChild
               cornerRadius={30}
@@ -94,7 +102,7 @@ const AppItem = memo(
                 />
               </motion.div>
             </Squircle>
-          </ParallaxWrapper>
+          </Atropos>
           {shouldShowAppName && focused && <div className="transition-all duration-500 absolute -z-10 top-[0%] app-item-shadow left-0 w-full h-1/2 bg-black/5 backdrop-blur-sm rounded-full"></div>}
 
           {shouldShowAppName && <motion.span

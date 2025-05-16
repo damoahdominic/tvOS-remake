@@ -83,9 +83,8 @@ const TVOSGrid: React.FC<TVOSGridProps> = ({
 
           rowItems.push(
             <motion.div
-              animate={{ scale: focused ? 1.12 : 1 }}
-              whileHover={{ scale: 1.12 }}
-              whileFocus={{ scale: 1.12 }}
+              animate={{ scale: focused ? 1.10 : 1 }}
+              whileFocus={{ scale: 1.10 }}
               key={app.id || `app-${row}-${col}`}
               className={cn("transition-all duration-300 focus:!outline-none focus-visible:outline-none focus-visible:ring-0", {
                 "": focused,
