@@ -78,8 +78,7 @@ const AppItem = memo(
           )}
         >
           <Atropos
-            activeOffset={focused ? 0 : 40}
-            shadowScale={1.05}
+            activeOffset={focused ? 0 : 70}
             shadow={false}
             stretchZ={50}
             rotateYInvert={true}
