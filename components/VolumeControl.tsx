@@ -155,7 +155,7 @@ export default function VolumeControl() {
 
     return (
         <div
-            className={`fixed !z-[99999999999] right-0 top-1/2 transform -translate-y-1/2 flex items-center rounded-l-lg p-4 transition-all duration-300 ease-in-out ${isVisible ? 'translate-x-0' : 'translate-x-full'
+            className={`fixed !z-[99999999999] right-0 top-1/2 transform -translate-y-1/2 flex items-center p-4 transition-all duration-300 ease-in-out ${isVisible ? 'translate-x-0' : 'translate-x-full'
                 }`}
         >
             <div className="flex flex-col items-center justify-center gap-2">
@@ -165,7 +165,7 @@ export default function VolumeControl() {
                 >
                     {getVolumeIcon()}
                 </button> */}
-                <motion.div animate={{ width: showLarge ? '32px' : isAtLimit ? '4px' : '8px', top: (!showLarge && isAtLimit) ? (limitDirection === 'max' ? '-2svh' : '2svh') : '0' }} className={`relative h-[40svh] bg-black/30 rounded-full overflow-hidden`}>
+                <motion.div animate={{ width: showLarge ? '32px' : isAtLimit ? '4px' : '8px', top: (!showLarge && isAtLimit) ? (limitDirection === 'max' ? '-2svh' : '2svh') : '0' }} className={`relative h-[40svh] bg-black/30 rounded-xl overflow-hidden`}>
                     <div
                         className="absolute bottom-0 w-full bg-white transition-all duration-300 ease-in-out"
                         style={{ height: isMuted ? '0%' : `${volume}%` }}
