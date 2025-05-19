@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import 'atropos/css'
+import 'atropos/css'//
+import '@marcreichel/apple-tv-card/dist/main.css';
 import { ViewTransitions } from "next-view-transitions";
 import { ThemeProvider } from "@/providers/theme-provider";
 import { AppProvider } from "@/providers/app-provider";

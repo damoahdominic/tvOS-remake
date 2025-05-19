@@ -2,12 +2,13 @@ import React, { forwardRef, memo, useContext } from "react";
 import { motion } from "framer-motion";
 import { useTransitionRouter } from "next-view-transitions";
 import Image from "next/image";
-import { Squircle } from "@squircle-js/react";
+// import { Squircle } from "@squircle-js/react";
 import { cn } from "@/lib/utils";
 import { AppContextMenuContext } from "@/providers/context-menu-provider";
 // import useGridNavigation from "@/hooks/useGridNavigation";
 // import ParallaxWrapper from "./parallax-wrapper";
-import Atropos from 'atropos/react';
+// import Atropos from 'atropos/react';
+import DynamicAppleTVCard from "../components/DynamicAppleTVCard"
 interface Props {
   shouldShowAppName: boolean;
   appIconUrl: string;
@@ -77,10 +78,12 @@ const AppItem = memo(
             // { "bg-black/30 backdrop-blur-md shadow-black/30": focused && shouldShowAppName }
           )}
         >
-          <Atropos
+          {/* <Atropos
             activeOffset={focused ? 0 : 70}
             shadow={false}
             stretchZ={50}
+            stretchY={20} 
+            stretchX={20} 
             rotateYInvert={true}
             rotateXInvert={true}
             innerClassName={"!bg-transparent rounded-[30px]"}
@@ -102,6 +105,7 @@ const AppItem = memo(
               </motion.div>
             </Squircle>
           </Atropos>
+         
           {shouldShowAppName && focused && <div className="transition-all duration-500 absolute -z-10 top-[0%] app-item-shadow left-0 w-full h-1/2 bg-black/5 backdrop-blur-sm rounded-full"></div>}
 
           {shouldShowAppName && <motion.span
@@ -113,7 +117,22 @@ const AppItem = memo(
             animate={{ y: 0 }}
           >
             {appName}
-          </motion.span>}
+          </motion.span>} */}
+
+          <DynamicAppleTVCard
+            title={appName}
+            backgroundImage={appIconUrl}
+            shouldShowName={shouldShowAppName}
+          >
+            <div className={`aspect-video w-full relative`}>
+              <Image
+                src={appIconUrl}
+                alt={`${appName}`}
+                className="w-full h-full object-cover"
+                fill
+              />
+            </div>
+          </DynamicAppleTVCard>
         </motion.button>
       );
     }

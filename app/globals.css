@@ -2,7 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-
 @font-face {
     font-family: 'CompactRounded';
     src: url('../public/fonts/SF-Compact-Rounded-Medium.otf') format('opentype');
