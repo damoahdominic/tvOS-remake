@@ -172,7 +172,9 @@ function AppleTvSideToggler({ page }: IMenu) {
 
                                             <div className="cursor-pointer">
                                                 <h2 className="text-xs font-semibold text-white/70">Dominic</h2>
-                                                <p className="text-xs text-white/70 hover:underline underline-offset-4">Switch User</p>
+                                                <Link href="/">
+                                                    <p className="text-xs text-white/70 hover:underline underline-offset-4">Go Back</p>
+                                                </Link>
                                             </div>
                                         </motion.div>
                                     </div>
