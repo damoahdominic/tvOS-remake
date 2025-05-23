@@ -89,7 +89,9 @@ const AppItem = memo(
           </DynamicAppleTVCard> */}
           <AppleTVCard
             title={appName}
+            autoSize={true}
             backgroundImage={appIconUrl}
+            shouldShowTitle={shouldShowAppName}
             onClick={() => router.push(href)}
           />
         </motion.button>

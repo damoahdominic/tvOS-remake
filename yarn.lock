@@ -2840,10 +2840,10 @@ queue-microtask@^1.2.2:
   resolved "https://registry.yarnpkg.com/queue-microtask/-/queue-microtask-1.2.3.tgz#4929228bbc724dfac43e0efb058caf7b6cfb6243"
   integrity sha512-NuaNSa6flKT5JaSYQzJok04JzTL1CA6aGhv5rfLW3PgqA+M2ChpZQnAC8h8i4ZFkBS8X5RqkDBHA7r4hej3K9A==
 
-react-apple-tv-card@^1.0.0:
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/react-apple-tv-card/-/react-apple-tv-card-1.0.0.tgz#3e5522524246af0bc567bf221d075ecd1cf84659"
-  integrity sha512-IUkFS1pPSgF1R0RykdObsAOuZl8V/pDLVKhM7sSfWIe2e4qhNJuC8SdpbAqiHUDHT0UMJhA5mw6NxkDB/20ukw==
+react-apple-tv-card@1.0.2:
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/react-apple-tv-card/-/react-apple-tv-card-1.0.2.tgz#390f9f16c8acd99cf102b619c3de2a6b6acccd1e"
+  integrity sha512-VGKA5otMCZWpSvWZm0xOoNXHyHvEimGQ/sV0JFYLjLCsHqRI3M9tds4/kAxhCkGvfGib8Y/p/1+E//MJgdxQjQ==
 
 react-dom@^18.2.0:
   version "18.3.1"
