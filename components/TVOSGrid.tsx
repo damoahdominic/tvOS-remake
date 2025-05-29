@@ -1,5 +1,4 @@
 import React, { useCallback, useEffect, useState } from "react";
-import useGridNavigation from "@/hooks/useGridNavigation";
 import AppItem from "./app-item";
 import { motion } from "framer-motion";
 import { Squircle } from "@squircle-js/react";
@@ -21,8 +20,10 @@ interface TVOSGridProps {
   isExpanded?: boolean;
   scrolled?: boolean;
   toggleExpansion: () => void;
-  isFocused?: (row: number, col: number) => boolean;
-  getFocusRef?: (
+  isFocused: (row: number, col: number) => boolean;
+  setFocusedPosition: (position: { row: number; col: number }) => void;
+  setLastFocusedPosition: (position: { row: number; col: number }) => void;
+  getFocusRef: (
     row: number,
     col: number
   ) => React.RefObject<HTMLButtonElement> | null;
@@ -47,16 +48,11 @@ const TVOSGrid: React.FC<TVOSGridProps> = ({
   scrolled,
   toggleExpansion,
   isExpanded,
-  isFocused: externalIsFocused,
-  getFocusRef: externalGetFocusRef,
+  isFocused,
+  getFocusRef,
+  setFocusedPosition,
+  setLastFocusedPosition,
 }) => {
-  // Use internal navigation if external props aren't provided
-  const { isFocused: internalIsFocused, getFocusRef: internalGetFocusRef } =
-    useGridNavigation(rowCount, colCount, 0, 0);
-
-  // Use either external or internal navigation functions
-  const isFocused = externalIsFocused || internalIsFocused;
-  const getFocusRef = externalGetFocusRef || internalGetFocusRef;
 
   const [isPreparing, setIsPreparing] = useState(true);
   const [gridItems, setGridItems] = useState<
@@ -99,6 +95,8 @@ const TVOSGrid: React.FC<TVOSGridProps> = ({
                 id={app.id}
                 ref={ref}
                 col={col}
+                setFocusedPosition={setFocusedPosition}
+                setLastFocusedPosition={setLastFocusedPosition}
                 row={row}
                 focused={focused}
               />
@@ -115,7 +113,7 @@ const TVOSGrid: React.FC<TVOSGridProps> = ({
     }
 
     return { firstRow, rest };
-  }, [apps, colCount, rowCount, isFocused, getFocusRef]);
+  }, [apps, colCount, rowCount, isFocused, getFocusRef, setFocusedPosition]);
 
   useEffect(() => {
     console.log(

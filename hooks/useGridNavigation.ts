@@ -3,6 +3,7 @@ import { useDialogContext } from "@/providers/dialog-provider";
 import React, { useState, useEffect, useCallback, useRef } from "react";
 import { AppItemType, apps } from "@/data";
 import { useRouter } from "next/navigation";
+import { useAppContext } from "@/providers/app-provider";
 
 interface Position {
   row: number;
@@ -19,6 +20,7 @@ interface UseGridNavigationReturn {
     row: number,
     col: number
   ) => React.RefObject<HTMLButtonElement> | null;
+  setFocusedPosition: (position: Position) => void;
 }
 
 // Add this helper at the top of the file
@@ -31,6 +33,8 @@ export default function useGridNavigation(
   initialCol: number = 0
 ): UseGridNavigationReturn {
   const router = useRouter();
+  
+  const {setLastFocusedPosition} = useAppContext();
   // Current focused position (using 0-based indexing internally)
   const [focusedPosition, setFocusedPosition] = useState<Position>({
     row: initialRow,
@@ -70,6 +74,7 @@ export default function useGridNavigation(
     // if lastActiveDockApp is null, then we should set it to the current dock app
     // if lastActiveDockApp is not null, then we should set it to the current dock app
 
+    setLastFocusedPosition(focusedPosition);
     if (focusedPosition.row === 0 && focusedPosition.col < dockApps.length) {
       const currentDockApp = dockApps[focusedPosition.col];
       setLastActiveDockApp(currentDockApp);
@@ -84,7 +89,7 @@ export default function useGridNavigation(
         );
       }
     }
-  }, [focusedPosition, dockApps, lastActiveDockApp]);
+  }, [focusedPosition, dockApps, lastActiveDockApp, setLastFocusedPosition]);
 
   // Add an effect to handle the back/escape navigation
   useEffect(() => {
@@ -345,5 +350,6 @@ export default function useGridNavigation(
     focusedPosition: focusedPositionOneIndexed,
     isFocused,
     getFocusRef,
+    setFocusedPosition,
   };
 }

@@ -14,6 +14,8 @@ interface Props {
   row?: number;
   focused?: boolean;
   isFolder?: boolean;
+  setFocusedPosition: (position: { row: number; col: number }) => void;
+  setLastFocusedPosition: (position: { row: number; col: number }) => void;
 }
 
 // Use both forwardRef and memo to prevent unnecessary re-renders
@@ -28,10 +30,11 @@ const AppItem = memo(
         col,
         row,
         focused,
+        setFocusedPosition,
+        setLastFocusedPosition
       },
       ref
     ) => {
-      console.log("🚀 ~ shouldShowAppName:", shouldShowAppName)
 
       const router = useTransitionRouter();
       const { openContextMenu } = useContext(AppContextMenuContext);
@@ -55,10 +58,12 @@ const AppItem = memo(
       // Handle hover to update focus
       const handleMouseEnter = () => {
         if (typeof row === "number" && typeof col === "number") {
-          // setFocusedPosition({ row, col });
+          setFocusedPosition({ row, col });
+          setLastFocusedPosition({ row, col });
           console.log({ row, col })
         }
       };
+      console.log("🚀 ~ row === 0:", row === 0)
 
       return (
         <motion.button
@@ -90,9 +95,13 @@ const AppItem = memo(
           <AppleTVCard
             title={appName}
             autoSize={true}
+            withShadow={row === 0 ? false : true}
             backgroundImage={appIconUrl}
             shouldShowTitle={shouldShowAppName}
-            onClick={() => router.push(href)}
+            onClick={() => {
+              setLastFocusedPosition({ row: row || 0, col: col || 0 });
+              router.push(href)
+            }}
           />
         </motion.button>
       );

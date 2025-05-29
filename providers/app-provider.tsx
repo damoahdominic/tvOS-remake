@@ -1,5 +1,5 @@
 "use client"
-import { createContext, useContext, useEffect, ReactNode, useState } from "react";
+import { createContext, useContext, useEffect, ReactNode, useState, Dispatch, SetStateAction } from "react";
 import { usePathname } from "next/navigation";
 import { useTransitionRouter } from 'next-view-transitions'
 import BootSequence from "@/components/boot-sequence";
@@ -12,13 +12,20 @@ interface AppContextType {
     loadingProgress: number;
     isFullscreen: boolean;
     setIsFullscreen: (isFullscreen: boolean) => void;
+    lastFocusedPosition: { row: number, col: number }
+    setLastFocusedPosition: Dispatch<SetStateAction<{
+        row: number;
+        col: number;
+    }>>
 }
 
 const AppContext = createContext<AppContextType>({
     isLoaded: false,
     loadingProgress: 0,
     isFullscreen: false,
-    setIsFullscreen: () => {},
+    setIsFullscreen: () => { },
+    lastFocusedPosition: { row: 1, col: 1 },
+    setLastFocusedPosition:() => {}
 });
 
 export function AppProvider({
@@ -32,6 +39,8 @@ export function AppProvider({
     const [minBootTimeElapsed, setMinBootTimeElapsed] = useState(false);
     const preloaderStatus = useImagePreloader(appData, 6); // Preload first 6 apps
     const [isFullscreen, setIsFullscreen] = useState(false);
+    const [lastFocusedPosition, setLastFocusedPosition] = useState<{ row: number; col: number }>({ row: 1, col: 1 });
+    console.log("🚀 ~ lastFocusedPosition:", lastFocusedPosition)
 
     const pathname = usePathname();
     const router = useTransitionRouter();
@@ -90,6 +99,8 @@ export function AppProvider({
             isLoaded,
             isFullscreen,
             setIsFullscreen,
+            setLastFocusedPosition,
+            lastFocusedPosition,
             loadingProgress: preloaderStatus.progress
         }}>
             <AnimatePresence>

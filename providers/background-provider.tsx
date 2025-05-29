@@ -1,7 +1,6 @@
 "use client"
 import BackgroundCarousel from '@/components/BackgroundCarousel';
 import { apps } from '@/data';
-import useGridNavigation from '@/hooks/useGridNavigation';
 import React, { useEffect, useState } from 'react'
 import { useAppContext } from './app-provider';
 
@@ -13,7 +12,8 @@ const BackgroundProvider = ({
 
 
     // Direct grid navigation - no activity bar integration for simplicity
-    const { focusedPosition } = useGridNavigation(3, 6, 0, 0);
+    const { lastFocusedPosition } = useAppContext()
+    console.log("🚀 ~ lastFocusedPosition:", lastFocusedPosition)
     const [focusedApp, setFocusedApp] = useState(apps[0]);
 
     // Handle scroll events with debounce
@@ -38,10 +38,10 @@ const BackgroundProvider = ({
     }, []);
 
     useEffect(() => {
-        if (focusedPosition.row === 1) {
-            setFocusedApp(apps[focusedPosition.col - 1]);
+        if (lastFocusedPosition.row === 0) {
+            setFocusedApp(apps[lastFocusedPosition.col]);
         }
-    }, [focusedPosition]);
+    }, [lastFocusedPosition]);
 
     return (
         <>
