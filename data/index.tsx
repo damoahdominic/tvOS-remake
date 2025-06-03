@@ -208,6 +208,41 @@ export const apps: AppItemType[] = [
     ],
   },
   {
+    appIconUrl: "/apps/arcade.svg",
+    appName: "Arcade",
+    href: "/arcade",
+    shouldShowAppName: false,
+    hasSplashScreen: true,
+    splash: {
+      background: "/app-bg/arcade/splash-bg.png",
+      foreground: "/app-bg/arcade/splash-fg.svg",
+    },
+    // backgrounds: [
+    //   {
+    //     image: "/app-bg/arcade/1.png",
+    //   },
+    // ],
+  },
+  {
+    appIconUrl: "/apps/settings.svg",
+    appName: "Settings",
+    href: "/settings",
+    hasSplashScreen: false,
+    shouldShowAppName: false,
+    backgrounds: [
+      {
+        image: "/app-bg/fitness/1.png",
+        content: (
+          <div className="relative px-10 bg-black  gap-3 size-full flex-col flex items-center justify-center font-semibold text-white">
+            <p className="text-4xl">
+              Play 200+ Games. No in-App Purchases. No Ads.
+            </p>
+          </div>
+        ),
+      },
+    ],
+  },
+  {
     appIconUrl: "/apps/photos.svg",
     appName: "Photos",
     href: "/photos",
@@ -274,7 +309,6 @@ export const apps: AppItemType[] = [
       },
     ],
   },
-  
   {
     appIconUrl: "/apps/apple-music.svg",
     appName: "Apple Music",
@@ -338,55 +372,21 @@ export const apps: AppItemType[] = [
       background: "/app-bg/store/splash-bg.png",
       foreground: "/app-bg/store/splash-fg.svg",
     },
-    backgrounds: [
-      {
-        image: "/app-bg/fitness/1.png",
-        content: (
-          <div className="relative px-10 bg-black  gap-3 size-full flex-col flex items-center justify-center font-semibold text-white">
-            <p className="text-4xl">
-              Play 200+ Games. No in-App Purchases. No Ads.
-            </p>
-          </div>
-        ),
-      },
-    ],
+    // backgrounds: [
+    //   {
+    //     image: "/app-bg/fitness/1.png",
+    //     content: (
+    //       <div className="relative px-10 bg-black  gap-3 size-full flex-col flex items-center justify-center font-semibold text-white">
+    //         <p className="text-4xl">
+    //           Play 200+ Games. No in-App Purchases. No Ads.
+    //         </p>
+    //       </div>
+    //     ),
+    //   },
+    // ],
     shouldShowAppName: false,
   },
-  {
-    appIconUrl: "/apps/arcade.svg",
-    appName: "Arcade",
-    href: "/arcade",
-    shouldShowAppName: false,
-    hasSplashScreen: true,
-    splash: {
-      background: "/app-bg/arcade/splash-bg.png",
-      foreground: "/app-bg/arcade/splash-fg.svg",
-    },
-    backgrounds: [
-      {
-        image: "/app-bg/arcade/1.png",
-      },
-    ],
-  },
-  {
-    appIconUrl: "/apps/settings.svg",
-    appName: "Settings",
-    href: "/settings",
-    hasSplashScreen: false,
-    shouldShowAppName: false,
-    backgrounds: [
-      {
-        image: "/app-bg/fitness/1.png",
-        content: (
-          <div className="relative px-10 bg-black  gap-3 size-full flex-col flex items-center justify-center font-semibold text-white">
-            <p className="text-4xl">
-              Play 200+ Games. No in-App Purchases. No Ads.
-            </p>
-          </div>
-        ),
-      },
-    ],
-  },
+
   {
     appIconUrl: "/apps/apple-podcast.svg",
     appName: "Apple Podcast",

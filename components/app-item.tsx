@@ -30,7 +30,6 @@ const AppItem = memo(
         col,
         row,
         focused,
-        setFocusedPosition,
         setLastFocusedPosition
       },
       ref
@@ -38,7 +37,6 @@ const AppItem = memo(
 
       const router = useTransitionRouter();
       const { openContextMenu } = useContext(AppContextMenuContext);
-      // const { setFocusedPosition } = useGridNavigation(3, 6, 0, 0);
 
       // Add debugging for focus issues
       React.useEffect(() => {
@@ -58,8 +56,8 @@ const AppItem = memo(
       // Handle hover to update focus
       const handleMouseEnter = () => {
         if (typeof row === "number" && typeof col === "number") {
-          setFocusedPosition({ row, col });
-          setLastFocusedPosition({ row, col });
+          // setFocusedPosition({ row, col });
+          // setLastFocusedPosition({ row, col });
           console.log({ row, col })
         }
       };
@@ -78,20 +76,6 @@ const AppItem = memo(
             "relative group rounded-t-[80px] transition-all duration-500 grid focusable-apps w-full",
           )}
         >
-          {/* <DynamicAppleTVCard
-            title={appName}
-            backgroundImage={appIconUrl}
-            shouldShowName={shouldShowAppName}
-          >
-            <div className={`aspect-video w-full relative`}>
-              <Image
-                src={appIconUrl}
-                alt={`${appName}`}
-                className="w-full h-full object-cover"
-                fill
-              />
-            </div>
-          </DynamicAppleTVCard> */}
           <AppleTVCard
             title={appName}
             autoSize={true}
