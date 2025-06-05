@@ -1,23 +1,18 @@
 import { settings } from "@/data/settings";
 import { motion } from "framer-motion";
 import Image from "next/image";
-import { ActivityItemsWrapper } from "../activity-items-wrapper";
-import dndAnimation from "@/public/lottie/DND.json";
 import { useState } from "react";
-import dynamic from "next/dynamic";
-
-const Lottie = dynamic(() => import("lottie-react"), {})
 
 export default function Settings({ settingsActionMap }: { settingsActionMap: Record<string, () => void> }) {
     const [toggleDND, setToggleDND] = useState(true);
 
     return (
-        <ActivityItemsWrapper animatePresence={true}>
+        <div className="activity-bar-item-bg">
             <motion.div
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
-                transition={{ duration: 2 }}
+                transition={{ duration: 0.4 }}
                 className="grid grid-cols-4 grid-rows-4 gap-3 p-5"
             >
                 {settings.map((settings, i) => {
@@ -77,9 +72,23 @@ export default function Settings({ settingsActionMap }: { settingsActionMap: Rec
                                         />
                                     </motion.div>
                                     :
-                                    <div className={`${i === 0 ? "w-[65px]" : "w-[35px]"} `}>
-                                        <Lottie animationData={dndAnimation} start={100} loop={false} />
-                                    </div>
+                                    <motion.div animate={{ opacity: 1 }} initial={{ opacity: 0 }} transition={{ duration: 0.35 }}>
+                                        <Image
+                                            src={settings.iconDark}
+                                            width={135}
+                                            height={135}
+                                            alt={settings.title}
+                                            className={`${i === 0 ? "w-[65px]" : "w-[35px]"} dark:hidden block group-hover:block bg-black rounded-full`}
+                                        />
+
+                                        <Image
+                                            src={settings.iconDark}
+                                            width={135}
+                                            height={135}
+                                            alt={settings.title}
+                                            className={`${i === 0 ? "w-[65px]" : "w-[35px]"} dark:block hidden group-hover:hidden bg-black rounded-full`}
+                                        />
+                                    </motion.div>
                             }
 
                             {!settings.iconOnly && (
@@ -91,6 +100,6 @@ export default function Settings({ settingsActionMap }: { settingsActionMap: Rec
                     );
                 })}
             </motion.div>
-        </ActivityItemsWrapper>
+        </div>
     );
 }

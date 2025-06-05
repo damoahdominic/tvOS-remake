@@ -261,7 +261,7 @@ const Page = () => {
 
 
     return (
-        <div className='h-full'>
+        <div className='h-full my-10'>
             {/* Title */}
             <h1 className='text-4xl font-bold text-center text-white'>{menuPaths[currentMenu][menuPaths[currentMenu].length - 1]}</h1>
 

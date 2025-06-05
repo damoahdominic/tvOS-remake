@@ -258,11 +258,11 @@ const ContextMenu: React.FC<ContextMenuProps> = ({
                     animate={
                       isActive
                         ? {
-                            scale: 1.15,
-                          }
+                          scale: 1.15,
+                        }
                         : {
-                            scale: 1,
-                          }
+                          scale: 1,
+                        }
                     }
                     transition={{ duration: 0.15 }}
                   >

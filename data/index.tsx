@@ -208,14 +208,14 @@ export const apps: AppItemType[] = [
     ],
   },
   {
-    appIconUrl: "/apps/arcade.svg",
-    appName: "Arcade",
-    href: "/arcade",
+    appIconUrl: "/d-card.svg",
+    appName: "D Studios",
+    href: "/team",
     shouldShowAppName: false,
     hasSplashScreen: true,
     splash: {
       background: "/app-bg/arcade/splash-bg.png",
-      foreground: "/app-bg/arcade/splash-fg.svg",
+      foreground: "/d.png",
     },
     // backgrounds: [
     //   {
@@ -223,6 +223,22 @@ export const apps: AppItemType[] = [
     //   },
     // ],
   },
+  // {
+  //   appIconUrl: "/apps/arcade.svg",
+  //   appName: "Arcade",
+  //   href: "/arcade",
+  //   shouldShowAppName: false,
+  //   hasSplashScreen: true,
+  //   splash: {
+  //     background: "/app-bg/arcade/splash-bg.png",
+  //     foreground: "/app-bg/arcade/splash-fg.svg",
+  //   },
+  //   // backgrounds: [
+  //   //   {
+  //   //     image: "/app-bg/arcade/1.png",
+  //   //   },
+  //   // ],
+  // },
   {
     appIconUrl: "/apps/settings.svg",
     appName: "Settings",

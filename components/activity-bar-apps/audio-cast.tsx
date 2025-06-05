@@ -1,14 +1,13 @@
 import React from 'react'
 import { motion } from 'framer-motion'
 import Image from 'next/image';
-import { ActivityItemsWrapper } from '../activity-items-wrapper';
 
 interface Props {
     onClick?: () => void;
 }
 const AudioCast = ({ onClick }: Props) => {
     return (
-        <ActivityItemsWrapper layoutId='audio-cast'>
+        <div className="activity-bar-item-bg">
         <div className='grid gap-2 p-3'>
             <h1 className='text-xl font-bold text-[#1E1E1E]/85 dark:text-white/85'>Audio</h1>
 
@@ -25,7 +24,7 @@ const AudioCast = ({ onClick }: Props) => {
                 <Image src={"/icons/dark/checkmark.svg"} alt="checkmark" width={15} height={15} className='hidden dark:block group-hover:hidden transition-all duration-300 ml-3' />
             </motion.button>
         </div>
-        </ActivityItemsWrapper>
+        </div>
     )
 }
 

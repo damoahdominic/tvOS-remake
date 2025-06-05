@@ -1,6 +1,6 @@
 "use client"
 import React, { useEffect, useState, forwardRef } from "react";
-import { motion, MotionConfig, Transition, AnimatePresence } from "framer-motion";
+import { motion, MotionConfig, Transition } from "framer-motion";
 import moment from "moment";
 import Image from "next/image";
 // import { Plus } from "lucide-react";
@@ -27,7 +27,7 @@ const Lottie = dynamic(() => import("lottie-react"), {})
 
 const transition: Transition = {
   type: "spring",
-  stiffness: 400,
+  stiffness: 300,
   damping: 30
 };
 
@@ -127,11 +127,10 @@ export default function ActivityBar({
   return (
     <MotionConfig transition={transition}>
       <motion.div
-        variants={{ open: { opacity: 1, y: 0 }, closed: { opacity: 0, y: 20 } }}
+        variants={{ open: { opacity: 1 }, closed: { opacity: 0} }}
         initial="closed"
         animate={isExpanded ? "closed" : "open"}
         exit="closed"
-        transition={{ delay: isExpanded ? 0 : 1 }}
         className="z-[100] position absolute top-10 right-5 flex flex-col items-end gap-2 text-[#1E1E1E]/85 dark:text-white/50"
       >
 
@@ -236,7 +235,6 @@ export default function ActivityBar({
         </motion.div>
 
         {/* <AnimatePresence mode="wait"> */}
-        <AnimatePresence mode="popLayout">
           {currentTab !== "" && (
             <motion.div
               key={currentTab}
@@ -250,7 +248,7 @@ export default function ActivityBar({
                 mass: 1
               }}
               className="w-full h-full sticky top-0"
-              layout
+              
             >
               {currentTab === "profile" && <Users />}
               {currentTab === "switch" && <Settings settingsActionMap={settingsActionMap} />}
@@ -262,7 +260,6 @@ export default function ActivityBar({
               {currentTab === "sleep-timer" && <SleepTimer onClick={() => setCurrentTab("switch")} />}
             </motion.div>
           )}
-        </AnimatePresence>
 
 
         <AlertLarge

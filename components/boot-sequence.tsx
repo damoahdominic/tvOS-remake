@@ -35,8 +35,9 @@ const BootSequence: React.FC<BootSequenceProps> = ({ progress = 0 }) => {
         <Image
           src="/apple-D-logo.png"
           alt="apple-D-logo"
-          width={200}
-          height={200}
+          width={1000}
+          height={1000}
+          className="h-[50svh] w-auto"
         />
       </motion.div>
 
@@ -46,7 +47,7 @@ const BootSequence: React.FC<BootSequenceProps> = ({ progress = 0 }) => {
           initial={{ opacity: 0 }}
           animate={{ opacity: 0.7 }}
           transition={{ duration: 0.8 }}
-          className="mt-48 w-[354px] h-[9px] bg-gray-800 rounded-[30px] overflow-hidden"
+          className="w-[354px] h-[9px] bg-gray-800 rounded-[30px] overflow-hidden"
         >
           <motion.div
             initial={{ width: "5%" }}

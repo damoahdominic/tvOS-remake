@@ -1,14 +1,13 @@
 import React from 'react'
 import { motion } from 'framer-motion'
 import Image from 'next/image';
-import { ActivityItemsWrapper } from '../activity-items-wrapper';
 
 interface Props {
     onClick?: () => void;
 }
 const Accessibility = ({ onClick }: Props) => {
     return (
-        <ActivityItemsWrapper layoutId='accessibility'>
+        <div className="activity-bar-item-bg">
             <div className='grid gap-2 p-3'>
                 <h1 className='text-xl font-bold text-[#1E1E1E]/85 dark:text-white/85'>Accessibility</h1>
 
@@ -33,7 +32,7 @@ const Accessibility = ({ onClick }: Props) => {
                     Settings
                 </motion.button>
             </div>
-        </ActivityItemsWrapper>
+        </div>
     )
 }
 

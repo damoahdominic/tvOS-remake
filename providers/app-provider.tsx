@@ -40,7 +40,6 @@ export function AppProvider({
     const preloaderStatus = useImagePreloader(appData, 6); // Preload first 6 apps
     const [isFullscreen, setIsFullscreen] = useState(false);
     const [lastFocusedPosition, setLastFocusedPosition] = useState<{ row: number; col: number }>({ row: 1, col: 1 });
-    console.log("🚀 ~ lastFocusedPosition:", lastFocusedPosition)
 
     const pathname = usePathname();
     const router = useTransitionRouter();

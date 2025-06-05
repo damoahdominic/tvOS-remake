@@ -1,14 +1,13 @@
 import React from 'react'
 import { motion } from 'framer-motion'
 import Image from 'next/image';
-import { ActivityItemsWrapper } from '../activity-items-wrapper';
 
 interface Props {
     onClick?: () => void;
 }
 const SleepTimer = ({ onClick }: Props) => {
     return (
-        <ActivityItemsWrapper layoutId='sleep-timer'>
+        <div className="activity-bar-item-bg">
             <div className='grid gap-2 p-3'>
                 <h1 className='text-xl font-bold text-[#1E1E1E]/85 dark:text-white/85'>Sleep Timer</h1>
 
@@ -49,7 +48,7 @@ const SleepTimer = ({ onClick }: Props) => {
                     </motion.button>
                 </div>
             </div>
-        </ActivityItemsWrapper>
+        </div>
     )
 }
 
