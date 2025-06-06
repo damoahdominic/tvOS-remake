@@ -14,7 +14,7 @@ export default function Page() {
         <div className='flex items-center justify-center h-svh overflow-hidden text-white bg-black/80'>
             {member ? <div className='flex gap-10'>
                 <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.35, delay: 0.2 }}>
-                    <Image src={member.image} alt={member.name} width={500} height={500} className="aspect-4/3" />
+                    <Image src={member.image} alt={member.name} width={500} height={500} className="aspect-4/3 max-w-[350px]" />
                 </motion.div>
                 <div className='space-y-3'>
                     <motion.h1 initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.35, delay: 0.5 }} className='text-3xl font-bold'>{member.name}</motion.h1>
