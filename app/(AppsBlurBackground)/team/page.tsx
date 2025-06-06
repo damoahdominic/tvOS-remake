@@ -31,7 +31,7 @@ export default function Page() {
 
     return (
         <div className='overflow-auto h-full'>
-            <div className='absolute top-5 w-full flex justify-center'>
+            <div className='absolute top-5 z-40 w-full flex justify-center'>
                 <motion.div className="flex space-x-1 bg-[#090909CC] rounded-full">
                     {tabs.map((tab) => (
                         <motion.button
