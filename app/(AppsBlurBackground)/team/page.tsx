@@ -63,7 +63,7 @@ export default function Page() {
 
             <div className='pt-20 h-full'>
                 {activeTab === "team" &&
-                    <div className='grid grid-cols-3 gap-10 mt-10 pb-10'>
+                    <div className='grid grid-cols-3 gap-10 mt-10 pb-10 px-10'>
                         {
                             team.map((member, index) => (
                                 <div key={index} className="flex flex-col items-center justify-center">
