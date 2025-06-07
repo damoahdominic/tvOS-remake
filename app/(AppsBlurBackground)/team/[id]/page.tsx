@@ -1,4 +1,5 @@
-'use client'
+"use client"
+export const runtime = 'edge';
 import { team } from '@/data/team'
 import Image from 'next/image'
 import React from 'react'
