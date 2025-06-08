@@ -1,5 +1,5 @@
 'use client'
-import { team } from '@/data/team'
+import { engineeringTeam, designTeam } from '@/data/team'
 import Image from 'next/image'
 import React, { useState } from 'react'
 import { motion } from "framer-motion";
@@ -63,20 +63,51 @@ export default function Page() {
 
             <div className='pt-20 h-full'>
                 {activeTab === "team" &&
-                    <div className='grid grid-cols-3 gap-10 mt-10 pb-10 px-10'>
-                        {
-                            team.map((member, index) => (
-                                <div key={index} className="flex flex-col items-center justify-center">
-                                    <Link href={`/team/${member.id}`}>
-                                        <div className='grid gap-2'>
-                                            <Image src={member.image} alt={member.name} width={500} height={500} className="aspect-4/3 hover:scale-105 transition-all duration-300" />
-                                            <h2 className="text-3xl font-bold mt-4">{member.name}</h2>
+                    <div className='flex flex-col space-y-12 h-full px-10 my-10'>
+                        <div className='space-y-6'>
+                            <h1 className='text-xl md:text-2xl font-bold'>Engineering Team</h1>
+                            <div className='grid grid-cols-3 gap-10'>
+                                {
+                                    engineeringTeam.map((member, index) => (
+                                        <div key={index} className="flex flex-col items-center justify-center w-full">
+                                            <Link href={`/team/${member.id}`}>
+                                                <div className='grid gap-2 relative'>
+                                                    <div style={{ backgroundColor: member.color }} className={`rounded-lg hover:scale-105 transition-all duration-300 aspect-4/3 flex items-end`}>
+                                                        <div className='relative aspect-square min-w-[400px]'>
+                                                            <Image src={member.image} alt={member.name} fill />
+                                                        </div>
+                                                    </div>
+                                                    <h2 className="text-xl font-bold mt-4">{member.name}</h2>
+                                                </div>
+                                            </Link>
                                         </div>
-                                    </Link>
-                                </div>
-                            ))
-                        }
-                    </div>}
+                                    ))
+                                }
+                            </div>
+                        </div>
+                        <div className='space-y-6'>
+                            <h1 className='text-xl md:text-2xl font-bold'>Design Team</h1>
+                            <div className='grid grid-cols-3 gap-10'>
+                                {
+                                    designTeam.map((member, index) => (
+                                        <div key={index} className="flex flex-col items-center justify-center w-full">
+                                            <Link href={`/team/${member.id}`}>
+                                                <div className='grid gap-2 relative'>
+                                                    <div style={{ backgroundColor: member.color }} className={`rounded-lg hover:scale-105 transition-all duration-300 aspect-4/3 flex items-end`}>
+                                                        <div className='relative aspect-square min-w-[400px]'>
+                                                            <Image src={member.image} alt={member.name} fill />
+                                                        </div>
+                                                    </div>
+                                                    <h2 className="text-xl font-bold mt-4">{member.name}</h2>
+                                                </div>
+                                            </Link>
+                                        </div>
+                                    ))
+                                }
+                            </div>
+                        </div>
+                    </div>
+                }
 
                 {activeTab === "credits" && <div className='flex flex-col space-y-8 h-full'>
                     <div className='px-10'>
