@@ -65,43 +65,39 @@ export default function Page() {
                 {activeTab === "team" &&
                     <div className='flex flex-col space-y-12 h-full px-10 my-10'>
                         <div className='space-y-6'>
-                            <h1 className='text-xl md:text-2xl font-bold'>Engineering Team</h1>
-                            <div className='grid grid-cols-3 gap-10'>
+                            <h1 className='text-xl md:text-3xl font-bold'>Engineering Team</h1>
+                            <div className='grid grid-cols-1 lg:grid-cols-3 gap-10'>
                                 {
                                     engineeringTeam.map((member, index) => (
-                                        <div key={index} className="flex flex-col items-center justify-center w-full">
-                                            <Link href={`/team/${member.id}`}>
-                                                <div className='grid gap-2 relative'>
-                                                    <div style={{ backgroundColor: member.color }} className={`rounded-3xl hover:scale-105 transition-all duration-300 aspect-4/3 h-[45svh] flex items-end`}>
-                                                        <div className='relative aspect-square min-w-[400px]'>
-                                                            <Image src={member.image} alt={member.name} fill />
-                                                        </div>
+                                        <Link key={index} href={`/team/${member.id}`} className='w-full'>
+                                            <div className='grid gap-2 relative'>
+                                                <div style={{ backgroundColor: member.color }} className={`rounded-3xl hover:scale-105 transition-all duration-300 flex items-end justify-center pt-8`}>
+                                                    <div className='relative min-w-[250px] xl:w-[400px] aspect-square'>
+                                                        <Image src={member.image} alt={member.name} fill />
                                                     </div>
-                                                    <h2 className="text-xl font-bold mt-4">{member.name}</h2>
                                                 </div>
-                                            </Link>
-                                        </div>
+                                                <h2 className="text-xl font-bold mt-4">{member.name}</h2>
+                                            </div>
+                                        </Link>
                                     ))
                                 }
                             </div>
                         </div>
                         <div className='space-y-6'>
-                            <h1 className='text-xl md:text-2xl font-bold'>Design Team</h1>
-                            <div className='grid grid-cols-3 gap-10'>
+                            <h1 className='text-xl md:text-3xl font-bold'>Design Team</h1>
+                            <div className='grid grid-cols-1 lg:grid-cols-3 gap-10'>
                                 {
                                     designTeam.map((member, index) => (
-                                        <div key={index} className="flex flex-col items-center justify-center w-full">
-                                            <Link href={`/team/${member.id}`}>
-                                                <div className='grid gap-2 relative'>
-                                                    <div style={{ backgroundColor: member.color }} className={`rounded-3xl hover:scale-105 transition-all duration-300 aspect-4/3 h-[45svh] flex items-end`}>
-                                                        <div className='relative aspect-square min-w-[400px]'>
-                                                            <Image src={member.image} alt={member.name} fill />
-                                                        </div>
+                                        <Link key={index} href={`/team/${member.id}`} className='w-full'>
+                                            <div className='grid gap-2 relative'>
+                                                <div style={{ backgroundColor: member.color }} className={`rounded-3xl hover:scale-105 transition-all duration-300 flex items-end justify-center pt-8`}>
+                                                    <div className='relative min-w-[250px] xl:w-[400px] aspect-square'>
+                                                        <Image src={member.image} alt={member.name} fill />
                                                     </div>
-                                                    <h2 className="text-xl font-bold mt-4">{member.name}</h2>
                                                 </div>
-                                            </Link>
-                                        </div>
+                                                <h2 className="text-xl font-bold mt-4">{member.name}</h2>
+                                            </div>
+                                        </Link>
                                     ))
                                 }
                             </div>
