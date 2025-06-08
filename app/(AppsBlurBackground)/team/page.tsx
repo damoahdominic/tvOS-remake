@@ -63,7 +63,7 @@ export default function Page() {
 
             <div className='pt-20 h-full'>
                 {activeTab === "team" &&
-                    <div className='flex flex-col space-y-12 h-full px-10 my-10'>
+                    <div className='flex flex-col space-y-12 h-full px-10 mt-10'>
                         <div className='space-y-6'>
                             <h1 className='text-xl md:text-3xl font-bold'>Engineering Team</h1>
                             <div className='grid grid-cols-1 lg:grid-cols-3 gap-10'>
@@ -83,7 +83,7 @@ export default function Page() {
                                 }
                             </div>
                         </div>
-                        <div className='space-y-6'>
+                        <div className='space-y-6 pb-12'>
                             <h1 className='text-xl md:text-3xl font-bold'>Design Team</h1>
                             <div className='grid grid-cols-1 lg:grid-cols-3 gap-10'>
                                 {
