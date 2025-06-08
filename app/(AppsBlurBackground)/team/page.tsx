@@ -72,7 +72,7 @@ export default function Page() {
                                         <div key={index} className="flex flex-col items-center justify-center w-full">
                                             <Link href={`/team/${member.id}`}>
                                                 <div className='grid gap-2 relative'>
-                                                    <div style={{ backgroundColor: member.color }} className={`rounded-lg hover:scale-105 transition-all duration-300 aspect-4/3 flex items-end`}>
+                                                    <div style={{ backgroundColor: member.color }} className={`rounded-3xl hover:scale-105 transition-all duration-300 aspect-4/3 h-[45svh] flex items-end`}>
                                                         <div className='relative aspect-square min-w-[400px]'>
                                                             <Image src={member.image} alt={member.name} fill />
                                                         </div>
@@ -93,7 +93,7 @@ export default function Page() {
                                         <div key={index} className="flex flex-col items-center justify-center w-full">
                                             <Link href={`/team/${member.id}`}>
                                                 <div className='grid gap-2 relative'>
-                                                    <div style={{ backgroundColor: member.color }} className={`rounded-lg hover:scale-105 transition-all duration-300 aspect-4/3 flex items-end`}>
+                                                    <div style={{ backgroundColor: member.color }} className={`rounded-3xl hover:scale-105 transition-all duration-300 aspect-4/3 h-[45svh] flex items-end`}>
                                                         <div className='relative aspect-square min-w-[400px]'>
                                                             <Image src={member.image} alt={member.name} fill />
                                                         </div>
