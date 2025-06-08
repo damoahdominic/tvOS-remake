@@ -46,20 +46,6 @@ export const lockScreenImages: LockScreenImage[] = [
         }
     },
     {
-        id: "3",
-        background: "/lockscreen/lock3background.png",
-        foreground: "/lockscreen/lock3foreground.png",
-        timeDisplay: {
-            position: "top-center",
-            layout: "horizontal",
-            color: "rgba(255, 255, 255, 0.9)",
-            margin: {
-                top: -15
-            },
-            font: "font-compact"
-        }
-    },
-    {
         id: "4",
         background: "/lockscreen/lock4background.png",
         foreground: "/lockscreen/lock4foreground.png",
