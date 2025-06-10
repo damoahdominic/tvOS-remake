@@ -181,7 +181,7 @@ export const apps: AppItemType[] = [
             />
             <div className="size-full flex items-center justify-center">
               <Image
-                src={"/apps/foreground/dom-n-larry.svg"}
+                src={"/dom_larry_new.svg"}
                 className="pb-20"
                 width={400}
                 height={61}
@@ -358,7 +358,7 @@ export const apps: AppItemType[] = [
         image: "/app-bg/apple-music/bg5.png",
         content: (
           <AppleMusicBackground
-            title="Riky Rick's 'Chise Ngaposta” is a bold salute ro a high-flying icon."
+            title="Riky Rick's 'Chise Ngaposta' is a bold salute ro a high-flying icon."
             description="The R&B queen re-emerges as a soul diva."
           />
         ),
@@ -468,7 +468,7 @@ export const apps: AppItemType[] = [
             <p className="text-7xl">
               Fitness for all.
               <br />
-              Fitness for you.
+              Fitness for you.
             </p>
           </div>
         ),
@@ -500,7 +500,7 @@ export const apps: AppItemType[] = [
             <p className="text-6xl">
               Fitness for all.
               <br />
-              Fitness for you.
+              Fitness for you.
             </p>
           </div>
         ),
