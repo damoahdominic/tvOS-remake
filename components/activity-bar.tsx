@@ -325,7 +325,7 @@ const NavigationButton = forwardRef<
         <div className="flex items-center group justify-center w-[56px] h-[56px]">
           {children ? children :
             typeof tab.image === "string" ?
-              <>
+              <React.Fragment key='icon'>
                 <Image
                   src={`/icons/light/${tab.image}`}
                   alt={tab.name}
@@ -334,14 +334,13 @@ const NavigationButton = forwardRef<
                   className={`block dark:hidden group-hover:block`}
                 />
                 <Image
-                  src={`/icons/${currentTab === tab.name ? "light" : "dark"}/${tab.image
-                    }`}
+                  src={`/icons/${currentTab === tab.name ? "light" : "dark"}/${tab.image}`}
                   alt={tab.name}
                   width={20}
                   height={20}
                   className="hidden dark:block group-hover:hidden"
                 />
-              </>
+              </React.Fragment>
               :
               tab.image
           }
