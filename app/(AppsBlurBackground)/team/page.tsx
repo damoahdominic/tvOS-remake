@@ -72,7 +72,7 @@ export default function Page() {
                                         <Link key={index} href={`/team/${member.id}`} className='w-full'>
                                             <div className='grid gap-2 relative'>
                                                 <div style={{ backgroundColor: member.color }} className={`rounded-3xl hover:scale-105 transition-all duration-300 flex items-end justify-center pt-8`}>
-                                                    <div className='relative min-w-[250px] xl:w-[400px] aspect-square'>
+                                                    <div className='relative w-full aspect-square'>
                                                         <Image src={member.image} alt={member.name} fill />
                                                     </div>
                                                 </div>
@@ -91,7 +91,7 @@ export default function Page() {
                                         <Link key={index} href={`/team/${member.id}`} className='w-full'>
                                             <div className='grid gap-2 relative'>
                                                 <div style={{ backgroundColor: member.color }} className={`rounded-3xl hover:scale-105 transition-all duration-300 flex items-end justify-center pt-8`}>
-                                                    <div className='relative min-w-[250px] xl:w-[400px] aspect-square'>
+                                                    <div className='relative w-full aspect-square'>
                                                         <Image src={member.image} alt={member.name} fill />
                                                     </div>
                                                 </div>
