@@ -35,8 +35,8 @@ const BootSequence: React.FC<BootSequenceProps> = ({ progress = 0 }) => {
         <Image
           src="/apple-D-logo.png"
           alt="apple-D-logo"
-          width={1000}
-          height={1000}
+          width={500}
+          height={500}
           className="h-[50svh] w-auto"
         />
       </motion.div>
