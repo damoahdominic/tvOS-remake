@@ -93,7 +93,7 @@ export default function Home() {
     };
 
     return (
-        <div className="relative min-h-screen">
+        <div className="relative min-h-screen overflow-hidden">
             {/* Activity Bar Component */}
             <ActivityBar isExpanded={isFullscreen} />
 

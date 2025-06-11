@@ -170,12 +170,27 @@ export const apps: AppItemType[] = [
     },
     backgrounds: [
       {
-        image: "/Apple_TV.png",
-        content: null,
-      },
-      {
-        image: "/domlarryslide.png",
-        content: null,
+        image: "/app-bg/apple-tv/2.png",
+        content: (
+          <div className="relative px-10 size-full flex items-center justify-center">
+            <Image
+              src={"/apps/foreground/apple-tv.svg"}
+              className="absolute top-[3%] left-[4%]"
+              width={200}
+              height={61}
+              alt={"severance"}
+            />
+            <div className="size-full flex items-center justify-center">
+              <Image
+                src={"/dom_larry_new.svg"}
+                className="pb-20"
+                width={400}
+                height={61}
+                alt={"severance"}
+              />
+            </div>
+          </div>
+        ),
       },
     ],
   },
@@ -219,8 +234,14 @@ export const apps: AppItemType[] = [
     shouldShowAppName: false,
     backgrounds: [
       {
-        image: "/settings.png",
-        content: null,
+        image: "/app-bg/fitness/1.png",
+        content: (
+          <div className="relative px-10 bg-black  gap-3 size-full flex-col flex items-center justify-center font-semibold text-white">
+            <p className="text-4xl">
+              Play 200+ Games. No in-App Purchases. No Ads.
+            </p>
+          </div>
+        ),
       },
     ],
   },
@@ -299,8 +320,49 @@ export const apps: AppItemType[] = [
     shouldShowAppName: false,
     backgrounds: [
       {
-        image: "/Apple_Music.png",
-        content: null,
+        image: "/app-bg/apple-music/bg1.png",
+        content: (
+          <AppleMusicBackground
+            title="THE AGENDA"
+            description='Nemzz and Central Cee have a "DILEMMA"'
+          />
+        ),
+      },
+      {
+        image: "/app-bg/apple-music/bg2.png",
+        content: (
+          <AppleMusicBackground
+            title="R&B NOW"
+            description='ODUMODUBLVK takes on a leadership role on "LEGOLAS"'
+          />
+        ),
+      },
+      {
+        image: "/app-bg/apple-music/bg3.png",
+        content: (
+          <AppleMusicBackground
+            title="AFRICA NOW"
+            description='ODUMODUBLVK takes on a leadership role on "LEGOLAS".'
+          />
+        ),
+      },
+      {
+        image: "/app-bg/apple-music/bg4.png",
+        content: (
+          <AppleMusicBackground
+            title="RAP LIFE"
+            description={`Riky Rick's "Chise Ngaposta" is a bold salute ro a high-flying icon.`}
+          />
+        ),
+      },
+      {
+        image: "/app-bg/apple-music/bg5.png",
+        content: (
+          <AppleMusicBackground
+            title="Riky Rick's 'Chise Ngaposta' is a bold salute ro a high-flying icon."
+            description="The R&B queen re-emerges as a soul diva."
+          />
+        ),
       },
     ],
   },

@@ -146,7 +146,7 @@ function AppleTvSideToggler({ page }: IMenu) {
                                     }}
                                 >
                                     <div className="pt-4 pb-6 group">
-                                        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.4 }} className="group-hover:hidden flex items-center gap-2 justify-between">
+                                        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.4 }} className="group-hover:hidden flex items-center gap-2 justify-between transition-all duration-300">
                                             <div className="flex items-center gap-2">
                                                 <Image
                                                     src={"/users/dominic.png"}
@@ -163,7 +163,7 @@ function AppleTvSideToggler({ page }: IMenu) {
                                             </p>
                                         </motion.div>
 
-                                        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.4 }} className="group-hover:flex hidden items-center gap-2">
+                                        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.4 }} className="group-hover:flex hidden items-center gap-2 transition-all duration-300">
                                             <Image
                                                 src={"/users/dominic.png"}
                                                 alt="user"
@@ -174,7 +174,9 @@ function AppleTvSideToggler({ page }: IMenu) {
 
                                             <div className="cursor-pointer">
                                                 <h2 className="text-xs font-semibold text-white/70">Dominic</h2>
-                                                <p onClick={() => router.back()} className="text-xs text-white/70 hover:underline underline-offset-4">Go Back</p>
+                                                <motion.button onClick={() => router.back()}>
+                                                    <div className="text-xs text-white/70 hover:underline underline-offset-4">Go Back</div>
+                                                </motion.button>
                                             </div>
                                         </motion.div>
                                     </div>

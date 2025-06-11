@@ -1,4 +1,3 @@
-"use client"
 import React from 'react'
 
 export default function AppleTvLayout({ children, }: Readonly<{ children: React.ReactNode; }>) {
