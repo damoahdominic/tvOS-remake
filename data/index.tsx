@@ -1,3 +1,4 @@
+"use client"
 import { AppleMusicBackground } from "@/components/appple-music-background";
 import Image from "next/image";
 import { motion } from "framer-motion";
