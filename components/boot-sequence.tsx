@@ -37,7 +37,7 @@ const BootSequence: React.FC<BootSequenceProps> = ({ progress = 0 }) => {
           alt="apple-D-logo"
           width={500}
           height={500}
-          className="h-[50svh] w-auto"
+          className="h-[25svh] w-auto"
         />
       </motion.div>
 
