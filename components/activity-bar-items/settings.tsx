@@ -44,13 +44,32 @@ export default function Settings({ settingsActionMap }: { settingsActionMap: Rec
                                     className={`${i === 0 ? "w-[65px]" : "w-[30px]"} dark:hidden block group-hover:block`}
                                 />
 
-                                <Image
-                                    src={settings.iconDark}
-                                    width={135}
-                                    height={135}
-                                    alt={settings.title}
-                                    className={`${i === 0 ? "w-[65px]" : "w-[30px]"} dark:block hidden group-hover:hidden`}
-                                />
+                                {settings.title === 'Do Not Disturb' ? (
+                                    <>
+                                        <Image
+                                            src={settings.iconDark}
+                                            width={135}
+                                            height={135}
+                                            alt={settings.title}
+                                            className={`${i === 0 ? "w-[65px]" : "w-[30px]"} dark:block hidden group-hover:hidden`}
+                                        />
+                                        <Image
+                                            src="/dnd_dark_hover.svg"
+                                            width={135}
+                                            height={135}
+                                            alt={settings.title}
+                                            className={`${i === 0 ? "w-[65px]" : "w-[30px]"} dark:block hidden group-hover:block`}
+                                        />
+                                    </>
+                                ) : (
+                                    <Image
+                                        src={settings.iconDark}
+                                        width={135}
+                                        height={135}
+                                        alt={settings.title}
+                                        className={`${i === 0 ? "w-[65px]" : "w-[30px]"} dark:block hidden group-hover:hidden`}
+                                    />
+                                )}
                             </>
                                 :
                                 !toggleDND ?
