@@ -1,3 +1,4 @@
+"use client"
 import { AppleMusicBackground } from "@/components/appple-music-background";
 import Image from "next/image";
 import { motion } from "framer-motion";
@@ -41,20 +42,6 @@ export const lockScreenImages: LockScreenImage[] = [
             color: "rgba(8, 8, 8, 0.5)",
             margin: {
                 left: -13
-            },
-            font: "font-compact"
-        }
-    },
-    {
-        id: "3",
-        background: "/lockscreen/lock3background.png",
-        foreground: "/lockscreen/lock3foreground.png",
-        timeDisplay: {
-            position: "top-center",
-            layout: "horizontal",
-            color: "rgba(255, 255, 255, 0.9)",
-            margin: {
-                top: -15
             },
             font: "font-compact"
         }

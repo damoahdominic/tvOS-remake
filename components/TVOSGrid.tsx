@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useCallback, useEffect, useState } from "react";
 import AppItem from "./app-item";
 import { motion } from "framer-motion";
@@ -123,7 +124,6 @@ const TVOSGrid: React.FC<TVOSGridProps> = ({
     const items = renderAppsCallback();
     setGridItems(items);
     setIsPreparing(false);
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [renderAppsCallback]);
 
   // Log DOM structure after render to help debug
@@ -199,7 +199,7 @@ const TVOSGrid: React.FC<TVOSGridProps> = ({
           variants={container}
           initial="hidden"
           animate="show"
-          className="grid grid-cols-6 gap-9 relative"
+          className="grid grid-cols-6 gap-x-9 relative"
         >
           {gridItems?.rest?.map((app, i) => (
             <div key={i} className="rest-row-item">
