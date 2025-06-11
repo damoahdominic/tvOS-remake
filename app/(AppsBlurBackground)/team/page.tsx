@@ -61,7 +61,7 @@ export default function Page() {
                 </motion.div>
             </div>
 
-            <div className='pt-20 h-full'>
+            <div className='pt-20 h-full text-white'>
                 {activeTab === "team" &&
                     <div className='flex flex-col space-y-12 h-full px-10 mt-10'>
                         <div className='space-y-6'>
@@ -105,7 +105,7 @@ export default function Page() {
                     </div>
                 }
 
-                {activeTab === "credits" && <div className='flex flex-col space-y-8 h-full'>
+                {activeTab === "credits" && <div className='flex flex-col space-y-8 h-full text-white'>
                     <div className='px-10'>
                         <h1 className='text-3xl font-bold'>Resources</h1>
                         <div className='grid grid-cols-3 gap-4 mt-8'>

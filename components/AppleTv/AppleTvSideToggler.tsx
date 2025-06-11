@@ -7,6 +7,7 @@ import { cn } from '@/lib/utils';
 import Link from 'next/link';
 import moment from 'moment';
 import { Squircle } from '@squircle-js/react';
+import { useTransitionRouter } from 'next-view-transitions';
 
 interface IMenu {
     page: "home" | "library" | "search"
@@ -43,6 +44,7 @@ function AppleTvSideToggler({ page }: IMenu) {
     const [isReady, setIsReady] = React.useState<boolean>(false);
     const [isMenuModalOpen, setIsMenuModalOpen] = useState(false);
     const uniqueId = useId();
+    const router = useTransitionRouter();
 
     // Effect hook to run on component mount
     React.useEffect(() => {
@@ -172,9 +174,7 @@ function AppleTvSideToggler({ page }: IMenu) {
 
                                             <div className="cursor-pointer">
                                                 <h2 className="text-xs font-semibold text-white/70">Dominic</h2>
-                                                <Link href="/">
-                                                    <p className="text-xs text-white/70 hover:underline underline-offset-4">Go Back</p>
-                                                </Link>
+                                                <p onClick={() => router.back()} className="text-xs text-white/70 hover:underline underline-offset-4">Go Back</p>
                                             </div>
                                         </motion.div>
                                     </div>
