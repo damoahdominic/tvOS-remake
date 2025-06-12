@@ -201,14 +201,15 @@ export const apps: AppItemType[] = [
     shouldShowAppName: false,
     hasSplashScreen: true,
     splash: {
-      background: "/app-bg/arcade/splash-bg.png",
-      foreground: "/d.png",
+      background: "/app-bg/d-studios/splash-bg.png",
+      foreground: "/app-bg/d-studios/splash-fg.svg",
     },
-    // backgrounds: [
-    //   {
-    //     image: "/app-bg/arcade/1.png",
-    //   },
-    // ],
+    backgrounds: [
+      {
+        image: "/app-bg/d-studios/1.png",
+        content: null,
+      },
+    ],
   },
   // {
   //   appIconUrl: "/apps/arcade.svg",
@@ -233,9 +234,9 @@ export const apps: AppItemType[] = [
     hasSplashScreen: true,
     splash: {
       background: "/app-bg/settings/splash-bg.png",
-      foreground: "",
+      foreground: "/app-bg/settings/splash-fg.svg",
     },
-    shouldShowAppName: false,
+    shouldShowAppName: true,
   },
   {
     appIconUrl: "/apps/photos.svg",
@@ -308,55 +309,12 @@ export const apps: AppItemType[] = [
     appIconUrl: "/apps/apple-music.svg",
     appName: "Apple Music",
     href: "/apple-music",
-    hasSplashScreen: false,
+    hasSplashScreen: true,
+    splash: {
+      background: "/app-bg/apple-music/splash-bg.png",
+      foreground: "/app-bg/apple-music/splash-fg.svg",
+    },
     shouldShowAppName: false,
-    backgrounds: [
-      {
-        image: "/app-bg/apple-music/bg1.png",
-        content: (
-          <AppleMusicBackground
-            title="THE AGENDA"
-            description='Nemzz and Central Cee have a "DILEMMA"'
-          />
-        ),
-      },
-      {
-        image: "/app-bg/apple-music/bg2.png",
-        content: (
-          <AppleMusicBackground
-            title="R&B NOW"
-            description='ODUMODUBLVK takes on a leadership role on "LEGOLAS"'
-          />
-        ),
-      },
-      {
-        image: "/app-bg/apple-music/bg3.png",
-        content: (
-          <AppleMusicBackground
-            title="AFRICA NOW"
-            description='ODUMODUBLVK takes on a leadership role on "LEGOLAS".'
-          />
-        ),
-      },
-      {
-        image: "/app-bg/apple-music/bg4.png",
-        content: (
-          <AppleMusicBackground
-            title="RAP LIFE"
-            description={`Riky Rick's "Chise Ngaposta" is a bold salute ro a high-flying icon.`}
-          />
-        ),
-      },
-      {
-        image: "/app-bg/apple-music/bg5.png",
-        content: (
-          <AppleMusicBackground
-            title="Riky Rick's 'Chise Ngaposta' is a bold salute ro a high-flying icon."
-            description="The R&B queen re-emerges as a soul diva."
-          />
-        ),
-      },
-    ],
   },
   {
     appIconUrl: "/apps/app-store.svg",

@@ -18,8 +18,13 @@ export default function Page() {
                 <div className='flex gap-10'>
                     <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.35, delay: 0.2 }}>
                         <motion.div style={{ backgroundColor: member.color }} className={`rounded-lg hover:scale-105 transition-all duration-300 h-full flex items-end`}>
-                            <motion.div className='relative aspect-square min-w-[380px]'>
-                                <Image src={member.image} alt={member.name} fill />
+                            <motion.div className='relative aspect-square min-w-[380px] overflow-hidden'>
+                                <Image
+                                    src={member.image}
+                                    alt={member.name}
+                                    fill
+                                    className='object-cover'
+                                />
                             </motion.div>
                         </motion.div>
                     </motion.div>
