@@ -168,29 +168,34 @@ export const apps: AppItemType[] = [
       foreground: "/app-bg/apple-tv/splash-fg.svg",
     },
     backgrounds: [
+      // {
+      //   image: "/app-bg/apple-tv/2.png",
+      //   content: (
+      //     <div className="relative px-10 size-full flex items-center justify-center">
+      //       <Image
+      //         src={"/apps/foreground/apple-tv.svg"}
+      //         className="absolute top-[3%] left-[4%]"
+      //         width={200}
+      //         height={61}
+      //         alt={"severance"}
+      //       />
+      //       <div className="size-full flex items-center justify-center">
+      //         <Image
+      //           src={"/dom_larry_new.svg"}
+      //           className="pb-20"
+      //           width={400}
+      //           height={61}
+      //           alt={"severance"}
+      //         />
+      //       </div>
+      //     </div>
+      //   ),
+      // },
       {
-        image: "/app-bg/apple-tv/2.png",
-        content: (
-          <div className="relative px-10 size-full flex items-center justify-center">
-            <Image
-              src={"/apps/foreground/apple-tv.svg"}
-              className="absolute top-[3%] left-[4%]"
-              width={200}
-              height={61}
-              alt={"severance"}
-            />
-            <div className="size-full flex items-center justify-center">
-              <Image
-                src={"/dom_larry_new.svg"}
-                className="pb-20"
-                width={400}
-                height={61}
-                alt={"severance"}
-              />
-            </div>
-          </div>
-        ),
+        image: "/app-bg/apple-tv/3.png",
+        content: null,
       },
+      
     ],
   },
   {
