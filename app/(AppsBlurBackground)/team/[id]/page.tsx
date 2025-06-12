@@ -35,7 +35,7 @@ export default function Page() {
 
                         <div className='space-y-5'>
                             <motion.h3 initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.35, delay: 0.8 }} className='mt-10 text-2xl font-bold'>Links</motion.h3>
-                            <motion.div className='grid grid-cols-3 gap-6 max-w-2xl'>
+                            <motion.div className='grid grid-cols-3 gap-9ca max-w-2xl'>
                                 <Link href={"mailto:" + member.email}>
                                     <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.35, delay: 0.9 }}>
                                         <AppleTVCard
