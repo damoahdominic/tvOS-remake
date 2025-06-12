@@ -1,5 +1,4 @@
 "use client"
-import { AppleMusicBackground } from "@/components/appple-music-background";
 import Image from "next/image";
 import { motion } from "framer-motion";
 export interface AppItemType {
@@ -236,7 +235,7 @@ export const apps: AppItemType[] = [
       background: "/app-bg/settings/splash-bg.png",
       foreground: "/app-bg/settings/splash-fg.svg",
     },
-    shouldShowAppName: true,
+    shouldShowAppName: false,
   },
   {
     appIconUrl: "/apps/photos.svg",
