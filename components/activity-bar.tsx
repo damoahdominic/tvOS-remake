@@ -14,7 +14,7 @@ import AudioCast from "./activity-bar-apps/audio-cast";
 import SleepTimer from "./activity-bar-apps/sleep-timer";
 import { useAudio } from "@/providers/audio-provider";
 import waveAnimation from "@/public/lottie/wave.json";
-import waveLightAnimation from "@/public/lottie/wave-light.json";
+import wavelightAnimation from "@/public/lottie/wavelight.json";
 import dynamic from "next/dynamic";
 import { useTransitionRouter } from "next-view-transitions";
 // import { ActivityItemsWrapper } from "./activity-items-wrapper";
@@ -105,7 +105,12 @@ export default function ActivityBar({
     {
       name: "music",
       image: <div className="w-[40px]">
-        <Lottie autoplay={false} animationData={waveAnimation} />
+        {currentTab !== "music" ? <>
+          <Lottie autoplay={false} animationData={wavelightAnimation} className="hidden dark:block group-hover:hidden" />
+          <Lottie autoplay={false} animationData={waveAnimation} className="block dark:hidden group-hover:block" />
+        </>
+        :
+        <Lottie autoplay={false} animationData={waveAnimation} className="" />}
       </div>,
       index: 0,
     },
@@ -127,7 +132,7 @@ export default function ActivityBar({
   return (
     <MotionConfig transition={transition}>
       <motion.div
-        variants={{ open: { opacity: 1 }, closed: { opacity: 0} }}
+        variants={{ open: { opacity: 1 }, closed: { opacity: 0 } }}
         initial="closed"
         animate={isExpanded ? "closed" : "open"}
         exit="closed"
@@ -178,7 +183,7 @@ export default function ActivityBar({
                     <Lottie animationData={waveAnimation} />
                   </div>
                   <div className="w-[40px] hidden dark:block group-hover:hidden">
-                    <Lottie animationData={waveLightAnimation} />
+                    <Lottie animationData={wavelightAnimation} />
                   </div>
                 </>}
             </NavigationButton>}
@@ -235,31 +240,31 @@ export default function ActivityBar({
         </motion.div>
 
         {/* <AnimatePresence mode="wait"> */}
-          {currentTab !== "" && (
-            <motion.div
-              key={currentTab}
-              initial={{ opacity: 0, scale: 0.98 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0, scale: 0.98 }}
-              transition={{
-                type: "spring",
-                stiffness: 200,
-                damping: 30,
-                mass: 1
-              }}
-              className="w-full h-full sticky top-0"
-              
-            >
-              {currentTab === "profile" && <Users />}
-              {currentTab === "switch" && <Settings settingsActionMap={settingsActionMap} />}
-              {currentTab === "music" && <MusicPlayer />}
-              {currentTab === "restrictions" && <Restrictions onClick={() => setCurrentTab("switch")} />}
-              {currentTab === "game" && <Game onClick={() => setCurrentTab("switch")} />}
-              {currentTab === "accessibility" && <Accessibility onClick={() => setCurrentTab("switch")} />}
-              {currentTab === "audio-cast" && <AudioCast onClick={() => setCurrentTab("switch")} />}
-              {currentTab === "sleep-timer" && <SleepTimer onClick={() => setCurrentTab("switch")} />}
-            </motion.div>
-          )}
+        {currentTab !== "" && (
+          <motion.div
+            key={currentTab}
+            initial={{ opacity: 0, scale: 0.98 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: 0.98 }}
+            transition={{
+              type: "spring",
+              stiffness: 200,
+              damping: 30,
+              mass: 1
+            }}
+            className="w-full h-full sticky top-0"
+
+          >
+            {currentTab === "profile" && <Users />}
+            {currentTab === "switch" && <Settings settingsActionMap={settingsActionMap} />}
+            {currentTab === "music" && <MusicPlayer />}
+            {currentTab === "restrictions" && <Restrictions onClick={() => setCurrentTab("switch")} />}
+            {currentTab === "game" && <Game onClick={() => setCurrentTab("switch")} />}
+            {currentTab === "accessibility" && <Accessibility onClick={() => setCurrentTab("switch")} />}
+            {currentTab === "audio-cast" && <AudioCast onClick={() => setCurrentTab("switch")} />}
+            {currentTab === "sleep-timer" && <SleepTimer onClick={() => setCurrentTab("switch")} />}
+          </motion.div>
+        )}
 
 
         <AlertLarge
