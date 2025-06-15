@@ -27,7 +27,7 @@ const resources = [
 ]
 
 export default function Page() {
-    const [activeTab, setActiveTab] = useState(tabs[1].id);
+    const [activeTab, setActiveTab] = useState(tabs[0].id);
 
     return (
         <div className={`overflow-auto h-full ${activeTab === "home" && "bg-[#C4A5CD]"}`}>
