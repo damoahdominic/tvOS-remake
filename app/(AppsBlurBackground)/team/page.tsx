@@ -26,6 +26,20 @@ const resources = [
     }
 ]
 
+const staggerContainer = {
+    hidden: {},
+    show: {
+        transition: {
+            staggerChildren: 0.1,
+        },
+    },
+};
+
+const staggerChild = {
+    hidden: { opacity: 0, y: 20 },
+    show: { opacity: 1, y: 0 },
+};
+
 export default function Page() {
     const [activeTab, setActiveTab] = useState(tabs[0].id);
 
@@ -77,51 +91,57 @@ export default function Page() {
                 }
 
                 {activeTab === "team" &&
-                    <div className='flex flex-col space-y-12 h-full px-10 mt-10'>
+                    <motion.div className='flex flex-col space-y-12 h-full px-10 mt-10'>
                         <div className='space-y-6'>
                             <h1 className='text-xl md:text-3xl font-bold'>Engineering Team</h1>
-                            <div className='grid grid-cols-1 lg:grid-cols-3 gap-10'>
+                            {/* Stagger items bellow */}
+                            <motion.div variants={staggerContainer} initial="hidden" animate="show" className='grid grid-cols-1 lg:grid-cols-3 gap-10'>
+                                {/* Stagger items */}
                                 {
                                     engineeringTeam.map((member, index) => (
-                                        <Link key={index} href={`/team/${member.id}`} className='w-full'>
-                                            <div className='grid gap-2 relative'>
-                                                <div style={{ backgroundColor: member.color }} className={`rounded-3xl hover:scale-105 transition-all duration-300 flex items-end justify-center pt-8`}>
-                                                    <div className='relative w-full aspect-square'>
-                                                        <Image src={member.image} alt={member.name} fill />
+                                        <motion.div key={index} variants={staggerChild}>
+                                            <Link href={`/team/${member.id}`} className='w-full'>
+                                                <div className='grid gap-2 relative'>
+                                                    <div style={{ backgroundColor: member.color }} className={`rounded-3xl hover:scale-105 transition-all duration-300 flex items-end justify-center pt-8`}>
+                                                        <div className='relative w-full aspect-square'>
+                                                            <Image src={member.image} alt={member.name} fill />
+                                                        </div>
                                                     </div>
+                                                    <h2 className="text-xl font-bold mt-4">{member.name}</h2>
                                                 </div>
-                                                <h2 className="text-xl font-bold mt-4">{member.name}</h2>
-                                            </div>
-                                        </Link>
+                                            </Link>
+                                        </motion.div>
                                     ))
                                 }
-                            </div>
+                            </motion.div>
                         </div>
                         <div className='space-y-6 pb-12'>
                             <h1 className='text-xl md:text-3xl font-bold'>Design Team</h1>
-                            <div className='grid grid-cols-1 lg:grid-cols-3 gap-10'>
+                            <motion.div variants={staggerContainer} initial="hidden" animate="show" className='grid grid-cols-1 lg:grid-cols-3 gap-10'>
                                 {
                                     designTeam.map((member, index) => (
-                                        <Link key={index} href={`/team/${member.id}`} className='w-full'>
-                                            <div className='grid gap-2 relative'>
-                                                <div style={{ backgroundColor: member.color }} className={`rounded-3xl hover:scale-105 transition-all duration-300 flex items-end justify-center pt-8`}>
-                                                    <div className='relative w-full aspect-square overflow-hidden'>
-                                                        <Image
-                                                            src={member.image}
-                                                            alt={member.name}
-                                                            fill
-                                                            className='object-cover'
-                                                        />
+                                        <motion.div key={index} variants={staggerChild}>
+                                            <Link key={index} href={`/team/${member.id}`} className='w-full'>
+                                                <div className='grid gap-2 relative'>
+                                                    <div style={{ backgroundColor: member.color }} className={`rounded-3xl hover:scale-105 transition-all duration-300 flex items-end justify-center pt-8`}>
+                                                        <div className='relative w-full aspect-square overflow-hidden'>
+                                                            <Image
+                                                                src={member.image}
+                                                                alt={member.name}
+                                                                fill
+                                                                className='object-cover'
+                                                            />
+                                                        </div>
                                                     </div>
+                                                    <h2 className="text-xl font-bold mt-4">{member.name}</h2>
                                                 </div>
-                                                <h2 className="text-xl font-bold mt-4">{member.name}</h2>
-                                            </div>
-                                        </Link>
+                                            </Link>
+                                        </motion.div>
                                     ))
                                 }
-                            </div>
+                            </motion.div>
                         </div>
-                    </div>
+                    </motion.div>
                 }
 
                 {activeTab === "credits" && <div className='flex flex-col space-y-8 h-full text-white'>
