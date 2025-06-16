@@ -79,14 +79,14 @@ export default function Page() {
                 {activeTab === "home" &&
                     <div className='h-full w-full relative text-white'>
                         <Image src="/team/home-bg.png" alt="team" fill className='object-contain' />
-                        <div className="fixed bottom-0 left-0 right-0 z-20 py-6 h-1/2 flex items-end bg-gradient-to-t from-black/80 to-transparent px-10">
-                            <div className='max-w-md space-y-2 relative left-10 bottom-16 text-2xl'>
+                        <motion.div className="fixed bottom-0 left-0 right-0 z-20 py-6 h-1/2 flex items-end bg-gradient-to-t from-black/80 to-transparent px-10">
+                            <motion.div initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} className='max-w-md space-y-2 relative left-10 bottom-16 text-2xl'>
                                 <h2>Meet the Team <span className='border border-white rounded-md text-base p-0.5'>Extraordinary Individuals</span></h2>
                                 <p>
                                     From flop to funded — Dom and Larry turn startup chaos into gold.
                                 </p>
-                            </div>
-                        </div>
+                            </motion.div>
+                        </motion.div>
                     </div>
                 }
 
