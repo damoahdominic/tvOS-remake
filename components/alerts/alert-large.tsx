@@ -208,7 +208,7 @@ export const AlertButton = ({ children, text, onClick, isFocused, setFocusedInde
       onClick={onClick}
       data-focused={isFocused ? 'true' : 'false'}
       className={`group focusable-alert-large-item rounded-md w-full px-2 py-1 flex items-center justify-center backdrop-blur-[50px] transition-all duration-500 hover:bg-white hover:apple-active-item-shadow ${isFocused
-        ? 'bg-white apple-active-item-shadow'
+        ? 'bg-white apple-active-item-shadow z-[1]'
         : 'bg-white/30'
         }`}
     >
