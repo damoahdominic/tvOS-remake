@@ -2,7 +2,7 @@ import React from 'react'
 
 export default function AppleTvLayout({ children, }: Readonly<{ children: React.ReactNode; }>) {
     return (
-        <div className='flex flex-col items-center justify-center h-screen'>
+        <div className='flex flex-col items-center justify-center h-svh'>
             <div
                 className={`fixed inset-0 transition-all duration-500 backdrop-blur-3xl`}
             />

@@ -34,7 +34,7 @@ export default function Page() {
     }, [])
 
     return (
-        <main className='relative w-full h-svh'>
+        <section className='relative w-full h-full z-50'>
             {
                 currentPage === "home" ? <HomePage />
                     // :
@@ -42,6 +42,6 @@ export default function Page() {
                     :
                     <SearchPage />
             }
-        </main>
+        </section>
     )
 }
