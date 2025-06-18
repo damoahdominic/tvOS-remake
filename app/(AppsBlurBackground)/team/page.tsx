@@ -26,11 +26,25 @@ const resources = [
     }
 ]
 
+const staggerContainer = {
+    hidden: {},
+    show: {
+        transition: {
+            staggerChildren: 0.1,
+        },
+    },
+};
+
+const staggerChild = {
+    hidden: { opacity: 0, y: 20 },
+    show: { opacity: 1, y: 0 },
+};
+
 export default function Page() {
-    const [activeTab, setActiveTab] = useState(tabs[1].id);
+    const [activeTab, setActiveTab] = useState(tabs[0].id);
 
     return (
-        <div className='overflow-auto h-full'>
+        <div className={`overflow-auto h-full ${activeTab === "home" && "bg-[#C4A5CD]"}`}>
             <div className='absolute top-5 z-40 w-full flex justify-center'>
                 <motion.div className="flex space-x-1 bg-[#090909CC] rounded-full">
                     {tabs.map((tab) => (
@@ -38,7 +52,7 @@ export default function Page() {
                             key={tab.id}
                             onClick={() => setActiveTab(tab.id)}
                             className={`${activeTab === tab.id ? "" : "hover:text-white/60"
-                                } relative rounded-full px-3 py-1.5 text-sm font-medium text-white outline-sky-400 transition focus-visible:outline-2`}
+                                } relative rounded-full px-5 py-3 text-lg font-medium text-white outline-sky-400 transition focus-visible:outline-2`}
                             style={{
                                 WebkitTapHighlightColor: "transparent",
                             }}
@@ -46,7 +60,7 @@ export default function Page() {
                             {activeTab === tab.id && (
                                 <motion.div
                                     // layoutId="bubble"
-                                    className="absolute inset-0 z-10 bg-white mix-blend-difference rounded-full"
+                                    className="absolute inset-0 z-50 py-8 bg-white -translate-y-1.5 mix-blend-difference rounded-full"
                                     initial={false}
                                     transition={{
                                         type: "spring",
@@ -61,51 +75,76 @@ export default function Page() {
                 </motion.div>
             </div>
 
-            <div className='pt-20 h-full'>
-                {activeTab === "team" &&
-                    <div className='flex flex-col space-y-12 h-full px-10 mt-10'>
-                        <div className='space-y-6'>
-                            <h1 className='text-xl md:text-3xl font-bold'>Engineering Team</h1>
-                            <div className='grid grid-cols-1 lg:grid-cols-3 gap-10'>
-                                {
-                                    engineeringTeam.map((member, index) => (
-                                        <Link key={index} href={`/team/${member.id}`} className='w-full'>
-                                            <div className='grid gap-2 relative'>
-                                                <div style={{ backgroundColor: member.color }} className={`rounded-3xl hover:scale-105 transition-all duration-300 flex items-end justify-center pt-8`}>
-                                                    <div className='relative w-full aspect-square'>
-                                                        <Image src={member.image} alt={member.name} fill />
-                                                    </div>
-                                                </div>
-                                                <h2 className="text-xl font-bold mt-4">{member.name}</h2>
-                                            </div>
-                                        </Link>
-                                    ))
-                                }
-                            </div>
-                        </div>
-                        <div className='space-y-6 pb-12'>
-                            <h1 className='text-xl md:text-3xl font-bold'>Design Team</h1>
-                            <div className='grid grid-cols-1 lg:grid-cols-3 gap-10'>
-                                {
-                                    designTeam.map((member, index) => (
-                                        <Link key={index} href={`/team/${member.id}`} className='w-full'>
-                                            <div className='grid gap-2 relative'>
-                                                <div style={{ backgroundColor: member.color }} className={`rounded-3xl hover:scale-105 transition-all duration-300 flex items-end justify-center pt-8`}>
-                                                    <div className='relative w-full aspect-square'>
-                                                        <Image src={member.image} alt={member.name} fill />
-                                                    </div>
-                                                </div>
-                                                <h2 className="text-xl font-bold mt-4">{member.name}</h2>
-                                            </div>
-                                        </Link>
-                                    ))
-                                }
-                            </div>
-                        </div>
+            <div className='pt-20 h-full text-white'>
+                {activeTab === "home" &&
+                    <div className='h-full w-full relative text-white'>
+                        <Image src="/team/home-bg.png" alt="team" fill className='object-contain' />
+                        <motion.div className="fixed bottom-0 left-0 right-0 z-20 py-6 h-1/2 flex items-end bg-gradient-to-t from-black/80 to-transparent px-10">
+                            <motion.div initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} className='max-w-md space-y-2 relative left-10 bottom-16 text-2xl'>
+                                <h2>Meet the Team <span className='border border-white rounded-md text-base p-0.5'>Extraordinary Individuals</span></h2>
+                                <p>
+                                    From flop to funded — Dom and Larry turn startup chaos into gold.
+                                </p>
+                            </motion.div>
+                        </motion.div>
                     </div>
                 }
 
-                {activeTab === "credits" && <div className='flex flex-col space-y-8 h-full'>
+                {activeTab === "team" &&
+                    <motion.div className='flex flex-col space-y-12 h-full px-10 mt-10'>
+                        <div className='space-y-6'>
+                            <h1 className='text-xl md:text-3xl font-bold'>Engineering Team</h1>
+                            {/* Stagger items bellow */}
+                            <motion.div variants={staggerContainer} initial="hidden" animate="show" className='grid grid-cols-1 lg:grid-cols-3 gap-10'>
+                                {/* Stagger items */}
+                                {
+                                    engineeringTeam.map((member, index) => (
+                                        <motion.div key={index} variants={staggerChild}>
+                                            <Link href={`/team/${member.id}`} className='w-full'>
+                                                <div className='grid gap-2 relative'>
+                                                    <div style={{ backgroundColor: member.color }} className={`rounded-3xl hover:scale-105 transition-all duration-300 flex items-end justify-center pt-8`}>
+                                                        <div className='relative w-full aspect-square'>
+                                                            <Image src={member.image} alt={member.name} fill />
+                                                        </div>
+                                                    </div>
+                                                    <h2 className="text-xl font-bold mt-4">{member.name}</h2>
+                                                </div>
+                                            </Link>
+                                        </motion.div>
+                                    ))
+                                }
+                            </motion.div>
+                        </div>
+                        <div className='space-y-6 pb-12'>
+                            <h1 className='text-xl md:text-3xl font-bold'>Design Team</h1>
+                            <motion.div variants={staggerContainer} initial="hidden" animate="show" className='grid grid-cols-1 lg:grid-cols-3 gap-10'>
+                                {
+                                    designTeam.map((member, index) => (
+                                        <motion.div key={index} variants={staggerChild}>
+                                            <Link key={index} href={`/team/${member.id}`} className='w-full'>
+                                                <div className='grid gap-2 relative'>
+                                                    <div style={{ backgroundColor: member.color }} className={`rounded-3xl hover:scale-105 transition-all duration-300 flex items-end justify-center pt-8`}>
+                                                        <div className='relative w-full aspect-square overflow-hidden'>
+                                                            <Image
+                                                                src={member.image}
+                                                                alt={member.name}
+                                                                fill
+                                                                className='object-cover'
+                                                            />
+                                                        </div>
+                                                    </div>
+                                                    <h2 className="text-xl font-bold mt-4">{member.name}</h2>
+                                                </div>
+                                            </Link>
+                                        </motion.div>
+                                    ))
+                                }
+                            </motion.div>
+                        </div>
+                    </motion.div>
+                }
+
+                {activeTab === "credits" && <div className='flex flex-col space-y-8 h-full text-white'>
                     <div className='px-10'>
                         <h1 className='text-3xl font-bold'>Resources</h1>
                         <div className='grid grid-cols-3 gap-4 mt-8'>

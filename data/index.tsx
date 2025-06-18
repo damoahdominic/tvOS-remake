@@ -1,7 +1,6 @@
 "use client"
-import { AppleMusicBackground } from "@/components/appple-music-background";
 import Image from "next/image";
-import { motion } from "framer-motion";
+// import { motion } from "framer-motion";
 export interface AppItemType {
   appIconUrl: string;
   appName: string;
@@ -125,10 +124,10 @@ export const defaultLockScreenConfig: LockScreenConfig = {
 
 export const ALERT_DIALOG_ID = "tvos-dialog";
 
-const titleTransition = { duration: 0.45, delay: 1 };
-const subtitleTransition = { duration: 0.45, delay: 1.35 };
-const animate = { opacity: 1, x: 0 };
-const initial = { opacity: 0, x: -20 };
+// const titleTransition = { duration: 0.45, delay: 1 };
+// const subtitleTransition = { duration: 0.45, delay: 1.35 };
+// const animate = { opacity: 1, x: 0 };
+// const initial = { opacity: 0, x: -20 };
 
 export const apps: AppItemType[] = [
   {
@@ -142,29 +141,34 @@ export const apps: AppItemType[] = [
       foreground: "/app-bg/apple-tv/splash-fg.svg",
     },
     backgrounds: [
+      // {
+      //   image: "/app-bg/apple-tv/2.png",
+      //   content: (
+      //     <div className="relative px-10 size-full flex items-center justify-center">
+      //       <Image
+      //         src={"/apps/foreground/apple-tv.svg"}
+      //         className="absolute top-[3%] left-[4%]"
+      //         width={200}
+      //         height={61}
+      //         alt={"severance"}
+      //       />
+      //       <div className="size-full flex items-center justify-center">
+      //         <Image
+      //           src={"/dom_larry_new.svg"}
+      //           className="pb-20"
+      //           width={400}
+      //           height={61}
+      //           alt={"severance"}
+      //         />
+      //       </div>
+      //     </div>
+      //   ),
+      // },
       {
-        image: "/app-bg/apple-tv/2.png",
-        content: (
-          <div className="relative px-10 size-full flex items-center justify-center">
-            <Image
-              src={"/apps/foreground/apple-tv.svg"}
-              className="absolute top-[3%] left-[4%]"
-              width={200}
-              height={61}
-              alt={"severance"}
-            />
-            <div className="size-full flex items-center justify-center">
-              <Image
-                src={"/apps/foreground/dom-n-larry.svg"}
-                className="pb-20"
-                width={400}
-                height={61}
-                alt={"severance"}
-              />
-            </div>
-          </div>
-        ),
+        image: "/app-bg/apple-tv/3.png",
+        content: null,
       },
+      
     ],
   },
   {
@@ -174,14 +178,15 @@ export const apps: AppItemType[] = [
     shouldShowAppName: false,
     hasSplashScreen: true,
     splash: {
-      background: "/app-bg/arcade/splash-bg.png",
-      foreground: "/d.png",
+      background: "/app-bg/d-studios/splash-bg.png",
+      foreground: "/app-bg/d-studios/splash-fg.svg",
     },
-    // backgrounds: [
-    //   {
-    //     image: "/app-bg/arcade/1.png",
-    //   },
-    // ],
+    backgrounds: [
+      {
+        image: "/app-bg/d-studios/1.png",
+        content: null,
+      },
+    ],
   },
   // {
   //   appIconUrl: "/apps/arcade.svg",
@@ -203,20 +208,12 @@ export const apps: AppItemType[] = [
     appIconUrl: "/apps/settings.svg",
     appName: "Settings",
     href: "/settings",
-    hasSplashScreen: false,
+    hasSplashScreen: true,
+    splash: {
+      background: "/app-bg/settings/splash-bg.png",
+      foreground: "/app-bg/settings/splash-fg.svg",
+    },
     shouldShowAppName: false,
-    backgrounds: [
-      {
-        image: "/app-bg/fitness/1.png",
-        content: (
-          <div className="relative px-10 bg-black  gap-3 size-full flex-col flex items-center justify-center font-semibold text-white">
-            <p className="text-4xl">
-              Play 200+ Games. No in-App Purchases. No Ads.
-            </p>
-          </div>
-        ),
-      },
-    ],
   },
   {
     appIconUrl: "/apps/photos.svg",
@@ -228,116 +225,73 @@ export const apps: AppItemType[] = [
       foreground: "/app-bg/photos/splash-fg.svg",
     },
     shouldShowAppName: false,
-    backgrounds: [
-      {
-        image: "/app-bg/photos/1.png",
-        content: (
-          <div className="relative px-10 top-[5%] gap-5 font-semibold text-white">
-            <motion.h2 initial={initial} animate={animate} transition={titleTransition} exit={initial} className="text-4xl">Trip to the Hamptons</motion.h2>
-            <motion.p initial={initial} animate={animate} transition={subtitleTransition} exit={initial} className="text-xl">August 2022</motion.p>
-          </div>
-        ),
-      },
-      {
-        image: "/app-bg/photos/2.png",
-        content: (
-          <div className="relative px-10 top-[5%] gap-5 size-full flex-col flex items-center justify-center font-semibold text-white">
-            <motion.h2 initial={initial} animate={animate} transition={titleTransition} exit={initial} className="text-4xl">Trip to the Hamptons</motion.h2>
-            <motion.p initial={initial} animate={animate} transition={subtitleTransition} exit={initial} className="text-xl">March 2024</motion.p>
-          </div>
-        ),
-      },
-      {
-        image: "/app-bg/photos/3.png",
-        content: (
-          <div className="relative px-10 h-full flex-col gap-5 flex justify-center font-semibold text-white">
-            <motion.h2 initial={initial} animate={animate} transition={titleTransition} exit={initial} className="text-4xl">Trip to the Hamptons</motion.h2>
-            <motion.p initial={initial} animate={animate} transition={subtitleTransition} exit={initial} className="text-xl">March 2024</motion.p>
-          </div>
-        ),
-      },
-      {
-        image: "/app-bg/photos/4.png",
-        content: (
-          <div className="relative px-10 top-[5%] gap-5 font-semibold text-white">
-            <motion.h2 initial={initial} animate={animate} transition={titleTransition} exit={initial} className="text-4xl">Weekend Trip</motion.h2>
-            <motion.p initial={initial} animate={animate} transition={subtitleTransition} exit={initial} className="text-xl">Trip to the Hamptons</motion.p>
-          </div>
-        ),
-      },
-      {
-        image: "/app-bg/photos/5.png",
-        content: (
-          <div className="relative px-10 top-[5%] gap-5 size-full flex-col flex items-center justify-center font-semibold text-white">
-            <motion.h2 initial={initial} animate={animate} transition={titleTransition} exit={initial} className="text-4xl">Landscape Shots</motion.h2>
-            <motion.p initial={initial} animate={animate} transition={subtitleTransition} exit={initial} className="text-xl">July 2023</motion.p>
-          </div>
-        ),
-      },
-      {
-        image: "/app-bg/photos/6.png",
-        content: (
-          <div className="relative px-10 h-full flex-col gap-5 flex justify-center font-semibold text-white">
-            <motion.h2 initial={initial} animate={animate} transition={titleTransition} exit={initial} className="text-4xl">Accra Ghana</motion.h2>
-            <motion.p initial={initial} animate={animate} transition={subtitleTransition} exit={initial} className="text-xl">December 2024</motion.p>
-          </div>
-        ),
-      },
-    ],
+    // backgrounds: [
+    //   {
+    //     image: "/app-bg/photos/1.png",
+    //     content: (
+    //       <div className="relative px-10 top-[5%] gap-5 font-semibold text-white">
+    //         <motion.h2 initial={initial} animate={animate} transition={titleTransition} exit={initial} className="text-4xl">Trip to the Hamptons</motion.h2>
+    //         <motion.p initial={initial} animate={animate} transition={subtitleTransition} exit={initial} className="text-xl">August 2022</motion.p>
+    //       </div>
+    //     ),
+    //   },
+    //   {
+    //     image: "/app-bg/photos/2.png",
+    //     content: (
+    //       <div className="relative px-10 top-[5%] gap-5 size-full flex-col flex items-center justify-center font-semibold text-white">
+    //         <motion.h2 initial={initial} animate={animate} transition={titleTransition} exit={initial} className="text-4xl">Trip to the Hamptons</motion.h2>
+    //         <motion.p initial={initial} animate={animate} transition={subtitleTransition} exit={initial} className="text-xl">March 2024</motion.p>
+    //       </div>
+    //     ),
+    //   },
+    //   {
+    //     image: "/app-bg/photos/3.png",
+    //     content: (
+    //       <div className="relative px-10 h-full flex-col gap-5 flex justify-center font-semibold text-white">
+    //         <motion.h2 initial={initial} animate={animate} transition={titleTransition} exit={initial} className="text-4xl">Trip to the Hamptons</motion.h2>
+    //         <motion.p initial={initial} animate={animate} transition={subtitleTransition} exit={initial} className="text-xl">March 2024</motion.p>
+    //       </div>
+    //     ),
+    //   },
+    //   {
+    //     image: "/app-bg/photos/4.png",
+    //     content: (
+    //       <div className="relative px-10 top-[5%] gap-5 font-semibold text-white">
+    //         <motion.h2 initial={initial} animate={animate} transition={titleTransition} exit={initial} className="text-4xl">Weekend Trip</motion.h2>
+    //         <motion.p initial={initial} animate={animate} transition={subtitleTransition} exit={initial} className="text-xl">Trip to the Hamptons</motion.p>
+    //       </div>
+    //     ),
+    //   },
+    //   {
+    //     image: "/app-bg/photos/5.png",
+    //     content: (
+    //       <div className="relative px-10 top-[5%] gap-5 size-full flex-col flex items-center justify-center font-semibold text-white">
+    //         <motion.h2 initial={initial} animate={animate} transition={titleTransition} exit={initial} className="text-4xl">Landscape Shots</motion.h2>
+    //         <motion.p initial={initial} animate={animate} transition={subtitleTransition} exit={initial} className="text-xl">July 2023</motion.p>
+    //       </div>
+    //     ),
+    //   },
+    //   {
+    //     image: "/app-bg/photos/6.png",
+    //     content: (
+    //       <div className="relative px-10 h-full flex-col gap-5 flex justify-center font-semibold text-white">
+    //         <motion.h2 initial={initial} animate={animate} transition={titleTransition} exit={initial} className="text-4xl">Accra Ghana</motion.h2>
+    //         <motion.p initial={initial} animate={animate} transition={subtitleTransition} exit={initial} className="text-xl">December 2024</motion.p>
+    //       </div>
+    //     ),
+    //   },
+    // ],
   },
   {
     appIconUrl: "/apps/apple-music.svg",
     appName: "Apple Music",
     href: "/apple-music",
-    hasSplashScreen: false,
+    hasSplashScreen: true,
+    splash: {
+      background: "/app-bg/apple-music/splash-bg.png",
+      foreground: "/app-bg/apple-music/splash-fg.svg",
+    },
     shouldShowAppName: false,
-    backgrounds: [
-      {
-        image: "/app-bg/apple-music/bg1.png",
-        content: (
-          <AppleMusicBackground
-            title="THE AGENDA"
-            description='Nemzz and Central Cee have a "DILEMMA"'
-          />
-        ),
-      },
-      {
-        image: "/app-bg/apple-music/bg2.png",
-        content: (
-          <AppleMusicBackground
-            title="R&B NOW"
-            description='ODUMODUBLVK takes on a leadership role on "LEGOLAS"'
-          />
-        ),
-      },
-      {
-        image: "/app-bg/apple-music/bg3.png",
-        content: (
-          <AppleMusicBackground
-            title="AFRICA NOW"
-            description='ODUMODUBLVK takes on a leadership role on "LEGOLAS".'
-          />
-        ),
-      },
-      {
-        image: "/app-bg/apple-music/bg4.png",
-        content: (
-          <AppleMusicBackground
-            title="RAP LIFE"
-            description={`Riky Rick's "Chise Ngaposta" is a bold salute ro a high-flying icon.`}
-          />
-        ),
-      },
-      {
-        image: "/app-bg/apple-music/bg5.png",
-        content: (
-          <AppleMusicBackground
-            title="Riky Rick's 'Chise Ngaposta” is a bold salute ro a high-flying icon."
-            description="The R&B queen re-emerges as a soul diva."
-          />
-        ),
-      },
-    ],
   },
   {
     appIconUrl: "/apps/app-store.svg",
@@ -442,7 +396,7 @@ export const apps: AppItemType[] = [
             <p className="text-7xl">
               Fitness for all.
               <br />
-              Fitness for you.
+              Fitness for you.
             </p>
           </div>
         ),
@@ -474,7 +428,7 @@ export const apps: AppItemType[] = [
             <p className="text-6xl">
               Fitness for all.
               <br />
-              Fitness for you.
+              Fitness for you.
             </p>
           </div>
         ),

@@ -17,6 +17,7 @@ interface AppContextType {
         row: number;
         col: number;
     }>>
+    onGoBack: () => void
 }
 
 const AppContext = createContext<AppContextType>({
@@ -25,7 +26,8 @@ const AppContext = createContext<AppContextType>({
     isFullscreen: false,
     setIsFullscreen: () => { },
     lastFocusedPosition: { row: 1, col: 1 },
-    setLastFocusedPosition:() => {}
+    setLastFocusedPosition: () => { },
+    onGoBack: () => { }
 });
 
 export function AppProvider({
@@ -39,10 +41,14 @@ export function AppProvider({
     const [minBootTimeElapsed, setMinBootTimeElapsed] = useState(false);
     const preloaderStatus = useImagePreloader(appData, 6); // Preload first 6 apps
     const [isFullscreen, setIsFullscreen] = useState(false);
-    const [lastFocusedPosition, setLastFocusedPosition] = useState<{ row: number; col: number }>({ row: 1, col: 1 });
+    const [lastFocusedPosition, setLastFocusedPosition] = useState<{ row: number; col: number }>({ row: 0, col: 0 });
 
     const pathname = usePathname();
     const router = useTransitionRouter();
+
+    const onGoBack = () => {
+        router.back();
+    }
 
     // Minimum boot time effect - ensures boot screen shows for at least 5 seconds
     useEffect(() => {
@@ -99,6 +105,7 @@ export function AppProvider({
             isFullscreen,
             setIsFullscreen,
             setLastFocusedPosition,
+            onGoBack,
             lastFocusedPosition,
             loadingProgress: preloaderStatus.progress
         }}>
