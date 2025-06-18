@@ -301,13 +301,17 @@ const BackgroundCarousel = ({ focusedApp, scrolled, isExpanded }: { focusedApp: 
                 }}
                 className="fixed inset-0 w-full h-full"
             >
+                {typeof background === "string" ?
+                    <div
+                    className={`fixed inset-0 w-full h-svh transition-all duration-300 ${background} ${scrolled ? "blur-xl" : ""}`} />
+                    :
                 <Image
                     width={1000}
                     height={1000}
                     src={typeof background === "string" ? background : background.image}
                     alt={`${app.appName} background`}
                     className={`fixed inset-0 w-full h-svh object-cover transition-all duration-300 ${scrolled ? "blur-xl" : ""}`}
-                />
+                />}
 
                 {/* Render splash foreground if showing splash */}
                 {foregroundSrc && (

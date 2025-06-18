@@ -164,7 +164,8 @@ export const apps: AppItemType[] = [
     shouldShowAppName: false,
     hasSplashScreen: true,
     splash: {
-      background: "/app-bg/apple-tv/splash-bg.png",
+      background: "apple-tv-bg",
+      // background: "/app-bg/apple-tv/splash-bg.png",
       foreground: "/app-bg/apple-tv/splash-fg.svg",
     },
     backgrounds: [
@@ -205,7 +206,8 @@ export const apps: AppItemType[] = [
     shouldShowAppName: false,
     hasSplashScreen: true,
     splash: {
-      background: "/app-bg/d-studios/splash-bg.png",
+      background: "team-bg",
+      // background: "/app-bg/d-studios/splash-bg.png",
       foreground: "/app-bg/d-studios/splash-fg.svg",
     },
     backgrounds: [
@@ -237,7 +239,8 @@ export const apps: AppItemType[] = [
     href: "/settings",
     hasSplashScreen: true,
     splash: {
-      background: "/app-bg/settings/splash-bg.png",
+      background: "settings-bg",
+      // background: "/app-bg/settings/splash-bg.png",
       foreground: "/app-bg/settings/splash-fg.svg",
     },
     shouldShowAppName: false,
@@ -248,7 +251,8 @@ export const apps: AppItemType[] = [
     href: "/photos",
     hasSplashScreen: true,
     splash: {
-      background: "/app-bg/photos/splash-bg.png",
+      background: "photos-bg",
+      // background: "/app-bg/photos/splash-bg.png",
       foreground: "/app-bg/photos/splash-fg.svg",
     },
     shouldShowAppName: false,
@@ -315,7 +319,8 @@ export const apps: AppItemType[] = [
     href: "/apple-music",
     hasSplashScreen: true,
     splash: {
-      background: "/app-bg/apple-music/splash-bg.png",
+      // background: "/app-bg/apple-music/splash-bg.png",
+      background: "apple-music-bg",
       foreground: "/app-bg/apple-music/splash-fg.svg",
     },
     shouldShowAppName: false,
@@ -326,7 +331,8 @@ export const apps: AppItemType[] = [
     href: "/app-store",
     hasSplashScreen: true,
     splash: {
-      background: "/app-bg/store/splash-bg.png",
+      background: "app-store-bg",
+      // background: "/app-bg/store/splash-bg.png",
       foreground: "/app-bg/store/splash-fg.svg",
     },
     // backgrounds: [

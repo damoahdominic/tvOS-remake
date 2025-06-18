@@ -95,6 +95,25 @@ body {
     transition-duration: 300ms;
 }
 
+.apple-tv-bg {
+background: linear-gradient(180deg, #3A3A3C 40.22%, #202122 100%);
+}
+.team-bg {
+  background: linear-gradient(180deg, #3D3D3D 0%, #030303 100%);
+}
+.settings-bg {
+  background: linear-gradient(180deg, #D0D4DA 0%, #8B8F93 100%);
+}
+.photos-bg {
+background: linear-gradient(180deg, #FFFFFF 0%, #E0E0E0 100%);
+}
+.apple-music-bg {
+background: linear-gradient(180deg, #FB5976 0%, #FA243B 100%);
+}
+.app-store-bg {
+background: linear-gradient(180deg, #19E6FF 0%, #1C70F2 100%);
+}
+
 svg {
       width: 40px;
       height: 40px;
