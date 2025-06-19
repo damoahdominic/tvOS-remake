@@ -34,7 +34,7 @@ export default function Page() {
     }, [])
 
     return (
-        <section className='relative w-full h-full z-50'>
+        <section className='h-full'>
             {
                 currentPage === "home" ? <HomePage />
                     // :
