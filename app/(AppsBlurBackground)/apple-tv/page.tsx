@@ -8,30 +8,31 @@ import React from 'react'
 type AppleTvPageTypes = "search" | "home" | "library"
 
 export default function Page() {
-    const [currentPage] = React.useState<AppleTvPageTypes>('home')
+    const [currentPage, setCurrentPage] = React.useState<AppleTvPageTypes>('home')
+    console.log("🚀 ~ Page ~ currentPage:", currentPage)
 
     // get the value with # in the url say #search show be return search
-    // React.useEffect(() => {
-    //     window.addEventListener('hashchange', () => {
-    //         const hash = window.location.hash.substring(1)
-    //         if (hash) {
-    //             setCurrentPage(hash as AppleTvPageTypes)
-    //         } else {
-    //             setCurrentPage('search')
-    //         }
-    //     })
+    React.useEffect(() => {
+        window.addEventListener('hashchange', () => {
+            const hash = window.location.hash.substring(1)
+            if (hash) {
+                setCurrentPage(hash as AppleTvPageTypes)
+            } else {
+                setCurrentPage('home')
+            }
+        })
 
-    //     return () => {
-    //         window.removeEventListener('hashchange', () => {
-    //             const hash = window.location.hash.substring(1)
-    //             if (hash) {
-    //                 setCurrentPage(hash as AppleTvPageTypes)
-    //             } else {
-    //                 setCurrentPage('search')
-    //             }
-    //         })
-    //     }
-    // }, [])
+        return () => {
+            window.removeEventListener('hashchange', () => {
+                const hash = window.location.hash.substring(1)
+                if (hash) {
+                    setCurrentPage(hash as AppleTvPageTypes)
+                } else {
+                    setCurrentPage('home')
+                }
+            })
+        }
+    }, [])
 
     return (
         <section className='h-full'>
