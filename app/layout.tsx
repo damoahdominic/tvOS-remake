@@ -53,7 +53,7 @@ export default function RootLayout({
                         images={lockScreenImages}
                         config={lockScreenConfig}
                         autoLockAfter={300000} // Auto-lock after 5 minutes of inactivity
-                        initialLocked={true}   // Start with lock screen shown
+                        initialLocked={false}   // Start with lock screen shown
                       >
                         <GridNavigationProvider>
                           <BackgroundProvider>

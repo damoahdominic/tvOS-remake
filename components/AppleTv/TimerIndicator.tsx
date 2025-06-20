@@ -16,7 +16,7 @@ export const TimerIndicator: React.FC<TimerIndicatorProps> = ({
     total
 }) => {
     // Calculate width based on whether it's active or not
-    const baseWidth = 60; // Base width of the active indicator in pixels
+    const baseWidth = 30; // Base width of the active indicator in pixels
     const inactiveWidth = 8; // Width of inactive indicators
     const gap = 4; // Gap between indicators
 

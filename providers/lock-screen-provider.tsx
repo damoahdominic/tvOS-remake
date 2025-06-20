@@ -38,7 +38,7 @@ export const LockScreenProvider: React.FC<LockScreenProviderProps> = ({
     images,
     config,
     autoLockAfter = 0,
-    initialLocked = true
+    initialLocked = false
 }) => {
     const [isLocked, setIsLocked] = useState(initialLocked);
     const [userActivity, setUserActivity] = useState(Date.now());

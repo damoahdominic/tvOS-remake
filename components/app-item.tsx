@@ -13,6 +13,8 @@ interface Props {
   col?: number;
   row?: number;
   focused?: boolean;
+  showBadge?: boolean;
+  badgeCount?: number;
   isFolder?: boolean;
   setFocusedPosition: (position: { row: number; col: number }) => void;
   setLastFocusedPosition: (position: { row: number; col: number }) => void;
@@ -28,6 +30,8 @@ const AppItem = memo(
         appName,
         href,
         col,
+        showBadge,
+        badgeCount,
         row,
         focused,
         setLastFocusedPosition
@@ -87,6 +91,11 @@ const AppItem = memo(
               router.push(href)
             }}
           />
+          {showBadge && (
+            <div className="absolute top-0 right-0 bg-red-500 text-white text-sm rounded-full size-6 flex items-center justify-center">
+              {badgeCount}
+            </div>
+          )}
         </motion.button>
       );
     }

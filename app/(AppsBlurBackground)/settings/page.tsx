@@ -5,6 +5,7 @@ import React, { useEffect, useRef, useState } from 'react'
 import { ScrollArea } from "@/components/ui/scroll-area"
 import { motion, AnimatePresence } from 'framer-motion';
 import { useTransitionRouter } from 'next-view-transitions'
+import EscapeNotice from '@/components/EscapeNotice'
 
 // Define types for menu items
 interface MenuItem {
@@ -129,6 +130,39 @@ const settingsData: SettingsData = {
         { id: 'location', label: 'Location Services', hasSubmenu: false, description: 'Manage which apps can access your location' },
         { id: 'analytics', label: 'Analytics & Improvements', hasSubmenu: false, description: 'Share usage data with Apple' },
         { id: 'ads', label: 'Apple Advertising', hasSubmenu: false, description: 'Personalized ads in Apple apps' }
+    ],
+    screen: [
+        { id: 'resolution', label: 'Resolution', hasSubmenu: false, description: 'Set screen resolution (4K, 1080p, etc.)' },
+        { id: 'calibration', label: 'Calibration', hasSubmenu: false, description: 'Calibrate color and brightness' },
+        { id: 'hdmi', label: 'HDMI Settings', hasSubmenu: false, description: 'HDMI-CEC, Range, Format' },
+        { id: 'appearance', label: 'Appearance', hasSubmenu: false, description: 'Light, Dark, or Auto' }
+    ],
+    audio: [
+        { id: 'audioformat', label: 'Audio Format', hasSubmenu: false, description: 'Dolby Atmos, Stereo, etc.' },
+        { id: 'volume', label: 'Volume', hasSubmenu: false, description: 'Adjust system volume' },
+        { id: 'subtitles', label: 'Subtitles & Captioning', hasSubmenu: false, description: 'Subtitle style and language' },
+        { id: 'soundeffects', label: 'Sound Effects', hasSubmenu: false, description: 'Navigation clicks, sound feedback' }
+    ],
+    network: [
+        { id: 'wifi', label: 'Wi-Fi', hasSubmenu: false, description: 'Connect to a Wi-Fi network' },
+        { id: 'ethernet', label: 'Ethernet', hasSubmenu: false, description: 'Wired network settings' },
+        { id: 'status', label: 'Connection Status', hasSubmenu: false, description: 'View current network status' },
+        { id: 'advanced', label: 'Advanced', hasSubmenu: false, description: 'IP, DNS, Proxy, etc.' }
+    ],
+    apps: [
+        { id: 'installed', label: 'Installed Apps', hasSubmenu: false, description: 'Manage or uninstall apps' },
+        { id: 'storage', label: 'Storage', hasSubmenu: false, description: 'View app storage usage' },
+        { id: 'permissions', label: 'Permissions', hasSubmenu: false, description: 'App permissions and access' }
+    ],
+    accounts: [
+        { id: 'appleid', label: 'Apple ID', hasSubmenu: false, description: 'Manage your Apple ID' },
+        { id: 'users', label: 'Users & Profiles', hasSubmenu: false, description: 'Switch or add users' },
+        { id: 'subscriptions', label: 'Subscriptions', hasSubmenu: false, description: 'Manage subscriptions' }
+    ],
+    about: [
+        { id: 'system', label: 'System Information', hasSubmenu: false, description: 'Device name, model, serial number' },
+        { id: 'legal', label: 'Legal', hasSubmenu: false, description: 'Licenses, terms, and conditions' },
+        { id: 'regulatory', label: 'Regulatory', hasSubmenu: false, description: 'Regulatory information' }
     ]
 };
 
@@ -187,17 +221,20 @@ const Page = () => {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [currentMenu, focusedIndex]);
 
+    // Defensive: fallback to empty array if menu key is missing
+    const currentMenuItems = settingsData[currentMenu] || [];
+
     // Set focus when focusedIndex changes
     useEffect(() => {
         if (itemRefs.current[focusedIndex]) {
             itemRefs.current[focusedIndex]?.focus();
         }
-    }, [focusedIndex]);
+    }, [focusedIndex, currentMenuItems.length]);
 
     // Initialize refs when currentMenu changes
     useEffect(() => {
-        itemRefs.current = itemRefs.current.slice(0, settingsData[currentMenu].length);
-    }, [currentMenu]);
+        itemRefs.current = itemRefs.current.slice(0, currentMenuItems.length);
+    }, [currentMenu, currentMenuItems.length]);
 
     // Navigate to submenu
     const navigateForward = (menuId: string) => {
@@ -262,8 +299,9 @@ const Page = () => {
 
     return (
         <div className='h-full my-10'>
+            <EscapeNotice className='absolute top-5 left-5 z-50' />
             {/* Title */}
-            <h1 className='text-4xl font-bold text-center text-white'>{menuPaths[currentMenu][menuPaths[currentMenu].length - 1]}</h1>
+            <h1 className='text-4xl font-bold text-center text-white'>{menuPaths[currentMenu]?.[menuPaths[currentMenu].length - 1] || 'Settings'}</h1>
 
             {/* Main Content */}
             <div className='grid grid-cols-2 w-full h-full'>
@@ -289,8 +327,8 @@ const Page = () => {
                                 exit={{ opacity: 0 }}
                                 transition={{ duration: 0.3 }}
                             >
-                                {settingsData[currentMenu][focusedIndex]?.description ? (
-                                    <p className="text-base">{settingsData[currentMenu][focusedIndex].description}</p>
+                                {currentMenuItems[focusedIndex]?.description ? (
+                                    <p className="text-base">{currentMenuItems[focusedIndex].description}</p>
                                 ) : (
                                     <p className="text-xs">Use arrow keys to navigate • Press right arrow or Enter to select • Press left arrow or Esc to go back</p>
                                 )}
@@ -312,7 +350,7 @@ const Page = () => {
                             className="py-4"
                         >
                             <div className="space-y-2">
-                                {settingsData[currentMenu].map((item, index) => (
+                                {currentMenuItems.map((item, index) => (
                                     <SettingsItem
                                         key={item.id}
                                         // eslint-disable-next-line @typescript-eslint/no-explicit-any

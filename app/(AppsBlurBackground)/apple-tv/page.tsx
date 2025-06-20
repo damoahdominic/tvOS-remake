@@ -3,6 +3,7 @@
 import HomePage from '@/components/AppleTv/HomePage'
 // import LibraryPage from '@/components/AppleTv/LibraryPage'
 import SearchPage from '@/components/AppleTv/SearchPage'
+import EscapeNotice from '@/components/EscapeNotice'
 import React from 'react'
 
 type AppleTvPageTypes = "search" | "home" | "library"
@@ -36,6 +37,7 @@ export default function Page() {
 
     return (
         <section className='h-full'>
+            <EscapeNotice className='absolute top-5 right-5 z-50' />
             {
                 currentPage === "home" ? <HomePage />
                     // :

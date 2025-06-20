@@ -4,6 +4,7 @@ import Image from 'next/image'
 import React, { useState } from 'react'
 import { motion } from "framer-motion";
 import { Link } from 'next-view-transitions';
+import EscapeNotice from '@/components/EscapeNotice';
 
 const tabs = [
     { id: "home", label: "Home" },
@@ -44,7 +45,8 @@ export default function Page() {
     const [activeTab, setActiveTab] = useState(tabs[0].id);
 
     return (
-        <div className={`overflow-auto h-full ${activeTab === "home" && "bg-[#C4A5CD]"}`}>
+        <div className={`overflow-auto h-full`}>
+            <EscapeNotice className='absolute top-5 left-5 z-50'/>
             <div className='absolute top-5 z-40 w-full flex justify-center'>
                 <motion.div className="flex space-x-1 bg-[#090909CC] rounded-full">
                     {tabs.map((tab) => (
@@ -52,7 +54,7 @@ export default function Page() {
                             key={tab.id}
                             onClick={() => setActiveTab(tab.id)}
                             className={`${activeTab === tab.id ? "" : "hover:text-white/60"
-                                } relative rounded-full px-5 py-3 text-lg font-medium text-white outline-sky-400 transition focus-visible:outline-2`}
+                                } relative rounded-full px-7 py-3 text-lg font-medium text-white outline-sky-400 transition focus-visible:outline-2`}
                             style={{
                                 WebkitTapHighlightColor: "transparent",
                             }}
@@ -60,7 +62,7 @@ export default function Page() {
                             {activeTab === tab.id && (
                                 <motion.div
                                     // layoutId="bubble"
-                                    className="absolute inset-0 z-50 py-8 bg-white -translate-y-1.5 mix-blend-difference rounded-full"
+                                    className="absolute inset-0 z-50 py-7 px-10 bg-white -translate-y-0.5 mix-blend-difference rounded-full"
                                     initial={false}
                                     transition={{
                                         type: "spring",
@@ -145,14 +147,13 @@ export default function Page() {
                 }
 
                 {activeTab === "credits" && <div className='flex flex-col space-y-8 h-full text-white'>
-                    <div className='px-10'>
-                        <h1 className='text-3xl font-bold'>Resources</h1>
-                        <div className='grid grid-cols-3 gap-4 mt-8'>
+                    <div className='px-10 w-full flex flex-col items-center'>
+                        <div className='flex flex-wrap gap-8 mt-10 mx-auto'>
                             {
                                 resources.map((resource, index) => (
                                     <Link target='_blank' href={resource.link} key={index}>
-                                        <div className='flex gap-4 items-center font-bold text-xl bg-black/30 rounded-md p-2'>
-                                            <Image src={resource.image} width={98} height={98} alt='github' />
+                                        <div className='flex flex-col gap-4 w-full md:w-[300px] font-medium text-xl bg-black/30 rounded-lg px-[2.5svh] py-[5svh]'>
+                                            <Image src={resource.image} width={97} height={97} alt='platform' />
                                             <div className=''>
                                                 <h1>{resource.title}</h1>
                                                 <h1>{resource.subtitle}</h1>
@@ -163,13 +164,19 @@ export default function Page() {
                             }
                         </div>
                     </div>
-                    <div className='h-full bg-black pt-10 px-10'>
-                        <div>
-                            <h1>Honorable Mentions <span className='border border-white p-1 text-xs rounded-md'>In the Journey</span></h1>
-                            <h1 className='mt-4 text-2xl font-bold'>Collins Abrusu • Gideon Asare </h1>
+                    <div className='h-full bg-black text-white font-medium pt-10 px-10'>
+                        <div className='flex w-full flex-col items-center justify-center space-y-4 text-xl'>
+                            <div className='flex items-center justify-center space-x-2'>
+                                <h1>Honorable Mentions</h1>
+                                <p className='border border-white p-1 text-xs font-bold rounded-md ml-2'>In the Journey</p>
+                            </div>
+                            <div className=''>
+                                <p>• Collins Abrusu</p>
+                                <p>• Gideon Asare </p>
+                            </div>
                         </div>
                         <div className='fixed bottom-10 w-full'>
-                            <p className='w-2/3 mx-auto text-center'>
+                            <p className='w-2/3 mx-auto text-center text-xs text-white/60'>
                                 This Project is not affiliated with, endorsed by, or sponsored by Apple Inc. All Apple trademarks, including product names and logos, are the property of Apple Inc. and are used here strictly for informational and creative purposes. Our goal is to provide a unique and enjoyable experience that is entirely our own. Everything you see has been thoughtfully crafted to inspire and entertain — with full respect to the original rights holders.
                             </p>
                         </div>

@@ -7,7 +7,7 @@ export const defaultTracks: Track[] = [
         title: "Jingle One",
         artist: "Dom&Larry",
         duration: 13, // in seconds
-        albumArt: "https://res.cloudinary.com/dg41c7v3d/image/upload/v1750100396/Album_Art_cwoiwx.svg",
+        albumArt: "/album_art-pose-1.png",
         audioSrc: "https://res.cloudinary.com/dg41c7v3d/video/upload/v1750099545/ThemeSong1_hceoqr.mp3"
     },
     {
@@ -15,7 +15,7 @@ export const defaultTracks: Track[] = [
         title: "Jingle Two",
         artist: "Dom&Larry",
         duration: 15,
-        albumArt: "https://res.cloudinary.com/dg41c7v3d/image/upload/v1750100450/Album_Art_qbzrcm.svg",
+        albumArt: "/album_art-pose-2.png",
         audioSrc: "https://res.cloudinary.com/dg41c7v3d/video/upload/v1750099581/ThemeSong2_oomyxz.wav"
     },
 ];

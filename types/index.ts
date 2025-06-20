@@ -1,6 +1,7 @@
 export interface JumpBackItem {
     id: string;
     title: string;
+    subTitle: string;
     description: string;
     logo: string;
     backgroundImage: string;
