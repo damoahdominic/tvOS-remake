@@ -13,7 +13,6 @@ const BackgroundProvider = ({
 
     // Direct grid navigation - no activity bar integration for simplicity
     const { lastFocusedPosition } = useAppContext()
-    console.log("🚀 ~ lastFocusedPosition:", lastFocusedPosition)
     const [focusedApp, setFocusedApp] = useState(apps[0]);
 
     // Handle scroll events with debounce
