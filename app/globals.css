@@ -62,6 +62,15 @@ body {
   -webkit-overflow-scrolling: touch;
 }
 
+/* Hide scrollbars but allow scrolling */
+html, body, * {
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE and Edge */
+}
+html::-webkit-scrollbar, body::-webkit-scrollbar, *::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Opera */
+}
+
 /* Focus styles */
 :focus {
   outline: none;
