@@ -85,6 +85,8 @@ const AppItem = memo(
             autoSize={true}
             withShadow={row === 0 ? false : true}
             backgroundImage={appIconUrl}
+            showBadge={showBadge}
+            badgeCount={badgeCount}
             shouldShowTitle={shouldShowAppName}
             onClick={() => {
               setLastFocusedPosition({ row: row || 0, col: col || 0 });
