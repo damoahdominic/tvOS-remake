@@ -92,12 +92,14 @@ const AppItem = memo(
               setLastFocusedPosition({ row: row || 0, col: col || 0 });
               router.push(href)
             }}
-          />
-          {showBadge && (
-            <div className="absolute top-0 right-0 bg-red-500 text-white text-sm rounded-full size-6 flex items-center justify-center">
-              {badgeCount}
-            </div>
-          )}
+          >
+
+            {showBadge && (
+              <div className="absolute z-50 top-5 right-6 bg-red-500 text-white text-sm rounded-full size-6 flex items-center justify-center">
+                {badgeCount}
+              </div>
+            )}
+          </AppleTVCard>
         </motion.button>
       );
     }
