@@ -96,8 +96,9 @@ const TVOSGrid: React.FC<TVOSGridProps> = ({
                 id={app.id}
                 ref={ref}
                 col={col}
-                showBadge={col === 0 && row === 0} // Example condition for showing badge
-                badgeCount={1}
+                showBadge={false} // Example condition for showing badge
+                // showBadge={col === 0 && row === 0} // Example condition for showing badge
+                badgeCount={0}
                 setFocusedPosition={setFocusedPosition}
                 setLastFocusedPosition={setLastFocusedPosition}
                 row={row}
