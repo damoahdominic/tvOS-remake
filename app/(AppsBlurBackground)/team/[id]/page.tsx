@@ -17,7 +17,7 @@ export default function Page() {
             {member ?
                 <div className='flex gap-10 mx-auto w-3/5'>
                     <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.35, delay: 0.2 }}>
-                        <motion.div style={{ backgroundColor: member.color }} className={`rounded-lg hover:scale-105 transition-all duration-300 h-full flex items-end`}>
+                        <motion.div style={{ background: 'linear-gradient(135deg, #101010 0%, #454545 100%)' }} className={`rounded-lg hover:scale-105 transition-all duration-300 h-full flex items-end`}>
                             <motion.div className='relative aspect-square min-w-[380px] overflow-hidden'>
                                 <Image
                                     src={member.image}

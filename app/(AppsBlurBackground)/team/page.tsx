@@ -104,9 +104,14 @@ export default function Page() {
                                         <motion.div key={index} variants={staggerChild}>
                                             <Link href={`/team/${member.id}`} className='w-full'>
                                                 <div className='grid gap-2 relative'>
-                                                    <div style={{ backgroundColor: member.color }} className={`rounded-3xl hover:scale-105 transition-all duration-300 flex items-end justify-center pt-8`}>
-                                                        <div className='relative w-full aspect-square'>
-                                                            <Image src={member.image} alt={member.name} fill />
+                                                    <div style={{ background: 'linear-gradient(135deg, #101010 0%, #454545 100%)' }} className={`rounded-3xl hover:scale-105 transition-all duration-300 flex items-end justify-center pt-8`}>
+                                                        <div className='relative w-full aspect-square overflow-hidden'>
+                                                            <Image 
+                                                                src={member.image} 
+                                                                alt={member.name} 
+                                                                fill 
+                                                                className='object-cover'
+                                                            />
                                                         </div>
                                                     </div>
                                                     <h2 className="text-xl font-bold mt-4">{member.name}</h2>
@@ -125,7 +130,7 @@ export default function Page() {
                                         <motion.div key={index} variants={staggerChild}>
                                             <Link key={index} href={`/team/${member.id}`} className='w-full'>
                                                 <div className='grid gap-2 relative'>
-                                                    <div style={{ backgroundColor: member.color }} className={`rounded-3xl hover:scale-105 transition-all duration-300 flex items-end justify-center pt-8`}>
+                                                    <div style={{ background: 'linear-gradient(135deg, #101010 0%, #454545 100%)' }} className={`rounded-3xl hover:scale-105 transition-all duration-300 flex items-end justify-center pt-8`}>
                                                         <div className='relative w-full aspect-square overflow-hidden'>
                                                             <Image
                                                                 src={member.image}
