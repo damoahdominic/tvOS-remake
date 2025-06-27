@@ -85,15 +85,12 @@ const AppItem = memo(
             autoSize={true}
             withShadow={row === 0 ? false : true}
             backgroundImage={appIconUrl}
-            showBadge={showBadge}
-            badgeCount={badgeCount}
             shouldShowTitle={shouldShowAppName}
             onClick={() => {
               setLastFocusedPosition({ row: row || 0, col: col || 0 });
               router.push(href)
             }}
           >
-
             {showBadge && (
               <div className="absolute z-50 top-5 right-6 bg-red-500 text-white text-sm rounded-full size-6 flex items-center justify-center">
                 {badgeCount}
