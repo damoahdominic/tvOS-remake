@@ -282,7 +282,9 @@ const Page = () => {
             x: 0,
             opacity: 1,
             transition: {
-                x: { type: 'spring', stiffness: 300, damping: 30 },
+                type: 'spring' as const,
+                stiffness: 300,
+                damping: 30,
                 opacity: { duration: 0.25 }
             }
         },
@@ -290,7 +292,9 @@ const Page = () => {
             x: direction === 'forward' ? '-20%' : '20%',
             opacity: 0,
             transition: {
-                x: { type: 'spring', stiffness: 300, damping: 30 },
+                type: 'spring' as const,
+                stiffness: 300,
+                damping: 30,
                 opacity: { duration: 0.25 }
             }
         })
