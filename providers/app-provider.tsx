@@ -41,7 +41,7 @@ export function AppProvider({
     const [minBootTimeElapsed, setMinBootTimeElapsed] = useState(false);
     const preloaderStatus = useImagePreloader(appData, 6); // Preload first 6 apps
     const [isFullscreen, setIsFullscreen] = useState(false);
-    const [lastFocusedPosition, setLastFocusedPosition] = useState<{ row: number; col: number }>({ row: 0, col: 2 });
+    const [lastFocusedPosition, setLastFocusedPosition] = useState<{ row: number; col: number }>({ row: 0, col: 0 });
 
     const pathname = usePathname();
     const router = useTransitionRouter();
