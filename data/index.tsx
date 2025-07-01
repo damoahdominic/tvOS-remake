@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import Image from "next/image";
 // import { motion } from "framer-motion";
 export interface AppItemType {
@@ -18,30 +18,30 @@ export interface AppItemType {
 }
 
 export const lockScreenImages: LockScreenImage[] = [
-    {
-        id: "2",
-        background: "/lockscreen/lock2background.png",
-        foreground: "/lockscreen/lock2foreground.png",
-        timeDisplay: {
-            position: "left-center",
-            layout: "horizontal",
-            color: "rgba(8, 8, 8, 0.5)",
-            margin: {
-                left: -13
-            },
-            font: "font-compact"
-        }
+  {
+    id: "2",
+    background: "/lockscreen/lock2background.png",
+    foreground: "/lockscreen/lock2foreground.png",
+    timeDisplay: {
+      position: "left-center",
+      layout: "horizontal",
+      color: "rgba(8, 8, 8, 0.5)",
+      margin: {
+        left: -13,
+      },
+      font: "font-compact",
     },
-    {
-        id: "5",
-        background: "/lockscreen/lock5background.png",
-        timeDisplay: {
-            position: "center",
-            layout: "horizontal",
-            color: "rgba(255, 255, 255, 0.5)",
-            font: "font-new-york"
-        }
-    }
+  },
+  {
+    id: "5",
+    background: "/lockscreen/lock5background.png",
+    timeDisplay: {
+      position: "center",
+      layout: "horizontal",
+      color: "rgba(255, 255, 255, 0.5)",
+      font: "font-new-york",
+    },
+  },
 ];
 
 // types/lockscreen.ts
@@ -169,7 +169,6 @@ export const apps: AppItemType[] = [
         image: "/app-bg/apple-tv/3.png",
         content: null,
       },
-      
     ],
   },
   {
@@ -202,7 +201,7 @@ export const apps: AppItemType[] = [
   //   },
   //   // backgrounds: [
   //   //   {
-  //   //     image: "/app-bg/arcade/1.png",
+  //   //     image: "/app-bg/arcade/1.jpg",
   //   //   },
   //   // ],
   // },
