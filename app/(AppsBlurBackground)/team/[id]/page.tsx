@@ -53,7 +53,7 @@ export default function Page() {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ duration: 0.35, delay: 0.6 }}
-              className="border border-white/50 text-white/50 rounded-md p-1 w-fit text-xs"
+              className="animate-pulse border border-white/50 text-white/50 rounded-md p-1 w-fit text-xs"
             >
               {member.role}
             </motion.p>
