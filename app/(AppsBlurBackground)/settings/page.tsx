@@ -300,6 +300,29 @@ const Page = () => {
         })
     };
 
+    const [tilt, setTilt] = useState({ rotateX: 0, rotateY: 0 });
+
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    const rect = e.currentTarget.getBoundingClientRect();
+
+    // Calculate mouse position relative to center of the element
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+
+    const centerX = rect.width / 2;
+    const centerY = rect.height / 2;
+
+    // Calculate rotation - max 15 degrees tilt on each axis
+    const rotateX = ((y - centerY) / centerY) * -15; // invert for natural tilt
+    const rotateY = ((x - centerX) / centerX) * 15;
+
+    setTilt({ rotateX, rotateY });
+  };
+
+  const handleMouseLeave = () => {
+    setTilt({ rotateX: 0, rotateY: 0 });
+  };
+
 
     return (
         <div className='h-full my-10'>
@@ -312,13 +335,24 @@ const Page = () => {
                 {/* Logo with App Details */}
                 <div className='flex flex-col items-center justify-center text-center gap-8 mb-[20%]'>
                     {/* Apple logo */}
-                    <Image
-                        src="/apple-logo-blur.svg"
-                        alt="Apple Logo"
-                        width={1080}
-                        height={1080}
-                        className='w-1/2 aspect-square'
-                    />
+                   <div
+      className="w-1/2 aspect-square perspective"
+      onMouseMove={handleMouseMove}
+      onMouseLeave={handleMouseLeave}
+      style={{ perspective: '1000px' }}
+    >
+      <Image
+        src="/apple-logo-blur.svg"
+        alt="Apple Logo"
+        width={1080}
+        height={1080}
+        className="w-full h-full transition-transform duration-200"
+        style={{
+          transform: `rotateX(${tilt.rotateX}deg) rotateY(${tilt.rotateY}deg)`,
+          transformStyle: 'preserve-3d',
+        }}
+      />
+    </div>
 
                     {/* App Details */}
                     <div className='w-1/2'>

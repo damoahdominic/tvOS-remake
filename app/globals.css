@@ -3,24 +3,24 @@
 @tailwind utilities;
 
 @font-face {
-    font-family: 'CompactRounded';
-    src: url('../public/fonts/SF-Compact-Rounded-Medium.otf') format('opentype');
-    font-weight: 500;
-    font-style: normal;
+  font-family: "CompactRounded";
+  src: url("../public/fonts/SF-Compact-Rounded-Medium.otf") format("opentype");
+  font-weight: 500;
+  font-style: normal;
 }
 
 @font-face {
-    font-family: 'NewYorkExtraLargeSemibold';
-    src: url('../public/fonts/NewYorkExtraLarge-Semibold.otf') format('opentype');
-    font-weight: 600;
-    font-style: normal;
+  font-family: "NewYorkExtraLargeSemibold";
+  src: url("../public/fonts/NewYorkExtraLarge-Semibold.otf") format("opentype");
+  font-weight: 600;
+  font-style: normal;
 }
 
 @font-face {
-    font-family: 'Pro';
-    src: url('../public/fonts/SF-Pro.ttf') format('truetype');
-    font-weight: normal;
-    font-style: normal;
+  font-family: "Pro";
+  src: url("../public/fonts/SF-Pro.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
 }
 
 body {
@@ -63,11 +63,15 @@ body {
 }
 
 /* Hide scrollbars but allow scrolling */
-html, body, * {
+html,
+body,
+* {
   scrollbar-width: none; /* Firefox */
   -ms-overflow-style: none; /* IE and Edge */
 }
-html::-webkit-scrollbar, body::-webkit-scrollbar, *::-webkit-scrollbar {
+html::-webkit-scrollbar,
+body::-webkit-scrollbar,
+*::-webkit-scrollbar {
   display: none; /* Chrome, Safari, Opera */
 }
 
@@ -80,7 +84,7 @@ html::-webkit-scrollbar, body::-webkit-scrollbar, *::-webkit-scrollbar {
   box-shadow: 0 0 0 4px rgba(255, 255, 255, 0.3);
 }
 
-.apple-active-item-shadow{
+.apple-active-item-shadow {
   box-shadow: 0px 20px 12.5px 0px #00000040;
 }
 
@@ -90,49 +94,49 @@ html::-webkit-scrollbar, body::-webkit-scrollbar, *::-webkit-scrollbar {
   transition-duration: 200ms;
 }
 
-.sidebar-menu-item:hover .circle-image{
- background-color: #F2F2F2;
- transition-property: all;
-    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-    transition-duration: 300ms;
+.sidebar-menu-item:hover .circle-image {
+  background-color: #f2f2f2;
+  transition-property: all;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 300ms;
 }
 
-.sidebar-menu-item:hover img.circle-image-active{
- display: block;
- transition-property: all;
-    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-    transition-duration: 300ms;
+.sidebar-menu-item:hover img.circle-image-active {
+  display: block;
+  transition-property: all;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 300ms;
 }
 
 .apple-tv-bg {
-background: linear-gradient(180deg, #3A3A3C 40.22%, #202122 100%);
+  background: linear-gradient(180deg, #3a3a3c 40.22%, #202122 100%);
 }
 .team-bg {
-  background: linear-gradient(180deg, #3D3D3D 0%, #030303 100%);
+  background: linear-gradient(180deg, #3d3d3d 0%, #030303 100%);
 }
 .settings-bg {
-  background: linear-gradient(180deg, #D0D4DA 0%, #8B8F93 100%);
+  background: linear-gradient(180deg, #d0d4da 0%, #8b8f93 100%);
 }
 .photos-bg {
-background: linear-gradient(180deg, #FFFFFF 0%, #E0E0E0 100%);
+  background: linear-gradient(180deg, #ffffff 0%, #e0e0e0 100%);
 }
 .apple-music-bg {
-background: linear-gradient(180deg, #FB5976 0%, #FA243B 100%);
+  background: linear-gradient(180deg, #fb5976 0%, #fa243b 100%);
 }
 .app-store-bg {
-background: linear-gradient(180deg, #19E6FF 0%, #1C70F2 100%);
+  background: linear-gradient(180deg, #19e6ff 0%, #1c70f2 100%);
 }
 
 svg {
-      width: 40px;
-      height: 40px;
-    }
+  width: 40px;
+  height: 40px;
+}
 
-  rect {
-    fill: #1E1E1E;
-    rx: 3; /* rounded corners */
-    transition: height 0.15s ease, y 0.15s ease;
-  }
+rect {
+  fill: #1e1e1e;
+  rx: 3; /* rounded corners */
+  transition: height 0.15s ease, y 0.15s ease;
+}
 
 @layer base {
   :root {
@@ -213,21 +217,20 @@ svg {
   body {
     @apply bg-background text-foreground;
   }
-  .activity-bar-item-bg{
-    @apply rounded-[20px] bg-white/50 dark:bg-[#1E1E1E]/50 border border-white/40 transition-[width] duration-500 text-black/40 dark:text-white/50 backdrop-blur-[50px]
+  .activity-bar-item-bg {
+    @apply rounded-[20px] bg-white/50 dark:bg-[#1E1E1E]/50 border border-white/40 transition-[width] duration-500 text-black/40 dark:text-white/50 backdrop-blur-[50px];
   }
 }
 
-.app-item-shadow{
-box-shadow: 0px 93px 67px -5px rgba(0,0,0,1);
--webkit-box-shadow: 0px 93px 67px -5px rgba(0,0,0,1);
--moz-box-shadow: 0px 93px 67px -5px rgba(0,0,0,1);
+.app-item-shadow {
+  box-shadow: 0px 93px 67px -5px rgba(0, 0, 0, 1);
+  -webkit-box-shadow: 0px 93px 67px -5px rgba(0, 0, 0, 1);
+  -moz-box-shadow: 0px 93px 67px -5px rgba(0, 0, 0, 1);
 }
 
-.z-highest{
+.z-highest {
   z-index: 9999999999;
 }
-
 
 .unlock-button {
   padding: 10px 24px;
@@ -266,15 +269,13 @@ box-shadow: 0px 93px 67px -5px rgba(0,0,0,1);
   }
 }
 
-
-
 @layer base {
   * {
     @apply border-border;
-    }
+  }
   body {
     @apply bg-background text-foreground;
-    }
+  }
 }
 
 /* Animation classes */
@@ -313,5 +314,156 @@ box-shadow: 0px 93px 67px -5px rgba(0,0,0,1);
   outline: 2px solid white;
   outline-offset: 2px;
 }
+@property --angle {
+  syntax: "<angle>";
+  initial-value: 0deg;
+  inherits: false;
+}
 
+.card-animate {
+  position: relative;
+}
 
+.card-animate::after,
+.card-animate::before {
+  content: "";
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  background-image: conic-gradient(
+    from var(--angle),
+    transparent 50%,
+    rgb(255, 0, 157)
+  );
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(1.015);
+  border-radius: inherit;
+  z-index: -1;
+  animation: 10s spin linear infinite;
+}
+
+.card-animate::before {
+  filter: blur(1.5rem);
+  opacity: 0.5;
+}
+
+@keyframes spin {
+  from {
+    --angle: 0deg;
+  }
+  to {
+    --angle: 360deg;
+  }
+}
+
+/* 1st, 4th, 7th */
+.mouse-position-tracker:nth-child(3n - 2) {
+  left: 0;
+}
+/* 2nd, 5th, 8th */
+.mouse-position-tracker:nth-child(3n - 1) {
+  left: calc(100% / 3);
+}
+
+/* 2nd, 5th, 8th */
+.mouse-position-tracker:nth-child(3n) {
+  right: 0;
+}
+
+/* 4 to 6 */
+.mouse-position-tracker:nth-child(n + 4):nth-child(-n + 6) {
+  top: calc(100% / 3);
+}
+/* 7 to 9 */
+.mouse-position-tracker:nth-child(n + 7):nth-child(-n + 9) {
+  bottom: 0;
+}
+
+.tilting-card-wrapper {
+  padding: 10px;
+  position: relative;
+  width: 100%;
+  height: 27rem;
+  aspect-ratio: 1 / 2;
+}
+
+.tilting-card-body {
+  position: absolute;
+  inset: 0;
+  --perspective: 1200px;
+  --rotationX: 0;
+  --rotationY: 0;
+  --rotationZ: 0;
+  --angle: 15deg;
+  transform: perspective(var(--perspective)) rotateX(var(--rotationX))
+    rotateY(var(--rotationY)) rotateZ(var(--rotationZ));
+  transition: transform 500ms ease;
+  background: linear-gradient(135deg, #101010 0%, #454545 100%);
+}
+.card-text {
+  position: absolute;
+  bottom: 30px;
+  left: 30px;
+  right: 30px;
+  z-index: 3;
+  text-align: left;
+}
+.card-text h4 {
+  color: #fff;
+  margin-bottom: 20px;
+  font-size: 0.8vw;
+}
+.card-text h3 {
+  font-size: 1.2vw;
+  color: #fff;
+}
+.mouse-position-tracker {
+  position: absolute;
+  width: calc(100% / 3);
+  height: calc(100% / 3);
+  z-index: 2;
+}
+.mouse-position-tracker:nth-child(1):hover ~ .tilting-card-body {
+  --rotationX: var(--angle);
+  --rotationY: calc(var(--angle) * -1);
+}
+
+.mouse-position-tracker:nth-child(2):hover ~ .tilting-card-body {
+  --rotationX: var(--angle);
+}
+
+.mouse-position-tracker:nth-child(3):hover ~ .tilting-card-body {
+  --rotationX: var(--angle);
+  --rotationY: var(--angle);
+}
+
+.mouse-position-tracker:nth-child(4):hover ~ .tilting-card-body {
+  --rotationY: calc(var(--angle) * -1);
+}
+
+.mouse-position-tracker:nth-child(6):hover ~ .tilting-card-body {
+  --rotationY: var(--angle);
+}
+
+.mouse-position-tracker:nth-child(7):hover ~ .tilting-card-body {
+  --rotationY: calc(var(--angle) * -1);
+  --rotationX: calc(var(--angle) * -1);
+}
+
+.mouse-position-tracker:nth-child(8):hover ~ .tilting-card-body {
+  --rotationX: calc(var(--angle) * -1);
+}
+
+.mouse-position-tracker:nth-child(9):hover ~ .tilting-card-body {
+  --rotationY: var(--angle);
+  --rotationX: calc(var(--angle) * -1);
+}
+.perspective {
+  perspective: 1000px;
+}
+
+.group:hover .rotate-3d {
+  transform: rotateY(15deg) rotateX(10deg);
+  transform-style: preserve-3d;
+}
