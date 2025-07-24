@@ -1,6 +1,6 @@
 export const users = [
     {
-        name: "Dominic",
+        name: "Dom",
         image: "/users/dominic.png",
         isActive: true,
     },
