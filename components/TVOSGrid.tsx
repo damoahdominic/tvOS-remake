@@ -142,11 +142,11 @@ const TVOSGrid: React.FC<TVOSGridProps> = ({
           const ref = getFocusRef(row, col);
           if (row < 3 && col < 3) {
             // Just log a sample to avoid clutter
-            // console.log(
-            //   `Ref at ${row},${col}: ${
-            //     ref ? (ref.current ? "has element" : "no element") : "no ref"
-            //   }`
-            // );
+            console.log(
+              `Ref at ${row},${col}: ${
+                ref ? (ref.current ? "has element" : "no element") : "no ref"
+              }`
+            );
           }
         }
       }
