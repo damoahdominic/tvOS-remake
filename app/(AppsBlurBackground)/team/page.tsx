@@ -125,7 +125,7 @@ export default function Page() {
               >
                 <div className="flex items-center gap-2">
                   <h2>Meet the Team </h2>
-                  <div className="animate-pulse border border-white rounded-md text-base py-[0.1rem] px-[0.5rem]">
+                  <div className="border border-white rounded-md text-base py-[0.1rem] px-[0.5rem]">
                     Extraordinary Individuals
                   </div>
                 </div>
@@ -280,7 +280,7 @@ export default function Page() {
                   <button
                     // whileHover={{ scale: 1.05 }}
                     // whileTap={{ scale: 0.95 }}
-                    className=" animate-pulse pmx-cta-btn secondary relative overflow-hidden  text-black font-bold py-4 px-8 rounded-2xl shadow-lg transition-all duration-300 flex items-center space-x-3"
+                    className="pmx-cta-btn secondary relative overflow-hidden  text-black font-bold py-4 px-8 rounded-2xl shadow-lg transition-all duration-300 flex items-center space-x-3"
                   >
                     <svg
                       className="w-6 h-6"
@@ -305,7 +305,7 @@ export default function Page() {
               <div className="flex w-full flex-col items-center justify-center space-y-4 text-xl">
                 <div className="flex items-center justify-center space-x-2">
                   <h1>Honorable Mentions</h1>
-                  <p className="border border-white p-1 text-xs font-bold rounded-md ml-2 animate-pulse">
+                  <p className="border border-white p-1 text-xs font-bold rounded-md ml-2">
                     In the Journey
                   </p>
                 </div>

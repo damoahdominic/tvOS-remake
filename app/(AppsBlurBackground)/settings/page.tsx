@@ -634,24 +634,13 @@ const Page = () => {
         {/* Logo with App Details */}
         <div className="flex flex-col items-center justify-center text-center gap-8 mb-[20%]">
           {/* Apple logo */}
-          <div
-            className="w-1/2 aspect-square perspective"
-            onMouseMove={handleMouseMove}
-            onMouseLeave={handleMouseLeave}
-            style={{ perspective: "1000px" }}
-          >
-            <Image
-              src="/apple-logo-blur.svg"
-              alt="Apple Logo"
-              width={1080}
-              height={1080}
-              className="w-full h-full transition-transform duration-200"
-              style={{
-                transform: `rotateX(${tilt.rotateX}deg) rotateY(${tilt.rotateY}deg)`,
-                transformStyle: "preserve-3d",
-              }}
-            />
-          </div>
+          <Image
+            src="/apple-logo-blur.svg"
+            alt="Apple Logo"
+            width={1080}
+            height={1080}
+            className="w-1/2 h-full transition-transform duration-200"
+          />
 
           {/* App Details */}
           <div className="w-1/2">

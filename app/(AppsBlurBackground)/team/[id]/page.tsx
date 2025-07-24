@@ -14,7 +14,7 @@ export default function Page() {
   const mergedTeam = [...engineeringTeam, ...designTeam];
   const member = mergedTeam.find((member) => member.id === Number(param.id));
   return (
-    <div className="flex items-center justify-center h-svh overflow-hidden text-white bg-black/80">
+    <div className="flex items-center justify-center h-svh overflow-hidden text-white bg-black/80 gradient-trans">
       <EscapeNotice className="absolute top-5 left-5 z-50" />
 
       {member ? (
@@ -53,7 +53,7 @@ export default function Page() {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ duration: 0.35, delay: 0.6 }}
-              className="animate-pulse border border-white/50 text-white/50 rounded-md p-1 w-fit text-xs"
+              className="border border-white/50 text-white/50 rounded-md p-1 w-fit text-xs"
             >
               {member.role}
             </motion.p>

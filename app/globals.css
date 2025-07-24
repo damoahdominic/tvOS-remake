@@ -407,7 +407,7 @@ rect {
   --rotationX: 0;
   --rotationY: 0;
   --rotationZ: 0;
-  --angle: 15deg;
+  --angle: 3deg;
   transform: perspective(var(--perspective)) rotateX(var(--rotationX))
     rotateY(var(--rotationY)) rotateZ(var(--rotationZ));
   transition: transform 500ms ease;
@@ -540,4 +540,8 @@ rect {
   100% {
     transform: translateX(100%) rotate(30deg);
   }
+}
+
+.gradient-trans{
+  transition: 5s ease-in-out;
 }
