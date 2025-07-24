@@ -632,6 +632,7 @@ const Page = () => {
       {/* Main Content */}
       <div className="grid grid-cols-2 w-full h-full">
         {/* Logo with App Details */}
+        {/* h */}
         <div className="flex flex-col items-center justify-center text-center gap-8 mb-[20%]">
           {/* Apple logo */}
           <Image
