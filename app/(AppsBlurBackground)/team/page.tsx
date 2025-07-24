@@ -61,7 +61,7 @@ export default function Page() {
   const [isHovered, setIsHovered] = useState<boolean>(false);
   const [isHoveredIndex, setIsHoveredIndex] = useState<number>(0);
 
-  const handleMouseMove = (event: React.MouseEvent<HTMLDivElement>) => {
+  const handleMouseMove = (event: React.MouseEvent<HTMLAnchorElement>) => {
     const rect = event.currentTarget.getBoundingClientRect();
     setMousePosition({
       x: event.clientX - rect.left,
