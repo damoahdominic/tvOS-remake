@@ -17,13 +17,19 @@ const resources = [
         image: "/github.png",
         title: "Open Source Code",
         subtitle: "Github",
-        link: "https://github.com/Apple-Remake"
+        link: "https://github.com/damoahdominic/tvOS-remake"
     },
     {
         image: "/figma.png",
         title: "Design File (Community)",
         subtitle: "Figma File",
-        link: "https://figma.com"
+        link: "https://www.figma.com/design/KmvT8YhqhqDXjdza2Q9ae5/tvOS-18-UI-Kit"
+    },
+    {
+        image: "/dstudios-circular.png",
+        title: "DStudios",
+        subtitle: "Diamond Sponsor",
+        link: "https://ddamoah.com"
     }
 ]
 
@@ -157,8 +163,8 @@ export default function Page() {
                             {
                                 resources.map((resource, index) => (
                                     <Link target='_blank' href={resource.link} key={index}>
-                                        <div className='flex flex-col gap-4 w-full md:w-[300px] font-medium text-xl bg-black/30 rounded-lg px-[2.5svh] py-[5svh]'>
-                                            <Image src={resource.image} width={97} height={97} alt='platform' />
+                                        <div className='flex flex-col gap-6 w-full md:w-[450px] font-medium text-xl bg-black/30 rounded-3xl px-[3.75svh] py-[7.5svh]'>
+                                            <Image src={resource.image} width={145} height={145} alt='platform' />
                                             <div className=''>
                                                 <h1>{resource.title}</h1>
                                                 <h1>{resource.subtitle}</h1>
@@ -170,6 +176,26 @@ export default function Page() {
                         </div>
                     </div>
                     <div className='h-full bg-black text-white font-medium pt-10 px-10'>
+                        {/* Donate Button Section */}
+                        <div className='flex w-full flex-col items-center justify-center space-y-6 mb-24'>
+                            <h2 className='text-2xl font-bold'>Support the Project</h2>
+                            <Link href="https://buymeacoffee.com/damoahdominic" target="_blank">
+                                <motion.button
+                                    whileHover={{ scale: 1.05 }}
+                                    whileTap={{ scale: 0.95 }}
+                                    className='bg-white hover:bg-gray-100 text-black font-bold py-4 px-8 rounded-2xl shadow-lg transition-all duration-300 flex items-center space-x-3'
+                                >
+                                    <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fillRule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" clipRule="evenodd" />
+                                    </svg>
+                                    <span>Donate & Support</span>
+                                </motion.button>
+                            </Link>
+                            <p className='text-sm text-white/60 text-center max-w-md'>
+                                Help us continue building amazing tvOS experiences. Your support means the world to us!
+                            </p>
+                        </div>
+                        
                         <div className='flex w-full flex-col items-center justify-center space-y-4 text-xl'>
                             <div className='flex items-center justify-center space-x-2'>
                                 <h1>Honorable Mentions</h1>
@@ -180,8 +206,10 @@ export default function Page() {
                                 <p>• Gideon Asare </p>
                             </div>
                         </div>
-                        <div className='fixed bottom-10 w-full'>
-                            <p className='w-2/3 mx-auto text-center text-xs text-white/60'>
+                        
+                        {/* Responsive Footer */}
+                        <div className='mt-16 mb-8 px-4 sm:px-8 lg:px-16'>
+                            <p className='max-w-4xl mx-auto text-center text-xs sm:text-sm text-white/60 leading-relaxed'>
                                 This Project is not affiliated with, endorsed by, or sponsored by Apple Inc. All Apple trademarks, including product names and logos, are the property of Apple Inc. and are used here strictly for informational and creative purposes. Our goal is to provide a unique and enjoyable experience that is entirely our own. Everything you see has been thoughtfully crafted to inspire and entertain — with full respect to the original rights holders.
                             </p>
                         </div>

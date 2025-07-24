@@ -24,7 +24,7 @@ export const ContentArea: React.FC = () => {
                         {/* Logo */}
                         <div className="w-[150px] h-[80px] relative -left-4 mb-6">
                             <Image
-                                src={currentItem.logo}
+                                src={currentItem.contentLogo}
                                 alt={`${currentItem.title} logo`}
                                 layout="fill"
                                 objectFit="contain"

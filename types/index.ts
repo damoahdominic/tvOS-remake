@@ -3,7 +3,8 @@ export interface JumpBackItem {
     title: string;
     subTitle: string;
     description: string;
-    logo: string;
+    logo: string; // Used for JumpBackInSection navigation items
+    contentLogo: string; // Used for ContentArea large logo above "Documentary"
     backgroundImage: string;
     linkText: string;
     linkUrl: string;
