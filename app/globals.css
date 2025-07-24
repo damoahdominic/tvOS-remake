@@ -396,7 +396,7 @@ rect {
   padding: 10px;
   position: relative;
   width: 100%;
-  height: 30.5rem;
+  
   aspect-ratio: 1 / 2;
 }
 
@@ -407,28 +407,11 @@ rect {
   --rotationX: 0;
   --rotationY: 0;
   --rotationZ: 0;
-  --angle: 3deg;
+  --angle: 5deg;
   transform: perspective(var(--perspective)) rotateX(var(--rotationX))
     rotateY(var(--rotationY)) rotateZ(var(--rotationZ));
   transition: transform 500ms ease;
   background: linear-gradient(135deg, #101010 0%, #454545 100%);
-}
-.card-text {
-  position: absolute;
-  bottom: 30px;
-  left: 30px;
-  right: 30px;
-  z-index: 3;
-  text-align: left;
-}
-.card-text h4 {
-  color: #fff;
-  margin-bottom: 20px;
-  font-size: 0.8vw;
-}
-.card-text h3 {
-  font-size: 1.2vw;
-  color: #fff;
 }
 .mouse-position-tracker {
   position: absolute;

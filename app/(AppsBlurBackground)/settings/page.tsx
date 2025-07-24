@@ -597,29 +597,6 @@ const Page = () => {
     }),
   };
 
-  const [tilt, setTilt] = useState({ rotateX: 0, rotateY: 0 });
-
-  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-    const rect = e.currentTarget.getBoundingClientRect();
-
-    // Calculate mouse position relative to center of the element
-    const x = e.clientX - rect.left;
-    const y = e.clientY - rect.top;
-
-    const centerX = rect.width / 2;
-    const centerY = rect.height / 2;
-
-    // Calculate rotation - max 15 degrees tilt on each axis
-    const rotateX = ((y - centerY) / centerY) * -15; // invert for natural tilt
-    const rotateY = ((x - centerX) / centerX) * 15;
-
-    setTilt({ rotateX, rotateY });
-  };
-
-  const handleMouseLeave = () => {
-    setTilt({ rotateX: 0, rotateY: 0 });
-  };
-
   return (
     <div className="h-full my-10">
       <EscapeNotice className="absolute top-5 left-5 z-50" />

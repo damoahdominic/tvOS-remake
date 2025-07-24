@@ -155,7 +155,7 @@ export default function Page() {
                 {engineeringTeam.map((member, index) => (
                   <motion.div key={index} variants={staggerChild}>
                     <Link href={`/team/${member.id}`}>
-                      <div className="tilting-card-wrapper cursor-pointer mb-5">
+                      <div className="tilting-card-wrapper cursor-pointer mb-5 lg:h-[32vw] h-[80vw]">
                         <div className="mouse-position-tracker"></div>
                         <div className="mouse-position-tracker"></div>
                         <div className="mouse-position-tracker"></div>
@@ -193,7 +193,7 @@ export default function Page() {
                 {designTeam.map((member, index) => (
                   <motion.div key={index} variants={staggerChild}>
                     <Link href={`/team/${member.id}`}>
-                      <div className="tilting-card-wrapper cursor-pointer mb-5">
+                      <div className="tilting-card-wrapper cursor-pointer mb-5 lg:h-[32vw] h-[80vw]">
                         <div className="mouse-position-tracker"></div>
                         <div className="mouse-position-tracker"></div>
                         <div className="mouse-position-tracker"></div>

@@ -14,7 +14,7 @@ export default function Page() {
   const mergedTeam = [...engineeringTeam, ...designTeam];
   const member = mergedTeam.find((member) => member.id === Number(param.id));
   return (
-    <div className="flex items-center justify-center h-svh overflow-hidden text-white bg-black/80 gradient-trans">
+    <div className="flex items-center justify-center h-svh overflow-hidden text-white bg-black/80 transition-all duration-1000">
       <EscapeNotice className="absolute top-5 left-5 z-50" />
 
       {member ? (
