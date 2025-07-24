@@ -46,7 +46,7 @@ export const ContentArea: React.FC = () => {
                             href={currentItem.linkUrl}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="hover:bg-white bg-white/50 text-black hover:text-[#1e1e1e] py-2 px-6 rounded-md w-max hover:bg-opacity-90 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-white"
+                            className="hover:bg-white bg-white/50 text-black animate-pulse pmx-cta-btn secondary hover:text-[#1e1e1e] py-2 px-6 rounded-md w-max hover:bg-opacity-90 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-white"
                         >
                             <span className='font-bold'>{currentItem.linkText}</span>
                         </a>
