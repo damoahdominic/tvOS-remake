@@ -81,7 +81,7 @@ export function AppProvider({
         const handleKeyDown = (e: KeyboardEvent) => {
             switch (e.key) {
                 case "Escape":
-                    console.log("Escape");
+                    // console.log("Escape");
                     if (pathname !== "/" && pathname !== "/settings") {
                         router.back();
                     }

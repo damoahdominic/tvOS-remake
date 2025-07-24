@@ -45,7 +45,7 @@ const AppItem = memo(
       // Add debugging for focus issues
       React.useEffect(() => {
         if (focused) {
-          console.log("AppItem focused:", appName);
+          // console.log("AppItem focused:", appName);
         }
       }, [focused, appName]);
 
@@ -62,10 +62,10 @@ const AppItem = memo(
         if (typeof row === "number" && typeof col === "number") {
           // setFocusedPosition({ row, col });
           // setLastFocusedPosition({ row, col });
-          console.log({ row, col })
+          // console.log({ row, col })
         }
       };
-      console.log("🚀 ~ row === 0:", row === 0)
+      // console.log("🚀 ~ row === 0:", row === 0)
 
       return (
         <motion.button

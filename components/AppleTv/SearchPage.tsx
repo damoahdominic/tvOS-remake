@@ -29,7 +29,7 @@ const SearchPage = () => {
     };
 
     const handleSearch = (query: string) => {
-        console.log('Searching for:', query);
+        // console.log('Searching for:', query);
         // Implement your actual search logic here
         // This would typically involve an API call
     };

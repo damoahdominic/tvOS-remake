@@ -40,7 +40,7 @@ export default function useGridNavigation(
             Array(colCount).fill(0).map(() => React.createRef<HTMLButtonElement>())
         );
         
-        console.log(`Grid navigation initialized with ${rowCount} rows and ${colCount} columns`);
+        // console.log(`Grid navigation initialized with ${rowCount} rows and ${colCount} columns`);
     }, [rowCount, colCount]);
 
     // Handle smooth scrolling based on row position
@@ -68,7 +68,7 @@ export default function useGridNavigation(
             behavior: 'smooth'
         });
         
-        console.log(`Scrolling ${direction} to position ${scrollTarget}px for row ${row}`);
+        // console.log(`Scrolling ${direction} to position ${scrollTarget}px for row ${row}`);
     }, []);
 
     // Handle keyboard navigation
@@ -125,7 +125,7 @@ export default function useGridNavigation(
                         if (targetRef?.current) {
                             targetRef.current.focus();
                             lastFocusedButton.current = targetRef.current;
-                            console.log(`Focused element at row=${newRow} col=${newCol}`);
+                            // console.log(`Focused element at row=${newRow} col=${newCol}`);
                             
                             // Apply scrolling if needed
                             if (scrollDirection) {
@@ -154,7 +154,7 @@ export default function useGridNavigation(
             if (initialRef?.current) {
                 initialRef.current.focus();
                 lastFocusedButton.current = initialRef.current;
-                console.log(`Set initial focus at row=${initialRow} col=${initialCol}`);
+                // console.log(`Set initial focus at row=${initialRow} col=${initialCol}`);
             } else {
                 console.warn(`Failed to set initial focus at row=${initialRow} col=${initialCol}`);
             }

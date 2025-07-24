@@ -120,9 +120,9 @@ const TVOSGrid: React.FC<TVOSGridProps> = ({
   }, [apps, colCount, rowCount, isFocused, getFocusRef, setFocusedPosition]);
 
   useEffect(() => {
-    console.log(
-      `TVOSGrid rendering with ${apps.length} apps, ${rowCount} rows, ${colCount} cols`
-    );
+    // console.log(
+    //   `TVOSGrid rendering with ${apps.length} apps, ${rowCount} rows, ${colCount} cols`
+    // );
     setIsPreparing(true);
     const items = renderAppsCallback();
     setGridItems(items);
@@ -132,9 +132,9 @@ const TVOSGrid: React.FC<TVOSGridProps> = ({
   // Log DOM structure after render to help debug
   useEffect(() => {
     if (!isPreparing && gridItems) {
-      console.log(
-        `Grid items ready - first row: ${gridItems.firstRow.length}, rest: ${gridItems.rest.length}`
-      );
+      // console.log(
+      //   `Grid items ready - first row: ${gridItems.firstRow.length}, rest: ${gridItems.rest.length}`
+      // );
 
       // Check if refs are properly initialized
       for (let row = 0; row < rowCount; row++) {
@@ -142,11 +142,11 @@ const TVOSGrid: React.FC<TVOSGridProps> = ({
           const ref = getFocusRef(row, col);
           if (row < 3 && col < 3) {
             // Just log a sample to avoid clutter
-            console.log(
-              `Ref at ${row},${col}: ${
-                ref ? (ref.current ? "has element" : "no element") : "no ref"
-              }`
-            );
+            // console.log(
+            //   `Ref at ${row},${col}: ${
+            //     ref ? (ref.current ? "has element" : "no element") : "no ref"
+            //   }`
+            // );
           }
         }
       }

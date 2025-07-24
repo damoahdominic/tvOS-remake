@@ -307,7 +307,7 @@ export const AudioProvider: React.FC<AudioProviderProps> = ({
 
     // Track ended handler with proper autoplay
     const handleTrackEnded = (): void => {
-        console.log("Track ended, loopMode:", loopMode);
+        // console.log("Track ended, loopMode:", loopMode);
 
         if (loopMode === 'one' && audioRef.current) {
             // Loop the current track
@@ -324,14 +324,14 @@ export const AudioProvider: React.FC<AudioProviderProps> = ({
 
     // Handle canplay event to ensure autoplay works
     const handleCanPlay = async (): Promise<void> => {
-        console.log("Track can play now!");
+        // console.log("Track can play now!");
         setCanPlay(true);
         setAudioError(false);
         setErrorMessage("");
 
         // Auto-play if we were playing before
         if (isPlaying && audioRef.current) {
-            console.log("Auto-playing track");
+            // console.log("Auto-playing track");
             // Use a short timeout to avoid potential race conditions
             setTimeout(() => {
                 safePlay().catch(error => {
