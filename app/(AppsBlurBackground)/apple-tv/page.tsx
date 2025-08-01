@@ -10,7 +10,6 @@ type AppleTvPageTypes = "search" | "home" | "library"
 
 export default function Page() {
     const [currentPage, setCurrentPage] = React.useState<AppleTvPageTypes>('home')
-    console.log("🚀 ~ Page ~ currentPage:", currentPage)
 
     // get the value with # in the url say #search show be return search
     React.useEffect(() => {

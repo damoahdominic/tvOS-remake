@@ -64,9 +64,9 @@ export default function useGridNavigation(
           .map(() => React.createRef<HTMLButtonElement>())
       );
 
-    console.log(
-      `Grid navigation initialized with ${rowCount} rows and ${colCount} columns`
-    );
+    // console.log(
+    //   `Grid navigation initialized with ${rowCount} rows and ${colCount} columns`
+    // );
   }, [rowCount, colCount]);
 
   useEffect(() => {
@@ -78,15 +78,15 @@ export default function useGridNavigation(
     if (focusedPosition.row === 0 && focusedPosition.col < dockApps.length) {
       const currentDockApp = dockApps[focusedPosition.col];
       setLastActiveDockApp(currentDockApp);
-      console.log(
-        `Active dock app: ${dockApps[focusedPosition.col].appName} (${dockApps[focusedPosition.col].href
-        })`
-      );
+      // console.log(
+      //   `Active dock app: ${dockApps[focusedPosition.col].appName} (${dockApps[focusedPosition.col].href
+      //   })`
+      // );
     } else {
       if (lastActiveDockApp) {
-        console.log(
-          `Last active dock app: ${lastActiveDockApp.appName} (${lastActiveDockApp.href})`
-        );
+        // console.log(
+        //   `Last active dock app: ${lastActiveDockApp.appName} (${lastActiveDockApp.href})`
+        // );
       }
     }
   }, [focusedPosition, dockApps, lastActiveDockApp, setLastFocusedPosition]);
@@ -183,9 +183,9 @@ export default function useGridNavigation(
       behavior: "smooth",
     });
 
-    console.log(
-      `Scrolling ${direction} to position ${scrollTarget}px for row ${row}`
-    );
+    // console.log(
+    //   `Scrolling ${direction} to position ${scrollTarget}px for row ${row}`
+    // );
   }, []);
 
   // This is the updated handleKeyDown function for your existing hook
@@ -277,7 +277,7 @@ export default function useGridNavigation(
                 // Store the new focused button
                 lastFocusedButton.current = targetRef.current;
 
-                console.log(`Focused element at row=${newRow} col=${newCol}`);
+                // console.log(`Focused element at row=${newRow} col=${newCol}`);
 
                 // Apply scrolling if needed
                 if (scrollDirection) {
@@ -310,7 +310,7 @@ export default function useGridNavigation(
       if (initialRef?.current) {
         initialRef.current.focus();
         lastFocusedButton.current = initialRef.current;
-        console.log(`Set initial focus at row=${initialRow} col=${initialCol}`);
+        // console.log(`Set initial focus at row=${initialRow} col=${initialCol}`);
       } else {
         console.warn(
           `Failed to set initial focus at row=${initialRow} col=${initialCol}`

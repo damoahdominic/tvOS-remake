@@ -70,7 +70,6 @@ export default function Home() {
         const handleKeyDown = (e: KeyboardEvent) => {
             switch (e.key) {
                 case "Escape":
-                    console.log("Escape");
                     if (isFullscreen) {
                         toggleExpansion();
                     }

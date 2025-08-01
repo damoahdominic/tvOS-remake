@@ -74,7 +74,7 @@ export const AppContextMenuProvider: React.FC<AppContextMenuProviderProps> = ({ 
                     id: 'edit-home-screen',
                     label: 'Edit Home Screen',
                     action: () => {
-                        console.log(`Editing home screen for ${menuState.appName}`);
+                        // console.log(`Editing home screen for ${menuState.appName}`);
                         // Handle edit home screen action
                     }
                 },
@@ -82,7 +82,7 @@ export const AppContextMenuProvider: React.FC<AppContextMenuProviderProps> = ({ 
                     id: 'move-to',
                     label: 'Move to...',
                     action: () => {
-                        console.log(`Moving ${menuState.appName} to another location`);
+                        // console.log(`Moving ${menuState.appName} to another location`);
                         // Handle moving app
                     },
                     rightArrow: true
@@ -96,7 +96,7 @@ export const AppContextMenuProvider: React.FC<AppContextMenuProviderProps> = ({ 
                     id: 'new-folder',
                     label: 'New Folder',
                     action: () => {
-                        console.log(`Creating new folder`);
+                        // console.log(`Creating new folder`);
                         // Handle new folder creation
                     }
                 },
@@ -104,7 +104,7 @@ export const AppContextMenuProvider: React.FC<AppContextMenuProviderProps> = ({ 
                     id: 'move-to',
                     label: 'Move to...',
                     action: () => {
-                        console.log(`Moving to another location`);
+                        // console.log(`Moving to another location`);
                         // Handle moving
                     },
                     rightArrow: true
