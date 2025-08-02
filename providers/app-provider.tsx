@@ -83,7 +83,17 @@ export function AppProvider({
                 case "Escape":
                     // console.log("Escape");
                     if (pathname !== "/" && pathname !== "/settings") {
-                        router.back();
+                        // Handle team page navigation flow
+                        if (pathname.startsWith("/team/")) {
+                            // From team member page, go to team grid
+                            router.push("/team?tab=team");
+                        } else if (pathname === "/team") {
+                            // From team grid, go to home
+                            router.push("/");
+                        } else {
+                            // Default behavior for other pages
+                            router.push("/");
+                        }
                     }
                     break;
                 default:

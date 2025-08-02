@@ -4,8 +4,8 @@ import Image from "next/image";
 import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { Link } from "next-view-transitions";
-import { useSearchParams } from "next/navigation";
-import EscapeNotice from "@/components/EscapeNotice";
+import { useSearchParams, useRouter } from "next/navigation";
+
 import MouseFollower from "@/components/MouseFollower";
 
 const tabs = [
@@ -52,6 +52,7 @@ const staggerChild = {
 export default function Page() {
   const searchParams = useSearchParams();
   const [activeTab, setActiveTab] = useState(tabs[0].id);
+  const router = useRouter();
   
   useEffect(() => {
     const tabParam = searchParams.get('tab');
@@ -85,7 +86,16 @@ export default function Page() {
   const handleMouseLeave = () => setIsHovered(false);
   return (
     <div className={`overflow-auto h-full`}>
-      <EscapeNotice className="absolute top-5 left-5 z-50" />
+      <h1 className="absolute top-5 left-5 z-50 font-medium text-sm text-white/60">
+        Press{" "}
+        <span
+          className="border-2 border-white/60 px-2 py-1.5 text-xs rounded-lg cursor-pointer"
+          onClick={() => router.push("/")}
+        >
+          esc
+        </span>{" "}
+        to go back
+      </h1>
       <div className="absolute top-5 z-40 w-full flex justify-center">
         <motion.div className="flex space-x-1 bg-[#090909CC] rounded-full">
           {tabs.map((tab) => (
