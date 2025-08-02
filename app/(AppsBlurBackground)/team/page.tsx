@@ -1,7 +1,7 @@
 "use client";
 import { engineeringTeam, designTeam } from "@/data/team";
 import Image from "next/image";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, Suspense } from "react";
 import { motion } from "framer-motion";
 import { Link } from "next-view-transitions";
 import { useSearchParams, useRouter } from "next/navigation";
@@ -49,7 +49,7 @@ const staggerChild = {
   show: { opacity: 1, y: 0 },
 };
 
-export default function Page() {
+function TeamPageContent() {
   const searchParams = useSearchParams();
   const [activeTab, setActiveTab] = useState(tabs[0].id);
   const router = useRouter();
@@ -352,5 +352,13 @@ export default function Page() {
         )}
       </div>
     </div>
+  );
+}
+
+export default function Page() {
+  return (
+    <Suspense fallback={<div className="h-full w-full flex items-center justify-center text-white">Loading...</div>}>
+      <TeamPageContent />
+    </Suspense>
   );
 }
