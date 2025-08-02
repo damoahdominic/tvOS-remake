@@ -86,7 +86,7 @@ export default function Page() {
   const handleMouseLeave = () => setIsHovered(false);
   return (
     <div className={`overflow-auto h-full`}>
-      <h1 className="absolute top-5 left-5 z-50 font-medium text-sm text-white/60">
+      <h1 className="hidden sm:block absolute top-5 left-5 z-50 font-medium text-sm text-white/60">
         Press{" "}
         <span
           className="border-2 border-white/60 px-2 py-1.5 text-xs rounded-lg cursor-pointer"
