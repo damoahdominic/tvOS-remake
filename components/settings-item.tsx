@@ -47,8 +47,8 @@ const SettingsItem = forwardRef<HTMLButtonElement, SettingsItemProps>(({
                 onClick={handleClick}
                 tabIndex={0}
                 className={`
-                    group focusable-settings-item rounded-xl px-4 py-3 
-                    flex items-center justify-between w-[80%] max-w-4xl mx-auto
+                    group focusable-settings-item rounded-xl px-3 md:px-4 py-2 md:py-3 
+                    flex items-center justify-between w-[95%] md:w-[80%] max-w-4xl mx-auto
                     backdrop-blur-[50px] transition-all duration-300
                     ${isFocused
                         ? 'bg-white apple-active-item-shadow transform-gpu z-10'
@@ -66,7 +66,7 @@ const SettingsItem = forwardRef<HTMLButtonElement, SettingsItemProps>(({
 
                     {/* Text and description */}
                     <div className="text-left">
-                        <h2 className={`text-2xl font-medium ${isFocused ? 'text-black' : 'text-white group-hover:text-white/90'}`}>
+                        <h2 className={`text-lg md:text-2xl font-medium ${isFocused ? 'text-black' : 'text-white group-hover:text-white/90'}`}>
                             {text}
                         </h2>
 

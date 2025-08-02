@@ -140,17 +140,17 @@ function TeamPageContent() {
               <motion.div
                 initial={{ opacity: 0, x: -20 }}
                 animate={{ opacity: 1, x: 0 }}
-                className="max-w-md space-y-2 relative left-10 bottom-16 text-2xl"
+                className="max-w-md space-y-2 relative left-4 sm:left-10 bottom-8 sm:bottom-16 text-lg sm:text-xl md:text-2xl"
               >
-                <div className="flex items-center gap-2">
-                  <h2>Meet the Team </h2>
-                  <div className="border border-white rounded-md text-base py-[0.1rem] px-[0.5rem]">
+                <div className="flex flex-col sm:flex-row sm:items-center gap-2">
+                  <h2 className="text-xl sm:text-2xl md:text-3xl font-semibold">Meet the Team</h2>
+                  <div className="border border-white rounded-md text-xs sm:text-sm md:text-base py-1 px-2 w-fit">
                     Extraordinary Individuals
                   </div>
                 </div>
-                <p>
-                  From flop to funded — Dom and Larry turn startup chaos into
-                  gold.
+                <p className="text-sm sm:text-base md:text-lg leading-relaxed">
+                  Where technical excellence meets creative vision — building
+                  digital experiences that feel both innovative and intuitive.
                 </p>
               </motion.div>
             </motion.div>

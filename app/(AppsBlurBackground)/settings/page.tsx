@@ -598,19 +598,29 @@ const Page = () => {
   };
 
   return (
-    <div className="h-full my-10">
+    <div className="h-full my-4 md:my-10 px-4 md:px-0">
       <EscapeNotice className="absolute top-5 left-5 z-50" />
       {/* Title */}
-      <h1 className="text-4xl font-bold text-center text-white">
+      <h1 className="text-2xl md:text-4xl font-bold text-center text-white mb-4 md:mb-8">
         {menuPaths[currentMenu]?.[menuPaths[currentMenu].length - 1] ||
           "Settings"}
       </h1>
 
+      {/* Apple Logo - Mobile only, at top */}
+      <div className="flex lg:hidden justify-center mb-6">
+        <Image
+          src="/apple-logo-blur.svg"
+          alt="Apple Logo"
+          width={1080}
+          height={1080}
+          className="w-16 h-16 transition-transform duration-200"
+        />
+      </div>
+
       {/* Main Content */}
-      <div className="grid grid-cols-2 w-full h-full">
-        {/* Logo with App Details */}
-        {/* h */}
-        <div className="flex flex-col items-center justify-center text-center gap-8 mb-[20%]">
+      <div className="grid grid-cols-1 lg:grid-cols-2 w-full h-full gap-4 lg:gap-0">
+        {/* Logo with App Details - Hidden on mobile, shown on large screens */}
+        <div className="hidden lg:flex flex-col items-center justify-center text-center gap-8 mb-[20%]">
           {/* Apple logo */}
           <Image
             src="/apple-logo-blur.svg"
@@ -647,7 +657,7 @@ const Page = () => {
         </div>
 
         {/* Menu Items */}
-        <ScrollArea className="h-[80svh] mt-[5%] w-full flex items-center">
+        <ScrollArea className="h-[70vh] md:h-[80svh] mt-0 lg:mt-[5%] w-full flex items-center">
           <AnimatePresence initial={false} custom={direction} mode="wait">
             <motion.div
               key={currentMenu}
