@@ -15,10 +15,10 @@ export default function Page() {
   const member = mergedTeam.find((member) => member.id === Number(param.id));
   return (
     <div className="flex items-center justify-center min-h-svh overflow-auto text-white bg-black/80 transition-all duration-1000 p-4 sm:p-6 lg:p-8">
-      <h1 className="absolute top-3 left-3 sm:top-5 sm:left-5 z-50 font-medium text-xs sm:text-sm text-white/60">
+      <h1 className="hidden sm:block absolute top-5 left-5 z-50 font-medium text-sm text-white/60">
         Press{" "}
         <span
-          className="border-2 border-white/60 px-1.5 py-1 sm:px-2 sm:py-1.5 text-xs rounded-lg cursor-pointer"
+          className="border-2 border-white/60 px-2 py-1.5 text-xs rounded-lg cursor-pointer"
           onClick={() => router.push("/team?tab=team")}
         >
           esc
