@@ -92,7 +92,7 @@ function AppleTvSideToggler({ page }: IMenu) {
         <>
             <MotionConfig transition={transition}>
                 <motion.div
-                    className='flex gap-1 items-center group pt-3 z-50 relative w-[300px] h-fit cursor-pointer'
+                    className='flex gap-1 items-center group pt-3 z-50 relative w-[250px] md:w-[300px] h-fit cursor-pointer'
                     layoutId={`dialog-${uniqueId}`}
                     style={{
                         borderRadius: '12px',
@@ -138,7 +138,7 @@ function AppleTvSideToggler({ page }: IMenu) {
                                 className='pointer-events-none fixed inset-0 left-10 z-50'
                             >
                                 <motion.div
-                                    className='pointer-events-auto relative flex flex-col overflow-hidden bg-black/80 backdrop-blur-3xl border w-[250px] h-[95%] px-4'
+                                    className='pointer-events-auto relative flex flex-col overflow-hidden bg-black/80 backdrop-blur-3xl border w-[200px] md:w-[250px] h-[95%] px-4'
                                     layoutId={`dialog-${uniqueId}`}
                                     tabIndex={-1}
                                     style={{

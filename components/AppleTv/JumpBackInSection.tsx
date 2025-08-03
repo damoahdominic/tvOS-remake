@@ -9,8 +9,8 @@ export const JumpBackInSection: React.FC = () => {
     const { selectedIndex, setSelectedIndex, items, timerProgress } = useNavigation();
 
     return (
-        <div className="fixed bottom-0 left-0 right-0 z-20 py-6 bg-gradient-to-t from-black/80 to-transparent">
-            <div className="px-10">
+        <div className="relative md:fixed md:bottom-0 md:left-0 md:right-0 z-20 py-4 md:py-6 bg-gradient-to-t from-black/80 to-transparent mt-8 md:mt-0">
+            <div className="md:px-10">
                 {/* Jump Back In Header with Indicators */}
                 <div className="flex items-center mb-4">
                     <h2 className="text-white text-lg font-semibold mr-4">Jump back in</h2>
@@ -32,7 +32,7 @@ export const JumpBackInSection: React.FC = () => {
                 {/* Navigation Items */}
                 <LayoutGroup>
                     <motion.div
-                        className="flex items-start space-x-5"
+                        className="flex items-start space-x-2 md:space-x-5 overflow-x-auto pb-2 md:pb-0 apple-tv-nav-items"
                         layout
                     >
                         {items.map((item, index) => (

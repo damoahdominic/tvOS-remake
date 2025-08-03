@@ -568,4 +568,15 @@ rect {
   .grid.grid-cols-4 {
     gap: 0.75rem;
   }
+  
+  /* Apple TV specific mobile styles */
+  .apple-tv-nav-items {
+    overflow-x: auto;
+    padding-bottom: 1rem;
+    gap: 1rem !important;
+  }
+  
+  .apple-tv-nav-items > * {
+    flex-shrink: 0;
+  }
 }

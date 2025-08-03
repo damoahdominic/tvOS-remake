@@ -40,7 +40,7 @@ const HomePage = () => {
             <div className="relative min-h-screen w-full bg-black overflow-hidden">
                 {/* Dynamic Background */}
                 <BackgroundImage />
-                <div className='px-10 space-y-8 h-full'>
+                <div className='px-4 md:px-10 space-y-4 md:space-y-8 h-full'>
                     <AppleTvSideToggler page='home' />
 
                     {/* Main Content */}
