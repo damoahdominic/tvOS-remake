@@ -18,8 +18,8 @@ export const engineeringTeam: TeamMember[] = [
         image: "/team/dominic.png",
         linkedin: "https://www.linkedin.com/in/dominic-damoah/",
         github: "https://github.com/damoahdominic",
-        email: "otiekudamoah@gmail.com",
-        bio: "Dominic is a seasoned full-stack engineer with years of hands-on experience architecting and building robust digital products from the ground up. With a passion for clean code and seamless user experiences, he bridges the gap between design and development—turning complex challenges into intuitive, scalable solutions. As the project lead for the tvOS initiative, Dominic guided the team with technical excellence and vision, helping bring this groundbreaking platform to life.",
+        email: "ceo@300mil.com",
+        bio: "With over a decade in the trenches of AI and software engineering, Dominic has the scars and wins that only come from shipping products that matter. As an O1 visa recipient who chose America as his battlefield, he's not here to play small—he's on a mission to create $300M+ in value by 2033. But this isn't about the money. It's about solving problems so real, so painful, that the market will pay anything for the solution. Dominic sees what others miss: the gaps between what technology can do and what the world desperately needs. He builds bridges across those gaps, turning possibility into inevitability. Every line of code, every pivot, every sleepless night is fuel for something bigger—products that don't just capture value, but create it from thin air. The kind of ventures that make investors wish they'd written the first check. The best entrepreneurs don't chase trends. They create them. Dominic is building tomorrow's necessities today.",
         color: "#E1AE9B",
     },
     {
