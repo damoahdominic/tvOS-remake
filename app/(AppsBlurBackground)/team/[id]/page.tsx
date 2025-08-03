@@ -27,7 +27,7 @@ export default function Page() {
       </h1>
 
       {member ? (
-        <div className="flex flex-col lg:flex-row gap-6 sm:gap-8 lg:gap-10 mx-auto w-full max-w-7xl">
+        <div className="flex flex-col lg:flex-row gap-6 lg:justify-center sm:gap-8 lg:gap-10 mx-auto w-full max-w-7xl">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -50,7 +50,7 @@ export default function Page() {
               </motion.div>
             </motion.div>
           </motion.div>
-          <div className="space-y-3 sm:space-y-4 flex-1 text-center lg:text-left">
+          <div className="space-y-3 sm:space-y-4 text-center lg:text-left">
             <motion.h1
               initial={{ opacity: 0, x: 20 }}
               animate={{ opacity: 1, x: 0 }}
