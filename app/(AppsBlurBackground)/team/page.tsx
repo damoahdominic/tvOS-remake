@@ -85,7 +85,7 @@ function TeamPageContent() {
   };
   const handleMouseLeave = () => setIsHovered(false);
   return (
-    <div className={`overflow-auto h-full`}>
+    <div className={`overflow-auto h-full ${activeTab === "credits" ? "bg-black/70" : "bg-black/30"}`}>
       <h1 className="hidden sm:block absolute top-5 left-5 z-50 font-medium text-sm text-white/60">
         Press{" "}
         <span
