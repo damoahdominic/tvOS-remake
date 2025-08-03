@@ -32,7 +32,7 @@ export const JumpBackInSection: React.FC = () => {
                 {/* Navigation Items */}
                 <LayoutGroup>
                     <motion.div
-                        className="flex items-start space-x-2 md:space-x-5 overflow-x-auto pb-2 md:pb-0 apple-tv-nav-items"
+                        className="flex items-start space-x-2 md:space-x-5 overflow-x-auto py-2 md:pb-0 apple-tv-nav-items"
                         layout
                     >
                         {items.map((item, index) => (
