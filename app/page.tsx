@@ -8,6 +8,7 @@ import useGridNavigation from "@/hooks/useGridNavigation"
 import { ModeToggle } from "@/components/mode-toggle"
 import { useAppContext } from "@/providers/app-provider"
 import useScrollRestoration from "@/hooks/useScrollRestoration"
+import { useIsMobile } from "@/hooks/use-mobile"
 
 // Simple focus position debugger component
 function FocusDebugger({ position }: { position: { row: number; col: number } }) {
@@ -38,10 +39,16 @@ export default function Home() {
     useScrollRestoration();
     const [scrolled, setScrolled] = useState(false)
     const {isFullscreen,setIsFullscreen} = useAppContext()
+    const isMobile = useIsMobile()
 
     const {lastFocusedPosition, setLastFocusedPosition} = useAppContext()
+    
+    // Adjust grid parameters based on screen size
+    const rowCount = isMobile ? 4 : 3
+    const colCount = isMobile ? 4 : 6
+    
     // Direct grid navigation - no activity bar integration for simplicity
-    const { isFocused, getFocusRef, focusedPosition, setFocusedPosition } = useGridNavigation(3, 6, lastFocusedPosition.row, lastFocusedPosition.col);
+    const { isFocused, getFocusRef, focusedPosition, setFocusedPosition } = useGridNavigation(rowCount, colCount, lastFocusedPosition.row, lastFocusedPosition.col);
 
     // Handle scroll events with debounce
     useEffect(() => {
@@ -100,9 +107,9 @@ export default function Home() {
             {/* TVOSGrid with direct grid navigation for simplicity */}
             <TVOSGrid
                 apps={apps}
-                rowCount={3}
+                rowCount={rowCount}
                 toggleExpansion={toggleExpansion}
-                colCount={6}
+                colCount={colCount}
                 isExpanded={isFullscreen}
                 setFocusedPosition={setFocusedPosition}
                 scrolled={scrolled}

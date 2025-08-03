@@ -177,13 +177,13 @@ const TVOSGrid: React.FC<TVOSGridProps> = ({
           className="bg-white/30 dark:bg-black/30"
         >
           <motion.div
-            className="w-full px-6 py-4 relative bottom-8 backdrop-blur-xl"
+            className={`w-full relative bottom-8 backdrop-blur-xl ${colCount === 4 ? 'px-4 py-3' : 'px-6 py-4'}`}
             initial={{ y: 100, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             transition={{ duration: 0.5 }}
           >
-            <div className="grid grid-cols-6 gap-9">
-              {gridItems?.firstRow?.slice(0, 6).map((app, i) => (
+            <div className={`grid ${colCount === 4 ? 'grid-cols-4 gap-6' : 'grid-cols-6 gap-9'}`}>
+              {gridItems?.firstRow?.slice(0, colCount).map((app, i) => (
                 <div key={i} className="first-row-item">
                   {app}
                 </div>
@@ -196,13 +196,13 @@ const TVOSGrid: React.FC<TVOSGridProps> = ({
       {/* Additional Content (for scrolling) */}
       <motion.div
         animate={{ bottom: scrolled ? "3rem" : "3.9rem" }}
-        className="relative px-8 py-12 cursor-pointer"
+        className={`relative cursor-pointer ${colCount === 4 ? 'px-6 py-8' : 'px-8 py-12'}`}
       >
         <motion.div
           variants={container}
           initial="hidden"
           animate="show"
-          className="grid grid-cols-6 gap-x-9 relative"
+          className={`grid relative ${colCount === 4 ? 'grid-cols-4 gap-x-6' : 'grid-cols-6 gap-x-9'}`}
         >
           {gridItems?.rest?.map((app, i) => (
             <div key={i} className="rest-row-item">
