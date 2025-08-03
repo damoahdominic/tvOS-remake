@@ -528,3 +528,44 @@ rect {
 .gradient-trans {
   transition: 5s ease-in-out;
 }
+
+@media screen and (max-width: 768px) {
+  .apple-tv-card-container{
+    padding-bottom: 1rem !important;
+  }
+  
+  /* Additional mobile-specific styles for better spacing */
+  .apple-tv-card-container[data-testid="apple-tv-card-container"] {
+    padding-bottom: 1rem !important;
+  }
+  
+  /* Target the specific element with inline styles */
+  div[data-testid="apple-tv-card-container"] {
+    padding-bottom: 1rem !important;
+  }
+  
+  /* Set padding-bottom to zero for cards in glass-like background (dock) */
+  .bg-white\/30 .apple-tv-card-container,
+  .dark .bg-black\/30 .apple-tv-card-container,
+  .bg-white\/30 div[data-testid="apple-tv-card-container"],
+  .dark .bg-black\/30 div[data-testid="apple-tv-card-container"] {
+    padding-bottom: 0 !important;
+  }
+  
+  /* Also target the backdrop-blur container */
+  .backdrop-blur-xl .apple-tv-card-container,
+  .backdrop-blur-xl div[data-testid="apple-tv-card-container"] {
+    padding-bottom: 0 !important;
+  }
+  
+  /* Reduce spacing between grid items on mobile */
+  .first-row-item,
+  .rest-row-item {
+    margin-bottom: 0.5rem;
+  }
+  
+  /* Ensure proper grid spacing on mobile */
+  .grid.grid-cols-4 {
+    gap: 0.75rem;
+  }
+}
