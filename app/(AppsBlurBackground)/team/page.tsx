@@ -245,7 +245,7 @@ function TeamPageContent() {
         {activeTab === "credits" && (
           <div className="flex flex-col space-y-8 h-full text-white">
             <div className="px-10 w-full flex flex-col items-center">
-              <div className="flex flex-wrap gap-8 mt-10 mx-auto">
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mt-10 w-full">
                 {resources.map((resource, index) => (
                   // <Link target="_blank" href={resource.link}>
                   <Link
@@ -264,7 +264,7 @@ function TeamPageContent() {
                         "--y": "90.36248779296875px",
                       } as React.CSSProperties
                     }
-                    className="relative overflow-hidden flex flex-col gap-6 w-full md:w-[450px] font-medium text-xl bg-black/30 rounded-3xl px-[3.75svh] py-[7.5svh]"
+                    className="relative overflow-hidden flex flex-col gap-6 w-full  font-medium text-xl bg-black/30 rounded-3xl px-[3.75svh] py-[7.5svh]"
                   >
                     {isHovered && isHoveredIndex === index && (
                       <MouseFollower
