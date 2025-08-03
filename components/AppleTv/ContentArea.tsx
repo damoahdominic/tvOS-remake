@@ -33,7 +33,7 @@ export const ContentArea: React.FC = () => {
 
                         {/* Title */}
                         <h1 className="text-4xl font-[510] text-white/50 mb-3">
-                            Documentary 
+                            Case Study
                         </h1>
 
                         {/* Description */}
