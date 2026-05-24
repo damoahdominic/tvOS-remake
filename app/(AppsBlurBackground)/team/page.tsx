@@ -30,8 +30,8 @@ const resources = [
   {
     image: "/dstudios-circular.png",
     title: "DStudios",
-    subtitle: "Diamond Sponsor",
-    link: "https://ddamoah.com",
+    subtitle: "Gold Sponsor",
+    link: "https://studio.ddamoah.com",
   },
 ];
 
