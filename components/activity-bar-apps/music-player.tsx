@@ -34,6 +34,8 @@ const MusicPlayer: React.FC = () => {
     return null;
   }
 
+  const isRemoteAlbumArt = currentTrack.albumArt.startsWith("http");
+
   return (
     <div className="activity-bar-item-bg">
     <motion.div
@@ -46,7 +48,7 @@ const MusicPlayer: React.FC = () => {
       {/* Album art and song info */}
       <div className='w-[330px] transition-all duration-300 bg-white/50 dark:bg-black/50 text-[#1E1E1E]/85 dark:text-white/80 hover:bg-white hover:text-[#1E1E1E]/80 hover:dark:text-[#1E1E1E]/80 hover:dark:bg-white p-4 rounded-xl flex items-center gap-2'>
         <div className='relative'>
-          <Image src={currentTrack.albumArt} alt='music' width={50} height={50} className='rounded-xl' />
+          <Image src={currentTrack.albumArt} alt='music' width={50} height={50} className='rounded-xl' unoptimized={isRemoteAlbumArt} />
           <Image src="/icons/apple-music-small.svg" alt='music' width={14} height={14} className='absolute bottom-0 right-0' />
         </div>
 
